@@ -1,0 +1,46 @@
+PODS:
+  - amap_flutter_location (0.0.1):
+    - AMapLocation (~> 2.6.7)
+    - Flutter
+  - AMapFoundation (1.6.5.1)
+  - AMapLocation (2.6.7):
+    - AMapFoundation (~> 1.6.4)
+  - Flutter (1.0.0)
+  - integration_test (0.0.1):
+    - Flutter
+  - "permission_handler (5.0.1+1)":
+    - Flutter
+
+DEPENDENCIES:
+  - amap_flutter_location (from `.symlinks/plugins/amap_flutter_location/ios`)
+  - AMapLocation
+  - Flutter (from `Flutter`)
+  - integration_test (from `.symlinks/plugins/integration_test/ios`)
+  - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
+
+SPEC REPOS:
+  trunk:
+    - AMapFoundation
+    - AMapLocation
+
+EXTERNAL SOURCES:
+  amap_flutter_location:
+    :path: ".symlinks/plugins/amap_flutter_location/ios"
+  Flutter:
+    :path: Flutter
+  integration_test:
+    :path: ".symlinks/plugins/integration_test/ios"
+  permission_handler:
+    :path: ".symlinks/plugins/permission_handler/ios"
+
+SPEC CHECKSUMS:
+  amap_flutter_location: cb1088039523427442cc1a96c90bb52f92025290
+  AMapFoundation: b67560a6f21aab81c8c12f84616b55a3833b6253
+  AMapLocation: a46c30d9930d0f3a3bd21139d8f845d10ac3f01d
+  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
+  integration_test: 6eb66a19f7104200dcfdd62bc0077e1b09686e4f
+  permission_handler: eac8e15b4a1a3fba55b761d19f3f4e6b005d15b6
+
+PODFILE CHECKSUM: a71c1ea7c2ae11cf69f800a1be7b1d0aa6255c0d
+
+COCOAPODS: 1.10.1
