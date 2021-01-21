@@ -1,7 +1,6 @@
 import 'dart:async';
-import 'dart:convert';
 
-import 'package:about_weather/location/location.dart';
+import 'package:about_weather/location/model/location.dart';
 import 'package:amap_flutter_location/amap_flutter_location.dart';
 import 'package:amap_flutter_location/amap_location_option.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +33,11 @@ class AMapLocation {
       (Map<String, Object> result) {
         Location location = Location.fromJson(result);
         locationChange(location);
-        if (location.district.isNotEmpty) stopLocation();
+
+        if (location.district != null) {
+          print(location.district);
+          stopLocation();
+        }
       },
     );
     bool hasLocationPermission = await _requestLocationPermission();
