@@ -1,6 +1,5 @@
-import 'package:about_weather/providers/theme_provider.dart';
+import 'package:about_weather/widgets/item_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class SettingPage extends StatefulWidget {
   @override
@@ -14,7 +13,14 @@ class _SettingPageState extends State<SettingPage> {
       appBar: AppBar(
         title: Text("设置"),
       ),
-      body: Text("${Provider.of<ThemeValues>(context).count}"),
+      body: Column(
+        children: [
+          ItemTile(
+            leading: Icon(Icons.wb_sunny_rounded),
+            leadingTitle: Text("深色模式"),
+          ),
+        ],
+      ),
     );
   }
 }

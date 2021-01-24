@@ -1,10 +1,10 @@
+import 'package:about_weather/theme/theme_bundle.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'location/amap_location.dart';
 import 'providers/theme_provider.dart';
 import 'setting/setting_page.dart';
-import 'widgets/item_tile.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,9 +21,8 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+        theme: ThemeBundle.light,
+        darkTheme: ThemeBundle.dark,
         home: MyHomePage(),
       ),
     );
@@ -67,17 +66,10 @@ class _MyHomePageState extends State<MyHomePage> {
           SizedBox(width: 10),
         ],
       ),
-      body: Center(
-        child: Column(
-          children: [
-            TextButton(
-              onPressed: () {
-                context.read<ThemeValues>().increment();
-              },
-              child: Text("${context.watch<ThemeValues>().count}"),
-            ),
-          ],
-        ),
+      body: Center(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.add),
       ),
     );
   }

@@ -10,7 +10,7 @@ class ItemTile extends StatelessWidget {
   ItemTile({
     this.leading,
     @required this.leadingTitle,
-    this.trailing = const Icon(Icons.keyboard_arrow_right_outlined),
+    this.trailing = const Icon(Icons.keyboard_arrow_right_rounded),
     this.trailingTitle,
     this.subTitle,
   });
