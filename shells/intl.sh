@@ -1,0 +1,2 @@
+flutter pub pub run intl_translation:extract_to_arb --output-dir=lib/intl/l10n_arb/ lib/intl/l10n/localizations_intl.dart
+flutter pub pub run intl_translation:generate_from_arb --generated-file-prefix=generated_ --output-dir=lib/intl/l10n_generated --no-use-deferred-loading lib/intl/l10n/localizations_intl.dart lib/intl/l10n_arb/intl_*.arb

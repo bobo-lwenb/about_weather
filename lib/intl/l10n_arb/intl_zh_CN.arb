@@ -1,0 +1,21 @@
+{
+  "@@last_modified": "2021-01-27T00:34:37.476595",
+  "darkMode": "深色模式",
+  "@darkMode": {
+    "description": "Dark Mode settings",
+    "type": "text",
+    "placeholders": {}
+  },
+  "language": "多语言",
+  "@language": {
+    "description": "language settings",
+    "type": "text",
+    "placeholders": {}
+  },
+  "settings": "设置",
+  "@settings": {
+    "description": "settings",
+    "type": "text",
+    "placeholders": {}
+  }
+}
