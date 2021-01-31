@@ -1,12 +1,12 @@
 import 'package:about_weather/intl/l10n/localizations_intl.dart';
-import 'package:about_weather/theme/theme_bundle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
 import 'location/amap_location.dart';
-import 'providers/theme_provider.dart';
+import 'setting/theme/theme_provider.dart';
 import 'setting/setting_page.dart';
+import 'setting/theme/theme_bundle.dart';
 
 void main() {
   runApp(MyApp());

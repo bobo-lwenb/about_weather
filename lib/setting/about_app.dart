@@ -1,0 +1,62 @@
+import 'dart:io';
+
+import 'package:about_weather/intl/l10n/localizations_intl.dart';
+import 'package:flutter/material.dart';
+import 'package:package_info/package_info.dart';
+
+class AboutApp extends StatefulWidget {
+  @override
+  _AboutAppState createState() => _AboutAppState();
+}
+
+class _AboutAppState extends State<AboutApp> {
+  String _appName = "";
+  String _appVersion = "";
+
+  @override
+  void initState() {
+    info();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white10,
+      ),
+      body: Center(
+        child: Column(
+          children: [
+            SizedBox(height: 16),
+            Text(AppLocalizations.of(context).welcome,
+                style: TextStyle(fontSize: 22)),
+            Container(
+              height: 255,
+              child: Center(
+                child: Text(_appName, style: TextStyle(fontSize: 42)),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(Platform.isAndroid ? "Android" : "iOS"),
+                SizedBox(width: 6),
+                Text(_appVersion),
+              ],
+            ),
+            Text(AppLocalizations.of(context).developer),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void info() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    _appName = packageInfo.appName;
+    _appVersion = packageInfo.version;
+    setState(() {});
+  }
+}

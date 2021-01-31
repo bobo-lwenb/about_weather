@@ -21,10 +21,13 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "aboutApp" : MessageLookupByLibrary.simpleMessage("关于应用"),
     "darkMode" : MessageLookupByLibrary.simpleMessage("深色模式"),
+    "developer" : MessageLookupByLibrary.simpleMessage("开发者: Liu wenbo"),
     "language" : MessageLookupByLibrary.simpleMessage("多语言"),
     "settings" : MessageLookupByLibrary.simpleMessage("设置"),
     "todayInHistory" : MessageLookupByLibrary.simpleMessage("历史上的今天"),
-    "todayInHistoryDesc" : MessageLookupByLibrary.simpleMessage("展示了历史上的今天发生的事件")
+    "todayInHistoryDesc" : MessageLookupByLibrary.simpleMessage("展示了历史上的今天发生的事件"),
+    "welcome" : MessageLookupByLibrary.simpleMessage("欢迎使用")
   };
 }

@@ -6,7 +6,7 @@ class ItemTile extends StatelessWidget {
   final Widget trailing;
   final Widget trailingTitle;
   final String subTitle;
-  final Function(TapDownDetails details) onTap;
+  final Function() onTap;
 
   ItemTile({
     this.leading,
@@ -58,27 +58,27 @@ class ItemTile extends StatelessWidget {
               ),
             ),
           );
-    Column _column = Column(
+    Widget _column = Column(
       children: [
         const Divider(height: 0),
-        Container(
-          height: 44,
-          child: Row(
-            children: [
-              _leading,
-              _leadingTitle,
-              _trailingTitle,
-              _trailing,
-            ],
+        InkWell(
+          onTap: onTap,
+          child: Container(
+            height: 44,
+            child: Row(
+              children: [
+                _leading,
+                _leadingTitle,
+                _trailingTitle,
+                _trailing,
+              ],
+            ),
           ),
         ),
         const Divider(height: 0),
         _subTitle
       ],
     );
-    return GestureDetector(
-      onTapDown: (TapDownDetails details) => onTap(details),
-      child: _column,
-    );
+    return _column;
   }
 }

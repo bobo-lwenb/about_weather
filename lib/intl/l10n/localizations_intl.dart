@@ -32,6 +32,15 @@ class AppLocalizations {
       Intl.message("Show the events that happened today in history",
           name: "todayInHistoryDesc",
           desc: "Show the events that happened today in history");
+
+  String get aboutApp =>
+      Intl.message("About App", name: "aboutApp", desc: "About App");
+
+  String get welcome =>
+      Intl.message("Welcome", name: "welcome", desc: "welcome");
+
+  String get developer => Intl.message("Developer: liu wenbo",
+      name: "developer", desc: "developer name");
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -21,10 +21,13 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "aboutApp" : MessageLookupByLibrary.simpleMessage("About App"),
     "darkMode" : MessageLookupByLibrary.simpleMessage("Dark Model"),
+    "developer" : MessageLookupByLibrary.simpleMessage("Developer: liu wenbo"),
     "language" : MessageLookupByLibrary.simpleMessage("Language"),
     "settings" : MessageLookupByLibrary.simpleMessage("Settings"),
     "todayInHistory" : MessageLookupByLibrary.simpleMessage("Today in History"),
-    "todayInHistoryDesc" : MessageLookupByLibrary.simpleMessage("Show the events that happened today in history")
+    "todayInHistoryDesc" : MessageLookupByLibrary.simpleMessage("Show the events that happened today in history"),
+    "welcome" : MessageLookupByLibrary.simpleMessage("Welcome")
   };
 }

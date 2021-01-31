@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2021-01-31T20:27:08.383343",
+  "@@last_modified": "2021-02-01T00:28:08.185507",
   "darkMode": "Dark Model",
   "@darkMode": {
     "description": "Dark Mode settings",
@@ -27,6 +27,24 @@
   "todayInHistoryDesc": "Show the events that happened today in history",
   "@todayInHistoryDesc": {
     "description": "Show the events that happened today in history",
+    "type": "text",
+    "placeholders": {}
+  },
+  "aboutApp": "About App",
+  "@aboutApp": {
+    "description": "About App",
+    "type": "text",
+    "placeholders": {}
+  },
+  "welcome": "Welcome",
+  "@welcome": {
+    "description": "welcome",
+    "type": "text",
+    "placeholders": {}
+  },
+  "developer": "Developer: liu wenbo",
+  "@developer": {
+    "description": "developer name",
     "type": "text",
     "placeholders": {}
   }

@@ -29,5 +29,23 @@
     "description": "Show the events that happened today in history",
     "type": "text",
     "placeholders": {}
+  },
+  "aboutApp": "关于应用",
+  "@aboutApp": {
+    "description": "About App",
+    "type": "text",
+    "placeholders": {}
+  },
+  "welcome": "欢迎使用",
+  "@welcome": {
+    "description": "welcome",
+    "type": "text",
+    "placeholders": {}
+  },
+  "developer": "开发者: Liu wenbo",
+  "@developer": {
+    "description": "developer name",
+    "type": "text",
+    "placeholders": {}
   }
 }
