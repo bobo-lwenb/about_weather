@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2021-01-27T11:53:43.759894",
+  "@@last_modified": "2021-01-31T20:27:08.383343",
   "darkMode": "Dark Model",
   "@darkMode": {
     "description": "Dark Mode settings",
@@ -15,6 +15,18 @@
   "settings": "Settings",
   "@settings": {
     "description": "settings",
+    "type": "text",
+    "placeholders": {}
+  },
+  "todayInHistory": "Today in History",
+  "@todayInHistory": {
+    "description": "today in History",
+    "type": "text",
+    "placeholders": {}
+  },
+  "todayInHistoryDesc": "Show the events that happened today in history",
+  "@todayInHistoryDesc": {
+    "description": "Show the events that happened today in history",
     "type": "text",
     "placeholders": {}
   }

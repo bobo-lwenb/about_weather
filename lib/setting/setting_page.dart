@@ -1,4 +1,5 @@
 import 'package:about_weather/intl/l10n/localizations_intl.dart';
+import 'package:about_weather/today_history/today_history_page.dart';
 import 'package:about_weather/widgets/item_tile.dart';
 import 'package:flutter/material.dart';
 
@@ -23,6 +24,17 @@ class _SettingPageState extends State<SettingPage> {
           ItemTile(
             leading: Icon(Icons.language_rounded),
             leadingTitle: Text(AppLocalizations.of(context).language),
+          ),
+          SizedBox(height: 44),
+          ItemTile(
+            leading: Icon(Icons.history_edu_rounded),
+            leadingTitle: Text(AppLocalizations.of(context).todayInHistory),
+            subTitle: AppLocalizations.of(context).todayInHistoryDesc,
+            onTap: (event) {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                return TodayHistoryPage();
+              }));
+            },
           ),
         ],
       ),

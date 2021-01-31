@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -40,7 +41,7 @@ class BaseDio {
       cancelToken: cancelToken,
       onReceiveProgress: onReceiveProgress,
     );
-    return response.data;
+    return json.decode(response.data);
   }
 
   Future<Map<String, dynamic>> post({
@@ -61,6 +62,6 @@ class BaseDio {
       onSendProgress: onSendProgress,
       onReceiveProgress: onReceiveProgress,
     );
-    return response.data;
+    return json.decode(response.data);
   }
 }

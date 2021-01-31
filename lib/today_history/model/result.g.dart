@@ -1,25 +1,25 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'event.dart';
+part of 'result.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Event _$EventFromJson(Map<String, dynamic> json) {
-  return Event(
+Result _$ResultFromJson(Map<String, dynamic> json) {
+  return Result(
     title: json['title'] as String,
-    img: json['img'] as String,
     year: json['year'] as String,
-    month: json['month'] as int,
-    day: json['day'] as int,
+    month: json['month'] as String,
+    day: json['day'] as String,
+    content: json['content'] as String,
   );
 }
 
-Map<String, dynamic> _$EventToJson(Event instance) => <String, dynamic>{
+Map<String, dynamic> _$ResultToJson(Result instance) => <String, dynamic>{
       'title': instance.title,
-      'img': instance.img,
       'year': instance.year,
       'month': instance.month,
       'day': instance.day,
+      'content': instance.content,
     };

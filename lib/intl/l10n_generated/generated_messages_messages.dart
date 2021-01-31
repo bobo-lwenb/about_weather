@@ -23,6 +23,8 @@ class MessageLookup extends MessageLookupByLibrary {
   static _notInlinedMessages(_) => <String, Function> {
     "darkMode" : MessageLookupByLibrary.simpleMessage("Dark Model"),
     "language" : MessageLookupByLibrary.simpleMessage("Language"),
-    "settings" : MessageLookupByLibrary.simpleMessage("Settings")
+    "settings" : MessageLookupByLibrary.simpleMessage("Settings"),
+    "todayInHistory" : MessageLookupByLibrary.simpleMessage("Today in History"),
+    "todayInHistoryDesc" : MessageLookupByLibrary.simpleMessage("Show the events that happened today in history")
   };
 }

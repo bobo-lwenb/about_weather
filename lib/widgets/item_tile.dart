@@ -5,7 +5,8 @@ class ItemTile extends StatelessWidget {
   final Widget leadingTitle;
   final Widget trailing;
   final Widget trailingTitle;
-  final Widget subTitle;
+  final String subTitle;
+  final Function(TapDownDetails details) onTap;
 
   ItemTile({
     this.leading,
@@ -13,6 +14,7 @@ class ItemTile extends StatelessWidget {
     this.trailing = const Icon(Icons.keyboard_arrow_right_rounded),
     this.trailingTitle,
     this.subTitle,
+    this.onTap,
   });
 
   @override
@@ -50,7 +52,10 @@ class ItemTile extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Padding(
               padding: EdgeInsets.only(left: _subTitleLeftPadding, top: 5, right: 10, bottom: 5),
-              child: subTitle,
+              child: Text(
+                subTitle,
+                style: TextStyle(fontSize: 11, color: Colors.grey[600]),
+              ),
             ),
           );
     Column _column = Column(
@@ -68,11 +73,11 @@ class ItemTile extends StatelessWidget {
           ),
         ),
         const Divider(height: 0),
-        _subTitle,
+        _subTitle
       ],
     );
-    return Listener(
-      onPointerDown: (event) {},
+    return GestureDetector(
+      onTapDown: (TapDownDetails details) => onTap(details),
       child: _column,
     );
   }

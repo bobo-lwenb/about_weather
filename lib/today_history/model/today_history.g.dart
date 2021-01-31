@@ -8,15 +8,18 @@ part of 'today_history.dart';
 
 TodayHistory _$TodayHistoryFromJson(Map<String, dynamic> json) {
   return TodayHistory(
-    resCode: json['showapi_res_code'] as int,
-    resError: json['showapi_res_error'] as String,
-    resBody: ResBody.fromJson(json['showapi_res_body'] as Map<String, dynamic>),
+    status: json['status'] as int,
+    msg: json['msg'] as String,
+    result: (json['result'] as List)
+        ?.map((e) =>
+            e == null ? null : Result.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
   );
 }
 
 Map<String, dynamic> _$TodayHistoryToJson(TodayHistory instance) =>
     <String, dynamic>{
-      'showapi_res_code': instance.resCode,
-      'showapi_res_error': instance.resError,
-      'showapi_res_body': instance.resBody,
+      'status': instance.status,
+      'msg': instance.msg,
+      'result': instance.result,
     };

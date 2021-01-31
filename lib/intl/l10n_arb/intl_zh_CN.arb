@@ -17,5 +17,17 @@
     "description": "settings",
     "type": "text",
     "placeholders": {}
+  },
+  "todayInHistory": "历史上的今天",
+  "@todayInHistory": {
+    "description": "today in History",
+    "type": "text",
+    "placeholders": {}
+  },
+  "todayInHistoryDesc": "展示了历史上的今天发生的事件",
+  "@todayInHistoryDesc": {
+    "description": "Show the events that happened today in history",
+    "type": "text",
+    "placeholders": {}
   }
 }
