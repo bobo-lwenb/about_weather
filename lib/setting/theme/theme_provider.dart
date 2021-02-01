@@ -2,18 +2,18 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class ThemeValues with ChangeNotifier, DiagnosticableTreeMixin {
-  int _count = 0;
+  ThemeMode _themeMode = ThemeMode.system;
 
-  int get count => _count;
+  ThemeMode get themeMode => _themeMode;
 
-  void increment() {
-    _count++;
+  void changeThemeMode(ThemeMode mode) {
+    _themeMode = mode;
     notifyListeners();
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(IntProperty("_count", _count));
+    properties.add(IntProperty("_themeMode", _themeMode.index));
   }
 }

@@ -1,17 +1,5 @@
 {
-  "@@last_modified": "2021-02-01T00:28:08.185507",
-  "darkMode": "Dark Model",
-  "@darkMode": {
-    "description": "Dark Mode settings",
-    "type": "text",
-    "placeholders": {}
-  },
-  "language": "Language",
-  "@language": {
-    "description": "language settings",
-    "type": "text",
-    "placeholders": {}
-  },
+  "@@last_modified": "2021-02-01T23:17:51.260363",
   "settings": "Settings",
   "@settings": {
     "description": "settings",
@@ -45,6 +33,54 @@
   "developer": "Developer: liu wenbo",
   "@developer": {
     "description": "developer name",
+    "type": "text",
+    "placeholders": {}
+  },
+  "themeMode": "Theme Model",
+  "@themeMode": {
+    "description": "Theme Model",
+    "type": "text",
+    "placeholders": {}
+  },
+  "followSystem": "Follow System",
+  "@followSystem": {
+    "description": "Follow System",
+    "type": "text",
+    "placeholders": {}
+  },
+  "lightMode": "Light Mode",
+  "@lightMode": {
+    "description": "Light Mode",
+    "type": "text",
+    "placeholders": {}
+  },
+  "darkMode": "Dark Mode",
+  "@darkMode": {
+    "description": "Dark Mode",
+    "type": "text",
+    "placeholders": {}
+  },
+  "language": "Language",
+  "@language": {
+    "description": "language settings",
+    "type": "text",
+    "placeholders": {}
+  },
+  "systemLanguage": "System Language",
+  "@systemLanguage": {
+    "description": "System Language",
+    "type": "text",
+    "placeholders": {}
+  },
+  "english": "English",
+  "@english": {
+    "description": "English",
+    "type": "text",
+    "placeholders": {}
+  },
+  "simplifiedChinese": "Simplified Chinese",
+  "@simplifiedChinese": {
+    "description": "Simplified Chines",
     "type": "text",
     "placeholders": {}
   }

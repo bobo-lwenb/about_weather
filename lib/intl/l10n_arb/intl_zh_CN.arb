@@ -1,17 +1,5 @@
 {
   "@@last_modified": "2021-01-27T00:34:37.476595",
-  "darkMode": "深色模式",
-  "@darkMode": {
-    "description": "Dark Mode settings",
-    "type": "text",
-    "placeholders": {}
-  },
-  "language": "多语言",
-  "@language": {
-    "description": "language settings",
-    "type": "text",
-    "placeholders": {}
-  },
   "settings": "设置",
   "@settings": {
     "description": "settings",
@@ -45,6 +33,54 @@
   "developer": "开发者: Liu wenbo",
   "@developer": {
     "description": "developer name",
+    "type": "text",
+    "placeholders": {}
+  },
+  "themeMode": "主题模式",
+  "@themeMode": {
+    "description": "Theme Model",
+    "type": "text",
+    "placeholders": {}
+  },
+  "followSystem": "跟随系统",
+  "@followSystem": {
+    "description": "Follow System",
+    "type": "text",
+    "placeholders": {}
+  },
+  "lightMode": "浅色模式",
+  "@lightMode": {
+    "description": "Light Mode",
+    "type": "text",
+    "placeholders": {}
+  },
+  "darkMode": "深色模式",
+  "@darkMode": {
+    "description": "Dark Mode",
+    "type": "text",
+    "placeholders": {}
+  },
+  "language": "多语言",
+  "@language": {
+    "description": "language settings",
+    "type": "text",
+    "placeholders": {}
+  },
+  "systemLanguage": "系统语言",
+  "@systemLanguage": {
+    "description": "System Language",
+    "type": "text",
+    "placeholders": {}
+  },
+  "english": "英语",
+  "@english": {
+    "description": "English",
+    "type": "text",
+    "placeholders": {}
+  },
+  "simplifiedChinese": "简体中文",
+  "@simplifiedChinese": {
+    "description": "Simplified Chines",
     "type": "text",
     "placeholders": {}
   }

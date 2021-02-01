@@ -36,7 +36,7 @@ class ItemTile extends StatelessWidget {
     Widget _trailingTitle = trailingTitle == null
         ? const SizedBox()
         : Padding(
-            padding: const EdgeInsets.only(left: 10),
+            padding: const EdgeInsets.only(left: 10, right: 5),
             child: trailingTitle,
           );
     Widget _trailing = trailing == null
@@ -51,7 +51,8 @@ class ItemTile extends StatelessWidget {
         : Align(
             alignment: Alignment.centerLeft,
             child: Padding(
-              padding: EdgeInsets.only(left: _subTitleLeftPadding, top: 5, right: 10, bottom: 5),
+              padding: EdgeInsets.only(
+                  left: _subTitleLeftPadding, top: 5, right: 10, bottom: 5),
               child: Text(
                 subTitle,
                 style: TextStyle(fontSize: 11, color: Colors.grey[600]),
