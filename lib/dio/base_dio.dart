@@ -41,7 +41,9 @@ class BaseDio {
       cancelToken: cancelToken,
       onReceiveProgress: onReceiveProgress,
     );
-    return json.decode(response.data);
+    return response.data is Map<String, dynamic>
+        ? response.data
+        : json.decode(response.data);
   }
 
   Future<Map<String, dynamic>> post({
@@ -62,6 +64,8 @@ class BaseDio {
       onSendProgress: onSendProgress,
       onReceiveProgress: onReceiveProgress,
     );
-    return json.decode(response.data);
+    return response.data is Map<String, dynamic>
+        ? response.data
+        : json.decode(response.data);
   }
 }
