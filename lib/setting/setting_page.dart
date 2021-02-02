@@ -4,12 +4,12 @@ import 'package:about_weather/setting/language/language_page.dart';
 import 'package:about_weather/setting/language/language_provider.dart';
 import 'package:about_weather/setting/theme/theme_page.dart';
 import 'package:about_weather/setting/theme/theme_provider.dart';
+import 'package:about_weather/tool_box/fields.dart';
 import 'package:about_weather/widgets/item_tile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'fields.dart';
 import 'today_history/today_history_page.dart';
 
 class SettingPage extends StatefulWidget {

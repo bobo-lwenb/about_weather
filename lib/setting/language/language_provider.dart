@@ -8,18 +8,20 @@ const LANGUAGE = [
 ];
 
 class Language with ChangeNotifier, DiagnosticableTreeMixin {
-  Locale _locale;
+  Locale localeData = LANGUAGE[0];
 
-  Locale get locale => _locale;
+  Language({this.localeData});
 
-  void changeLanuage(Locale value) {
-    _locale = value;
+  Locale get locale => localeData;
+
+  void changeLanguage(Locale value) {
+    localeData = value;
     notifyListeners();
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(StringProperty("_locale", _locale.toString()));
+    properties.add(StringProperty("_locale", localeData.toString()));
   }
 }
