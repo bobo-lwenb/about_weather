@@ -20,7 +20,11 @@ class BaseDio {
     baseOptions.baseUrl = baseUrl;
     baseOptions.connectTimeout = 5000;
     baseOptions.receiveTimeout = 3000;
-    baseOptions.headers = {HttpHeaders.authorizationHeader: "APPCODE $appCode"};
+    if (appCode != null) {
+      baseOptions.headers = {
+        HttpHeaders.authorizationHeader: "APPCODE $appCode"
+      };
+    }
     baseOptions.responseType = ResponseType.json;
     _dio = Dio(baseOptions);
     _dio.interceptors.add(ErrorInterceptor());

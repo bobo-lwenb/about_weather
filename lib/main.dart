@@ -5,9 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
-import 'location/amap_location.dart';
+import 'main_ui/home_page.dart';
 import 'setting/theme/theme_provider.dart';
-import 'setting/setting_page.dart';
 import 'setting/theme/theme_bundle.dart';
 
 void main() {
@@ -52,64 +51,7 @@ class MyApp extends StatelessWidget {
         const Locale('zh', 'CN'),
       ],
       locale: Provider.of<Language>(context).locale,
-      home: MyHomePage(),
+      home: HomePage(),
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  AMapLocation _aMapLocation;
-
-  @override
-  void initState() {
-    _setAMapLocation();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _aMapLocation.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("About Weather"),
-        actions: [
-          Listener(
-            onPointerDown: (event) {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return SettingPage();
-              }));
-            },
-            child: Icon(Icons.settings),
-          ),
-          SizedBox(width: 10),
-        ],
-      ),
-      body: Center(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(Icons.add),
-      ),
-    );
-  }
-
-  void _setAMapLocation() {
-    AMapLocation.initAMapLocationKey();
-    _aMapLocation = AMapLocation(
-      locationChange: (result) {
-        print(result.district);
-      },
-      permissionDenied: () {},
-    );
-    _aMapLocation.requestPermission();
   }
 }

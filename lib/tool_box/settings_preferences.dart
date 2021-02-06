@@ -12,28 +12,24 @@ class SettingsPreferences {
 
   void setThemeMode(ThemeMode mode) async {
     SharedPreferences sp = await SharedPreferences.getInstance();
-    print("setThemeMode-${mode.index}");
     await sp.setInt(THEME_KEY, mode.index);
   }
 
   Future<ThemeMode> getThemeMode() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     int mode = sp.getInt(THEME_KEY) ?? 0;
-    print("getThemeMode-$mode");
     return ThemeMode.values[mode];
   }
 
   void setLocale(Locale locale) async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     int value = LANGUAGE.indexOf(locale);
-    print("setLocale-$value");
     await sp.setInt(LOCALE_KEY, value);
   }
 
   Future<Locale> getLocale() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     int value = sp.getInt(LOCALE_KEY) ?? 0;
-    print("getLocale-$value");
     return LANGUAGE[value];
   }
 }

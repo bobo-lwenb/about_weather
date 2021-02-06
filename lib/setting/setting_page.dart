@@ -1,3 +1,4 @@
+import 'package:about_weather/epidemic/epidemic_page.dart';
 import 'package:about_weather/intl/l10n/localizations_intl.dart';
 import 'package:about_weather/setting/about_app.dart';
 import 'package:about_weather/setting/language/language_page.dart';
@@ -53,6 +54,17 @@ class _SettingPageState extends State<SettingPage> {
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
                 return LanguagePage();
+              }));
+            },
+          ),
+          SizedBox(height: 24),
+          ItemTile(
+            leading: Icon(Icons.data_usage_rounded),
+            leadingTitle: Text("疫情数据"),
+            subTitle: "包含国内疫情和海外疫情的数据",
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                return EpidemicPage();
               }));
             },
           ),
