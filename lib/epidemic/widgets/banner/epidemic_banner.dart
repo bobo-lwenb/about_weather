@@ -23,18 +23,23 @@ class _EpidemicBannerState extends State<EpidemicBanner>
   String _lastUpdateTime;
   InternalData _model;
   Area _area;
+  String _titleProvince;
 
   @override
   void initState() {
     super.initState();
-    _title = ["全国疫情数据", "${widget.province}疫情数据"];
-    _tabController = TabController(length: _title.length, vsync: this);
     NewsDio.instance().getInternalData().then((model) {
       _lastUpdateTime = model.lastUpdateTime;
       _model = model;
       _model.areaTree[0].children.forEach((element) {
-        if (widget.province.contains(element.name)) _area = element;
+        if (widget.province.contains(element.name)) {
+          _area = element;
+          _titleProvince = element.name;
+          return;
+        }
       });
+      _title = ["全国疫情数据", "$_titleProvince疫情数据"];
+      _tabController = TabController(length: _title.length, vsync: this);
       setState(() {});
     });
   }
@@ -62,9 +67,7 @@ class _EpidemicBannerState extends State<EpidemicBanner>
       index: _currentindex,
       children: <Widget>[
         ChinaBanner(model: _model),
-        LocalBanner(
-          area: _area,
-        ),
+        LocalBanner(area: _area),
       ],
     );
     return Column(

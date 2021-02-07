@@ -33,9 +33,7 @@ class AMapLocation {
       (Map<String, Object> result) {
         Location location = Location.fromJson(result);
         locationChange(location);
-
-        if (location.district != null) {
-          print(location.district);
+        if (location.province != null) {
           stopLocation();
         }
       },
@@ -88,7 +86,8 @@ class AMapLocation {
 
     /// iOS
     /// iOS 14中设置期望的定位精度权限
-    locationOption.desiredLocationAccuracyAuthorizationMode = AMapLocationAccuracyAuthorizationMode.ReduceAccuracy;
+    locationOption.desiredLocationAccuracyAuthorizationMode =
+        AMapLocationAccuracyAuthorizationMode.ReduceAccuracy;
 
     /// iOS 14中定位精度权限由模糊定位升级到精确定位时，需要用到的场景key fullAccuracyPurposeKey 这个key要和plist中的配置一样
     locationOption.fullAccuracyPurposeKey = "";
@@ -117,10 +116,13 @@ class AMapLocation {
 
   /// iOS14 上获取native精度类型
   void requestAccuracyAuthorization() async {
-    AMapAccuracyAuthorization currentAccuracyAuthorization = await _location.getSystemAccuracyAuthorization();
-    if (currentAccuracyAuthorization == AMapAccuracyAuthorization.AMapAccuracyAuthorizationFullAccuracy) {
+    AMapAccuracyAuthorization currentAccuracyAuthorization =
+        await _location.getSystemAccuracyAuthorization();
+    if (currentAccuracyAuthorization ==
+        AMapAccuracyAuthorization.AMapAccuracyAuthorizationFullAccuracy) {
       print("精确定位类型");
-    } else if (currentAccuracyAuthorization == AMapAccuracyAuthorization.AMapAccuracyAuthorizationReducedAccuracy) {
+    } else if (currentAccuracyAuthorization ==
+        AMapAccuracyAuthorization.AMapAccuracyAuthorizationReducedAccuracy) {
       print("模糊定位类型");
     } else {
       print("未知定位类型");

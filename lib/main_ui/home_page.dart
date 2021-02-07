@@ -44,11 +44,7 @@ class _HomePageState extends State<HomePage> {
           SizedBox(width: 10),
         ],
       ),
-      body: _location == null ? Container() : _buildList(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(Icons.add),
-      ),
+      body: _location?.province == null ? Container() : _buildList(),
     );
   }
 

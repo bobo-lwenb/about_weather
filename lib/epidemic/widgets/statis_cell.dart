@@ -36,19 +36,21 @@ class StatisCell extends StatelessWidget {
           ),
         ),
         SizedBox(height: 3),
-        Opacity(
-          opacity: isShowChange ? 1 : 0,
-          child: Text.rich(TextSpan(children: <TextSpan>[
-            TextSpan(
-              text: "较昨日",
-              style: TextStyle(color: Colors.grey[700], fontSize: 14),
-            ),
-            TextSpan(
-              text: _buildString(changeCount),
-              style: TextStyle(color: color, fontSize: 14),
-            ),
-          ])),
-        ),
+        isShowChange
+            ? Text.rich(TextSpan(children: <TextSpan>[
+                TextSpan(
+                  text: "较昨日",
+                  style: TextStyle(color: Colors.grey[700], fontSize: 14),
+                ),
+                TextSpan(
+                  text: _buildString(changeCount),
+                  style: TextStyle(color: color, fontSize: 14),
+                ),
+              ]))
+            : Text(
+                "--",
+                style: TextStyle(color: color, fontSize: 14),
+              ),
       ],
     );
     return Container(
