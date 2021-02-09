@@ -1,3 +1,4 @@
+import 'package:about_weather/intl/l10n/localizations_intl.dart';
 import 'package:flutter/material.dart';
 
 class StatisCell extends StatelessWidget {
@@ -39,7 +40,7 @@ class StatisCell extends StatelessWidget {
         isShowChange
             ? Text.rich(TextSpan(children: <TextSpan>[
                 TextSpan(
-                  text: "较昨日",
+                  text: AppLocalizations.of(context).fromYesterday,
                   style: TextStyle(color: Colors.grey[700], fontSize: 14),
                 ),
                 TextSpan(

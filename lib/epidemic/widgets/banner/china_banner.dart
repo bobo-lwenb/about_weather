@@ -2,6 +2,7 @@ import 'package:about_weather/epidemic/internal_model/china_add.dart';
 import 'package:about_weather/epidemic/internal_model/china_total.dart';
 import 'package:about_weather/epidemic/internal_model/internal_data.dart';
 import 'package:about_weather/epidemic/widgets/statis_cell.dart';
+import 'package:about_weather/intl/l10n/localizations_intl.dart';
 import 'package:flutter/material.dart';
 
 class ChinaBanner extends StatelessWidget {
@@ -18,7 +19,7 @@ class ChinaBanner extends StatelessWidget {
       children: <Widget>[
         Expanded(
           child: StatisCell(
-            typeName: "境外输入",
+            typeName: AppLocalizations.of(context).importAbroad,
             count: total?.importedCase,
             changeCount: add?.importedCase,
             color: Colors.yellow[900],
@@ -27,7 +28,7 @@ class ChinaBanner extends StatelessWidget {
         ),
         Expanded(
           child: StatisCell(
-            typeName: "无症状感染者",
+            typeName: AppLocalizations.of(context).symptomless,
             count: total?.noInfect,
             changeCount: add?.noInfect,
             color: Colors.deepPurple,
@@ -36,7 +37,7 @@ class ChinaBanner extends StatelessWidget {
         ),
         Expanded(
           child: StatisCell(
-            typeName: "累计治愈",
+            typeName: AppLocalizations.of(context).cure,
             count: total?.heal,
             changeCount: add?.heal,
             color: Colors.green,
@@ -50,7 +51,7 @@ class ChinaBanner extends StatelessWidget {
       children: <Widget>[
         Expanded(
           child: StatisCell(
-            typeName: "现有确诊",
+            typeName: AppLocalizations.of(context).existConfirmed,
             count: total?.nowConfirm,
             changeCount: add?.nowConfirm,
             color: Colors.red,
@@ -59,7 +60,7 @@ class ChinaBanner extends StatelessWidget {
         ),
         Expanded(
           child: StatisCell(
-            typeName: "累计确诊",
+            typeName: AppLocalizations.of(context).confirmed,
             count: total?.confirm,
             changeCount: add?.confirm,
             color: Colors.redAccent[700],
@@ -68,7 +69,7 @@ class ChinaBanner extends StatelessWidget {
         ),
         Expanded(
           child: StatisCell(
-            typeName: "累计死亡",
+            typeName: AppLocalizations.of(context).death,
             count: total?.dead,
             changeCount: add?.dead,
             color: Colors.black87,

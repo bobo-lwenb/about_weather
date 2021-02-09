@@ -83,5 +83,257 @@
     "description": "Simplified Chines",
     "type": "text",
     "placeholders": {}
+  },
+  "epidemicData": "疫情数据",
+  "@epidemicData": {
+    "description": "Epidemic Data",
+    "type": "text",
+    "placeholders": {}
+  },
+  "epidemicDataDesc": "包含国内疫情和海外疫情的数据",
+  "@epidemicDataDesc": {
+    "description": "Contains data on domestic and overseas epidemics",
+    "type": "text",
+    "placeholders": {}
+  },
+  "covid_19": "新型冠状病毒肺炎",
+  "@covid_19": {
+    "description": "COVID-19",
+    "type": "text",
+    "placeholders": {}
+  },
+  "domesticEpidemic": "国内疫情",
+  "@domesticEpidemic": {
+    "description": "Domestic Epidemic",
+    "type": "text",
+    "placeholders": {}
+  },
+  "overseasEpidemic": "海外疫情",
+  "@overseasEpidemic": {
+    "description": "Overseas Epidemic",
+    "type": "text",
+    "placeholders": {}
+  },
+  "statisticsCutoff": "数据统计截止",
+  "@statisticsCutoff": {
+    "description": "Statistics Cutoff",
+    "type": "text",
+    "placeholders": {}
+  },
+  "localExistingConfirmed": "本土现有确诊",
+  "@localExistingConfirmed": {
+    "description": "Local Existing Confirmed",
+    "type": "text",
+    "placeholders": {}
+  },
+  "existConfirmed": "现有确诊",
+  "@existConfirmed": {
+    "description": "Exist Confirmed",
+    "type": "text",
+    "placeholders": {}
+  },
+  "confirmed": "累计确诊",
+  "@confirmed": {
+    "description": "Confirmed",
+    "type": "text",
+    "placeholders": {}
+  },
+  "symptomless": "无症状感染者",
+  "@symptomless": {
+    "description": "Symptomless",
+    "type": "text",
+    "placeholders": {}
+  },
+  "importAbroad": "境外输入",
+  "@importAbroad": {
+    "description": "Import Abroad",
+    "type": "text",
+    "placeholders": {}
+  },
+  "death": "累计死亡",
+  "@death": {
+    "description": "Death",
+    "type": "text",
+    "placeholders": {}
+  },
+  "cure": "累计治愈",
+  "@cure": {
+    "description": "Cure",
+    "type": "text",
+    "placeholders": {}
+  },
+  "existSuspect": "现有疑似",
+  "@existSuspect": {
+    "description": "Exist Suspect",
+    "type": "text",
+    "placeholders": {}
+  },
+  "existSevere": "现有重症",
+  "@existSevere": {
+    "description": "Exist Severe",
+    "type": "text",
+    "placeholders": {}
+  },
+  "fromYesterday": "较昨日",
+  "@fromYesterday": {
+    "description": "from yesterday",
+    "type": "text",
+    "placeholders": {}
+  },
+  "chinaEpidemic": "中国疫情（包括港澳台）",
+  "@chinaEpidemic": {
+    "description": "China Epidemic (including Hong Kong, Macao and Taiwan)",
+    "type": "text",
+    "placeholders": {}
+  },
+  "epidemicTip": "7:00-10:00为更新高峰，数据如有滞后请谅解。",
+  "@epidemicTip": {
+    "description": "7:00-10:00 is the peak update period. Please understand if the data lags behind.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "dataSource": "数据来源：各地卫健委公开数据",
+  "@dataSource": {
+    "description": "Data Source: public data from local health commissions",
+    "type": "text",
+    "placeholders": {}
+  },
+  "area": "地区",
+  "@area": {
+    "description": "Area",
+    "type": "text",
+    "placeholders": {}
+  },
+  "ec": "现有\n确诊",
+  "@ec": {
+    "description": "Exist Confirmed",
+    "type": "text",
+    "placeholders": {}
+  },
+  "localSymptomless": "本土现有\n无症状",
+  "@localSymptomless": {
+    "description": "Local Symptomless",
+    "type": "text",
+    "placeholders": {}
+  },
+  "deathless": "死亡",
+  "@deathless": {
+    "description": "deathless",
+    "type": "text",
+    "placeholders": {}
+  },
+  "detail": "详情",
+  "@detail": {
+    "description": "Detail",
+    "type": "text",
+    "placeholders": {}
+  },
+  "preventionAdvice": "新冠肺炎预防建议",
+  "@preventionAdvice": {
+    "description": "COVID-19 Prevention Advice",
+    "type": "text",
+    "placeholders": {}
+  },
+  "hygiene": "个人卫生",
+  "@hygiene": {
+    "description": "Personal Hygiene",
+    "type": "text",
+    "placeholders": {}
+  },
+  "hygiene1": "勤洗手，要用洗手液和清水清洗双手，搓手洗至少20秒，洗手后及时擦干。",
+  "@hygiene1": {
+    "description": "Wash Hand",
+    "type": "text",
+    "placeholders": {}
+  },
+  "hygiene2": "保持双手清洁，特别是在触摸眼、口、鼻或耳之前。",
+  "@hygiene2": {
+    "description": "Keep your hands clean",
+    "type": "text",
+    "placeholders": {}
+  },
+  "hygiene3": "打喷嚏或咳嗽时应用纸巾捂住口鼻，然后把纸巾弃置有盖的垃圾桶内，最后马上清洗双手。",
+  "@hygiene3": {
+    "description": "Cover your mouth and nose",
+    "type": "text",
+    "placeholders": {}
+  },
+  "hygiene4": "保持室内空气流通。",
+  "@hygiene4": {
+    "description": "Keep indoor air circulation.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "hygiene5": "从外带回家中的物品如果可以，尽量用酒精消毒。",
+  "@hygiene5": {
+    "description": "If you can bring home items from outside",
+    "type": "text",
+    "placeholders": {}
+  },
+  "avoid": "尽量避免",
+  "@avoid": {
+    "description": "Try to Avoid",
+    "type": "text",
+    "placeholders": {}
+  },
+  "avoid1": "避免前往人流密集的场所，如不可避免，请戴好外科口罩。",
+  "@avoid1": {
+    "description": "Avoid going to crowded places.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "avoid2": "注意食品安全安全和卫生，避免进食或饮用生或未熟透的动物食品，包括肉蛋奶。",
+  "@avoid2": {
+    "description": "Pay attention to food safety and hygiene",
+    "type": "text",
+    "placeholders": {}
+  },
+  "avoid3": "避免长时间佩戴同一只口罩，条件允许适时更换口罩。",
+  "@avoid3": {
+    "description": "Avoid wearing the same mask for a long time",
+    "type": "text",
+    "placeholders": {}
+  },
+  "sd": "尽快就诊",
+  "@sd": {
+    "description": "See a doctor as soon as possible",
+    "type": "text",
+    "placeholders": {}
+  },
+  "sd1": "如有身体不适，特别是发烧咳嗽，佩戴好口罩并及时就诊。",
+  "@sd1": {
+    "description": "If you feel unwell",
+    "type": "text",
+    "placeholders": {}
+  },
+  "sd2": "就诊时请保持好社交距离。",
+  "@sd2": {
+    "description": "maintain social distancing",
+    "type": "text",
+    "placeholders": {}
+  },
+  "sd3": "就诊完返回家中时，及时洗手。",
+  "@sd3": {
+    "description": "Wash your hands promptly",
+    "type": "text",
+    "placeholders": {}
+  },
+  "newCases": "新增确诊",
+  "@newCases": {
+    "description": "New Cases",
+    "type": "text",
+    "placeholders": {}
+  },
+  "source": "数据来源：WHO和霍普金斯大学网站",
+  "@source": {
+    "description": "Data source: WHO and Hopkins University website",
+    "type": "text",
+    "placeholders": {}
+  },
+  "national": "全国疫情数据",
+  "@national": {
+    "description": "National Epidemic Data",
+    "type": "text",
+    "placeholders": {}
   }
 }

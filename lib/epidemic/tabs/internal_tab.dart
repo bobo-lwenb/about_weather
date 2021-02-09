@@ -5,6 +5,7 @@ import 'package:about_weather/epidemic/internal_model/tree/area.dart';
 import 'package:about_weather/epidemic/widgets/list_header.dart';
 import 'package:about_weather/epidemic/widgets/list_internal_item.dart';
 import 'package:about_weather/epidemic/widgets/statis_cell.dart';
+import 'package:about_weather/intl/l10n/localizations_intl.dart';
 import 'package:flutter/material.dart';
 
 class InternalTab extends StatefulWidget {
@@ -61,7 +62,7 @@ class _InternalTabState extends State<InternalTab>
           child: Padding(
             padding: EdgeInsets.only(left: 8, top: 8, right: 8, bottom: 26),
             child: Text(
-              "数据来源：各地卫健委公开数据",
+              AppLocalizations.of(context).dataSource,
               style: TextStyle(color: Colors.grey[500]),
             ),
           ),
@@ -101,21 +102,21 @@ class _InternalTabState extends State<InternalTab>
       children: <TableRow>[
         TableRow(children: <Widget>[
           StatisCell(
-            typeName: "本土现有确诊",
+            typeName: AppLocalizations.of(context).localExistConfirmed,
             count: _chinaTotal.localConfirm,
             changeCount: _chinaAdd.localConfirm,
             color: Colors.deepOrange,
             backgroundColor: Colors.orange[50],
           ),
           StatisCell(
-            typeName: "现有确诊",
+            typeName: AppLocalizations.of(context).existConfirmed,
             count: _chinaTotal.nowConfirm,
             changeCount: _chinaAdd.nowConfirm,
             color: Colors.red,
             backgroundColor: Colors.red[50],
           ),
           StatisCell(
-            typeName: "累计确诊",
+            typeName: AppLocalizations.of(context).confirmed,
             count: _chinaTotal.confirm,
             changeCount: _chinaAdd.confirm,
             color: Colors.redAccent[700],
@@ -124,21 +125,21 @@ class _InternalTabState extends State<InternalTab>
         ]),
         TableRow(children: <Widget>[
           StatisCell(
-            typeName: "无症状感染者",
+            typeName: AppLocalizations.of(context).symptomless,
             count: _chinaTotal.noInfect,
             changeCount: _chinaAdd.noInfect,
             color: Colors.deepPurple,
             backgroundColor: Colors.deepPurple[50],
           ),
           StatisCell(
-            typeName: "境外输入",
+            typeName: AppLocalizations.of(context).importAbroad,
             count: _chinaTotal.importedCase,
             changeCount: _chinaAdd.importedCase,
             color: Colors.blue,
             backgroundColor: Colors.blue[50],
           ),
           StatisCell(
-            typeName: "累计死亡",
+            typeName: AppLocalizations.of(context).death,
             count: _chinaTotal.dead,
             changeCount: _chinaAdd.dead,
             color: Colors.black87,
@@ -147,21 +148,21 @@ class _InternalTabState extends State<InternalTab>
         ]),
         TableRow(children: <Widget>[
           StatisCell(
-            typeName: "累计治愈",
+            typeName: AppLocalizations.of(context).cure,
             count: _chinaTotal.heal,
             changeCount: _chinaAdd.heal,
             color: Colors.green,
             backgroundColor: Colors.green[50],
           ),
           StatisCell(
-            typeName: "现有疑似",
+            typeName: AppLocalizations.of(context).existSuspect,
             count: _chinaTotal.suspect,
             changeCount: _chinaAdd.suspect,
             color: Colors.orange,
             backgroundColor: Colors.yellow[50],
           ),
           StatisCell(
-            typeName: "现有重症",
+            typeName: AppLocalizations.of(context).existSevere,
             count: _chinaTotal.nowSevere,
             changeCount: _chinaAdd.nowSevere,
             color: Colors.orange,
@@ -177,7 +178,7 @@ class _InternalTabState extends State<InternalTab>
         Text.rich(TextSpan(
           children: <TextSpan>[
             TextSpan(
-              text: "数据统计截止 ",
+              text: "${AppLocalizations.of(context).statisticsCutoff} ",
               style: TextStyle(color: Colors.grey[700]),
             ),
             TextSpan(text: "$_lastUpdateTime"),
@@ -195,23 +196,23 @@ class _InternalTabState extends State<InternalTab>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          "中国疫情（包括港澳台）",
+          AppLocalizations.of(context).chinaEpidemic,
           style: TextStyle(fontSize: 26),
         ),
         SizedBox(height: 5),
         Text(
-          "7:00-10:00为更新高峰，数据如有滞后请谅解。",
+          AppLocalizations.of(context).epidemicTip,
           style: TextStyle(color: Colors.grey[700]),
         ),
         SizedBox(height: 15),
         ListHeader(
           cellRatio: cellRatio,
-          title1: "地区",
-          title2: "现有\n确诊",
-          title3: "累计确诊",
-          title4: "本土现有\n无症状",
-          title5: "死亡",
-          title6: "详情",
+          title1: AppLocalizations.of(context).area,
+          title2: AppLocalizations.of(context).ec,
+          title3: AppLocalizations.of(context).confirmed,
+          title4: AppLocalizations.of(context).localSymptomless,
+          title5: AppLocalizations.of(context).deathless,
+          title6: AppLocalizations.of(context).detail,
         ),
       ],
     );
@@ -252,37 +253,39 @@ class _InternalTabState extends State<InternalTab>
 
   Widget _buildMatter() {
     Widget title = Text(
-      "新冠肺炎预防建议",
+      AppLocalizations.of(context).preventionAdvice,
       style: TextStyle(fontSize: 26),
     );
     Widget matter = Column(
       children: <Widget>[
         _buildMatterTile(
           icon: Icon(Icons.info_outline_rounded, color: Colors.blue),
-          text: Text("个人卫生", style: TextStyle(fontSize: 22)),
+          text: Text(AppLocalizations.of(context).hygiene,
+              style: TextStyle(fontSize: 22)),
         ),
-        _buildMatterTile(text: Text("勤洗手，要用洗手液和清水清洗税收，搓手洗至少20秒，洗手后及时擦干。")),
-        _buildMatterTile(text: Text("保持双手清洁，特别是在触摸眼、口、鼻或耳之前。")),
-        _buildMatterTile(
-            text: Text("打喷嚏或咳嗽时应用纸巾捂住口鼻，然后把纸巾弃置有盖的垃圾桶内，最后马上清洗双手。")),
-        _buildMatterTile(text: Text("保持室内空气流通。")),
-        _buildMatterTile(text: Text("从外带回家中的物品如果可以，尽量用酒精消毒。")),
+        _buildMatterTile(text: Text(AppLocalizations.of(context).hygiene1)),
+        _buildMatterTile(text: Text(AppLocalizations.of(context).hygiene2)),
+        _buildMatterTile(text: Text(AppLocalizations.of(context).hygiene3)),
+        _buildMatterTile(text: Text(AppLocalizations.of(context).hygiene4)),
+        _buildMatterTile(text: Text(AppLocalizations.of(context).hygiene5)),
         SizedBox(height: 16),
         _buildMatterTile(
           icon: Icon(Icons.remove_circle_outline_rounded, color: Colors.red),
-          text: Text("尽量避免", style: TextStyle(fontSize: 22)),
+          text: Text(AppLocalizations.of(context).avoid,
+              style: TextStyle(fontSize: 22)),
         ),
-        _buildMatterTile(text: Text("避免前往人流密集的场所，如不可避免，请戴好外科口罩。")),
-        _buildMatterTile(text: Text("注意食品安全安全和卫生，避免进食或饮用生或未熟透的动物食品，包括肉蛋奶。")),
-        _buildMatterTile(text: Text("避免长时间佩戴同一只口罩，条件允许适时更换口罩。")),
+        _buildMatterTile(text: Text(AppLocalizations.of(context).avoid1)),
+        _buildMatterTile(text: Text(AppLocalizations.of(context).avoid2)),
+        _buildMatterTile(text: Text(AppLocalizations.of(context).avoid3)),
         SizedBox(height: 16),
         _buildMatterTile(
           icon: Icon(Icons.add_circle_outline_rounded, color: Colors.green),
-          text: Text("尽快就诊", style: TextStyle(fontSize: 22)),
+          text: Text(AppLocalizations.of(context).sd,
+              style: TextStyle(fontSize: 22)),
         ),
-        _buildMatterTile(text: Text("如有身体不适，特别是发烧咳嗽，佩戴好口罩并及时就诊。")),
-        _buildMatterTile(text: Text("就诊时请保持好社交距离。")),
-        _buildMatterTile(text: Text("就诊完返回家中时，及时洗手。")),
+        _buildMatterTile(text: Text(AppLocalizations.of(context).sd1)),
+        _buildMatterTile(text: Text(AppLocalizations.of(context).sd2)),
+        _buildMatterTile(text: Text(AppLocalizations.of(context).sd3)),
         SizedBox(height: 16),
       ],
     );

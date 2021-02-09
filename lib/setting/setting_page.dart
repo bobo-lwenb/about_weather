@@ -60,8 +60,8 @@ class _SettingPageState extends State<SettingPage> {
           SizedBox(height: 24),
           ItemTile(
             leading: Icon(Icons.data_usage_rounded),
-            leadingTitle: Text("疫情数据"),
-            subTitle: "包含国内疫情和海外疫情的数据",
+            leadingTitle: Text(AppLocalizations.of(context).epidemicData),
+            subTitle: AppLocalizations.of(context).epidemicDataDesc,
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
                 return EpidemicPage();

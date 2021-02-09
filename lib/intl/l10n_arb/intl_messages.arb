@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2021-02-01T23:17:51.260363",
+  "@@last_modified": "2021-02-10T00:04:23.748023",
   "settings": "Settings",
   "@settings": {
     "description": "settings",
@@ -81,6 +81,258 @@
   "simplifiedChinese": "Simplified Chinese",
   "@simplifiedChinese": {
     "description": "Simplified Chines",
+    "type": "text",
+    "placeholders": {}
+  },
+  "epidemicData": "Epidemic Data",
+  "@epidemicData": {
+    "description": "Epidemic Data",
+    "type": "text",
+    "placeholders": {}
+  },
+  "epidemicDataDesc": "Contains data on domestic and overseas epidemics",
+  "@epidemicDataDesc": {
+    "description": "Contains data on domestic and overseas epidemics",
+    "type": "text",
+    "placeholders": {}
+  },
+  "covid_19": "COVID-19",
+  "@covid_19": {
+    "description": "COVID-19",
+    "type": "text",
+    "placeholders": {}
+  },
+  "domesticEpidemic": "Domestic Epidemic",
+  "@domesticEpidemic": {
+    "description": "Domestic Epidemic",
+    "type": "text",
+    "placeholders": {}
+  },
+  "overseasEpidemic": "Overseas Epidemic",
+  "@overseasEpidemic": {
+    "description": "Overseas Epidemic",
+    "type": "text",
+    "placeholders": {}
+  },
+  "statisticsCutoff": "Statistics Cutoff",
+  "@statisticsCutoff": {
+    "description": "Statistics Cutoff",
+    "type": "text",
+    "placeholders": {}
+  },
+  "localExistConfirmed": "Local E-C",
+  "@localExistConfirmed": {
+    "description": "Local Exist Confirmed",
+    "type": "text",
+    "placeholders": {}
+  },
+  "existConfirmed": "E-C",
+  "@existConfirmed": {
+    "description": "Exist Confirmed",
+    "type": "text",
+    "placeholders": {}
+  },
+  "confirmed": "Confirmed",
+  "@confirmed": {
+    "description": "Confirmed",
+    "type": "text",
+    "placeholders": {}
+  },
+  "symptomless": "Symptomless",
+  "@symptomless": {
+    "description": "Symptomless",
+    "type": "text",
+    "placeholders": {}
+  },
+  "importAbroad": "Import Abroad",
+  "@importAbroad": {
+    "description": "Import Abroad",
+    "type": "text",
+    "placeholders": {}
+  },
+  "death": "Death",
+  "@death": {
+    "description": "Death",
+    "type": "text",
+    "placeholders": {}
+  },
+  "cure": "Cure",
+  "@cure": {
+    "description": "Cure",
+    "type": "text",
+    "placeholders": {}
+  },
+  "existSuspect": "Exist Suspect",
+  "@existSuspect": {
+    "description": "Exist Suspect",
+    "type": "text",
+    "placeholders": {}
+  },
+  "existSevere": "Exist Severe",
+  "@existSevere": {
+    "description": "Exist Severe",
+    "type": "text",
+    "placeholders": {}
+  },
+  "fromYesterday": "from yesterday",
+  "@fromYesterday": {
+    "description": "from yesterday",
+    "type": "text",
+    "placeholders": {}
+  },
+  "chinaEpidemic": "China Epidemic (including Hong Kong, Macao and Taiwan)",
+  "@chinaEpidemic": {
+    "description": "China Epidemic (including Hong Kong, Macao and Taiwan)",
+    "type": "text",
+    "placeholders": {}
+  },
+  "epidemicTip": "7:00-10:00 is the peak update period. Please understand if the data lags behind.",
+  "@epidemicTip": {
+    "description": "7:00-10:00 is the peak update period. Please understand if the data lags behind.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "dataSource": "Data Source: public data from local health commissions",
+  "@dataSource": {
+    "description": "Data Source: public data from local health commissions",
+    "type": "text",
+    "placeholders": {}
+  },
+  "area": "Area",
+  "@area": {
+    "description": "Area",
+    "type": "text",
+    "placeholders": {}
+  },
+  "ec": "E-C",
+  "@ec": {
+    "description": "Exist Confirmed",
+    "type": "text",
+    "placeholders": {}
+  },
+  "localSymptomless": "Symptomless",
+  "@localSymptomless": {
+    "description": "Local Symptomless",
+    "type": "text",
+    "placeholders": {}
+  },
+  "deathless": "death",
+  "@deathless": {
+    "description": "deathless",
+    "type": "text",
+    "placeholders": {}
+  },
+  "detail": "Detail",
+  "@detail": {
+    "description": "Detail",
+    "type": "text",
+    "placeholders": {}
+  },
+  "preventionAdvice": "COVID-19 Prevention Advice",
+  "@preventionAdvice": {
+    "description": "COVID-19 Prevention Advice",
+    "type": "text",
+    "placeholders": {}
+  },
+  "hygiene": "Personal Hygiene",
+  "@hygiene": {
+    "description": "Personal Hygiene",
+    "type": "text",
+    "placeholders": {}
+  },
+  "hygiene1": "Wash your hands frequently, wash your hands with hand sanitizer and water, rub your hands for at least 20 seconds, and dry them in time.",
+  "@hygiene1": {
+    "description": "Wash Hand",
+    "type": "text",
+    "placeholders": {}
+  },
+  "hygiene2": "Keep your hands clean, especially before touching your eyes, mouth, nose or ears.",
+  "@hygiene2": {
+    "description": "Keep your hands clean",
+    "type": "text",
+    "placeholders": {}
+  },
+  "hygiene3": "Cover your mouth and nose with a tissue when you sneeze or cough, then put the tissue in a covered trash can, and wash your hands immediately.",
+  "@hygiene3": {
+    "description": "Cover your mouth and nose",
+    "type": "text",
+    "placeholders": {}
+  },
+  "hygiene4": "Keep indoor air circulation.",
+  "@hygiene4": {
+    "description": "Keep indoor air circulation.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "hygiene5": "If you can bring home items from outside, try to disinfect them with alcohol.",
+  "@hygiene5": {
+    "description": "If you can bring home items from outside",
+    "type": "text",
+    "placeholders": {}
+  },
+  "avoid": "Try to Avoid",
+  "@avoid": {
+    "description": "Try to Avoid",
+    "type": "text",
+    "placeholders": {}
+  },
+  "avoid1": "Avoid going to crowded places. If it is unavoidable, please wear a surgical mask.",
+  "@avoid1": {
+    "description": "Avoid going to crowded places.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "avoid2": "Pay attention to food safety and hygiene, and avoid eating or drinking raw or undercooked animal food, including meat, eggs, and milk.",
+  "@avoid2": {
+    "description": "Pay attention to food safety and hygiene",
+    "type": "text",
+    "placeholders": {}
+  },
+  "avoid3": "Avoid wearing the same mask for a long time, and conditions allow changing the mask in due course.",
+  "@avoid3": {
+    "description": "Avoid wearing the same mask for a long time",
+    "type": "text",
+    "placeholders": {}
+  },
+  "sd": "See a doctor as soon as possible",
+  "@sd": {
+    "description": "See a doctor as soon as possible",
+    "type": "text",
+    "placeholders": {}
+  },
+  "sd1": "If you feel unwell, especially fever and cough, wear a mask and see a doctor in time.",
+  "@sd1": {
+    "description": "If you feel unwell",
+    "type": "text",
+    "placeholders": {}
+  },
+  "sd2": "Please maintain social distancing when visiting a doctor.",
+  "@sd2": {
+    "description": "maintain social distancing",
+    "type": "text",
+    "placeholders": {}
+  },
+  "sd3": "Wash your hands promptly when you return home after consultation.",
+  "@sd3": {
+    "description": "Wash your hands promptly",
+    "type": "text",
+    "placeholders": {}
+  },
+  "newCases": "New Cases",
+  "@newCases": {
+    "description": "New Cases",
+    "type": "text",
+    "placeholders": {}
+  },
+  "source": "Data source: WHO and Hopkins University website",
+  "@source": {
+    "description": "Data source: WHO and Hopkins University website",
+    "type": "text",
+    "placeholders": {}
+  },
+  "national": "National Epidemic Data",
+  "@national": {
+    "description": "National Epidemic Data",
     "type": "text",
     "placeholders": {}
   }

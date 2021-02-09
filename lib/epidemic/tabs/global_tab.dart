@@ -4,6 +4,7 @@ import 'package:about_weather/epidemic/global_model/global_statis.dart';
 import 'package:about_weather/epidemic/widgets/list_global_item.dart';
 import 'package:about_weather/epidemic/widgets/list_header.dart';
 import 'package:about_weather/epidemic/widgets/statis_cell.dart';
+import 'package:about_weather/intl/l10n/localizations_intl.dart';
 import 'package:flutter/material.dart';
 
 class GlobalTab extends StatefulWidget {
@@ -53,7 +54,7 @@ class _GlobalTabState extends State<GlobalTab>
           child: Padding(
             padding: EdgeInsets.only(left: 8, top: 8, right: 8, bottom: 26),
             child: Text(
-              "数据来源：WHO和霍普金斯大学网站",
+              AppLocalizations.of(context).source,
               style: TextStyle(color: Colors.grey[500]),
             ),
           ),
@@ -87,14 +88,14 @@ class _GlobalTabState extends State<GlobalTab>
       children: <TableRow>[
         TableRow(children: <Widget>[
           StatisCell(
-            typeName: "累计确诊",
+            typeName: AppLocalizations.of(context).confirmed,
             count: _globalStatis.confirm,
             changeCount: _globalStatis.confirmAdd,
             color: Colors.redAccent[700],
             backgroundColor: Colors.red[100],
           ),
           StatisCell(
-            typeName: "现有确诊",
+            typeName: AppLocalizations.of(context).existConfirmed,
             count: _globalStatis.nowConfirm,
             changeCount: _globalStatis.nowConfirmAdd,
             color: Colors.red,
@@ -103,14 +104,14 @@ class _GlobalTabState extends State<GlobalTab>
         ]),
         TableRow(children: <Widget>[
           StatisCell(
-            typeName: "累计治愈",
+            typeName: AppLocalizations.of(context).cure,
             count: _globalStatis.heal,
             changeCount: _globalStatis.healAdd,
             color: Colors.green,
             backgroundColor: Colors.green[50],
           ),
           StatisCell(
-            typeName: "累计死亡",
+            typeName: AppLocalizations.of(context).death,
             count: _globalStatis.dead,
             changeCount: _globalStatis.deadAdd,
             color: Colors.black87,
@@ -126,7 +127,7 @@ class _GlobalTabState extends State<GlobalTab>
         Text.rich(TextSpan(
           children: <TextSpan>[
             TextSpan(
-              text: "数据统计截止 ",
+              text: "${AppLocalizations.of(context).statisticsCutoff} ",
               style: TextStyle(color: Colors.grey[700]),
             ),
             TextSpan(text: "${_globalStatis.lastUpdateTime}"),
@@ -145,18 +146,18 @@ class _GlobalTabState extends State<GlobalTab>
       children: <Widget>[
         SizedBox(height: 16),
         Text(
-          "海外疫情",
+          AppLocalizations.of(context).overseasEpidemic,
           style: TextStyle(fontSize: 26),
         ),
         SizedBox(height: 8),
         ListHeader(
           cellRatio: cellRatio,
-          title1: "地区",
-          title2: "新增确诊",
-          title3: "累计确诊",
-          title4: "治愈",
-          title5: "死亡",
-          title6: "详情",
+          title1: AppLocalizations.of(context).area,
+          title2: AppLocalizations.of(context).newCases,
+          title3: AppLocalizations.of(context).confirmed,
+          title4: AppLocalizations.of(context).cure,
+          title5: AppLocalizations.of(context).deathless,
+          title6: AppLocalizations.of(context).detail,
         ),
       ],
     );
