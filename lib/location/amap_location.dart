@@ -40,11 +40,9 @@ class AMapLocation {
     );
     bool hasLocationPermission = await _requestLocationPermission();
     if (hasLocationPermission) {
-      print("定位权限申请通过");
       _setLocationOption();
       startLocation();
     } else {
-      print("定位权限申请不通过");
       permissionDenied();
     }
   }
@@ -120,12 +118,8 @@ class AMapLocation {
         await _location.getSystemAccuracyAuthorization();
     if (currentAccuracyAuthorization ==
         AMapAccuracyAuthorization.AMapAccuracyAuthorizationFullAccuracy) {
-      print("精确定位类型");
     } else if (currentAccuracyAuthorization ==
         AMapAccuracyAuthorization.AMapAccuracyAuthorizationReducedAccuracy) {
-      print("模糊定位类型");
-    } else {
-      print("未知定位类型");
-    }
+    } else {}
   }
 }

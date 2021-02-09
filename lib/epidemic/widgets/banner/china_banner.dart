@@ -11,16 +11,16 @@ class ChinaBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ChinaTotal total = model.chinaTotal;
-    ChinaAdd add = model.chinaAdd;
+    ChinaTotal total = model?.chinaTotal;
+    ChinaAdd add = model?.chinaAdd;
     Widget flex1 = Flex(
       direction: Axis.horizontal,
       children: <Widget>[
         Expanded(
           child: StatisCell(
             typeName: "境外输入",
-            count: total.importedCase,
-            changeCount: add.importedCase,
+            count: total?.importedCase,
+            changeCount: add?.importedCase,
             color: Colors.yellow[900],
             backgroundColor: Colors.white,
           ),
@@ -28,8 +28,8 @@ class ChinaBanner extends StatelessWidget {
         Expanded(
           child: StatisCell(
             typeName: "无症状感染者",
-            count: total.noInfect,
-            changeCount: add.noInfect,
+            count: total?.noInfect,
+            changeCount: add?.noInfect,
             color: Colors.deepPurple,
             backgroundColor: Colors.white,
           ),
@@ -37,8 +37,8 @@ class ChinaBanner extends StatelessWidget {
         Expanded(
           child: StatisCell(
             typeName: "累计治愈",
-            count: total.heal,
-            changeCount: add.heal,
+            count: total?.heal,
+            changeCount: add?.heal,
             color: Colors.green,
             backgroundColor: Colors.white,
           ),
@@ -51,8 +51,8 @@ class ChinaBanner extends StatelessWidget {
         Expanded(
           child: StatisCell(
             typeName: "现有确诊",
-            count: total.nowConfirm,
-            changeCount: add.nowConfirm,
+            count: total?.nowConfirm,
+            changeCount: add?.nowConfirm,
             color: Colors.red,
             backgroundColor: Colors.white,
           ),
@@ -60,8 +60,8 @@ class ChinaBanner extends StatelessWidget {
         Expanded(
           child: StatisCell(
             typeName: "累计确诊",
-            count: total.confirm,
-            changeCount: add.confirm,
+            count: total?.confirm,
+            changeCount: add?.confirm,
             color: Colors.redAccent[700],
             backgroundColor: Colors.white,
           ),
@@ -69,8 +69,8 @@ class ChinaBanner extends StatelessWidget {
         Expanded(
           child: StatisCell(
             typeName: "累计死亡",
-            count: total.dead,
-            changeCount: add.dead,
+            count: total?.dead,
+            changeCount: add?.dead,
             color: Colors.black87,
             backgroundColor: Colors.white,
           ),

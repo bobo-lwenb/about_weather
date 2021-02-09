@@ -13,8 +13,8 @@ class LocalBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Total total = area.total;
-    Today today = area.today;
+    Total total = area?.total;
+    Today today = area?.today;
     Widget flex1 = Flex(
       direction: Axis.horizontal,
       children: <Widget>[
@@ -22,7 +22,7 @@ class LocalBanner extends StatelessWidget {
           flex: 1,
           child: StatisCell(
             typeName: "现有确诊",
-            count: total.nowConfirm,
+            count: total?.nowConfirm,
             isShowChange: false,
             color: Colors.red,
             backgroundColor: Colors.white,
@@ -32,8 +32,8 @@ class LocalBanner extends StatelessWidget {
           flex: 1,
           child: StatisCell(
             typeName: "累计确诊",
-            count: total.confirm,
-            changeCount: today.confirm,
+            count: total?.confirm,
+            changeCount: today?.confirm,
             color: Colors.redAccent[700],
             backgroundColor: Colors.white,
           ),
@@ -42,7 +42,7 @@ class LocalBanner extends StatelessWidget {
           flex: 1,
           child: StatisCell(
             typeName: "现有疑似",
-            count: total.suspect,
+            count: total?.suspect,
             isShowChange: false,
             color: Colors.orange,
             backgroundColor: Colors.white,
@@ -57,8 +57,8 @@ class LocalBanner extends StatelessWidget {
           flex: 1,
           child: StatisCell(
             typeName: "无症状感染者",
-            count: total.wzz,
-            changeCount: today.wzzAdd,
+            count: total?.wzz,
+            changeCount: today?.wzzAdd,
             color: Colors.deepPurple,
             backgroundColor: Colors.white,
           ),
@@ -67,7 +67,7 @@ class LocalBanner extends StatelessWidget {
           flex: 1,
           child: StatisCell(
             typeName: "累计治愈",
-            count: total.heal,
+            count: total?.heal,
             isShowChange: false,
             color: Colors.green,
             backgroundColor: Colors.white,
@@ -77,7 +77,7 @@ class LocalBanner extends StatelessWidget {
           flex: 1,
           child: StatisCell(
             typeName: "累计死亡",
-            count: total.dead,
+            count: total?.dead,
             isShowChange: false,
             color: Colors.black87,
             backgroundColor: Colors.white,

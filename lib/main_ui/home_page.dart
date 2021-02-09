@@ -2,9 +2,10 @@ import 'dart:convert';
 
 import 'package:about_weather/epidemic/widgets/banner/epidemic_banner.dart';
 import 'package:about_weather/location/amap_location.dart';
-import 'package:about_weather/location/model/location.dart';
+import 'package:about_weather/location/location_data.dart';
 import 'package:about_weather/setting/setting_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -13,7 +14,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   AMapLocation _aMapLocation;
-  Location _location;
 
   @override
   void initState() {
@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
           SizedBox(width: 10),
         ],
       ),
-      body: _location?.province == null ? Container() : _buildList(),
+      body: _buildList(),
     );
   }
 
@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
               boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 5)],
               borderRadius: BorderRadius.circular(10),
             ),
-            child: EpidemicBanner(province: _location.province),
+            child: EpidemicBanner(),
           ),
         ),
       ],
@@ -70,12 +70,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _setAMapLocation() {
-    AMapLocation.initAMapLocationKey();
     _aMapLocation = AMapLocation(
-      locationChange: (result) {
-        print(json.encode(result));
-        _location = result;
-        setState(() {});
+      locationChange: (location) {
+        print(json.encode(location));
+        if (location.province == null || location.province.isEmpty) return;
+        Provider.of<LocationData>(context, listen: false)
+            .updateLocation(location);
       },
       permissionDenied: () {},
     );

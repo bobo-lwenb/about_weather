@@ -29,7 +29,7 @@ class StatisCell extends StatelessWidget {
         ),
         SizedBox(height: 3),
         Text(
-          "$count",
+          count == null ? "--" : "$count",
           style: TextStyle(
             color: color,
             fontSize: countSize,
