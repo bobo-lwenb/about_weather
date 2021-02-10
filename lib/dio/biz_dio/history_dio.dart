@@ -1,9 +1,9 @@
 import 'package:about_weather/dio/base_dio.dart';
 import 'package:about_weather/setting/today_history/model/today_history.dart';
 
+const String TODAY_HISTORY_APPCODE = "2072f902a46c4b599699a1a557ed3257";
 const String TODAY_HISTORY_HOST = "https://jisulssdjt.market.alicloudapi.com";
 const String TODAY_HISTORY_PATH = "/todayhistory/query";
-const String TODAY_HISTORY_APPCODE = "2072f902a46c4b599699a1a557ed3257";
 
 class HistoryDio extends BaseDio {
   static HistoryDio _instance;

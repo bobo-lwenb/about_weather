@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:about_weather/epidemic/widgets/banner/epidemic_banner.dart';
 import 'package:about_weather/location/amap_location.dart';
 import 'package:about_weather/location/location_data.dart';
@@ -72,7 +70,6 @@ class _HomePageState extends State<HomePage> {
   void _setAMapLocation() {
     _aMapLocation = AMapLocation(
       locationChange: (location) {
-        print(json.encode(location));
         if (location.province == null || location.province.isEmpty) return;
         Provider.of<LocationData>(context, listen: false)
             .updateLocation(location);

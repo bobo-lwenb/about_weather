@@ -1,4 +1,4 @@
-import 'package:about_weather/dio/biz_dio/today_history/history_dio.dart';
+import 'package:about_weather/dio/biz_dio/history_dio.dart';
 import 'package:about_weather/intl/l10n/localizations_intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';

@@ -1,4 +1,4 @@
-import 'package:about_weather/dio/biz_dio/news_epidemic/news_dio.dart';
+import 'package:about_weather/dio/biz_dio/news_dio.dart';
 import 'package:about_weather/epidemic/global_model/foreign_model.dart';
 import 'package:about_weather/epidemic/global_model/global_statis.dart';
 import 'package:about_weather/epidemic/widgets/list_global_item.dart';

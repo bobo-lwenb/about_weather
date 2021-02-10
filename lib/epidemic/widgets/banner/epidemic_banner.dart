@@ -1,4 +1,4 @@
-import 'package:about_weather/dio/biz_dio/news_epidemic/news_dio.dart';
+import 'package:about_weather/dio/biz_dio/news_dio.dart';
 import 'package:about_weather/epidemic/internal_model/internal_data.dart';
 import 'package:about_weather/epidemic/internal_model/tree/area.dart';
 import 'package:about_weather/epidemic/widgets/banner/china_banner.dart';
