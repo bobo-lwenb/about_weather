@@ -1,4 +1,4 @@
-import 'package:about_weather/city_search/model/area_to_id/region.dart';
+import 'package:about_weather/city_search/model/region.dart';
 import 'package:about_weather/dio/base_dio.dart';
 
 const String YIYUAN_APPCODE = "2072f902a46c4b599699a1a557ed3257";

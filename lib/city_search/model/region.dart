@@ -1,4 +1,4 @@
-import 'package:about_weather/city_search/model/area_to_id/place_name.dart';
+import 'package:about_weather/city_search/model/place_name.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'region.g.dart';

@@ -1,8 +1,5 @@
-import 'dart:convert';
-import 'dart:developer';
-
-import 'package:about_weather/city_search/model/area_to_id/city_info.dart';
-import 'package:about_weather/city_search/model/area_to_id/place_name.dart';
+import 'package:about_weather/city_search/model/city_info.dart';
+import 'package:about_weather/city_search/model/place_name.dart';
 import 'package:about_weather/city_search/search_item.dart';
 import 'package:about_weather/dio/biz_dio/yiyuan_dio.dart';
 import 'package:flutter/material.dart';
