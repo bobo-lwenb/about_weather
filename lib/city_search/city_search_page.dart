@@ -52,14 +52,24 @@ class _CitySearchPageState extends State<CitySearchPage> {
           }),
         ],
       ),
-      body: ListView.builder(
+      body: ListView.separated(
         itemBuilder: (context, index) {
           CityInfo info = _list[index].cityInfo;
           return InkWell(
             child: SearchItem(info: info),
-            onTap: () {},
+            onTap: () {
+              showModalBottomSheet<int>(
+                context: context,
+                isDismissible: false,
+                // enableDrag: false,
+                builder: (BuildContext context) {
+                  return Container();
+                },
+              );
+            },
           );
         },
+        separatorBuilder: (context, index) => Divider(height: 1),
         itemCount: _list.length,
       ),
     );

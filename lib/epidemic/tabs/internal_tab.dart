@@ -220,7 +220,7 @@ class _InternalTabState extends State<InternalTab>
   }
 
   Widget _buildList(BuildContext context) {
-    Widget list = ListView.builder(
+    Widget list = ListView.separated(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
@@ -239,6 +239,7 @@ class _InternalTabState extends State<InternalTab>
           onTap: () {},
         );
       },
+      separatorBuilder: (context, index) => Divider(height: 1),
       itemCount: _listArea.length,
     );
     return MediaQuery.removePadding(

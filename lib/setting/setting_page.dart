@@ -1,3 +1,4 @@
+import 'package:about_weather/city_list/city_list.dart';
 import 'package:about_weather/epidemic/epidemic_page.dart';
 import 'package:about_weather/intl/l10n/localizations_intl.dart';
 import 'package:about_weather/setting/about_app.dart';
@@ -6,12 +7,12 @@ import 'package:about_weather/setting/language/language_provider.dart';
 import 'package:about_weather/setting/theme/theme_page.dart';
 import 'package:about_weather/setting/theme/theme_provider.dart';
 import 'package:about_weather/tool_box/fields.dart';
-import 'package:about_weather/widgets/item_tile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'today_history/today_history_page.dart';
+import 'widgets/item_tile.dart';
 
 class SettingPage extends StatefulWidget {
   @override
@@ -86,6 +87,15 @@ class _SettingPageState extends State<SettingPage> {
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
                 return AboutApp();
+              }));
+            },
+          ),
+          ItemTile(
+            leading: Icon(Icons.list_alt_rounded),
+            leadingTitle: Text("位置列表"),
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                return CityListPage();
               }));
             },
           ),

@@ -168,7 +168,7 @@ class _GlobalTabState extends State<GlobalTab>
   }
 
   Widget _buildList(BuildContext context) {
-    Widget list = ListView.builder(
+    Widget list = ListView.separated(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
@@ -185,6 +185,7 @@ class _GlobalTabState extends State<GlobalTab>
           onTap: () {},
         );
       },
+      separatorBuilder: (context, index) => Divider(height: 1),
       itemCount: _foreignList.length,
     );
     return MediaQuery.removePadding(

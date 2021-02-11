@@ -1,8 +1,8 @@
 import 'package:about_weather/intl/l10n/localizations_intl.dart';
+import 'package:about_weather/setting/widgets/item_tile.dart';
 import 'package:about_weather/tool_box/fields.dart';
 import 'package:about_weather/setting/language/language_provider.dart';
 import 'package:about_weather/tool_box/settings_preferences.dart';
-import 'package:about_weather/widgets/item_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
