@@ -25,7 +25,8 @@ class AppException implements Exception {
       case DioErrorType.RESPONSE:
         try {
           int errCode = error.response.statusCode;
-          // String errMsg = error.response.statusMessage;
+          String errMsg = error.response.statusMessage;
+          print("==============$errMsg");
           // return ErrorEntity(code: errCode, message: errMsg);
           switch (errCode) {
             case 400:

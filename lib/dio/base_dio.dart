@@ -28,8 +28,11 @@ class BaseDio {
     baseOptions.responseType = ResponseType.json;
     _dio = Dio(baseOptions);
     _dio.interceptors.add(ErrorInterceptor());
+    dioSetting(_dio);
     return this;
   }
+
+  void dioSetting(Dio dio) {}
 
   Future<Map<String, dynamic>> get({
     @required String path,
