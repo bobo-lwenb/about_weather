@@ -1,12 +1,11 @@
 import 'package:about_weather/dio/biz_dio/moji_dio.dart';
-import 'package:about_weather/location/location_data.dart';
 import 'package:about_weather/location/model/location.dart';
 import 'package:about_weather/main_ui/sign_banner/model/aqi_index/aqi_index.dart';
 import 'package:about_weather/main_ui/sign_banner/model/condition/condition.dart';
 import 'package:flutter/material.dart';
 
 class SignBanner extends StatefulWidget {
-  final LocationData location;
+  final Location location;
 
   SignBanner({this.location, Key key}) : super(key: key);
 
@@ -29,7 +28,7 @@ class _SignBannerState extends State<SignBanner> {
     return Column(
       children: [
         Container(
-          height: 350,
+          height: 270,
           child: Stack(
             alignment: AlignmentDirectional.bottomCenter,
             children: <Widget>[
@@ -69,13 +68,13 @@ class _SignBannerState extends State<SignBanner> {
   }
 
   void initData() {
-    Location _location = widget.location.location;
+    Location _location = widget.location;
     if (_location == null) return;
     List<Future> list = [
-      // MojiDio.instance().condition(
-      //   _location.latitude.toString(),
-      //   _location.longitude.toString(),
-      // ),
+      MojiDio.instance().condition(
+        _location.latitude.toString(),
+        _location.longitude.toString(),
+      ),
       MojiDio.instance().aqiIndex(
         _location.latitude.toString(),
         _location.longitude.toString(),

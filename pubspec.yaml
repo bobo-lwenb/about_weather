@@ -62,9 +62,37 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - lib/images/W0.png
+    - lib/images/W1.png
+    - lib/images/W2.png
+    - lib/images/W3.png
+    - lib/images/W4.png
+    - lib/images/W5.png
+    - lib/images/W6.png
+    - lib/images/W7.png
+    - lib/images/W8.png
+    - lib/images/W9.png
+    - lib/images/W10.png
+    - lib/images/W13.png
+    - lib/images/W14.png
+    - lib/images/W15.png
+    - lib/images/W16.png
+    - lib/images/W17.png
+    - lib/images/W18.png
+    - lib/images/W19.png
+    - lib/images/W20.png
+    - lib/images/W29.png
+    - lib/images/W30.png
+    - lib/images/W31.png
+    - lib/images/W32.png
+    - lib/images/W33.png
+    - lib/images/W34.png
+    - lib/images/W35.png
+    - lib/images/W36.png
+    - lib/images/W44.png
+    - lib/images/W45.png
+    - lib/images/W46.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

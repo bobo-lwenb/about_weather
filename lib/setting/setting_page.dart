@@ -90,15 +90,6 @@ class _SettingPageState extends State<SettingPage> {
               }));
             },
           ),
-          ItemTile(
-            leading: Icon(Icons.list_alt_rounded),
-            leadingTitle: Text("位置列表"),
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return CityListPage();
-              }));
-            },
-          ),
         ],
       ),
     );

@@ -1,5 +1,5 @@
 import 'package:about_weather/intl/l10n/localizations_intl.dart';
-import 'package:about_weather/location/location_data.dart';
+import 'package:about_weather/location/location_list.dart';
 import 'package:about_weather/setting/language/language_provider.dart';
 import 'package:about_weather/tool_box/settings_preferences.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +7,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
 import 'location/amap_location.dart';
-import 'main_ui/home_page.dart';
+import 'main_ui/home/home_page.dart';
 import 'setting/theme/theme_provider.dart';
 import 'setting/theme/theme_bundle.dart';
 
@@ -28,8 +28,8 @@ void main() {
           ChangeNotifierProvider<Language>(
             create: (context) => Language(localeData: listValue[1]),
           ),
-          ChangeNotifierProvider<LocationData>(
-            create: (context) => LocationData(),
+          ChangeNotifierProvider<LocationList>(
+            create: (context) => LocationList(),
           ),
         ],
         child: MyApp(),

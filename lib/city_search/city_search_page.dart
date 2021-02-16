@@ -2,6 +2,7 @@ import 'package:about_weather/city_search/model/city_info.dart';
 import 'package:about_weather/city_search/model/place_name.dart';
 import 'package:about_weather/city_search/search_item.dart';
 import 'package:about_weather/dio/biz_dio/yiyuan_dio.dart';
+import 'package:about_weather/main_ui/sign_banner/sign_banner.dart';
 import 'package:flutter/material.dart';
 
 class CitySearchPage extends StatefulWidget {
@@ -26,7 +27,6 @@ class _CitySearchPageState extends State<CitySearchPage> {
         title: Builder(builder: (context) {
           return TextField(
             controller: _controller,
-            autofocus: true,
             maxLines: 1,
             decoration: InputDecoration(
               hintText: "输入城市名搜索",
@@ -42,7 +42,7 @@ class _CitySearchPageState extends State<CitySearchPage> {
             return InkWell(
               onTap: () {
                 String text = _controller.text;
-                _searchArea(context, text);
+                _searchArea(context, "柳");
               },
               child: Padding(
                 padding: EdgeInsets.all(16),
@@ -60,10 +60,9 @@ class _CitySearchPageState extends State<CitySearchPage> {
             onTap: () {
               showModalBottomSheet<int>(
                 context: context,
-                isDismissible: false,
-                // enableDrag: false,
+                isDismissible: true,
                 builder: (BuildContext context) {
-                  return Container();
+                  return _buildSign();
                 },
               );
             },
@@ -84,5 +83,39 @@ class _CitySearchPageState extends State<CitySearchPage> {
         setState(() {});
       });
     }
+  }
+
+  Widget _buildSign() {
+    Widget row = Row(
+      children: <Widget>[
+        TextButton(
+          child: Text("取消"),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        Expanded(
+          child: Text(
+            "柳州 柳北",
+            textAlign: TextAlign.center,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ),
+        TextButton(
+          child: Text("确定"),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ],
+    );
+    return Stack(
+      children: [
+        SingleChildScrollView(
+          child: SignBanner(),
+        ),
+        row,
+      ],
+    );
   }
 }
