@@ -1,13 +1,39 @@
+import 'package:about_weather/dio/biz_dio/moji_dio.dart';
+import 'package:about_weather/location/model/location.dart';
+import 'package:about_weather/main_ui/fifteen_banner/model/forecast.dart';
+import 'package:about_weather/tool_box/format_date.dart';
 import 'package:flutter/material.dart';
 
 class FifteenBanner extends StatefulWidget {
+  final Location location;
+
+  FifteenBanner({this.location, Key key}) : super(key: key);
+
   @override
   _FifteenBannerState createState() => _FifteenBannerState();
 }
 
 class _FifteenBannerState extends State<FifteenBanner> {
+  List<Forecast> _list = List.empty(growable: true);
+
+  @override
+  void initState() {
+    super.initState();
+    MojiDio.instance()
+        .forecast15(
+      widget.location.latitude.toString(),
+      widget.location.longitude.toString(),
+    )
+        .then((list) {
+      _list.clear();
+      _list.addAll(list);
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (_list.isEmpty) return Container(height: 275);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -21,9 +47,9 @@ class _FifteenBannerState extends State<FifteenBanner> {
             physics: BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
-              return FifteenItem();
+              return FifteenItem(forecast: _list[index]);
             },
-            itemCount: 16,
+            itemCount: _list.length,
           ),
         ),
         Divider(height: 1),
@@ -33,29 +59,40 @@ class _FifteenBannerState extends State<FifteenBanner> {
 }
 
 class FifteenItem extends StatelessWidget {
+  final Forecast forecast;
+
+  FifteenItem({this.forecast});
+
   @override
   Widget build(BuildContext context) {
+    String weekday = formatWeekday(forecast.predictDate);
+    String date = formatMd(forecast.predictDate);
+    String pop = forecast.pop;
+    String condotionDay = forecast.conditionDay;
+    String tempDay = forecast.tempDay;
+    String tempNight = forecast.tempNight;
+    String conditionNight = forecast.conditionNight;
     return Container(
       padding: const EdgeInsets.all(16),
       child: Column(
         children: <Widget>[
-          Text("周一"),
+          Text("$weekday"),
           SizedBox(height: 8),
-          Text("2-14"),
+          Text("$date"),
           SizedBox(height: 8),
-          Text("50%", style: TextStyle(color: Colors.blue)),
+          Text("$pop%", style: TextStyle(color: Colors.blue)),
           SizedBox(height: 8),
           Icon(Icons.wb_sunny_rounded),
           SizedBox(height: 8),
-          Text("晴"),
+          Text("$condotionDay"),
           SizedBox(height: 8),
-          Text("26°"),
+          Text("$tempDay°"),
           SizedBox(height: 4),
-          Text("16°"),
+          Text("$tempNight°"),
           SizedBox(height: 8),
           Icon(Icons.cloud_rounded),
           SizedBox(height: 8),
-          Text("多云"),
+          Text("$conditionNight"),
         ],
       ),
     );

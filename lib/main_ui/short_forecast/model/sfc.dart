@@ -11,7 +11,7 @@ class SFC {
   int isCorrect;
   int isFeedback;
   String notice;
-  Percent percent;
+  List<Percent> percent;
   int rain;
   int rainLastTime;
   int sfCondition;

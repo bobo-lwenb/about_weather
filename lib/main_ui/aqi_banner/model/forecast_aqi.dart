@@ -6,7 +6,7 @@ part 'forecast_aqi.g.dart';
 class ForecastAQI {
   String date;
   String publishTime;
-  String value;
+  int value;
 
   ForecastAQI({
     this.date,

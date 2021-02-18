@@ -2,6 +2,8 @@ import 'package:about_weather/dio/biz_dio/moji_dio.dart';
 import 'package:about_weather/location/model/location.dart';
 import 'package:about_weather/main_ui/sign_banner/model/aqi_index/aqi_index.dart';
 import 'package:about_weather/main_ui/sign_banner/model/condition/condition.dart';
+import 'package:about_weather/tool_box/fields.dart';
+import 'package:about_weather/tool_box/format_date.dart';
 import 'package:flutter/material.dart';
 
 class SignBanner extends StatefulWidget {
@@ -35,17 +37,17 @@ class _SignBannerState extends State<SignBanner> {
               Positioned(
                 bottom: 95,
                 child: Text(
-                  "16°",
+                  "${getField(_condition?.temp)}°",
                   style: TextStyle(fontSize: 100, fontWeight: FontWeight.w200),
                 ),
               ),
               Positioned(
                 bottom: 80,
-                child: Text("晴"),
+                child: Text("${getField(_condition?.condition)}"),
               ),
               Positioned(
                 bottom: 60,
-                child: Text("冷热适宜，感觉很舒适。"),
+                child: Text("${getField(_condition?.tips)}"),
               ),
             ],
           ),
@@ -88,6 +90,7 @@ class _SignBannerState extends State<SignBanner> {
   }
 
   Widget _buildAQI() {
+    String pubTime = formatDateFromSection(_aqiIndex?.pubtime);
     Widget column = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -96,11 +99,11 @@ class _SignBannerState extends State<SignBanner> {
           style: TextStyle(color: Colors.grey),
         ),
         Text(
-          "123-轻度污染",
+          "${getField(_aqiIndex?.value)}-轻度污染",
           style: TextStyle(fontSize: 32),
         ),
         Text(
-          "上次更新：1小时内",
+          "上次更新：$pubTime",
           style: TextStyle(color: Colors.grey),
         ),
       ],
@@ -112,28 +115,37 @@ class _SignBannerState extends State<SignBanner> {
   }
 
   Widget _buildGrid() {
+    String sunRise = formatHmm(getField(_condition?.sunRise));
+    String sunSet = formatHmm(getField(_condition?.sunSet));
+    String humidity = getField(_condition?.humidity);
+    String realFeel = getField(_condition?.realFeel);
+    String pressure = getField(_condition?.pressure);
+    String uvi = getField(_condition?.uvi);
+    String vis = getField(_condition?.vis);
+    String windDir = getField(_condition?.windDir);
+    String windSpeed = getField(_condition?.windSpeed);
     Widget row1 = Row(
       children: <Widget>[
-        Expanded(child: Item(top: "日出", title: "5:46")),
-        Expanded(child: Item(top: "日落", title: "18:45"))
+        Expanded(child: Item(top: "日出", title: "$sunRise")),
+        Expanded(child: Item(top: "日落", title: "$sunSet"))
       ],
     );
     Widget row2 = Row(
       children: <Widget>[
-        Expanded(child: Item(top: "湿度", title: "42%")),
-        Expanded(child: Item(top: "体感温度", title: "15°"))
+        Expanded(child: Item(top: "湿度", title: "$humidity%")),
+        Expanded(child: Item(top: "体感温度", title: "$realFeel°"))
       ],
     );
     Widget row3 = Row(
       children: <Widget>[
-        Expanded(child: Item(top: "气压", title: "999百帕")),
-        Expanded(child: Item(top: "紫外线指数", title: "0"))
+        Expanded(child: Item(top: "气压", title: "$pressure百帕")),
+        Expanded(child: Item(top: "紫外线指数", title: "$uvi"))
       ],
     );
     Widget row4 = Row(
       children: <Widget>[
-        Expanded(child: Item(top: "能见度", title: "1200米")),
-        Expanded(child: Item(top: "风 米/秒", title: "西南风 99.7"))
+        Expanded(child: Item(top: "能见度", title: "$vis米")),
+        Expanded(child: Item(top: "风 米/秒", title: "$windDir $windSpeed"))
       ],
     );
     return Column(

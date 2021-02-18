@@ -11,9 +11,10 @@ ForecastModel _$ForecastModelFromJson(Map<String, dynamic> json) {
     city: json['city'] == null
         ? null
         : City.fromJson(json['city'] as Map<String, dynamic>),
-    forecast: json['forecast'] == null
-        ? null
-        : Forecast.fromJson(json['forecast'] as Map<String, dynamic>),
+    forecast: (json['forecast'] as List)
+        ?.map((e) =>
+            e == null ? null : Forecast.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
   );
 }
 

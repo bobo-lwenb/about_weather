@@ -1,13 +1,39 @@
+import 'package:about_weather/dio/biz_dio/moji_dio.dart';
+import 'package:about_weather/location/model/location.dart';
 import 'package:flutter/material.dart';
 
+import 'model/hourly.dart';
+
 class TFBanner extends StatefulWidget {
+  final Location location;
+
+  TFBanner({this.location, Key key}) : super(key: key);
+
   @override
   _TFBannerState createState() => _TFBannerState();
 }
 
 class _TFBannerState extends State<TFBanner> {
+  List<Hourly> _hourly = List.empty(growable: true);
+
+  @override
+  void initState() {
+    super.initState();
+    MojiDio.instance()
+        .forecast24(
+      widget.location.latitude.toString(),
+      widget.location.longitude.toString(),
+    )
+        .then((list) {
+      _hourly.clear();
+      _hourly.addAll(list);
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (_hourly.isEmpty) return Container(height: 166);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -21,9 +47,9 @@ class _TFBannerState extends State<TFBanner> {
             physics: BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
-              return TFItem();
+              return TFItem(hourly: _hourly[index]);
             },
-            itemCount: 24,
+            itemCount: _hourly.length,
           ),
         ),
         Divider(height: 1),
@@ -33,18 +59,10 @@ class _TFBannerState extends State<TFBanner> {
 }
 
 class TFItem extends StatelessWidget {
-  final String hour;
-  final String condition;
-  final String icon;
-  final String pop;
-  final String temp;
+  final Hourly hourly;
 
   TFItem({
-    this.hour,
-    this.condition,
-    this.icon,
-    this.pop,
-    this.temp,
+    this.hourly,
   });
 
   @override
@@ -53,15 +71,15 @@ class TFItem extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       child: Column(
         children: <Widget>[
-          Text("16时"),
+          Text("${hourly.hour}时"),
           SizedBox(height: 8),
           Icon(Icons.wb_sunny_rounded),
           SizedBox(height: 8),
-          Text("晴"),
+          Text("${hourly.condition}"),
           SizedBox(height: 8),
-          Text("50%", style: TextStyle(color: Colors.blue)),
+          Text("${hourly.pop}%", style: TextStyle(color: Colors.blue)),
           SizedBox(height: 8),
-          Text("16°"),
+          Text("${hourly.temp}°"),
         ],
       ),
     );

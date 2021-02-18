@@ -1,13 +1,39 @@
+import 'package:about_weather/dio/biz_dio/moji_dio.dart';
+import 'package:about_weather/location/model/location.dart';
 import 'package:flutter/material.dart';
 
+import 'model/alert.dart';
+
 class AlertBanner extends StatefulWidget {
+  final Location location;
+
+  AlertBanner({this.location, Key key}) : super(key: key);
+
   @override
   _AlertBannerState createState() => _AlertBannerState();
 }
 
 class _AlertBannerState extends State<AlertBanner> {
+  List<Alert> _list = List.empty(growable: true);
+  @override
+  void initState() {
+    super.initState();
+    MojiDio.instance()
+        .alert(
+      widget.location.latitude.toString(),
+      widget.location.longitude.toString(),
+    )
+        .then((list) {
+      if (list == null) return;
+      _list.clear();
+      _list.addAll(list);
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (_list.isEmpty) return Container();
     Widget listView = ListView.separated(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
@@ -17,7 +43,7 @@ class _AlertBannerState extends State<AlertBanner> {
       separatorBuilder: (context, index) {
         return Divider(height: 1);
       },
-      itemCount: 1,
+      itemCount: _list.length,
     );
     Widget widget = MediaQuery.removePadding(
       context: context,
@@ -40,21 +66,30 @@ class _AlertBannerState extends State<AlertBanner> {
 }
 
 class AlertItem extends StatelessWidget {
+  final Alert alert;
+
+  AlertItem({this.alert});
+
   @override
   Widget build(BuildContext context) {
+    String titleString = alert.title;
+    String level = alert.level;
+    String name = alert.name;
+    String pubTime = alert.pubTime;
+    String contentString = alert.content;
     Widget title = Row(
       children: <Widget>[
-        Expanded(child: Text("北京市气象台发布大风蓝色预警")),
-        Text("蓝色"),
+        Expanded(child: Text("$titleString")),
+        Text("$level"),
         SizedBox(width: 4),
-        Text("大风"),
+        Text("$name"),
       ],
     );
     Widget tiem = Text(
-      "2021-02-15 16:30:00",
+      "$pubTime",
       style: TextStyle(color: Colors.grey, fontSize: 12),
     );
-    Widget content = Text("预计，16日06时至22时，本市大部分地区有4级左右偏北风，阵风可达7级以上，请注意防范。");
+    Widget content = Text("$contentString");
     Widget column = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[

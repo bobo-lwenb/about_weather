@@ -8,6 +8,7 @@ import 'package:about_weather/main_ui/live_index/live_index_banner.dart';
 import 'package:about_weather/main_ui/short_forecast/short_forecast.dart';
 import 'package:about_weather/main_ui/sign_banner/sign_banner.dart';
 import 'package:about_weather/main_ui/tf_banner/tf_banner.dart';
+import 'package:about_weather/tool_box/fields.dart';
 import 'package:flutter/material.dart';
 
 class HomePageItem extends StatefulWidget {
@@ -24,54 +25,72 @@ class _HomePageItemState extends State<HomePageItem>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return CustomScrollView(
+    Widget location = Positioned(
+      top: 30,
+      child: _buildLocation(widget.location),
+    );
+    Widget scrollView = CustomScrollView(
       physics: BouncingScrollPhysics(),
       slivers: [
         SliverToBoxAdapter(
           child: SizedBox(height: 80),
         ),
         SliverToBoxAdapter(
-          child: SignBanner(location: widget.location, key: UniqueKey()),
+          child: SignBanner(location: widget.location),
         ),
         SliverToBoxAdapter(
-          child: ShortForecastBanner(),
+          child: ShortForecastBanner(location: widget.location),
         ),
         SliverToBoxAdapter(
-          child: TFBanner(),
+          child: TFBanner(location: widget.location),
         ),
         SliverToBoxAdapter(
-          child: FifteenBanner(),
+          child: FifteenBanner(location: widget.location),
         ),
         SliverToBoxAdapter(
-          child: AQIBanner(),
+          child: AQIBanner(location: widget.location),
         ),
         SliverToBoxAdapter(
-          child: LiveIndexBanner(),
+          child: LiveIndexBanner(location: widget.location),
         ),
         SliverToBoxAdapter(
-          child: AlertBanner(),
+          child: AlertBanner(location: widget.location),
         ),
         SliverToBoxAdapter(
-          child: LimitBanner(),
+          child: LimitBanner(location: widget.location),
         ),
         SliverToBoxAdapter(
-          child: _buildEpidemicBanner(),
+          child: EpidemicBanner(),
         ),
+      ],
+    );
+    return Stack(
+      children: <Widget>[
+        scrollView,
+        location,
       ],
     );
   }
 
-  Widget _buildEpidemicBanner() {
+  Widget _buildLocation(Location location) {
+    DateTime dateTime = DateTime.now();
+    Widget column = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+            "${dateTime.month}月${dateTime.day}日 ${getWeekDesc(dateTime.weekday)}",
+            style: TextStyle(fontSize: 14)),
+        Row(children: <Widget>[
+          Icon(Icons.location_on_outlined, size: 14),
+          SizedBox(width: 4),
+          Text("${location.city} ${location.district}",
+              style: TextStyle(fontSize: 32)),
+        ]),
+      ],
+    );
     return Container(
-      width: double.infinity,
-      padding: EdgeInsets.all(8),
-      margin: EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        // boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 5)],
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: EpidemicBanner(),
+      padding: const EdgeInsets.all(16),
+      child: column,
     );
   }
 

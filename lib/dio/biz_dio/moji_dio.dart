@@ -5,7 +5,7 @@ import 'package:about_weather/main_ui/alert_banner/model/alert_model.dart';
 import 'package:about_weather/main_ui/aqi_banner/model/forecast_aqi_model.dart';
 import 'package:about_weather/main_ui/fifteen_banner/model/forecast_model.dart';
 import 'package:about_weather/main_ui/limit_banner/model/limit_model.dart';
-import 'package:about_weather/main_ui/live_index/model/live_list.dart';
+import 'package:about_weather/main_ui/live_index/model/live_index.dart';
 import 'package:about_weather/main_ui/short_forecast/model/sfc.dart';
 import 'package:about_weather/main_ui/sign_banner/model/aqi_index/aqi_model.dart';
 import 'package:about_weather/main_ui/sign_banner/model/condition/condition_model.dart';
@@ -15,7 +15,7 @@ import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
 
 const String MOJI_APPCODE = "2072f902a46c4b599699a1a557ed3257";
-const String MOJI_HOST = "https://aliv8.data.moji.com";
+const String MOJI_HOST = "https://aliv8.mojicb.com";
 
 /// 天气实况
 const String CONDITION = "/whapi/json/aliweather/condition";
@@ -78,7 +78,6 @@ class MojiDio extends BaseDio {
       "token": "ff826c205f8f4a59701e64e9e64e01c4",
     };
     Map<String, dynamic> result = await post(path: LIMIT, data: params);
-    print(result);
     Map<String, dynamic> data = result["data"];
     ConditionModel model = ConditionModel.fromJson(data);
     return model.condition;
@@ -92,7 +91,6 @@ class MojiDio extends BaseDio {
       "token": "6e9a127c311094245fc1b2aa6d0a54fd",
     };
     Map<String, dynamic> result = await post(path: LIMIT, data: params);
-    print(result);
     Map<String, dynamic> data = result["data"];
     AQIModel model = AQIModel.fromJson(data);
     return model.aqi;
@@ -106,7 +104,6 @@ class MojiDio extends BaseDio {
       "token": "1b89050d9f64191d494c806f78e8ea36",
     };
     Map<String, dynamic> result = await post(path: FORECAST_24, data: params);
-    print(result);
     Map<String, dynamic> data = result["data"];
     HourlyModel model = HourlyModel.fromJson(data);
     return model.hourly;
@@ -120,7 +117,6 @@ class MojiDio extends BaseDio {
       "token": "7538f7246218bdbf795b329ab09cc524",
     };
     Map<String, dynamic> result = await post(path: FORECAST_15, data: params);
-    print(result);
     Map<String, dynamic> data = result["data"];
     ForecastModel model = ForecastModel.fromJson(data);
     return model.forecast;
@@ -135,7 +131,6 @@ class MojiDio extends BaseDio {
     };
     Map<String, dynamic> result =
         await post(path: FORECAST_AQI_5, data: params);
-    print(result);
     Map<String, dynamic> data = result["data"];
     ForecastAQIModel model = ForecastAQIModel.fromJson(data);
     return model.aqiForecast;
@@ -149,13 +144,16 @@ class MojiDio extends BaseDio {
       "token": "42b0c7e2e8d00d6e80d92797fe5360fd",
     };
     Map<String, dynamic> result = await post(path: LIVE_INDEX, data: params);
-    print(result);
     var now = new DateTime.now();
     var formatter = new DateFormat('yyyy-MM-dd');
     String formatted = formatter.format(now);
-    Map<String, dynamic> data = result["data"]["liveIndex"][formatted];
-    LiveList model = LiveList.fromJson(data);
-    return model.list;
+    List<dynamic> data = result["data"]["liveIndex"][formatted];
+    List<LiveIndex> list = List.empty(growable: true);
+    data.forEach((element) {
+      LiveIndex index = LiveIndex.fromJson(element);
+      list.add(index);
+    });
+    return list;
   }
 
   /// 短时预报
@@ -167,8 +165,7 @@ class MojiDio extends BaseDio {
     };
     Map<String, dynamic> result =
         await post(path: SHORT_FORECAST, data: params);
-    print(result);
-    Map<String, dynamic> data = result["data"];
+    Map<String, dynamic> data = result["data"]["sfc"];
     SFC model = SFC.fromJson(data);
     return model;
   }
@@ -181,7 +178,6 @@ class MojiDio extends BaseDio {
       "token": "d01246ac6284b5a591f875173e9e2a18",
     };
     Map<String, dynamic> result = await post(path: ALERT, data: params);
-    print(result);
     Map<String, dynamic> data = result["data"];
     AlertModel model = AlertModel.fromJson(data);
     return model.alert;
@@ -195,7 +191,6 @@ class MojiDio extends BaseDio {
       "token": "c712899b393c7b262dd7984f6eb52657",
     };
     Map<String, dynamic> result = await post(path: LIMIT, data: params);
-    print(result);
     Map<String, dynamic> data = result["data"];
     LimitModel model = LimitModel.fromJson(data);
     return model.limit;

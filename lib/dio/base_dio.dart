@@ -20,10 +20,12 @@ class BaseDio {
     baseOptions.baseUrl = baseUrl;
     baseOptions.connectTimeout = 5000;
     baseOptions.receiveTimeout = 3000;
+    baseOptions.headers = {
+      HttpHeaders.contentTypeHeader:
+          "application/x-www-form-urlencoded; charset=UTF-8"
+    };
     if (appCode != null) {
-      baseOptions.headers = {
-        HttpHeaders.authorizationHeader: "APPCODE $appCode"
-      };
+      baseOptions.headers[HttpHeaders.authorizationHeader] = "APPCODE $appCode";
     }
     baseOptions.responseType = ResponseType.json;
     _dio = Dio(baseOptions);

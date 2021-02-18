@@ -28,7 +28,6 @@ class _ThemePageState extends State<ThemePage> {
     _themeMode = Provider.of<ThemeValues>(context).themeMode;
     _current = _themeMode.index;
     _themeTitle = themeTitle(context);
-    print(_current);
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context).themeMode),

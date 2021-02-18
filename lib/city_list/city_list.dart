@@ -17,13 +17,20 @@ class _CityListPageState extends State<CityListPage> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("位置"),
       ),
       body: ListView.separated(
+        physics: BouncingScrollPhysics(),
         itemBuilder: (context, index) {
+          // CityModel cityModel = _list[index];
           return InkWell(
             child: ListItem(),
             onTap: () {},
@@ -33,7 +40,7 @@ class _CityListPageState extends State<CityListPage> {
           return Divider(height: 1);
         },
         // itemCount: _list.length,
-        itemCount: 10,
+        itemCount: 3,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

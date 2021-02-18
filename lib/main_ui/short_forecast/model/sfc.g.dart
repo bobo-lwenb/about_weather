@@ -15,9 +15,10 @@ SFC _$SFCFromJson(Map<String, dynamic> json) {
     isCorrect: json['isCorrect'] as int,
     isFeedback: json['isFeedback'] as int,
     notice: json['notice'] as String,
-    percent: json['percent'] == null
-        ? null
-        : Percent.fromJson(json['percent'] as Map<String, dynamic>),
+    percent: (json['percent'] as List)
+        ?.map((e) =>
+            e == null ? null : Percent.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
     rain: json['rain'] as int,
     rainLastTime: json['rainLastTime'] as int,
     sfCondition: json['sfCondition'] as int,

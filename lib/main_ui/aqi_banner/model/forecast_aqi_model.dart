@@ -8,7 +8,7 @@ part 'forecast_aqi_model.g.dart';
 @JsonSerializable(nullable: true)
 class ForecastAQIModel {
   City city;
-  ForecastAQI aqiForecast;
+  List<ForecastAQI> aqiForecast;
 
   ForecastAQIModel({
     this.city,

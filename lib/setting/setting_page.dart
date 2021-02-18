@@ -1,4 +1,3 @@
-import 'package:about_weather/city_list/city_list.dart';
 import 'package:about_weather/epidemic/epidemic_page.dart';
 import 'package:about_weather/intl/l10n/localizations_intl.dart';
 import 'package:about_weather/setting/about_app.dart';
@@ -45,6 +44,7 @@ class _SettingPageState extends State<SettingPage> {
               }));
             },
           ),
+          SizedBox(height: 8),
           ItemTile(
             leading: Icon(Icons.language_rounded),
             leadingTitle: Text(AppLocalizations.of(context).language),

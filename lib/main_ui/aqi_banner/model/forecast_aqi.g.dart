@@ -10,7 +10,7 @@ ForecastAQI _$ForecastAQIFromJson(Map<String, dynamic> json) {
   return ForecastAQI(
     date: json['date'] as String,
     publishTime: json['publishTime'] as String,
-    value: json['value'] as String,
+    value: json['value'] as int,
   );
 }
 

@@ -7,7 +7,7 @@ class Percent {
   int dbz;
   String desc;
   int icon;
-  int percent;
+  double percent;
 
   Percent({
     this.dbz,

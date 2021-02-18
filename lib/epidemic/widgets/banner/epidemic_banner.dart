@@ -50,7 +50,7 @@ class _EpidemicBannerState extends State<EpidemicBanner>
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<LocationList>(
+    Widget widget = Consumer<LocationList>(
       builder: (context, list, child) {
         Location location = list.list[0];
         if (_model != null && location != null) {
@@ -80,6 +80,17 @@ class _EpidemicBannerState extends State<EpidemicBanner>
         );
         return column;
       },
+    );
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(8),
+      margin: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        // boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 5)],
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: widget,
     );
   }
 

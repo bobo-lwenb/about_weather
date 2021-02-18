@@ -7,7 +7,7 @@ part 'forecast_model.g.dart';
 @JsonSerializable(nullable: true)
 class ForecastModel {
   City city;
-  Forecast forecast;
+  List<Forecast> forecast;
 
   ForecastModel({
     this.city,

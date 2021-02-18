@@ -1,17 +1,10 @@
+import 'package:about_weather/city_list/model/city_model.dart';
 import 'package:flutter/material.dart';
 
 class ListItem extends StatelessWidget {
-  final String titleTop;
-  final String title;
-  final String temperature;
-  final Widget widget;
+  final CityModel cityModel;
 
-  ListItem({
-    this.titleTop,
-    this.title,
-    this.temperature,
-    this.widget,
-  });
+  ListItem({this.cityModel});
 
   @override
   Widget build(BuildContext context) {

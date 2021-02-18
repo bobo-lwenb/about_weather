@@ -11,7 +11,7 @@ Percent _$PercentFromJson(Map<String, dynamic> json) {
     dbz: json['dbz'] as int,
     desc: json['desc'] as String,
     icon: json['icon'] as int,
-    percent: json['percent'] as int,
+    percent: (json['percent'] as num)?.toDouble(),
   );
 }
 

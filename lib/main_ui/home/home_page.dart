@@ -56,10 +56,6 @@ class _HomePageState extends State<HomePage> {
             setState(() {});
           },
         );
-        Widget location = Positioned(
-          top: 30,
-          child: _buildLocation(list[0]),
-        );
         Widget settings = Positioned(
           right: 0,
           top: 30,
@@ -68,7 +64,6 @@ class _HomePageState extends State<HomePage> {
         return Stack(
           children: <Widget>[
             pageView,
-            location,
             settings,
           ],
         );
@@ -76,24 +71,6 @@ class _HomePageState extends State<HomePage> {
     );
     return Scaffold(
       body: consumer,
-    );
-  }
-
-  Widget _buildLocation(Location location) {
-    Widget column = Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text("2月11日 周四", style: TextStyle(fontSize: 14)),
-        Row(children: <Widget>[
-          Icon(Icons.location_on_outlined, size: 14),
-          SizedBox(width: 4),
-          Text("柳州 柳北", style: TextStyle(fontSize: 32)),
-        ]),
-      ],
-    );
-    return Container(
-      padding: const EdgeInsets.all(16),
-      child: column,
     );
   }
 
@@ -129,7 +106,7 @@ class _HomePageState extends State<HomePage> {
     _aMapLocation = AMapLocation(
       locationChange: (location) {
         if (location.province == null || location.province.isEmpty) return;
-        List<Location> list = [location, location];
+        List<Location> list = [location];
         Provider.of<LocationList>(context, listen: false).updateLocation(list);
       },
       permissionDenied: () {},
