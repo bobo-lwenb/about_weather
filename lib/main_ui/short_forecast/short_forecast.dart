@@ -34,18 +34,12 @@ class _ShortForecastBannerState extends State<ShortForecastBanner> {
   @override
   Widget build(BuildContext context) {
     String banner = getField(_sfc?.banner);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Padding(
-          padding: EdgeInsets.all(16),
-          child: Text(
-            "$banner",
-            style: TextStyle(fontSize: 28),
-          ),
-        ),
-        Divider(height: 1),
-      ],
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 16),
+      child: opacityWidget(
+        object: _sfc,
+        child: Text("$banner", style: TextStyle(fontSize: 28)),
+      ),
     );
   }
 }

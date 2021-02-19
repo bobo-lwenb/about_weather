@@ -47,8 +47,8 @@ class _HomePageState extends State<HomePage> {
           itemBuilder: (context, index) {
             Location location = list[index];
             return HomePageItem(
-              location: location,
               key: ObjectKey(location),
+              location: location,
             );
           },
           onPageChanged: (index) {

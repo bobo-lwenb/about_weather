@@ -1,6 +1,7 @@
 import 'package:about_weather/dio/biz_dio/moji_dio.dart';
 import 'package:about_weather/location/model/location.dart';
 import 'package:about_weather/tool_box/format_date.dart';
+import 'package:about_weather/tool_box/moji_chart.dart';
 import 'package:flutter/material.dart';
 
 import 'model/forecast_aqi.dart';
@@ -48,7 +49,7 @@ class _AQIBannerState extends State<AQIBanner> {
             physics: BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
-              return AQIItem(forecastAQI: _list[index]);
+              return AQIItem(forecastAQI: _list[index], index: index);
             },
             itemCount: _list.length,
           ),
@@ -61,22 +62,27 @@ class _AQIBannerState extends State<AQIBanner> {
 
 class AQIItem extends StatelessWidget {
   final ForecastAQI forecastAQI;
+  final int index;
 
-  AQIItem({this.forecastAQI});
+  AQIItem({this.forecastAQI, this.index});
 
   @override
   Widget build(BuildContext context) {
     int value = forecastAQI.value;
-    String weekday = formatWeekday(forecastAQI.date);
+    String desc = apiDesc(value.toString());
+    String weekday = getDayDesc(formatWeekday(forecastAQI.date), index);
+    String date = formatMd(forecastAQI.date);
     return Container(
       padding: const EdgeInsets.all(16),
       child: Column(
         children: <Widget>[
+          Text("$weekday"),
+          SizedBox(height: 8),
+          Text("$date"),
+          SizedBox(height: 8),
           Text("$value"),
           SizedBox(height: 8),
-          Text("良"),
-          SizedBox(height: 8),
-          Text("$weekday"),
+          Text("$desc"),
         ],
       ),
     );

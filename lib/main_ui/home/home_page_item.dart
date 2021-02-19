@@ -5,7 +5,6 @@ import 'package:about_weather/main_ui/aqi_banner/aqi_banner.dart';
 import 'package:about_weather/main_ui/fifteen_banner/fifteen_banner.dart';
 import 'package:about_weather/main_ui/limit_banner/limit_banner.dart';
 import 'package:about_weather/main_ui/live_index/live_index_banner.dart';
-import 'package:about_weather/main_ui/short_forecast/short_forecast.dart';
 import 'package:about_weather/main_ui/sign_banner/sign_banner.dart';
 import 'package:about_weather/main_ui/tf_banner/tf_banner.dart';
 import 'package:about_weather/tool_box/fields.dart';
@@ -13,8 +12,9 @@ import 'package:flutter/material.dart';
 
 class HomePageItem extends StatefulWidget {
   final Location location;
+  final int index;
 
-  HomePageItem({this.location, Key key}) : super(key: key);
+  HomePageItem({Key key, this.location, this.index}) : super(key: key);
 
   @override
   _HomePageItemState createState() => _HomePageItemState();
@@ -39,9 +39,6 @@ class _HomePageItemState extends State<HomePageItem>
           child: SignBanner(location: widget.location),
         ),
         SliverToBoxAdapter(
-          child: ShortForecastBanner(location: widget.location),
-        ),
-        SliverToBoxAdapter(
           child: TFBanner(location: widget.location),
         ),
         SliverToBoxAdapter(
@@ -60,7 +57,7 @@ class _HomePageItemState extends State<HomePageItem>
           child: LimitBanner(location: widget.location),
         ),
         SliverToBoxAdapter(
-          child: EpidemicBanner(),
+          child: EpidemicBanner(location: widget.location),
         ),
       ],
     );

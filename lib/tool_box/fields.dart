@@ -46,3 +46,14 @@ String getWeekDesc(int weekday) {
 String getField(String field) {
   return field == null ? "" : field;
 }
+
+Widget opacityWidget({@required dynamic object, @required Widget child}) {
+  Widget widget = IgnorePointer(
+    ignoring: true,
+    child: Opacity(
+      opacity: object == null ? 0 : 1,
+      child: child,
+    ),
+  );
+  return object == null ? widget : child;
+}

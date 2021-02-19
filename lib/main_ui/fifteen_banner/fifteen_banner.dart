@@ -2,6 +2,7 @@ import 'package:about_weather/dio/biz_dio/moji_dio.dart';
 import 'package:about_weather/location/model/location.dart';
 import 'package:about_weather/main_ui/fifteen_banner/model/forecast.dart';
 import 'package:about_weather/tool_box/format_date.dart';
+import 'package:about_weather/tool_box/moji_chart.dart';
 import 'package:flutter/material.dart';
 
 class FifteenBanner extends StatefulWidget {
@@ -47,7 +48,7 @@ class _FifteenBannerState extends State<FifteenBanner> {
             physics: BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
-              return FifteenItem(forecast: _list[index]);
+              return FifteenItem(forecast: _list[index], index: index);
             },
             itemCount: _list.length,
           ),
@@ -60,12 +61,13 @@ class _FifteenBannerState extends State<FifteenBanner> {
 
 class FifteenItem extends StatelessWidget {
   final Forecast forecast;
+  final int index;
 
-  FifteenItem({this.forecast});
+  FifteenItem({this.forecast, this.index});
 
   @override
   Widget build(BuildContext context) {
-    String weekday = formatWeekday(forecast.predictDate);
+    String weekday = getDayDesc(formatWeekday(forecast.predictDate), index);
     String date = formatMd(forecast.predictDate);
     String pop = forecast.pop;
     String condotionDay = forecast.conditionDay;
@@ -82,7 +84,7 @@ class FifteenItem extends StatelessWidget {
           SizedBox(height: 8),
           Text("$pop%", style: TextStyle(color: Colors.blue)),
           SizedBox(height: 8),
-          Icon(Icons.wb_sunny_rounded),
+          Image.asset(iconPath(forecast.conditionIdDay), width: 14),
           SizedBox(height: 8),
           Text("$condotionDay"),
           SizedBox(height: 8),
@@ -90,7 +92,7 @@ class FifteenItem extends StatelessWidget {
           SizedBox(height: 4),
           Text("$tempNight°"),
           SizedBox(height: 8),
-          Icon(Icons.cloud_rounded),
+          Image.asset(iconPath(forecast.conditionIdNight), width: 14),
           SizedBox(height: 8),
           Text("$conditionNight"),
         ],

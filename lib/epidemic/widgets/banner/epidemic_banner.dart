@@ -4,12 +4,14 @@ import 'package:about_weather/epidemic/internal_model/tree/area.dart';
 import 'package:about_weather/epidemic/widgets/banner/china_banner.dart';
 import 'package:about_weather/epidemic/widgets/banner/local_banner.dart';
 import 'package:about_weather/intl/l10n/localizations_intl.dart';
-import 'package:about_weather/location/location_list.dart';
 import 'package:about_weather/location/model/location.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class EpidemicBanner extends StatefulWidget {
+  final Location location;
+
+  EpidemicBanner({this.location});
+
   @override
   _EpidemicBannerState createState() => _EpidemicBannerState();
 }
@@ -50,36 +52,31 @@ class _EpidemicBannerState extends State<EpidemicBanner>
 
   @override
   Widget build(BuildContext context) {
-    Widget widget = Consumer<LocationList>(
-      builder: (context, list, child) {
-        Location location = list.list[0];
-        if (_model != null && location != null) {
-          _model.areaTree[0].children.forEach((element) {
-            if (location.province.contains(element.name)) {
-              _area = element;
-              _title = [
-                "${AppLocalizations.of(context).national}",
-                "${element.name} ${AppLocalizations.of(context).epidemicData}",
-              ];
-              return;
-            }
-          });
+    Location location = widget.location;
+    if (_model != null && location != null) {
+      _model.areaTree[0].children.forEach((element) {
+        if (location.province.contains(element.name)) {
+          _area = element;
+          _title = [
+            "${AppLocalizations.of(context).national}",
+            "${element.name} ${AppLocalizations.of(context).epidemicData}",
+          ];
+          return;
         }
-        Widget column = Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            _buildTabs(_title),
-            SizedBox(height: 8),
-            _buildIndexedStack(_model, _area),
-            Padding(
-              padding: const EdgeInsets.only(left: 16, top: 8.0, bottom: 8),
-              child: Text(
-                  "${AppLocalizations.of(context).statisticsCutoff} ${_model?.lastUpdateTime}"),
-            ),
-          ],
-        );
-        return column;
-      },
+      });
+    }
+    Widget column = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        _buildTabs(_title),
+        SizedBox(height: 8),
+        _buildIndexedStack(_model, _area),
+        Padding(
+          padding: const EdgeInsets.only(left: 16, top: 8.0, bottom: 8),
+          child: Text(
+              "${AppLocalizations.of(context).statisticsCutoff} ${_model?.lastUpdateTime}"),
+        ),
+      ],
     );
     return Container(
       width: double.infinity,
@@ -90,7 +87,7 @@ class _EpidemicBannerState extends State<EpidemicBanner>
         // boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 5)],
         borderRadius: BorderRadius.circular(10),
       ),
-      child: widget,
+      child: column,
     );
   }
 

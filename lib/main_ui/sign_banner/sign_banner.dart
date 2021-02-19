@@ -1,9 +1,11 @@
 import 'package:about_weather/dio/biz_dio/moji_dio.dart';
 import 'package:about_weather/location/model/location.dart';
+import 'package:about_weather/main_ui/short_forecast/short_forecast.dart';
 import 'package:about_weather/main_ui/sign_banner/model/aqi_index/aqi_index.dart';
 import 'package:about_weather/main_ui/sign_banner/model/condition/condition.dart';
 import 'package:about_weather/tool_box/fields.dart';
 import 'package:about_weather/tool_box/format_date.dart';
+import 'package:about_weather/tool_box/moji_chart.dart';
 import 'package:flutter/material.dart';
 
 class SignBanner extends StatefulWidget {
@@ -27,43 +29,56 @@ class _SignBannerState extends State<SignBanner> {
 
   @override
   Widget build(BuildContext context) {
+    String temp = getField(_condition?.temp);
+    String condition = _condition?.condition;
+    String icon = _condition?.icon;
+    String tips = _condition?.tips;
+    Widget top = Container(
+      height: 200,
+      child: Stack(
+        alignment: AlignmentDirectional.bottomCenter,
+        children: <Widget>[
+          Positioned(
+            bottom: 55,
+            child: Text(
+              "$temp°",
+              style: TextStyle(fontSize: 100, fontWeight: FontWeight.w200),
+            ),
+          ),
+          Positioned(
+            bottom: 40,
+            child: Row(
+              children: [
+                Text("$condition"),
+                SizedBox(width: 4),
+                Image.asset(iconPath(icon), width: 12),
+              ],
+            ),
+          ),
+          Positioned(
+            bottom: 20,
+            child: Text("$tips"),
+          ),
+        ],
+      ),
+    );
+    Widget list = Container(
+      padding: EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          _buildAQI(),
+          Divider(height: 1),
+          _buildGrid(),
+        ],
+      ),
+    );
     return Column(
       children: [
-        Container(
-          height: 270,
-          child: Stack(
-            alignment: AlignmentDirectional.bottomCenter,
-            children: <Widget>[
-              Positioned(
-                bottom: 95,
-                child: Text(
-                  "${getField(_condition?.temp)}°",
-                  style: TextStyle(fontSize: 100, fontWeight: FontWeight.w200),
-                ),
-              ),
-              Positioned(
-                bottom: 80,
-                child: Text("${getField(_condition?.condition)}"),
-              ),
-              Positioned(
-                bottom: 60,
-                child: Text("${getField(_condition?.tips)}"),
-              ),
-            ],
-          ),
-        ),
+        opacityWidget(object: _condition, child: top),
+        ShortForecastBanner(location: widget.location),
         Divider(height: 1),
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              _buildAQI(),
-              Divider(height: 1),
-              _buildGrid(),
-            ],
-          ),
-        ),
+        list,
         Divider(height: 1),
       ],
     );
@@ -90,6 +105,8 @@ class _SignBannerState extends State<SignBanner> {
   }
 
   Widget _buildAQI() {
+    String value = _aqiIndex?.value;
+    String desc = apiDesc(value);
     String pubTime = formatDateFromSection(_aqiIndex?.pubtime);
     Widget column = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,10 +115,12 @@ class _SignBannerState extends State<SignBanner> {
           "空气质量",
           style: TextStyle(color: Colors.grey),
         ),
+        SizedBox(height: 3),
         Text(
-          "${getField(_aqiIndex?.value)}-轻度污染",
+          "$value $desc",
           style: TextStyle(fontSize: 32),
         ),
+        SizedBox(height: 3),
         Text(
           "上次更新：$pubTime",
           style: TextStyle(color: Colors.grey),
@@ -110,7 +129,7 @@ class _SignBannerState extends State<SignBanner> {
     );
     return Container(
       padding: EdgeInsets.symmetric(vertical: 8),
-      child: column,
+      child: opacityWidget(object: _aqiIndex, child: column),
     );
   }
 
@@ -150,13 +169,13 @@ class _SignBannerState extends State<SignBanner> {
     );
     return Column(
       children: <Widget>[
-        row1,
+        opacityWidget(object: _condition, child: row1),
         Divider(height: 1),
-        row2,
+        opacityWidget(object: _condition, child: row2),
         Divider(height: 1),
-        row3,
+        opacityWidget(object: _condition, child: row3),
         Divider(height: 1),
-        row4,
+        opacityWidget(object: _condition, child: row4),
       ],
     );
   }
