@@ -24,7 +24,24 @@ class _SignBannerState extends State<SignBanner> {
   @override
   void initState() {
     super.initState();
-    initData();
+    Location _location = widget.location;
+    if (_location == null) return;
+    List<Future> list = [
+      MojiDio.instance().condition(
+        _location.latitude.toString(),
+        _location.longitude.toString(),
+      ),
+      MojiDio.instance().aqiIndex(
+        _location.latitude.toString(),
+        _location.longitude.toString(),
+      ),
+    ];
+    Future.wait(list).then((listValues) {
+      _condition = listValues[0];
+      _aqiIndex = listValues[1];
+      if (!mounted) return;
+      setState(() {});
+    });
   }
 
   @override
@@ -49,9 +66,9 @@ class _SignBannerState extends State<SignBanner> {
             bottom: 40,
             child: Row(
               children: [
-                Text("$condition"),
-                SizedBox(width: 4),
-                Image.asset(iconPath(icon), width: 12),
+                Text("$condition", style: TextStyle(fontSize: 22)),
+                SizedBox(width: 8),
+                Image.asset(iconPath(icon), width: 20),
               ],
             ),
           ),
@@ -82,26 +99,6 @@ class _SignBannerState extends State<SignBanner> {
         Divider(height: 1),
       ],
     );
-  }
-
-  void initData() {
-    Location _location = widget.location;
-    if (_location == null) return;
-    List<Future> list = [
-      MojiDio.instance().condition(
-        _location.latitude.toString(),
-        _location.longitude.toString(),
-      ),
-      MojiDio.instance().aqiIndex(
-        _location.latitude.toString(),
-        _location.longitude.toString(),
-      ),
-    ];
-    Future.wait(list).then((listValues) {
-      _condition = listValues[0];
-      _aqiIndex = listValues[1];
-      setState(() {});
-    });
   }
 
   Widget _buildAQI() {

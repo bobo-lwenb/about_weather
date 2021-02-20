@@ -4,6 +4,7 @@ import 'package:about_weather/location/location_list.dart';
 import 'package:about_weather/location/model/location.dart';
 import 'package:about_weather/main_ui/home/home_page_item.dart';
 import 'package:about_weather/setting/setting_page.dart';
+import 'package:about_weather/tool_box/settings_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,10 +17,12 @@ class _HomePageState extends State<HomePage> {
   AMapLocation _aMapLocation;
   PageController _pageController;
   int _current = 0;
+  SettingsPreferences _preferences;
 
   @override
   void initState() {
     super.initState();
+    _preferences = SettingsPreferences();
     _setAMapLocation();
     _pageController = PageController(
       initialPage: _current,
@@ -49,6 +52,7 @@ class _HomePageState extends State<HomePage> {
             return HomePageItem(
               key: ObjectKey(location),
               location: location,
+              index: index,
             );
           },
           onPageChanged: (index) {
@@ -58,7 +62,7 @@ class _HomePageState extends State<HomePage> {
         );
         Widget settings = Positioned(
           right: 0,
-          top: 30,
+          top: 20,
           child: _buildSettings(),
         );
         return Stack(
@@ -83,12 +87,16 @@ class _HomePageState extends State<HomePage> {
         }));
       },
     );
-    Widget search = IconButton(
+    Widget listCity = IconButton(
       icon: Icon(Icons.list_alt_rounded),
       onPressed: () {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) {
           return CityListPage();
-        }));
+        })).then((index) {
+          if (index == null) return;
+          _current = index;
+          _pageController.jumpToPage(_current);
+        });
       },
     );
     return Container(
@@ -96,7 +104,7 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         children: <Widget>[
           settings,
-          search,
+          listCity,
         ],
       ),
     );
@@ -106,8 +114,12 @@ class _HomePageState extends State<HomePage> {
     _aMapLocation = AMapLocation(
       locationChange: (location) {
         if (location.province == null || location.province.isEmpty) return;
-        List<Location> list = [location];
-        Provider.of<LocationList>(context, listen: false).updateLocation(list);
+        _preferences.getLocationList().then((list) {
+          list.removeAt(0);
+          list.insert(0, location);
+          Provider.of<LocationList>(context, listen: false)
+              .updateLocation(list);
+        });
       },
       permissionDenied: () {},
     );

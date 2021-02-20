@@ -28,6 +28,7 @@ class _FifteenBannerState extends State<FifteenBanner> {
         .then((list) {
       _list.clear();
       _list.addAll(list);
+      if (!mounted) return;
       setState(() {});
     });
   }
@@ -67,7 +68,7 @@ class FifteenItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String weekday = getDayDesc(formatWeekday(forecast.predictDate), index);
+    String weekday = dayDesc(formatWeekday(forecast.predictDate), index);
     String date = formatMd(forecast.predictDate);
     String pop = forecast.pop;
     String condotionDay = forecast.conditionDay;
@@ -84,7 +85,7 @@ class FifteenItem extends StatelessWidget {
           SizedBox(height: 8),
           Text("$pop%", style: TextStyle(color: Colors.blue)),
           SizedBox(height: 8),
-          Image.asset(iconPath(forecast.conditionIdDay), width: 14),
+          Image.asset(iconPath(forecast.conditionIdDay), width: 20),
           SizedBox(height: 8),
           Text("$condotionDay"),
           SizedBox(height: 8),
@@ -92,7 +93,7 @@ class FifteenItem extends StatelessWidget {
           SizedBox(height: 4),
           Text("$tempNight°"),
           SizedBox(height: 8),
-          Image.asset(iconPath(forecast.conditionIdNight), width: 14),
+          Image.asset(iconPath(forecast.conditionIdNight), width: 20),
           SizedBox(height: 8),
           Text("$conditionNight"),
         ],

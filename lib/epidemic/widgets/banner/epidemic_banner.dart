@@ -31,6 +31,7 @@ class _EpidemicBannerState extends State<EpidemicBanner>
     _tabController = TabController(length: _title.length, vsync: this);
     NewsDio.instance().getInternalData().then((model) {
       _model = model;
+      if (!mounted) return;
       setState(() {});
     });
   }

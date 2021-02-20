@@ -27,6 +27,7 @@ class _ShortForecastBannerState extends State<ShortForecastBanner> {
     )
         .then((data) {
       _sfc = data;
+      if (!mounted) return;
       setState(() {});
     });
   }

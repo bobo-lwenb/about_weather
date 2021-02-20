@@ -29,13 +29,14 @@ class _AQIBannerState extends State<AQIBanner> {
         .then((list) {
       _list.clear();
       _list.addAll(list);
+      if (!mounted) return;
       setState(() {});
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_list.isEmpty) return Container(height: 108);
+    if (_list.isEmpty) return Container(height: 110);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -44,7 +45,7 @@ class _AQIBannerState extends State<AQIBanner> {
           child: Text("5日空气质量预报"),
         ),
         Container(
-          height: 108,
+          height: 110,
           child: ListView.builder(
             physics: BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
@@ -70,7 +71,7 @@ class AQIItem extends StatelessWidget {
   Widget build(BuildContext context) {
     int value = forecastAQI.value;
     String desc = apiDesc(value.toString());
-    String weekday = getDayDesc(formatWeekday(forecastAQI.date), index);
+    String weekday = dayDesc(formatWeekday(forecastAQI.date), index);
     String date = formatMd(forecastAQI.date);
     return Container(
       padding: const EdgeInsets.all(16),

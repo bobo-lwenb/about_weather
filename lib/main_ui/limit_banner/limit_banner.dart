@@ -29,6 +29,7 @@ class _LimitBannerState extends State<LimitBanner> {
       if (list == null) return;
       _list.clear();
       _list.addAll(list);
+      setState(() {});
     });
   }
 
@@ -39,7 +40,7 @@ class _LimitBannerState extends State<LimitBanner> {
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
-        return Limititem();
+        return Limititem(limit: _list[index]);
       },
       separatorBuilder: (context, index) {
         return Divider(height: 1);

@@ -1,8 +1,9 @@
 import 'package:about_weather/city_search/model/city_info.dart';
 import 'package:about_weather/city_search/model/place_name.dart';
+import 'package:about_weather/city_search/preview_city.dart';
 import 'package:about_weather/city_search/search_item.dart';
 import 'package:about_weather/dio/biz_dio/yiyuan_dio.dart';
-import 'package:about_weather/main_ui/sign_banner/sign_banner.dart';
+import 'package:about_weather/location/model/location.dart';
 import 'package:flutter/material.dart';
 
 class CitySearchPage extends StatefulWidget {
@@ -18,6 +19,12 @@ class _CitySearchPageState extends State<CitySearchPage> {
   void initState() {
     super.initState();
     _controller = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
   }
 
   @override
@@ -42,7 +49,7 @@ class _CitySearchPageState extends State<CitySearchPage> {
             return InkWell(
               onTap: () {
                 String text = _controller.text;
-                _searchArea(context, "柳");
+                _searchArea(context, text);
               },
               child: Padding(
                 padding: EdgeInsets.all(16),
@@ -53,18 +60,22 @@ class _CitySearchPageState extends State<CitySearchPage> {
         ],
       ),
       body: ListView.separated(
+        physics: BouncingScrollPhysics(),
         itemBuilder: (context, index) {
           CityInfo info = _list[index].cityInfo;
+          Location location = _cityinfo2Location(info);
           return InkWell(
             child: SearchItem(info: info),
             onTap: () {
-              showModalBottomSheet<int>(
+              showModalBottomSheet<bool>(
                 context: context,
                 isDismissible: true,
                 builder: (BuildContext context) {
-                  return _buildSign();
+                  return PreviewCity(location: location);
                 },
-              );
+              ).then((value) {
+                if (value) Navigator.of(context).pop();
+              });
             },
           );
         },
@@ -72,6 +83,16 @@ class _CitySearchPageState extends State<CitySearchPage> {
         itemCount: _list.length,
       ),
     );
+  }
+
+  Location _cityinfo2Location(CityInfo info) {
+    Location location = Location();
+    location.latitude = info.latitude;
+    location.longitude = info.longitude;
+    location.province = info.c7;
+    location.city = info.c5;
+    location.district = info.c3;
+    return location;
   }
 
   void _searchArea(BuildContext context, String name) {
@@ -83,39 +104,5 @@ class _CitySearchPageState extends State<CitySearchPage> {
         setState(() {});
       });
     }
-  }
-
-  Widget _buildSign() {
-    Widget row = Row(
-      children: <Widget>[
-        TextButton(
-          child: Text("取消"),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        Expanded(
-          child: Text(
-            "柳州 柳北",
-            textAlign: TextAlign.center,
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-        ),
-        TextButton(
-          child: Text("确定"),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-      ],
-    );
-    return Stack(
-      children: [
-        SingleChildScrollView(
-          child: SignBanner(),
-        ),
-        row,
-      ],
-    );
   }
 }

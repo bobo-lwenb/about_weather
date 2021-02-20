@@ -27,7 +27,7 @@ class _HomePageItemState extends State<HomePageItem>
     super.build(context);
     Widget location = Positioned(
       top: 30,
-      child: _buildLocation(widget.location),
+      child: _buildLocation(widget.location, widget.index),
     );
     Widget scrollView = CustomScrollView(
       physics: BouncingScrollPhysics(),
@@ -69,7 +69,7 @@ class _HomePageItemState extends State<HomePageItem>
     );
   }
 
-  Widget _buildLocation(Location location) {
+  Widget _buildLocation(Location location, int index) {
     DateTime dateTime = DateTime.now();
     Widget column = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,7 +78,10 @@ class _HomePageItemState extends State<HomePageItem>
             "${dateTime.month}月${dateTime.day}日 ${getWeekDesc(dateTime.weekday)}",
             style: TextStyle(fontSize: 14)),
         Row(children: <Widget>[
-          Icon(Icons.location_on_outlined, size: 14),
+          Offstage(
+            offstage: index == 0 ? false : true,
+            child: Icon(Icons.location_on_outlined, size: 14),
+          ),
           SizedBox(width: 4),
           Text("${location.city} ${location.district}",
               style: TextStyle(fontSize: 32)),

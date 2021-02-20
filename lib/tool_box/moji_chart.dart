@@ -1,7 +1,7 @@
 String apiDesc(String number) {
   if (number == null || number.isEmpty) return "";
   int value = int.parse(number);
-  if (0 <= value && value < 50) {
+  if (0 <= value && value <= 50) {
     return "优";
   } else if (51 <= value && value < 100) {
     return "良";
@@ -20,7 +20,7 @@ String apiDesc(String number) {
   }
 }
 
-String getDayDesc(String weekday, int index) {
+String dayDesc(String weekday, int index) {
   if (index == 0) {
     return "昨天";
   }

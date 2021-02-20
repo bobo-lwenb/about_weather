@@ -37,6 +37,7 @@ class _TFBannerState extends State<TFBanner> {
       setSun = (list[0] as Condition).sunSet;
       _hourly.clear();
       _hourly.addAll(list[1]);
+      if (!mounted) return;
       setState(() {});
     });
   }
@@ -105,7 +106,7 @@ class TFItem extends StatelessWidget {
         children: <Widget>[
           Text("${hourly.hour}时"),
           SizedBox(height: 8),
-          Image.asset(path, width: 14),
+          Image.asset(path, width: 20),
           SizedBox(height: 8),
           Text("${hourly.condition}"),
           SizedBox(height: 8),

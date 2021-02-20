@@ -27,6 +27,7 @@ class _LiveIndexBannerState extends State<LiveIndexBanner> {
         .then((list) {
       _list.clear();
       _list.addAll(list);
+      if (!mounted) return;
       setState(() {});
     });
   }
