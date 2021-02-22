@@ -1,12 +1,15 @@
 import 'package:about_weather/dio/biz_dio/moji_dio.dart';
 import 'package:about_weather/location/model/location.dart';
+import 'package:about_weather/main_ui/home/background_path.dart';
 import 'package:about_weather/main_ui/short_forecast/short_forecast.dart';
 import 'package:about_weather/main_ui/sign_banner/model/aqi_index/aqi_index.dart';
 import 'package:about_weather/main_ui/sign_banner/model/condition/condition.dart';
 import 'package:about_weather/tool_box/fields.dart';
+import 'package:about_weather/tool_box/fields_bg.dart';
 import 'package:about_weather/tool_box/format_date.dart';
 import 'package:about_weather/tool_box/moji_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SignBanner extends StatefulWidget {
   final Location location;
@@ -38,6 +41,8 @@ class _SignBannerState extends State<SignBanner> {
     ];
     Future.wait(list).then((listValues) {
       _condition = listValues[0];
+      String path = adaptConditionId(_condition.conditionId, _condition.icon);
+      Provider.of<BackgrounPath>(context, listen: false).changePath(path);
       _aqiIndex = listValues[1];
       if (!mounted) return;
       setState(() {});

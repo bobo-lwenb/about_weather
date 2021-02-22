@@ -93,6 +93,50 @@ flutter:
     - lib/images/W44.png
     - lib/images/W45.png
     - lib/images/W46.png
+    - lib/images/B0.webp
+    - lib/images/B1.webp
+    - lib/images/B2.webp
+    - lib/images/B3.webp
+    - lib/images/B4.webp
+    - lib/images/B5.webp
+    - lib/images/B6.webp
+    - lib/images/B7.webp
+    - lib/images/B8.webp
+    - lib/images/B9.webp
+    - lib/images/B10.webp
+    - lib/images/B11.webp
+    - lib/images/B12.webp
+    - lib/images/B13.webp
+    - lib/images/B14.webp
+    - lib/images/B15.webp
+    - lib/images/B16.webp
+    - lib/images/B17.webp
+    - lib/images/B18.webp
+    - lib/images/B19.webp
+    - lib/images/B20.webp
+    - lib/images/B21.webp
+    - lib/images/B22.webp
+    - lib/images/B23.webp
+    - lib/images/B24.webp
+    - lib/images/B25.webp
+    - lib/images/B26.webp
+    - lib/images/B27.webp
+    - lib/images/B28.webp
+    - lib/images/B29.webp
+    - lib/images/B30.webp
+    - lib/images/B31.webp
+    - lib/images/B32.webp
+    - lib/images/B33.webp
+    - lib/images/B34.webp
+    - lib/images/B35.webp
+    - lib/images/B36.webp
+    - lib/images/B37.webp
+    - lib/images/B38.webp
+    - lib/images/B39.webp
+    - lib/images/B40.webp
+    - lib/images/B41.webp
+    - lib/images/B42.webp
+    - lib/images/B43.webp
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

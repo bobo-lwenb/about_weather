@@ -9,6 +9,9 @@ import 'package:about_weather/main_ui/sign_banner/sign_banner.dart';
 import 'package:about_weather/main_ui/tf_banner/tf_banner.dart';
 import 'package:about_weather/tool_box/fields.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'background_path.dart';
 
 class HomePageItem extends StatefulWidget {
   final Location location;
@@ -61,11 +64,28 @@ class _HomePageItemState extends State<HomePageItem>
         ),
       ],
     );
-    return Stack(
-      children: <Widget>[
-        scrollView,
-        location,
-      ],
+    return ChangeNotifierProvider<BackgrounPath>(
+      create: (context) => BackgrounPath(),
+      child: Stack(
+        children: <Widget>[
+          Positioned.fill(
+            child: Builder(builder: (context) {
+              String path = Provider.of<BackgrounPath>(context).bgPath;
+              return Image.asset("$path", fit: BoxFit.cover);
+            }),
+          ),
+          Positioned.fill(
+            child: Opacity(
+              opacity: 0.25,
+              child: Container(
+                color: Colors.black,
+              ),
+            ),
+          ),
+          scrollView,
+          location,
+        ],
+      ),
     );
   }
 

@@ -3,6 +3,7 @@ import 'package:about_weather/location/location_list.dart';
 import 'package:about_weather/setting/language/language_provider.dart';
 import 'package:about_weather/tool_box/settings_preferences.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
@@ -13,6 +14,10 @@ import 'setting/theme/theme_bundle.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent, //设置状态栏透明
+  ));
 
   AMapLocation.initAMapLocationKey();
   final SettingsPreferences _sp = SettingsPreferences();

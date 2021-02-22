@@ -37,6 +37,7 @@ class _ThemePageState extends State<ThemePage> {
           SizedBox(height: 24),
           ListView.builder(
             shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
             itemCount: _themeTitle.length,
             itemBuilder: (context, index) {
               return ItemTile(

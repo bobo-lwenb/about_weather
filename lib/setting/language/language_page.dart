@@ -37,6 +37,7 @@ class _LanguagePageState extends State<LanguagePage> {
           SizedBox(height: 24),
           ListView.builder(
             shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
             itemCount: _languageTitle.length,
             itemBuilder: (context, index) {
               return ItemTile(
