@@ -76,7 +76,7 @@ class _HomePageItemState extends State<HomePageItem>
           ),
           Positioned.fill(
             child: Opacity(
-              opacity: 0.25,
+              opacity: isDark(context) ? 0.5 : 0.25,
               child: Container(
                 color: Colors.black,
               ),
@@ -96,15 +96,15 @@ class _HomePageItemState extends State<HomePageItem>
       children: <Widget>[
         Text(
             "${dateTime.month}月${dateTime.day}日 ${getWeekDesc(dateTime.weekday)}",
-            style: TextStyle(fontSize: 14)),
+            style: TextStyle(fontSize: 14, color: textColor)),
         Row(children: <Widget>[
           Offstage(
             offstage: index == 0 ? false : true,
-            child: Icon(Icons.location_on_outlined, size: 14),
+            child: Icon(Icons.location_on_outlined, size: 14, color: textColor),
           ),
           SizedBox(width: 4),
           Text("${location.city} ${location.district}",
-              style: TextStyle(fontSize: 32)),
+              style: TextStyle(fontSize: 32, color: textColor)),
         ]),
       ],
     );

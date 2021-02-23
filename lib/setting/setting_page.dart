@@ -19,79 +19,93 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<SettingPage> {
+  ThemeMode mode;
+  Locale locale;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    mode = Provider.of<ThemeValues>(context).themeMode;
+    locale = Provider.of<Language>(context).locale;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    statusbarDarkColor();
+  }
+
   @override
   Widget build(BuildContext context) {
-    ThemeMode mode = Provider.of<ThemeValues>(context).themeMode;
-    Locale locale = Provider.of<Language>(context).locale;
-
+    Widget body = Column(
+      children: [
+        SizedBox(height: 24),
+        ItemTile(
+          leading: Icon(Icons.wb_sunny_rounded),
+          leadingTitle: Text(AppLocalizations.of(context).themeMode),
+          trailingTitle: Text(
+            themeTitle(context)[mode.index],
+            style: TextStyle(color: Colors.grey[600]),
+          ),
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+              return ThemePage();
+            }));
+          },
+        ),
+        SizedBox(height: 8),
+        ItemTile(
+          leading: Icon(Icons.language_rounded),
+          leadingTitle: Text(AppLocalizations.of(context).language),
+          trailingTitle: Text(
+            languageTitle(context)[LANGUAGE.indexOf(locale)],
+            style: TextStyle(color: Colors.grey[600]),
+          ),
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+              return LanguagePage();
+            }));
+          },
+        ),
+        SizedBox(height: 24),
+        ItemTile(
+          leading: Icon(Icons.data_usage_rounded),
+          leadingTitle: Text(AppLocalizations.of(context).epidemicData),
+          subTitle: AppLocalizations.of(context).epidemicDataDesc,
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+              return EpidemicPage();
+            }));
+          },
+        ),
+        SizedBox(height: 24),
+        ItemTile(
+          leading: Icon(Icons.history_edu_rounded),
+          leadingTitle: Text(AppLocalizations.of(context).todayInHistory),
+          subTitle: AppLocalizations.of(context).todayInHistoryDesc,
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+              return TodayHistoryPage();
+            }));
+          },
+        ),
+        SizedBox(height: 24),
+        ItemTile(
+          leading: Icon(Icons.info_outline_rounded),
+          leadingTitle: Text(AppLocalizations.of(context).aboutApp),
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+              return AboutApp();
+            }));
+          },
+        ),
+      ],
+    );
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context).settings),
       ),
-      body: Column(
-        children: [
-          SizedBox(height: 24),
-          ItemTile(
-            leading: Icon(Icons.wb_sunny_rounded),
-            leadingTitle: Text(AppLocalizations.of(context).themeMode),
-            trailingTitle: Text(
-              themeTitle(context)[mode.index],
-              style: TextStyle(color: Colors.grey[600]),
-            ),
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return ThemePage();
-              }));
-            },
-          ),
-          SizedBox(height: 8),
-          ItemTile(
-            leading: Icon(Icons.language_rounded),
-            leadingTitle: Text(AppLocalizations.of(context).language),
-            trailingTitle: Text(
-              languageTitle(context)[LANGUAGE.indexOf(locale)],
-              style: TextStyle(color: Colors.grey[600]),
-            ),
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return LanguagePage();
-              }));
-            },
-          ),
-          SizedBox(height: 24),
-          ItemTile(
-            leading: Icon(Icons.data_usage_rounded),
-            leadingTitle: Text(AppLocalizations.of(context).epidemicData),
-            subTitle: AppLocalizations.of(context).epidemicDataDesc,
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return EpidemicPage();
-              }));
-            },
-          ),
-          SizedBox(height: 24),
-          ItemTile(
-            leading: Icon(Icons.history_edu_rounded),
-            leadingTitle: Text(AppLocalizations.of(context).todayInHistory),
-            subTitle: AppLocalizations.of(context).todayInHistoryDesc,
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return TodayHistoryPage();
-              }));
-            },
-          ),
-          SizedBox(height: 24),
-          ItemTile(
-            leading: Icon(Icons.info_outline_rounded),
-            leadingTitle: Text(AppLocalizations.of(context).aboutApp),
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return AboutApp();
-              }));
-            },
-          ),
-        ],
-      ),
+      body: body,
     );
   }
 }

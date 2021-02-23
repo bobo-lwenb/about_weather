@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 String apiDesc(String number) {
   if (number == null || number.isEmpty) return "";
   int value = int.parse(number);
@@ -34,3 +36,5 @@ String dayDesc(String weekday, int index) {
 }
 
 String iconPath(String icon) => "lib/images/W$icon.png";
+
+Widget get white24Divider => Divider(height: 1, color: Colors.white30);

@@ -1,5 +1,6 @@
 import 'package:about_weather/dio/biz_dio/moji_dio.dart';
 import 'package:about_weather/location/model/location.dart';
+import 'package:about_weather/main_ui/sign_banner/sign_mode.dart';
 import 'package:about_weather/tool_box/fields.dart';
 import 'package:flutter/material.dart';
 
@@ -7,8 +8,13 @@ import 'model/sfc.dart';
 
 class ShortForecastBanner extends StatefulWidget {
   final Location location;
+  final SignMode signMode;
 
-  ShortForecastBanner({this.location, Key key}) : super(key: key);
+  ShortForecastBanner({
+    Key key,
+    this.location,
+    this.signMode = SignMode.normal,
+  }) : super(key: key);
 
   @override
   _ShortForecastBannerState createState() => _ShortForecastBannerState();
@@ -39,8 +45,15 @@ class _ShortForecastBannerState extends State<ShortForecastBanner> {
       padding: EdgeInsets.symmetric(vertical: 16),
       child: opacityWidget(
         object: _sfc,
-        child: Text("$banner", style: TextStyle(fontSize: 28)),
+        child: Text("$banner",
+            style: TextStyle(
+              fontSize: 28,
+              color: adaptColor(textColor),
+            )),
       ),
     );
   }
+
+  Color adaptColor(Color color) =>
+      widget.signMode == SignMode.normal ? color : null;
 }

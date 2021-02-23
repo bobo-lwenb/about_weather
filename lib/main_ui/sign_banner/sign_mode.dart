@@ -1,0 +1,4 @@
+enum SignMode {
+  normal,
+  preview,
+}

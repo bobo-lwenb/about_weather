@@ -5,6 +5,8 @@ class StatisCell extends StatelessWidget {
   final bool isShowChange;
   final int changeCount;
   final int count;
+  final Color topColor;
+  final Color subColor;
   final String typeName;
   final double countSize;
   final Color color;
@@ -16,6 +18,8 @@ class StatisCell extends StatelessWidget {
     this.isShowChange = true,
     this.changeCount,
     this.countSize = 30,
+    this.topColor,
+    this.subColor = Colors.grey,
     this.color = Colors.blue,
     this.backgroundColor = Colors.orange,
   });
@@ -26,7 +30,7 @@ class StatisCell extends StatelessWidget {
       children: <Widget>[
         Text(
           "$typeName",
-          style: TextStyle(fontSize: 16),
+          style: TextStyle(fontSize: 16, color: topColor),
         ),
         SizedBox(height: 3),
         Text(
@@ -41,7 +45,7 @@ class StatisCell extends StatelessWidget {
             ? Text.rich(TextSpan(children: <TextSpan>[
                 TextSpan(
                   text: AppLocalizations.of(context).fromYesterday,
-                  style: TextStyle(color: Colors.grey[700], fontSize: 14),
+                  style: TextStyle(color: subColor, fontSize: 14),
                 ),
                 TextSpan(
                   text: _buildString(changeCount),

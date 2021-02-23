@@ -5,7 +5,7 @@ part 'alert.g.dart';
 @JsonSerializable(nullable: true)
 class Alert {
   String content;
-  String infoid;
+  int infoid;
 
   @JsonKey(name: "land_defense_id")
   String landDefenseId;

@@ -5,6 +5,7 @@ import 'package:about_weather/epidemic/widgets/list_global_item.dart';
 import 'package:about_weather/epidemic/widgets/list_header.dart';
 import 'package:about_weather/epidemic/widgets/statis_cell.dart';
 import 'package:about_weather/intl/l10n/localizations_intl.dart';
+import 'package:about_weather/tool_box/fields.dart';
 import 'package:flutter/material.dart';
 
 class GlobalTab extends StatefulWidget {
@@ -80,7 +81,7 @@ class _GlobalTabState extends State<GlobalTab>
       border: TableBorder.symmetric(
         outside: BorderSide.none,
         inside: BorderSide(
-          color: Colors.white,
+          color: isDark(context) ? Colors.grey[850] : Colors.white,
           width: 3.0,
           style: BorderStyle.solid,
         ),
@@ -88,6 +89,7 @@ class _GlobalTabState extends State<GlobalTab>
       children: <TableRow>[
         TableRow(children: <Widget>[
           StatisCell(
+            topColor: Colors.grey[850],
             typeName: AppLocalizations.of(context).confirmed,
             count: _globalStatis.confirm,
             changeCount: _globalStatis.confirmAdd,
@@ -95,6 +97,7 @@ class _GlobalTabState extends State<GlobalTab>
             backgroundColor: Colors.red[100],
           ),
           StatisCell(
+            topColor: Colors.grey[850],
             typeName: AppLocalizations.of(context).existConfirmed,
             count: _globalStatis.nowConfirm,
             changeCount: _globalStatis.nowConfirmAdd,
@@ -104,6 +107,7 @@ class _GlobalTabState extends State<GlobalTab>
         ]),
         TableRow(children: <Widget>[
           StatisCell(
+            topColor: Colors.grey[850],
             typeName: AppLocalizations.of(context).cure,
             count: _globalStatis.heal,
             changeCount: _globalStatis.healAdd,
@@ -111,11 +115,12 @@ class _GlobalTabState extends State<GlobalTab>
             backgroundColor: Colors.green[50],
           ),
           StatisCell(
+            topColor: Colors.grey[850],
             typeName: AppLocalizations.of(context).death,
             count: _globalStatis.dead,
             changeCount: _globalStatis.deadAdd,
             color: Colors.black87,
-            backgroundColor: Colors.black12,
+            backgroundColor: Colors.grey[200],
           ),
         ]),
       ],
@@ -126,10 +131,7 @@ class _GlobalTabState extends State<GlobalTab>
         SizedBox(height: 10),
         Text.rich(TextSpan(
           children: <TextSpan>[
-            TextSpan(
-              text: "${AppLocalizations.of(context).statisticsCutoff} ",
-              style: TextStyle(color: Colors.grey[700]),
-            ),
+            TextSpan(text: "${AppLocalizations.of(context).statisticsCutoff} "),
             TextSpan(text: "${_globalStatis.lastUpdateTime}"),
           ],
         )),

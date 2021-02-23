@@ -5,6 +5,7 @@ import 'package:about_weather/epidemic/widgets/banner/china_banner.dart';
 import 'package:about_weather/epidemic/widgets/banner/local_banner.dart';
 import 'package:about_weather/intl/l10n/localizations_intl.dart';
 import 'package:about_weather/location/model/location.dart';
+import 'package:about_weather/tool_box/fields.dart';
 import 'package:flutter/material.dart';
 
 class EpidemicBanner extends StatefulWidget {
@@ -75,17 +76,18 @@ class _EpidemicBannerState extends State<EpidemicBanner>
         Padding(
           padding: const EdgeInsets.only(left: 16, top: 8.0, bottom: 8),
           child: Text(
-              "${AppLocalizations.of(context).statisticsCutoff} ${_model?.lastUpdateTime}"),
+            "${AppLocalizations.of(context).statisticsCutoff} ${_model?.lastUpdateTime}",
+            style: TextStyle(color: subtextColor),
+          ),
         ),
       ],
     );
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(8),
-      margin: EdgeInsets.all(16),
+      margin: EdgeInsets.only(left: 16, top: 16, right: 16, bottom: 45),
       decoration: BoxDecoration(
-        color: Colors.white,
-        // boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 5)],
+        color: Colors.white12,
         borderRadius: BorderRadius.circular(10),
       ),
       child: column,
@@ -96,9 +98,9 @@ class _EpidemicBannerState extends State<EpidemicBanner>
     Widget tabBar = TabBar(
       controller: _tabController,
       physics: NeverScrollableScrollPhysics(),
-      labelColor: Colors.deepOrangeAccent[400],
+      labelColor: Colors.deepOrangeAccent[100],
       unselectedLabelColor: Colors.grey[400],
-      indicatorColor: Colors.deepOrangeAccent[400],
+      indicatorColor: Colors.deepOrangeAccent[100],
       indicatorWeight: 1,
       indicatorSize: TabBarIndicatorSize.label,
       tabs: title.map((e) {

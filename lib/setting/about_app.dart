@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:about_weather/intl/l10n/localizations_intl.dart';
+import 'package:about_weather/tool_box/fields.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info/package_info.dart';
 
@@ -24,7 +25,7 @@ class _AboutAppState extends State<AboutApp> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white10,
+        backgroundColor: isDark(context) ? Colors.grey[850] : Colors.white10,
       ),
       body: Center(
         child: Column(

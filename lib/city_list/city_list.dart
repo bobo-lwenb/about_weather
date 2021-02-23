@@ -4,6 +4,7 @@ import 'package:about_weather/dio/biz_dio/moji_dio.dart';
 import 'package:about_weather/location/location_list.dart';
 import 'package:about_weather/location/model/location.dart';
 import 'package:about_weather/main_ui/sign_banner/model/condition/condition.dart';
+import 'package:about_weather/tool_box/fields.dart';
 import 'package:about_weather/tool_box/moji_chart.dart';
 import 'package:about_weather/tool_box/settings_preferences.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,12 @@ class _CityListPageState extends State<CityListPage> {
   void initState() {
     super.initState();
     _preferences = SettingsPreferences();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    statusbarDarkColor();
   }
 
   @override
@@ -69,7 +76,13 @@ class _CityListPageState extends State<CityListPage> {
           return InkWell(
             child: Dismissible(
               key: ValueKey(index),
-              background: Container(color: Colors.redAccent),
+              background: index == 0
+                  ? Container(color: Colors.white)
+                  : Container(color: Colors.redAccent),
+              confirmDismiss: (direction) async {
+                if (index == 0) return false;
+                return true;
+              },
               onDismissed: (direction) {
                 _listModel.removeAt(index);
                 _locations.removeAt(index);

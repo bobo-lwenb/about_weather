@@ -6,6 +6,7 @@ import 'package:about_weather/epidemic/widgets/list_header.dart';
 import 'package:about_weather/epidemic/widgets/list_internal_item.dart';
 import 'package:about_weather/epidemic/widgets/statis_cell.dart';
 import 'package:about_weather/intl/l10n/localizations_intl.dart';
+import 'package:about_weather/tool_box/fields.dart';
 import 'package:flutter/material.dart';
 
 class InternalTab extends StatefulWidget {
@@ -94,7 +95,7 @@ class _InternalTabState extends State<InternalTab>
       border: TableBorder.symmetric(
         outside: BorderSide.none,
         inside: BorderSide(
-          color: Colors.white,
+          color: isDark(context) ? Colors.grey[850] : Colors.white,
           width: 3.0,
           style: BorderStyle.solid,
         ),
@@ -102,6 +103,7 @@ class _InternalTabState extends State<InternalTab>
       children: <TableRow>[
         TableRow(children: <Widget>[
           StatisCell(
+            topColor: Colors.grey[850],
             typeName: AppLocalizations.of(context).localExistConfirmed,
             count: _chinaTotal.localConfirm,
             changeCount: _chinaAdd.localConfirm,
@@ -109,6 +111,7 @@ class _InternalTabState extends State<InternalTab>
             backgroundColor: Colors.orange[50],
           ),
           StatisCell(
+            topColor: Colors.grey[850],
             typeName: AppLocalizations.of(context).existConfirmed,
             count: _chinaTotal.nowConfirm,
             changeCount: _chinaAdd.nowConfirm,
@@ -116,6 +119,7 @@ class _InternalTabState extends State<InternalTab>
             backgroundColor: Colors.red[50],
           ),
           StatisCell(
+            topColor: Colors.grey[850],
             typeName: AppLocalizations.of(context).confirmed,
             count: _chinaTotal.confirm,
             changeCount: _chinaAdd.confirm,
@@ -125,6 +129,7 @@ class _InternalTabState extends State<InternalTab>
         ]),
         TableRow(children: <Widget>[
           StatisCell(
+            topColor: Colors.grey[850],
             typeName: AppLocalizations.of(context).symptomless,
             count: _chinaTotal.noInfect,
             changeCount: _chinaAdd.noInfect,
@@ -132,6 +137,7 @@ class _InternalTabState extends State<InternalTab>
             backgroundColor: Colors.deepPurple[50],
           ),
           StatisCell(
+            topColor: Colors.grey[850],
             typeName: AppLocalizations.of(context).importAbroad,
             count: _chinaTotal.importedCase,
             changeCount: _chinaAdd.importedCase,
@@ -139,15 +145,17 @@ class _InternalTabState extends State<InternalTab>
             backgroundColor: Colors.blue[50],
           ),
           StatisCell(
+            topColor: Colors.grey[850],
             typeName: AppLocalizations.of(context).death,
             count: _chinaTotal.dead,
             changeCount: _chinaAdd.dead,
             color: Colors.black87,
-            backgroundColor: Colors.black12,
+            backgroundColor: Colors.grey[300],
           ),
         ]),
         TableRow(children: <Widget>[
           StatisCell(
+            topColor: Colors.grey[850],
             typeName: AppLocalizations.of(context).cure,
             count: _chinaTotal.heal,
             changeCount: _chinaAdd.heal,
@@ -155,6 +163,7 @@ class _InternalTabState extends State<InternalTab>
             backgroundColor: Colors.green[50],
           ),
           StatisCell(
+            topColor: Colors.grey[850],
             typeName: AppLocalizations.of(context).existSuspect,
             count: _chinaTotal.suspect,
             changeCount: _chinaAdd.suspect,
@@ -162,6 +171,7 @@ class _InternalTabState extends State<InternalTab>
             backgroundColor: Colors.yellow[50],
           ),
           StatisCell(
+            topColor: Colors.grey[850],
             typeName: AppLocalizations.of(context).existSevere,
             count: _chinaTotal.nowSevere,
             changeCount: _chinaAdd.nowSevere,
@@ -177,10 +187,7 @@ class _InternalTabState extends State<InternalTab>
         SizedBox(height: 10),
         Text.rich(TextSpan(
           children: <TextSpan>[
-            TextSpan(
-              text: "${AppLocalizations.of(context).statisticsCutoff} ",
-              style: TextStyle(color: Colors.grey[700]),
-            ),
+            TextSpan(text: "${AppLocalizations.of(context).statisticsCutoff} "),
             TextSpan(text: "$_lastUpdateTime"),
           ],
         )),
@@ -297,7 +304,7 @@ class _InternalTabState extends State<InternalTab>
         SizedBox(height: 16),
         Container(
           decoration: BoxDecoration(
-            color: Colors.grey[200],
+            color: isDark(context) ? Colors.black : Colors.grey[200],
             borderRadius: BorderRadius.circular(8),
           ),
           padding: EdgeInsets.all(16),

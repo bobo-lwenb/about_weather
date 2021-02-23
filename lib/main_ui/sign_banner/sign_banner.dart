@@ -4,6 +4,7 @@ import 'package:about_weather/main_ui/home/background_path.dart';
 import 'package:about_weather/main_ui/short_forecast/short_forecast.dart';
 import 'package:about_weather/main_ui/sign_banner/model/aqi_index/aqi_index.dart';
 import 'package:about_weather/main_ui/sign_banner/model/condition/condition.dart';
+import 'package:about_weather/main_ui/sign_banner/sign_mode.dart';
 import 'package:about_weather/tool_box/fields.dart';
 import 'package:about_weather/tool_box/fields_bg.dart';
 import 'package:about_weather/tool_box/format_date.dart';
@@ -13,8 +14,13 @@ import 'package:provider/provider.dart';
 
 class SignBanner extends StatefulWidget {
   final Location location;
+  final SignMode signMode;
 
-  SignBanner({this.location, Key key}) : super(key: key);
+  SignBanner({
+    Key key,
+    this.location,
+    this.signMode = SignMode.normal,
+  }) : super(key: key);
 
   @override
   _SignBannerState createState() => _SignBannerState();
@@ -41,8 +47,10 @@ class _SignBannerState extends State<SignBanner> {
     ];
     Future.wait(list).then((listValues) {
       _condition = listValues[0];
-      String path = adaptConditionId(_condition.conditionId, _condition.icon);
-      Provider.of<BackgrounPath>(context, listen: false).changePath(path);
+      if (widget.signMode == SignMode.normal) {
+        String path = adaptConditionId(_condition.conditionId, _condition.icon);
+        Provider.of<BackgrounPath>(context, listen: false).changePath(path);
+      }
       _aqiIndex = listValues[1];
       if (!mounted) return;
       setState(() {});
@@ -64,22 +72,33 @@ class _SignBannerState extends State<SignBanner> {
             bottom: 55,
             child: Text(
               "$temp°",
-              style: TextStyle(fontSize: 100, fontWeight: FontWeight.w200),
+              style: TextStyle(
+                fontSize: 100,
+                fontWeight: FontWeight.w200,
+                color: adaptColor(textColor),
+              ),
             ),
           ),
           Positioned(
             bottom: 40,
-            child: Row(
-              children: [
-                Text("$condition", style: TextStyle(fontSize: 22)),
-                SizedBox(width: 8),
-                Image.asset(iconPath(icon), width: 20),
-              ],
-            ),
+            child: Row(children: [
+              Text("$condition",
+                  style: TextStyle(
+                    fontSize: 22,
+                    color: adaptColor(textColor),
+                  )),
+              SizedBox(width: 8),
+              icon != null
+                  ? Image.asset(iconPath(icon), width: 20)
+                  : Container(),
+            ]),
           ),
           Positioned(
             bottom: 20,
-            child: Text("$tips"),
+            child: Text("$tips",
+                style: TextStyle(
+                  color: adaptColor(textColor),
+                )),
           ),
         ],
       ),
@@ -90,7 +109,7 @@ class _SignBannerState extends State<SignBanner> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           _buildAQI(),
-          Divider(height: 1),
+          white24Divider,
           _buildGrid(),
         ],
       ),
@@ -98,13 +117,19 @@ class _SignBannerState extends State<SignBanner> {
     return Column(
       children: [
         opacityWidget(object: _condition, child: top),
-        ShortForecastBanner(location: widget.location),
-        Divider(height: 1),
+        ShortForecastBanner(
+          location: widget.location,
+          signMode: widget.signMode,
+        ),
+        white24Divider,
         list,
-        Divider(height: 1),
+        white24Divider,
       ],
     );
   }
+
+  Color adaptColor(Color color) =>
+      widget.signMode == SignMode.normal ? color : null;
 
   Widget _buildAQI() {
     String value = _aqiIndex?.value;
@@ -115,17 +140,17 @@ class _SignBannerState extends State<SignBanner> {
       children: <Widget>[
         Text(
           "空气质量",
-          style: TextStyle(color: Colors.grey),
+          style: TextStyle(color: adaptColor(subtextColor)),
         ),
         SizedBox(height: 3),
         Text(
           "$value $desc",
-          style: TextStyle(fontSize: 32),
+          style: TextStyle(fontSize: 32, color: adaptColor(textColor)),
         ),
         SizedBox(height: 3),
         Text(
           "上次更新：$pubTime",
-          style: TextStyle(color: Colors.grey),
+          style: TextStyle(color: adaptColor(subtextColor)),
         ),
       ],
     );
@@ -147,36 +172,76 @@ class _SignBannerState extends State<SignBanner> {
     String windSpeed = getField(_condition?.windSpeed);
     Widget row1 = Row(
       children: <Widget>[
-        Expanded(child: Item(top: "日出", title: "$sunRise")),
-        Expanded(child: Item(top: "日落", title: "$sunSet"))
+        Expanded(
+            child: Item(
+          top: "日出",
+          title: "$sunRise",
+          signmode: widget.signMode,
+        )),
+        Expanded(
+            child: Item(
+          top: "日落",
+          title: "$sunSet",
+          signmode: widget.signMode,
+        )),
       ],
     );
     Widget row2 = Row(
       children: <Widget>[
-        Expanded(child: Item(top: "湿度", title: "$humidity%")),
-        Expanded(child: Item(top: "体感温度", title: "$realFeel°"))
+        Expanded(
+            child: Item(
+          top: "湿度",
+          title: "$humidity%",
+          signmode: widget.signMode,
+        )),
+        Expanded(
+            child: Item(
+          top: "体感温度",
+          title: "$realFeel°",
+          signmode: widget.signMode,
+        )),
       ],
     );
     Widget row3 = Row(
       children: <Widget>[
-        Expanded(child: Item(top: "气压", title: "$pressure百帕")),
-        Expanded(child: Item(top: "紫外线指数", title: "$uvi"))
+        Expanded(
+            child: Item(
+          top: "气压",
+          title: "$pressure百帕",
+          signmode: widget.signMode,
+        )),
+        Expanded(
+            child: Item(
+          top: "紫外线指数",
+          title: "$uvi",
+          signmode: widget.signMode,
+        )),
       ],
     );
     Widget row4 = Row(
       children: <Widget>[
-        Expanded(child: Item(top: "能见度", title: "$vis米")),
-        Expanded(child: Item(top: "风 米/秒", title: "$windDir $windSpeed"))
+        Expanded(
+            child: Item(
+          top: "能见度",
+          title: "$vis米",
+          signmode: widget.signMode,
+        )),
+        Expanded(
+            child: Item(
+          top: "风 米/秒",
+          title: "$windDir $windSpeed",
+          signmode: widget.signMode,
+        )),
       ],
     );
     return Column(
       children: <Widget>[
         opacityWidget(object: _condition, child: row1),
-        Divider(height: 1),
+        white24Divider,
         opacityWidget(object: _condition, child: row2),
-        Divider(height: 1),
+        white24Divider,
         opacityWidget(object: _condition, child: row3),
-        Divider(height: 1),
+        white24Divider,
         opacityWidget(object: _condition, child: row4),
       ],
     );
@@ -186,11 +251,9 @@ class _SignBannerState extends State<SignBanner> {
 class Item extends StatelessWidget {
   final String top;
   final String title;
+  final SignMode signmode;
 
-  Item({
-    this.top,
-    this.title,
-  });
+  Item({this.top, this.title, this.signmode});
 
   @override
   Widget build(BuildContext context) {
@@ -199,13 +262,14 @@ class Item extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            "$top",
-            style: TextStyle(color: Colors.grey),
-          ),
+          Text("$top",
+              style: TextStyle(
+                  color: signmode == SignMode.normal ? subtextColor : null)),
           Text(
             "$title",
-            style: TextStyle(fontSize: 32),
+            style: TextStyle(
+                fontSize: 32,
+                color: signmode == SignMode.normal ? textColor : null),
           ),
         ],
       ),

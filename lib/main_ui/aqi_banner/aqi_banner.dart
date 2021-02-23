@@ -1,5 +1,6 @@
 import 'package:about_weather/dio/biz_dio/moji_dio.dart';
 import 'package:about_weather/location/model/location.dart';
+import 'package:about_weather/tool_box/fields.dart';
 import 'package:about_weather/tool_box/format_date.dart';
 import 'package:about_weather/tool_box/moji_chart.dart';
 import 'package:flutter/material.dart';
@@ -36,16 +37,20 @@ class _AQIBannerState extends State<AQIBanner> {
 
   @override
   Widget build(BuildContext context) {
-    if (_list.isEmpty) return Container(height: 110);
+    if (_list.isEmpty) return Container();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.only(left: 16, top: 16),
-          child: Text("5日空气质量预报"),
+          child: Text("5日空气质量预报",
+              style: TextStyle(
+                fontSize: 24,
+                color: textColor,
+              )),
         ),
         Container(
-          height: 110,
+          height: 120,
           child: ListView.builder(
             physics: BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
@@ -55,7 +60,7 @@ class _AQIBannerState extends State<AQIBanner> {
             itemCount: _list.length,
           ),
         ),
-        Divider(height: 1),
+        white24Divider,
       ],
     );
   }
@@ -77,13 +82,13 @@ class AQIItem extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       child: Column(
         children: <Widget>[
-          Text("$weekday"),
+          Text("$weekday", style: TextStyle(color: textColor)),
           SizedBox(height: 8),
-          Text("$date"),
+          Text("$date", style: TextStyle(color: textColor)),
           SizedBox(height: 8),
-          Text("$value"),
+          Text("$value", style: TextStyle(color: textColor)),
           SizedBox(height: 8),
-          Text("$desc"),
+          Text("$desc", style: TextStyle(color: textColor)),
         ],
       ),
     );

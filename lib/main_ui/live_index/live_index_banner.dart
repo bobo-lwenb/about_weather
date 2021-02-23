@@ -1,5 +1,7 @@
 import 'package:about_weather/dio/biz_dio/moji_dio.dart';
 import 'package:about_weather/location/model/location.dart';
+import 'package:about_weather/tool_box/fields.dart';
+import 'package:about_weather/tool_box/moji_chart.dart';
 import 'package:flutter/material.dart';
 
 import 'model/live_index.dart';
@@ -41,7 +43,7 @@ class _LiveIndexBannerState extends State<LiveIndexBanner> {
         return LiveItem(index: _list[index]);
       },
       separatorBuilder: (BuildContext context, int index) {
-        return Divider(height: 1);
+        return white24Divider;
       },
       itemCount: _list.length,
     );
@@ -59,10 +61,10 @@ class _LiveIndexBannerState extends State<LiveIndexBanner> {
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.only(left: 16, top: 16),
-          child: Text("生活指数"),
+          child: Text("生活指数", style: TextStyle(fontSize: 24, color: textColor)),
         ),
         widget,
-        Divider(height: 1),
+        white24Divider,
       ],
     );
   }
@@ -81,12 +83,12 @@ class LiveItem extends StatelessWidget {
     Widget column = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text("$name: $status"),
+        Text("$name: $status", style: TextStyle(color: textColor)),
         SizedBox(height: 3),
         Text(
           "$desc",
           style: TextStyle(
-            color: Colors.grey,
+            color: subtextColor,
             fontSize: 14,
           ),
         ),

@@ -1,5 +1,7 @@
 import 'package:about_weather/dio/biz_dio/moji_dio.dart';
 import 'package:about_weather/location/model/location.dart';
+import 'package:about_weather/tool_box/fields.dart';
+import 'package:about_weather/tool_box/moji_chart.dart';
 import 'package:flutter/material.dart';
 
 import 'model/alert.dart';
@@ -38,10 +40,10 @@ class _AlertBannerState extends State<AlertBanner> {
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
-        return AlertItem();
+        return AlertItem(alert: _list[index]);
       },
       separatorBuilder: (context, index) {
-        return Divider(height: 1);
+        return white24Divider;
       },
       itemCount: _list.length,
     );
@@ -56,10 +58,10 @@ class _AlertBannerState extends State<AlertBanner> {
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.only(left: 16, top: 16),
-          child: Text("天气预警"),
+          child: Text("天气预警", style: TextStyle(fontSize: 24, color: textColor)),
         ),
         widget,
-        Divider(height: 1),
+        white24Divider,
       ],
     );
   }
@@ -77,19 +79,24 @@ class AlertItem extends StatelessWidget {
     String name = alert.name;
     String pubTime = alert.pubTime;
     String contentString = alert.content;
-    Widget title = Row(
+    Widget title = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Expanded(child: Text("$titleString")),
-        Text("$level"),
-        SizedBox(width: 4),
-        Text("$name"),
+        Text("$titleString", style: TextStyle(color: textColor)),
+        Row(
+          children: <Widget>[
+            Text("$level", style: TextStyle(color: textColor)),
+            SizedBox(width: 4),
+            Text("$name", style: TextStyle(color: textColor)),
+          ],
+        ),
       ],
     );
     Widget tiem = Text(
       "$pubTime",
-      style: TextStyle(color: Colors.grey, fontSize: 12),
+      style: TextStyle(color: subtextColor, fontSize: 12),
     );
-    Widget content = Text("$contentString");
+    Widget content = Text("$contentString", style: TextStyle(color: textColor));
     Widget column = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[

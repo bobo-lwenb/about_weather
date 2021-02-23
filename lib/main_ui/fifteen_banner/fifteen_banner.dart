@@ -1,6 +1,7 @@
 import 'package:about_weather/dio/biz_dio/moji_dio.dart';
 import 'package:about_weather/location/model/location.dart';
 import 'package:about_weather/main_ui/fifteen_banner/model/forecast.dart';
+import 'package:about_weather/tool_box/fields.dart';
 import 'package:about_weather/tool_box/format_date.dart';
 import 'package:about_weather/tool_box/moji_chart.dart';
 import 'package:flutter/material.dart';
@@ -35,16 +36,20 @@ class _FifteenBannerState extends State<FifteenBanner> {
 
   @override
   Widget build(BuildContext context) {
-    if (_list.isEmpty) return Container(height: 275);
+    if (_list.isEmpty) return Container(height: 243);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.only(left: 16, top: 16),
-          child: Text("15日天气预报"),
+          child: Text("15日天气预报",
+              style: TextStyle(
+                fontSize: 24,
+                color: textColor,
+              )),
         ),
         Container(
-          height: 275,
+          height: 243,
           child: ListView.builder(
             physics: BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
@@ -54,7 +59,7 @@ class _FifteenBannerState extends State<FifteenBanner> {
             itemCount: _list.length,
           ),
         ),
-        Divider(height: 1),
+        white24Divider,
       ],
     );
   }
@@ -79,23 +84,23 @@ class FifteenItem extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       child: Column(
         children: <Widget>[
-          Text("$weekday"),
+          Text("$weekday", style: TextStyle(color: textColor)),
           SizedBox(height: 8),
-          Text("$date"),
+          Text("$date", style: TextStyle(color: textColor)),
           SizedBox(height: 8),
-          Text("$pop%", style: TextStyle(color: Colors.blue)),
+          Text("$pop%", style: TextStyle(color: Colors.lightBlue)),
           SizedBox(height: 8),
           Image.asset(iconPath(forecast.conditionIdDay), width: 20),
           SizedBox(height: 8),
-          Text("$condotionDay"),
+          Text("$condotionDay", style: TextStyle(color: textColor)),
           SizedBox(height: 8),
-          Text("$tempDay°"),
+          Text("$tempDay°", style: TextStyle(color: textColor)),
           SizedBox(height: 4),
-          Text("$tempNight°"),
+          Text("$tempNight°", style: TextStyle(color: textColor)),
           SizedBox(height: 8),
           Image.asset(iconPath(forecast.conditionIdNight), width: 20),
           SizedBox(height: 8),
-          Text("$conditionNight"),
+          Text("$conditionNight", style: TextStyle(color: textColor)),
         ],
       ),
     );

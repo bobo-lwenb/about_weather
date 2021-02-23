@@ -53,7 +53,7 @@ class ListGlobalItem extends StatelessWidget {
 
   Widget _buildText({
     String text,
-    Color color = Colors.black,
+    Color color,
     AlignmentGeometry alignment = Alignment.center,
   }) {
     Widget container = Container(

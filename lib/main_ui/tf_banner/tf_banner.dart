@@ -1,6 +1,7 @@
 import 'package:about_weather/dio/biz_dio/moji_dio.dart';
 import 'package:about_weather/location/model/location.dart';
 import 'package:about_weather/main_ui/sign_banner/model/condition/condition.dart';
+import 'package:about_weather/tool_box/fields.dart';
 import 'package:about_weather/tool_box/moji_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -44,16 +45,20 @@ class _TFBannerState extends State<TFBanner> {
 
   @override
   Widget build(BuildContext context) {
-    if (_hourly.isEmpty) return Container(height: 166);
+    if (_hourly.isEmpty) return Container(height: 148);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.only(left: 16, top: 16),
-          child: Text("24小时天气预报"),
+          child: Text("24小时天气预报",
+              style: TextStyle(
+                fontSize: 24,
+                color: textColor,
+              )),
         ),
         Container(
-          height: 166,
+          height: 148,
           child: ListView.builder(
             physics: BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
@@ -65,7 +70,7 @@ class _TFBannerState extends State<TFBanner> {
             itemCount: _hourly.length,
           ),
         ),
-        Divider(height: 1),
+        white24Divider,
       ],
     );
   }
@@ -104,15 +109,15 @@ class TFItem extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       child: Column(
         children: <Widget>[
-          Text("${hourly.hour}时"),
+          Text("${hourly.hour}时", style: TextStyle(color: textColor)),
           SizedBox(height: 8),
           Image.asset(path, width: 20),
           SizedBox(height: 8),
-          Text("${hourly.condition}"),
+          Text("${hourly.condition}", style: TextStyle(color: textColor)),
           SizedBox(height: 8),
-          Text("${hourly.pop}%", style: TextStyle(color: Colors.blue)),
+          Text("${hourly.pop}%", style: TextStyle(color: Colors.lightBlue)),
           SizedBox(height: 8),
-          Text("${hourly.temp}°"),
+          Text("${hourly.temp}°", style: TextStyle(color: textColor)),
         ],
       ),
     );

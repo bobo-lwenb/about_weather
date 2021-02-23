@@ -9,7 +9,7 @@ part of 'alert.dart';
 Alert _$AlertFromJson(Map<String, dynamic> json) {
   return Alert(
     content: json['content'] as String,
-    infoid: json['infoid'] as String,
+    infoid: json['infoid'] as int,
     level: json['level'] as String,
     name: json['name'] as String,
     pubTime: json['pub_time'] as String,

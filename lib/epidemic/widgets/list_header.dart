@@ -39,7 +39,7 @@ class ListHeader extends StatelessWidget {
               padding: EdgeInsets.only(left: 8),
               alignment: Alignment.centerLeft,
               color: Colors.black87,
-              backgroundColor: Colors.black12,
+              backgroundColor: Colors.blue[300],
             ),
             HeaderCell(
               title: title2,
@@ -59,7 +59,7 @@ class ListHeader extends StatelessWidget {
             HeaderCell(
               title: title5,
               color: Colors.black87,
-              backgroundColor: Colors.black12,
+              backgroundColor: Colors.grey[500],
             ),
             HeaderCell(
               title: title6,

@@ -99,8 +99,11 @@ class _CitySearchPageState extends State<CitySearchPage> {
     if (name.isEmpty) {
       Scaffold.of(context).showSnackBar(SnackBar(content: Text("请输入城市名搜索")));
     } else {
-      YiyuanDio.instance().areaToId(name).then((value) {
-        _list = value;
+      YiyuanDio.instance().areaToId(name).then((list) {
+        if (list == null || (list as List).isEmpty) {
+          Scaffold.of(context).showSnackBar(SnackBar(content: Text("无匹配城市")));
+        }
+        _list = list;
         setState(() {});
       });
     }
