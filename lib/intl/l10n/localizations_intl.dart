@@ -203,6 +203,9 @@ class AppLocalizations {
   String get newCases =>
       Intl.message("New Cases", name: "newCases", desc: "New Cases");
 
+  String get nowCases =>
+      Intl.message("Now Cases", name: "nowCases", desc: "Now Cases");
+
   String get source =>
       Intl.message("Data source: WHO and Hopkins University website",
           name: "source",
@@ -210,6 +213,26 @@ class AppLocalizations {
 
   String get national => Intl.message("National Epidemic Data",
       name: "national", desc: "National Epidemic Data");
+
+  String get cityList =>
+      Intl.message("City List", name: "cityList", desc: "City List");
+
+  String get currentLocation => Intl.message("Current Location",
+      name: "currentLocation", desc: "Current Location");
+
+  String get citySearch => Intl.message("Enter city name to search",
+      name: "citySearch", desc: "Enter city name to search");
+
+  String get cityNoMatch => Intl.message("No matching city found",
+      name: "cityNoMatch", desc: "No matching city found");
+
+  String get cancel => Intl.message("Cancel", name: "cancel", desc: "Cancel");
+
+  String get add => Intl.message("Add", name: "add", desc: "Add");
+
+  String get detailsExpect =>
+      Intl.message("Please stay tuned for detailed data.",
+          name: "detailsExpect", desc: "Please stay tuned for detailed data.");
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

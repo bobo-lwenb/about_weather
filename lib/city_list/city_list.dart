@@ -1,6 +1,7 @@
 import 'package:about_weather/city_list/model/city_model.dart';
 import 'package:about_weather/city_search/city_search_page.dart';
 import 'package:about_weather/dio/biz_dio/moji_dio.dart';
+import 'package:about_weather/intl/l10n/localizations_intl.dart';
 import 'package:about_weather/location/location_list.dart';
 import 'package:about_weather/location/model/location.dart';
 import 'package:about_weather/main_ui/sign_banner/model/condition/condition.dart';
@@ -53,7 +54,7 @@ class _CityListPageState extends State<CityListPage> {
         cityModel.temperature = condition.temp;
         cityModel.name = "${_locations[key].city} ${_locations[key].district}";
         if (key == 0)
-          cityModel.top = "当前位置";
+          cityModel.top = AppLocalizations.of(context).currentLocation;
         else
           cityModel.top = "";
         cityModel.icon = iconPath(condition.icon);
@@ -67,7 +68,7 @@ class _CityListPageState extends State<CityListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("位置"),
+        title: Text(AppLocalizations.of(context).cityList),
       ),
       body: ListView.separated(
         physics: BouncingScrollPhysics(),

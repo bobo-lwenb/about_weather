@@ -1,3 +1,4 @@
+import 'package:about_weather/intl/l10n/localizations_intl.dart';
 import 'package:about_weather/location/location_list.dart';
 import 'package:about_weather/location/model/location.dart';
 import 'package:about_weather/main_ui/sign_banner/sign_banner.dart';
@@ -49,7 +50,7 @@ class _PreviewCityState extends State<PreviewCity> {
     Widget row = Row(
       children: <Widget>[
         TextButton(
-          child: Text("取消"),
+          child: Text(AppLocalizations.of(context).cancel),
           onPressed: () {
             Navigator.of(context).pop(false);
           },
@@ -62,7 +63,7 @@ class _PreviewCityState extends State<PreviewCity> {
           ),
         ),
         TextButton(
-          child: Text("添加"),
+          child: Text(AppLocalizations.of(context).add),
           onPressed: () {
             if (isadd) {
               _list.add(widget.location);

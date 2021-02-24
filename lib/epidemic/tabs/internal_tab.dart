@@ -243,7 +243,20 @@ class _InternalTabState extends State<InternalTab>
             localAdd: area.today.wzzAdd,
             dead: area.total.dead,
           ),
-          onTap: () {},
+          onTap: () {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    content: Container(
+                      height: 100,
+                      child: Center(
+                          child:
+                              Text(AppLocalizations.of(context).detailsExpect)),
+                    ),
+                  );
+                });
+          },
         );
       },
       separatorBuilder: (context, index) => Divider(height: 1),

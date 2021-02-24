@@ -71,7 +71,9 @@ class _HomePageItemState extends State<HomePageItem>
           Positioned.fill(
             child: Builder(builder: (context) {
               String path = Provider.of<BackgrounPath>(context).bgPath;
-              return Image.asset("$path", fit: BoxFit.cover);
+              return path == null || path.isEmpty
+                  ? Container(color: Colors.white)
+                  : Image.asset("$path", fit: BoxFit.cover);
             }),
           ),
           Positioned.fill(
@@ -100,7 +102,7 @@ class _HomePageItemState extends State<HomePageItem>
         Row(children: <Widget>[
           Offstage(
             offstage: index == 0 ? false : true,
-            child: Icon(Icons.location_on_outlined, size: 14, color: textColor),
+            child: Icon(Icons.near_me_sharp, size: 14, color: textColor),
           ),
           SizedBox(width: 4),
           Text("${location.city} ${location.district}",

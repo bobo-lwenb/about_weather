@@ -155,7 +155,7 @@ class _GlobalTabState extends State<GlobalTab>
         ListHeader(
           cellRatio: cellRatio,
           title1: AppLocalizations.of(context).area,
-          title2: AppLocalizations.of(context).newCases,
+          title2: AppLocalizations.of(context).nowCases,
           title3: AppLocalizations.of(context).confirmed,
           title4: AppLocalizations.of(context).cure,
           title5: AppLocalizations.of(context).deathless,
@@ -179,12 +179,25 @@ class _GlobalTabState extends State<GlobalTab>
           child: ListGlobalItem(
             cellRatio: cellRatio,
             value0: model.name,
-            value1: "${model.confirmAdd}",
+            value1: "${model.nowConfirm}",
             value2: "${model.confirm}",
             value3: "${model.heal}",
             value4: "${model.dead}",
           ),
-          onTap: () {},
+          onTap: () {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    content: Container(
+                      height: 100,
+                      child: Center(
+                          child:
+                              Text(AppLocalizations.of(context).detailsExpect)),
+                    ),
+                  );
+                });
+          },
         );
       },
       separatorBuilder: (context, index) => Divider(height: 1),

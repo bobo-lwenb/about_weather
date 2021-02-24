@@ -324,6 +324,12 @@
     "type": "text",
     "placeholders": {}
   },
+  "nowCases": "现有确诊",
+  "@nowCases": {
+    "description": "Now Cases",
+    "type": "text",
+    "placeholders": {}
+  },
   "source": "数据来源：WHO和霍普金斯大学网站",
   "@source": {
     "description": "Data source: WHO and Hopkins University website",
@@ -333,6 +339,48 @@
   "national": "全国疫情数据",
   "@national": {
     "description": "National Epidemic Data",
+    "type": "text",
+    "placeholders": {}
+  },
+  "cityList": "城市列表",
+  "@cityList": {
+    "description": "City List",
+    "type": "text",
+    "placeholders": {}
+  },
+  "currentLocation": "当前位置",
+  "@currentLocation": {
+    "description": "Current Location",
+    "type": "text",
+    "placeholders": {}
+  },
+  "citySearch": "输入城市名以搜索",
+  "@citySearch": {
+    "description": "Enter city name to search",
+    "type": "text",
+    "placeholders": {}
+  },
+  "cityNoMatch": "未找到匹配城市",
+  "@cityNoMatch": {
+    "description": "No matching city found",
+    "type": "text",
+    "placeholders": {}
+  },
+  "cancel": "取消",
+  "@cancel": {
+    "description": "Cancel",
+    "type": "text",
+    "placeholders": {}
+  },
+  "add": "添加",
+  "@add": {
+    "description": "Add",
+    "type": "text",
+    "placeholders": {}
+  },
+  "detailsExpect": "详细数据敬请期待。",
+  "@detailsExpect": {
+    "description": "Please stay tuned for detailed data.",
     "type": "text",
     "placeholders": {}
   }

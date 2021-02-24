@@ -3,6 +3,7 @@ import 'package:about_weather/city_search/model/place_name.dart';
 import 'package:about_weather/city_search/preview_city.dart';
 import 'package:about_weather/city_search/search_item.dart';
 import 'package:about_weather/dio/biz_dio/yiyuan_dio.dart';
+import 'package:about_weather/intl/l10n/localizations_intl.dart';
 import 'package:about_weather/location/model/location.dart';
 import 'package:flutter/material.dart';
 
@@ -36,7 +37,7 @@ class _CitySearchPageState extends State<CitySearchPage> {
             controller: _controller,
             maxLines: 1,
             decoration: InputDecoration(
-              hintText: "输入城市名搜索",
+              hintText: AppLocalizations.of(context).citySearch,
               border: OutlineInputBorder(borderSide: BorderSide.none),
             ),
             onSubmitted: (text) {
@@ -97,11 +98,13 @@ class _CitySearchPageState extends State<CitySearchPage> {
 
   void _searchArea(BuildContext context, String name) {
     if (name.isEmpty) {
-      Scaffold.of(context).showSnackBar(SnackBar(content: Text("请输入城市名搜索")));
+      Scaffold.of(context).showSnackBar(
+          SnackBar(content: Text(AppLocalizations.of(context).citySearch)));
     } else {
       YiyuanDio.instance().areaToId(name).then((list) {
         if (list == null || (list as List).isEmpty) {
-          Scaffold.of(context).showSnackBar(SnackBar(content: Text("无匹配城市")));
+          Scaffold.of(context).showSnackBar(SnackBar(
+              content: Text(AppLocalizations.of(context).cityNoMatch)));
         }
         _list = list;
         setState(() {});

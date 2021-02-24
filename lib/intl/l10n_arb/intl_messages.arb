@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2021-02-10T00:04:23.748023",
+  "@@last_modified": "2021-02-24T13:10:08.408311",
   "settings": "Settings",
   "@settings": {
     "description": "settings",
@@ -324,6 +324,12 @@
     "type": "text",
     "placeholders": {}
   },
+  "nowCases": "Now Cases",
+  "@nowCases": {
+    "description": "Now Cases",
+    "type": "text",
+    "placeholders": {}
+  },
   "source": "Data source: WHO and Hopkins University website",
   "@source": {
     "description": "Data source: WHO and Hopkins University website",
@@ -333,6 +339,48 @@
   "national": "National Epidemic Data",
   "@national": {
     "description": "National Epidemic Data",
+    "type": "text",
+    "placeholders": {}
+  },
+  "cityList": "City List",
+  "@cityList": {
+    "description": "City List",
+    "type": "text",
+    "placeholders": {}
+  },
+  "currentLocation": "Current Location",
+  "@currentLocation": {
+    "description": "Current Location",
+    "type": "text",
+    "placeholders": {}
+  },
+  "citySearch": "Enter city name to search",
+  "@citySearch": {
+    "description": "Enter city name to search",
+    "type": "text",
+    "placeholders": {}
+  },
+  "cityNoMatch": "No matching city found",
+  "@cityNoMatch": {
+    "description": "No matching city found",
+    "type": "text",
+    "placeholders": {}
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel",
+    "type": "text",
+    "placeholders": {}
+  },
+  "add": "Add",
+  "@add": {
+    "description": "Add",
+    "type": "text",
+    "placeholders": {}
+  },
+  "detailsExpect": "Please stay tuned for detailed data.",
+  "@detailsExpect": {
+    "description": "Please stay tuned for detailed data.",
     "type": "text",
     "placeholders": {}
   }
