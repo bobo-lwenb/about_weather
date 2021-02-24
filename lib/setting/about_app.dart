@@ -42,7 +42,7 @@ class _AboutAppState extends State<AboutApp> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(Platform.isAndroid ? "Android" : "iOS"),
+                Text(Platform.isAndroid ? "Android Version" : "iOS Version"),
                 SizedBox(width: 6),
                 Text(_appVersion),
               ],
