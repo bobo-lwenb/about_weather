@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     switch (state) {
       case AppLifecycleState.resumed:
         if (_lastUpdateTime != null &&
-            DateTime.now().difference(_lastUpdateTime) > Duration(seconds: 1)) {
+            DateTime.now().difference(_lastUpdateTime) > Duration(minutes: 5)) {
           Provider.of<RefreshPage>(context, listen: false).refresh();
         }
         break;
