@@ -3,6 +3,7 @@ import 'package:about_weather/location/model/location.dart';
 import 'package:about_weather/main_ui/alert_banner/alert_banner.dart';
 import 'package:about_weather/main_ui/aqi_banner/aqi_banner.dart';
 import 'package:about_weather/main_ui/fifteen_banner/fifteen_banner.dart';
+import 'package:about_weather/main_ui/home/refresh_page.dart';
 import 'package:about_weather/main_ui/limit_banner/limit_banner.dart';
 import 'package:about_weather/main_ui/live_index/live_index_banner.dart';
 import 'package:about_weather/main_ui/sign_banner/sign_banner.dart';
@@ -66,28 +67,36 @@ class _HomePageItemState extends State<HomePageItem>
     );
     return ChangeNotifierProvider<BackgrounPath>(
       create: (context) => BackgrounPath(),
-      child: Stack(
-        children: <Widget>[
-          Positioned.fill(
-            child: Builder(builder: (context) {
-              String path = Provider.of<BackgrounPath>(context).bgPath;
-              return path == null || path.isEmpty
-                  ? Container(color: Colors.white)
-                  : Image.asset("$path", fit: BoxFit.cover);
-            }),
-          ),
-          Positioned.fill(
-            child: Opacity(
-              opacity: isDark(context) ? 0.5 : 0.25,
-              child: Container(
-                color: Colors.black,
+      child: Consumer<RefreshPage>(builder: (context, value, child) {
+        return Stack(
+          key: ValueKey(value.number),
+          children: <Widget>[
+            Positioned.fill(
+              child: Consumer<BackgrounPath>(builder: (context, path, child) {
+                return AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 1000),
+                    child: SizedBox.expand(
+                      key: ValueKey(path.bgPath),
+                      child: path.bgPath == null || path.bgPath.isEmpty
+                          ? Container(color: Colors.white)
+                          : Image.asset("${path.bgPath}", fit: BoxFit.cover),
+                    ));
+              }),
+            ),
+            Positioned.fill(
+              child: AnimatedOpacity(
+                opacity: isDark(context) ? 0.5 : 0.25,
+                duration: const Duration(milliseconds: 1000),
+                child: Container(
+                  color: Colors.black,
+                ),
               ),
             ),
-          ),
-          scrollView,
-          location,
-        ],
-      ),
+            scrollView,
+            location,
+          ],
+        );
+      }),
     );
   }
 

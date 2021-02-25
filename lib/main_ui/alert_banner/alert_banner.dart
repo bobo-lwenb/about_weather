@@ -29,6 +29,7 @@ class _AlertBannerState extends State<AlertBanner> {
       if (list == null) return;
       _list.clear();
       _list.addAll(list);
+      if (!mounted) return;
       setState(() {});
     });
   }

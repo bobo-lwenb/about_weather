@@ -32,7 +32,7 @@ class _PreviewCityState extends State<PreviewCity> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _list = Provider.of<LocationList>(context, listen: false).list;
+    _list = Provider.of<LocationList>(context, listen: false).locationList;
     _list.forEach((element) {
       if (element.province == widget.location.province &&
           element.city == widget.location.city &&

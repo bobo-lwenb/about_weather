@@ -4,7 +4,6 @@ import 'package:about_weather/dio/biz_dio/moji_dio.dart';
 import 'package:about_weather/intl/l10n/localizations_intl.dart';
 import 'package:about_weather/location/location_list.dart';
 import 'package:about_weather/location/model/location.dart';
-import 'package:about_weather/main_ui/sign_banner/model/condition/condition.dart';
 import 'package:about_weather/tool_box/fields.dart';
 import 'package:about_weather/tool_box/moji_chart.dart';
 import 'package:about_weather/tool_box/settings_preferences.dart';
@@ -18,8 +17,6 @@ class CityListPage extends StatefulWidget {
 
 class _CityListPageState extends State<CityListPage> {
   List<Location> _locations;
-  List<CityModel> _listModel = List.empty(growable: true);
-  List<Future> futures = List.empty(growable: true);
   SettingsPreferences _preferences;
 
   @override
@@ -37,31 +34,7 @@ class _CityListPageState extends State<CityListPage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _locations = Provider.of<LocationList>(context).list;
-    futures.clear();
-    _locations.forEach((location) {
-      Future future = MojiDio.instance().condition(
-        location.latitude.toString(),
-        location.longitude.toString(),
-      );
-      futures.add(future);
-    });
-    _listModel.clear();
-    Future.wait(futures).then((list) {
-      list.asMap().forEach((key, element) {
-        Condition condition = element as Condition;
-        CityModel cityModel = CityModel();
-        cityModel.temperature = condition.temp;
-        cityModel.name = "${_locations[key].city} ${_locations[key].district}";
-        if (key == 0)
-          cityModel.top = AppLocalizations.of(context).currentLocation;
-        else
-          cityModel.top = "";
-        cityModel.icon = iconPath(condition.icon);
-        _listModel.add(cityModel);
-      });
-      setState(() {});
-    });
+    _locations = Provider.of<LocationList>(context).locationList;
   }
 
   @override
@@ -73,7 +46,7 @@ class _CityListPageState extends State<CityListPage> {
       body: ListView.separated(
         physics: BouncingScrollPhysics(),
         itemBuilder: (context, index) {
-          CityModel cityModel = _listModel[index];
+          Location location = _locations[index];
           return InkWell(
             child: Dismissible(
               key: ValueKey(index),
@@ -85,13 +58,17 @@ class _CityListPageState extends State<CityListPage> {
                 return true;
               },
               onDismissed: (direction) {
-                _listModel.removeAt(index);
                 _locations.removeAt(index);
                 _preferences.setLocationList(_locations);
                 Provider.of<LocationList>(context, listen: false)
                     .updateLocation(_locations);
+                setState(() {});
               },
-              child: ListItem(cityModel: cityModel),
+              child: ListItem(
+                key: ValueKey(index),
+                location: location,
+                index: index,
+              ),
             ),
             onTap: () {
               Navigator.of(context).pop(index);
@@ -101,7 +78,7 @@ class _CityListPageState extends State<CityListPage> {
         separatorBuilder: (context, index) {
           return Divider(height: 1);
         },
-        itemCount: _listModel.length,
+        itemCount: _locations.length,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -115,13 +92,43 @@ class _CityListPageState extends State<CityListPage> {
   }
 }
 
-class ListItem extends StatelessWidget {
-  final CityModel cityModel;
+class ListItem extends StatefulWidget {
+  final Location location;
+  final int index;
 
-  ListItem({this.cityModel});
+  ListItem({Key key, this.location, this.index}) : super(key: key);
+
+  @override
+  _ListItemState createState() => _ListItemState();
+}
+
+class _ListItemState extends State<ListItem> {
+  CityModel cityModel;
+
+  @override
+  void initState() {
+    super.initState();
+    MojiDio.instance()
+        .condition(
+      widget.location.latitude.toString(),
+      widget.location.longitude.toString(),
+    )
+        .then((condition) {
+      cityModel = CityModel();
+      cityModel.temperature = condition.temp;
+      cityModel.name = "${widget.location.city} ${widget.location.district}";
+      if (widget.index == 0)
+        cityModel.top = AppLocalizations.of(context).currentLocation;
+      else
+        cityModel.top = "";
+      cityModel.icon = iconPath(condition.icon);
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    if (cityModel == null) return Container();
     return Container(
       padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       child: Row(
@@ -131,22 +138,22 @@ class ListItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  "${cityModel.top}",
+                  "${cityModel?.top}",
                   style: TextStyle(fontSize: 12, color: Colors.grey),
                 ),
                 Text(
-                  "${cityModel.name}",
+                  "${cityModel?.name}",
                   style: TextStyle(fontSize: 28),
                 ),
               ],
             ),
           ),
           Text(
-            "${cityModel.temperature}°",
+            "${cityModel?.temperature}°",
             style: TextStyle(fontSize: 44),
           ),
           SizedBox(width: 8),
-          Image.asset(cityModel.icon, width: 24),
+          Image.asset(cityModel?.icon, width: 24),
         ],
       ),
     );

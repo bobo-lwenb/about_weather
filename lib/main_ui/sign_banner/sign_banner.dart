@@ -47,7 +47,7 @@ class _SignBannerState extends State<SignBanner> {
     ];
     Future.wait(list).then((listValues) {
       _condition = listValues[0];
-      if (widget.signMode == SignMode.normal) {
+      if (widget.signMode == SignMode.normal && context != null) {
         String path = adaptConditionId(_condition.conditionId, _condition.icon);
         Provider.of<BackgrounPath>(context, listen: false).changePath(path);
       }
@@ -223,7 +223,7 @@ class _SignBannerState extends State<SignBanner> {
         Expanded(
             child: Item(
           top: "能见度",
-          title: "$vis米",
+          title: "${_convertMeter(vis)}",
           signmode: widget.signMode,
         )),
         Expanded(
@@ -245,6 +245,17 @@ class _SignBannerState extends State<SignBanner> {
         opacityWidget(object: _condition, child: row4),
       ],
     );
+  }
+
+  String _convertMeter(String meter) {
+    if (meter.isEmpty) return "";
+    int value = int.parse(meter);
+    if (0 < value && value < 500) return "$meter 米";
+    double result = value / 1000;
+    String data = result.toStringAsFixed(1);
+    List<String> list = data.split(".");
+    if (list[1] == "0") return "${list[0]} 公里";
+    return "$data 公里";
   }
 }
 

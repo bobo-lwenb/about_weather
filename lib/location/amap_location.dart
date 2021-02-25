@@ -91,7 +91,7 @@ class AMapLocation {
     locationOption.fullAccuracyPurposeKey = "";
 
     /// iOS端定位最小更新距离
-    locationOption.distanceFilter = -1;
+    locationOption.distanceFilter = 100;
 
     /// iOS中期望的定位精度
     locationOption.desiredAccuracy = DesiredAccuracy.Best;
@@ -103,7 +103,7 @@ class AMapLocation {
 
     /// android
     /// Android端连续定位的间隔
-    locationOption.locationInterval = 2000;
+    locationOption.locationInterval = 120000;
 
     /// Android端定位模式
     locationOption.locationMode = AMapLocationMode.Hight_Accuracy;

@@ -3,9 +3,11 @@ import 'package:about_weather/location/amap_location.dart';
 import 'package:about_weather/location/location_list.dart';
 import 'package:about_weather/location/model/location.dart';
 import 'package:about_weather/main_ui/home/home_page_item.dart';
+import 'package:about_weather/main_ui/home/refresh_page.dart';
 import 'package:about_weather/setting/setting_page.dart';
 import 'package:about_weather/tool_box/fields.dart';
 import 'package:about_weather/tool_box/settings_preferences.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,15 +16,17 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   AMapLocation _aMapLocation;
   PageController _pageController;
   int _current = 0;
   SettingsPreferences _preferences;
+  DateTime _lastUpdateTime;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _preferences = SettingsPreferences();
     _setAMapLocation();
     _pageController = PageController(
@@ -67,9 +71,11 @@ class _HomePageState extends State<HomePage> {
           child: _buildSettings(),
         );
         Widget indicator = Positioned(
-          bottom: 20,
-          child: _buildIndicator(context, list.length),
-        );
+            bottom: 20,
+            child: Offstage(
+              offstage: list.length == 1 ? true : false,
+              child: _buildIndicator(context, list.length),
+            ));
         return Stack(
           alignment: AlignmentDirectional.center,
           children: <Widget>[
@@ -83,6 +89,23 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: consumer,
     );
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    switch (state) {
+      case AppLifecycleState.resumed:
+        if (_lastUpdateTime != null &&
+            DateTime.now().difference(_lastUpdateTime) > Duration(seconds: 1)) {
+          Provider.of<RefreshPage>(context, listen: false).refresh();
+        }
+        break;
+      case AppLifecycleState.paused:
+        _lastUpdateTime = DateTime.now();
+        break;
+      default:
+    }
   }
 
   Widget _buildIndicator(BuildContext context, int length) {
@@ -127,6 +150,12 @@ class _HomePageState extends State<HomePage> {
         }));
       },
     );
+    Widget refreshIndicator = CircularProgressIndicator(
+      value: null,
+      backgroundColor: Colors.white54,
+      valueColor: AlwaysStoppedAnimation<Color>(Colors.black38),
+      strokeWidth: 2,
+    );
     Widget listCity = IconButton(
       icon: Icon(Icons.list_alt_rounded, color: textColor),
       onPressed: () {
@@ -142,8 +171,15 @@ class _HomePageState extends State<HomePage> {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
-          settings,
+          Row(children: <Widget>[
+            Offstage(
+              offstage: true,
+              child: SizedBox(width: 16, height: 16, child: refreshIndicator),
+            ),
+            settings
+          ]),
           listCity,
         ],
       ),

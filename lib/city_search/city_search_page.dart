@@ -15,6 +15,7 @@ class CitySearchPage extends StatefulWidget {
 class _CitySearchPageState extends State<CitySearchPage> {
   List<PlaceName> _list = List.empty(growable: true);
   TextEditingController _controller;
+  FocusNode _focusNode = FocusNode();
 
   @override
   void initState() {
@@ -26,6 +27,7 @@ class _CitySearchPageState extends State<CitySearchPage> {
   void dispose() {
     super.dispose();
     _controller.dispose();
+    _focusNode.dispose();
   }
 
   @override
@@ -34,6 +36,8 @@ class _CitySearchPageState extends State<CitySearchPage> {
       appBar: AppBar(
         title: Builder(builder: (context) {
           return TextField(
+            autofocus: true,
+            focusNode: _focusNode,
             controller: _controller,
             maxLines: 1,
             decoration: InputDecoration(
@@ -51,6 +55,7 @@ class _CitySearchPageState extends State<CitySearchPage> {
               onTap: () {
                 String text = _controller.text;
                 _searchArea(context, text);
+                _focusNode.unfocus();
               },
               child: Padding(
                 padding: EdgeInsets.all(16),
