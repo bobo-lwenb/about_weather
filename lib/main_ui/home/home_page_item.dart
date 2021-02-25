@@ -29,10 +29,43 @@ class _HomePageItemState extends State<HomePageItem>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    Widget location = Positioned(
-      top: 30,
-      child: _buildLocation(widget.location, widget.index),
+    return ChangeNotifierProvider<BackgrounPath>(
+      create: (context) => BackgrounPath(),
+      child: Consumer<RefreshPage>(builder: (context, value, child) {
+        Widget stack = Stack(key: ValueKey(value.number), children: <Widget>[
+          Positioned.fill(
+            child: Consumer<BackgrounPath>(builder: (context, path, child) {
+              return AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 1000),
+                  child: SizedBox.expand(
+                    key: ValueKey(path.bgPath),
+                    child: path.bgPath == null || path.bgPath.isEmpty
+                        ? Container(color: Colors.white)
+                        : Image.asset("${path.bgPath}", fit: BoxFit.cover),
+                  ));
+            }),
+          ),
+          Positioned.fill(
+            child: AnimatedOpacity(
+              opacity: isDark(context) ? 0.5 : 0.25,
+              duration: const Duration(milliseconds: 1000),
+              child: Container(
+                color: Colors.black,
+              ),
+            ),
+          ),
+          _buildScrollView(widget.location),
+          Positioned(
+            top: 30,
+            child: _buildLocation(widget.location, widget.index),
+          ),
+        ]);
+        return stack;
+      }),
     );
+  }
+
+  Widget _buildScrollView(Location location) {
     Widget scrollView = CustomScrollView(
       physics: BouncingScrollPhysics(),
       slivers: [
@@ -40,64 +73,32 @@ class _HomePageItemState extends State<HomePageItem>
           child: SizedBox(height: 80),
         ),
         SliverToBoxAdapter(
-          child: SignBanner(location: widget.location),
+          child: SignBanner(location: location),
         ),
         SliverToBoxAdapter(
-          child: TFBanner(location: widget.location),
+          child: TFBanner(location: location),
         ),
         SliverToBoxAdapter(
-          child: FifteenBanner(location: widget.location),
+          child: FifteenBanner(location: location),
         ),
         SliverToBoxAdapter(
-          child: AQIBanner(location: widget.location),
+          child: AQIBanner(location: location),
         ),
         SliverToBoxAdapter(
-          child: LiveIndexBanner(location: widget.location),
+          child: LiveIndexBanner(location: location),
         ),
         SliverToBoxAdapter(
-          child: AlertBanner(location: widget.location),
+          child: AlertBanner(location: location),
         ),
         SliverToBoxAdapter(
-          child: LimitBanner(location: widget.location),
+          child: LimitBanner(location: location),
         ),
         SliverToBoxAdapter(
-          child: EpidemicBanner(location: widget.location),
+          child: EpidemicBanner(location: location),
         ),
       ],
     );
-    return ChangeNotifierProvider<BackgrounPath>(
-      create: (context) => BackgrounPath(),
-      child: Consumer<RefreshPage>(builder: (context, value, child) {
-        return Stack(
-          key: ValueKey(value.number),
-          children: <Widget>[
-            Positioned.fill(
-              child: Consumer<BackgrounPath>(builder: (context, path, child) {
-                return AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 1000),
-                    child: SizedBox.expand(
-                      key: ValueKey(path.bgPath),
-                      child: path.bgPath == null || path.bgPath.isEmpty
-                          ? Container(color: Colors.white)
-                          : Image.asset("${path.bgPath}", fit: BoxFit.cover),
-                    ));
-              }),
-            ),
-            Positioned.fill(
-              child: AnimatedOpacity(
-                opacity: isDark(context) ? 0.5 : 0.25,
-                duration: const Duration(milliseconds: 1000),
-                child: Container(
-                  color: Colors.black,
-                ),
-              ),
-            ),
-            scrollView,
-            location,
-          ],
-        );
-      }),
-    );
+    return scrollView;
   }
 
   Widget _buildLocation(Location location, int index) {
