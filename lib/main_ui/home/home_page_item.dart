@@ -66,39 +66,21 @@ class _HomePageItemState extends State<HomePageItem>
   }
 
   Widget _buildScrollView(Location location) {
-    Widget scrollView = CustomScrollView(
+    Widget listview = ListView(
       physics: BouncingScrollPhysics(),
-      slivers: [
-        SliverToBoxAdapter(
-          child: SizedBox(height: 80),
-        ),
-        SliverToBoxAdapter(
-          child: SignBanner(location: location),
-        ),
-        SliverToBoxAdapter(
-          child: TFBanner(location: location),
-        ),
-        SliverToBoxAdapter(
-          child: FifteenBanner(location: location),
-        ),
-        SliverToBoxAdapter(
-          child: AQIBanner(location: location),
-        ),
-        SliverToBoxAdapter(
-          child: LiveIndexBanner(location: location),
-        ),
-        SliverToBoxAdapter(
-          child: AlertBanner(location: location),
-        ),
-        SliverToBoxAdapter(
-          child: LimitBanner(location: location),
-        ),
-        SliverToBoxAdapter(
-          child: EpidemicBanner(location: location),
-        ),
+      children: [
+        SizedBox(height: 80),
+        SignBanner(location: location),
+        TFBanner(location: location),
+        FifteenBanner(location: location),
+        AQIBanner(location: location),
+        LiveIndexBanner(location: location),
+        AlertBanner(location: location),
+        LimitBanner(location: location),
+        EpidemicBanner(location: location),
       ],
     );
-    return scrollView;
+    return listview;
   }
 
   Widget _buildLocation(Location location, int index) {

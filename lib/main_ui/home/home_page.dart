@@ -2,6 +2,7 @@ import 'package:about_weather/city_list/city_list.dart';
 import 'package:about_weather/location/amap_location.dart';
 import 'package:about_weather/location/location_list.dart';
 import 'package:about_weather/location/model/location.dart';
+import 'package:about_weather/main_ui/home/current_indext.dart';
 import 'package:about_weather/main_ui/home/home_page_item.dart';
 import 'package:about_weather/main_ui/home/refresh_page.dart';
 import 'package:about_weather/setting/setting_page.dart';
@@ -61,8 +62,9 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
             );
           },
           onPageChanged: (index) {
+            Provider.of<CurrentIndex>(context, listen: false)
+                .updateIndex(index);
             _current = index;
-            setState(() {});
           },
         );
         Widget settings = Positioned(
@@ -74,7 +76,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
             bottom: 20,
             child: Offstage(
               offstage: list.length == 1 ? true : false,
-              child: _buildIndicator(context, list.length),
+              child: _buildIndicator(list.length),
             ));
         return Stack(
           alignment: AlignmentDirectional.center,
@@ -108,36 +110,44 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     }
   }
 
-  Widget _buildIndicator(BuildContext context, int length) {
-    List<Widget> list = List.generate(length, (index) {
-      return index == 0
-          ? Icon(
-              Icons.near_me_sharp,
-              size: 10,
-              color: _current == 0 ? Colors.deepOrangeAccent : Colors.grey[400],
-            )
-          : Container(
-              margin: EdgeInsets.symmetric(vertical: 5, horizontal: 3),
-              width: 5,
-              height: 5,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: _current == index
-                    ? Colors.deepOrangeAccent
-                    : Colors.grey[400],
-              ),
-            );
-    });
+  Widget _buildIndicator(int length) {
+    Widget widget = Consumer<CurrentIndex>(
+      builder: (context, value, child) {
+        int current = value.index;
+        List<Widget> list = List.generate(length, (index) {
+          return index == 0
+              ? Icon(
+                  Icons.near_me_sharp,
+                  size: 10,
+                  color:
+                      current == 0 ? Colors.deepOrangeAccent : Colors.grey[400],
+                )
+              : Container(
+                  margin: EdgeInsets.symmetric(vertical: 5, horizontal: 3),
+                  width: 5,
+                  height: 5,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: current == index
+                        ? Colors.deepOrangeAccent
+                        : Colors.grey[400],
+                  ),
+                );
+        });
+        return Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: list,
+        );
+      },
+    );
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 4),
       decoration: BoxDecoration(
         color: Colors.white30,
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: list,
-      ),
+      child: widget,
     );
   }
 
