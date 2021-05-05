@@ -53,7 +53,6 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
         if (list == null) return Container();
         ModelStatus.instance().init(list.length, _current);
         if (_current > list.length - 1) _current = list.length - 1;
-        _updatePages(_current);
         Widget pageView = PageView.builder(
           physics: BouncingScrollPhysics(),
           controller: _pageController,
@@ -68,9 +67,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
           },
           onPageChanged: (index) {
             _current = index;
-            Provider.of<CurrentIndex>(context, listen: false)
-                .updateIndex(index);
-            _updatePages(index);
+            _updatePages(_current);
           },
         );
         Widget settings = Positioned(

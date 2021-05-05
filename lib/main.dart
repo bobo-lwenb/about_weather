@@ -40,7 +40,7 @@ void main() {
             create: (context) => RefreshPage(),
           ),
           ChangeNotifierProvider<CurrentIndex>(
-            create: (context) => CurrentIndex(),
+            create: (context) => CurrentIndex(indexValue: 0),
           ),
           ChangeNotifierProvider<BackgrounPath>(
             create: (context) => BackgrounPath(),

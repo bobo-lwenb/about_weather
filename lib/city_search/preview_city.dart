@@ -71,13 +71,14 @@ class _PreviewCityState extends State<PreviewCity> {
               _preferences.setLocationList(_list);
               Provider.of<LocationList>(context, listen: false)
                   .updateLocation(_list);
+
+              PageStatus status = PageStatus(
+                index: _list.length,
+                isShow: false,
+                path: "",
+              );
+              ModelStatus.instance().addPageStatu(status);
             }
-            PageStatus status = PageStatus(
-              index: _list.length,
-              isShow: false,
-              path: "",
-            );
-            ModelStatus.instance().addPageStatu(status);
             Navigator.of(context).pop(true);
           },
         ),
