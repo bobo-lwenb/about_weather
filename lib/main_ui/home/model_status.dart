@@ -15,6 +15,7 @@ class ModelStatus {
   }
 
   void init(int length, int current) {
+    if (_list.isNotEmpty) return;
     List<PageStatus> pages = List.empty(growable: true);
     List.generate(length, (index) {
       PageStatus status = PageStatus(
@@ -48,6 +49,12 @@ class ModelStatus {
     PageStatus status = ModelStatus.instance().getPageStatu(index);
     return status;
   }
+
+  PageStatus deleteByIndex(int index) => _list.removeAt(index);
+
+  void deletePageStatu(PageStatus status) => _list.remove(status);
+
+  void addPageStatu(PageStatus status) => _list.add(status);
 
   void updatePageStatus(List<PageStatus> data) {
     _list.clear();

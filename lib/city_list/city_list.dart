@@ -4,6 +4,7 @@ import 'package:about_weather/dio/biz_dio/moji_dio.dart';
 import 'package:about_weather/intl/l10n/localizations_intl.dart';
 import 'package:about_weather/location/location_list.dart';
 import 'package:about_weather/location/model/location.dart';
+import 'package:about_weather/main_ui/home/model_status.dart';
 import 'package:about_weather/tool_box/fields.dart';
 import 'package:about_weather/tool_box/moji_chart.dart';
 import 'package:about_weather/tool_box/settings_preferences.dart';
@@ -62,7 +63,8 @@ class _CityListPageState extends State<CityListPage> {
                 _preferences.setLocationList(_locations);
                 Provider.of<LocationList>(context, listen: false)
                     .updateLocation(_locations);
-                setState(() {});
+
+                ModelStatus.instance().deleteByIndex(index);
               },
               child: ListItem(
                 key: ValueKey(index),
