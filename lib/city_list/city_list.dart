@@ -49,7 +49,7 @@ class _CityListPageState extends State<CityListPage> {
           Location location = _locations[index];
           return InkWell(
             child: Dismissible(
-              key: ValueKey(index),
+              key: ObjectKey(location),
               background: index == 0
                   ? Container(color: Colors.white)
                   : Container(color: Colors.redAccent),

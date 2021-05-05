@@ -1,5 +1,6 @@
 import 'package:about_weather/intl/l10n/localizations_intl.dart';
 import 'package:about_weather/location/location_list.dart';
+import 'package:about_weather/main_ui/home/background_path.dart';
 import 'package:about_weather/main_ui/home/current_indext.dart';
 import 'package:about_weather/main_ui/home/refresh_page.dart';
 import 'package:about_weather/setting/language/language_provider.dart';
@@ -40,6 +41,9 @@ void main() {
           ),
           ChangeNotifierProvider<CurrentIndex>(
             create: (context) => CurrentIndex(),
+          ),
+          ChangeNotifierProvider<BackgrounPath>(
+            create: (context) => BackgrounPath(),
           )
         ],
         child: MyApp(),

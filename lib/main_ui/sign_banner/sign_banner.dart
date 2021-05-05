@@ -1,6 +1,7 @@
 import 'package:about_weather/dio/biz_dio/moji_dio.dart';
 import 'package:about_weather/location/model/location.dart';
 import 'package:about_weather/main_ui/home/background_path.dart';
+import 'package:about_weather/main_ui/home/model_status.dart';
 import 'package:about_weather/main_ui/short_forecast/short_forecast.dart';
 import 'package:about_weather/main_ui/sign_banner/model/aqi_index/aqi_index.dart';
 import 'package:about_weather/main_ui/sign_banner/model/condition/condition.dart';
@@ -15,11 +16,13 @@ import 'package:provider/provider.dart';
 class SignBanner extends StatefulWidget {
   final Location location;
   final SignMode signMode;
+  final int index;
 
   SignBanner({
     Key key,
     this.location,
     this.signMode = SignMode.normal,
+    this.index,
   }) : super(key: key);
 
   @override
@@ -48,8 +51,12 @@ class _SignBannerState extends State<SignBanner> {
     Future.wait(list).then((listValues) {
       _condition = listValues[0];
       if (widget.signMode == SignMode.normal && context != null) {
+        PageStatus status = ModelStatus.instance().getPageStatu(widget.index);
         String path = adaptConditionId(_condition.conditionId, _condition.icon);
-        Provider.of<BackgrounPath>(context, listen: false).changePath(path);
+        status.path = path;
+        ModelStatus.instance().setPageStatu(status);
+        if (status.isShow)
+          Provider.of<BackgrounPath>(context, listen: false).changePath(path);
       }
       _aqiIndex = listValues[1];
       if (!mounted) return;

@@ -12,8 +12,6 @@ import 'package:about_weather/tool_box/fields.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'background_path.dart';
-
 class HomePageItem extends StatefulWidget {
   final Location location;
   final int index;
@@ -29,40 +27,16 @@ class _HomePageItemState extends State<HomePageItem>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return ChangeNotifierProvider<BackgrounPath>(
-      create: (context) => BackgrounPath(),
-      child: Consumer<RefreshPage>(builder: (context, value, child) {
-        Widget stack = Stack(key: ValueKey(value.number), children: <Widget>[
-          Positioned.fill(
-            child: Consumer<BackgrounPath>(builder: (context, path, child) {
-              return AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 1000),
-                  child: SizedBox.expand(
-                    key: ValueKey(path.bgPath),
-                    child: path.bgPath == null || path.bgPath.isEmpty
-                        ? Container(color: Colors.white)
-                        : Image.asset("${path.bgPath}", fit: BoxFit.cover),
-                  ));
-            }),
-          ),
-          Positioned.fill(
-            child: AnimatedOpacity(
-              opacity: isDark(context) ? 0.5 : 0.25,
-              duration: const Duration(milliseconds: 1000),
-              child: Container(
-                color: Colors.black,
-              ),
-            ),
-          ),
-          _buildScrollView(widget.location),
-          Positioned(
-            top: 30,
-            child: _buildLocation(widget.location, widget.index),
-          ),
-        ]);
-        return stack;
-      }),
-    );
+    return Consumer<RefreshPage>(builder: (context, value, child) {
+      Widget stack = Stack(key: ValueKey(value.number), children: <Widget>[
+        _buildScrollView(widget.location),
+        Positioned(
+          top: 30,
+          child: _buildLocation(widget.location, widget.index),
+        ),
+      ]);
+      return stack;
+    });
   }
 
   Widget _buildScrollView(Location location) {
@@ -70,7 +44,7 @@ class _HomePageItemState extends State<HomePageItem>
       physics: BouncingScrollPhysics(),
       children: [
         SizedBox(height: 80),
-        SignBanner(location: location),
+        SignBanner(location: location, index: widget.index),
         TFBanner(location: location),
         FifteenBanner(location: location),
         AQIBanner(location: location),

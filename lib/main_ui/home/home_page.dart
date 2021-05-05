@@ -2,8 +2,10 @@ import 'package:about_weather/city_list/city_list.dart';
 import 'package:about_weather/location/amap_location.dart';
 import 'package:about_weather/location/location_list.dart';
 import 'package:about_weather/location/model/location.dart';
+import 'package:about_weather/main_ui/home/background_path.dart';
 import 'package:about_weather/main_ui/home/current_indext.dart';
 import 'package:about_weather/main_ui/home/home_page_item.dart';
+import 'package:about_weather/main_ui/home/model_status.dart';
 import 'package:about_weather/main_ui/home/refresh_page.dart';
 import 'package:about_weather/setting/setting_page.dart';
 import 'package:about_weather/tool_box/fields.dart';
@@ -49,6 +51,8 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
       builder: (context, data, child) {
         List<Location> list = data.list;
         if (list == null) return Container();
+        ModelStatus.instance().init(list.length, _current);
+        _updatePages(_current);
         Widget pageView = PageView.builder(
           physics: BouncingScrollPhysics(),
           controller: _pageController,
@@ -62,9 +66,10 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
             );
           },
           onPageChanged: (index) {
+            _current = index;
             Provider.of<CurrentIndex>(context, listen: false)
                 .updateIndex(index);
-            _current = index;
+            _updatePages(index);
           },
         );
         Widget settings = Positioned(
@@ -81,6 +86,27 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
         return Stack(
           alignment: AlignmentDirectional.center,
           children: <Widget>[
+            Positioned.fill(
+              child: Consumer<BackgrounPath>(builder: (context, path, child) {
+                return AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 500),
+                    child: SizedBox.expand(
+                      key: ValueKey(path.bgPath),
+                      child: path.bgPath == null || path.bgPath.isEmpty
+                          ? Container(color: Colors.white)
+                          : Image.asset("${path.bgPath}", fit: BoxFit.cover),
+                    ));
+              }),
+            ),
+            Positioned.fill(
+              child: AnimatedOpacity(
+                opacity: isDark(context) ? 0.5 : 0.25,
+                duration: const Duration(milliseconds: 1000),
+                child: Container(
+                  color: Colors.black,
+                ),
+              ),
+            ),
             pageView,
             settings,
             indicator,
@@ -110,10 +136,16 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     }
   }
 
+  void _updatePages(int index) {
+    PageStatus status = ModelStatus.instance().setPageStatuByIndex(index);
+    if (status.path.isEmpty) return;
+    Provider.of<BackgrounPath>(context, listen: false).changePath(status.path);
+  }
+
   Widget _buildIndicator(int length) {
     Widget widget = Consumer<CurrentIndex>(
       builder: (context, value, child) {
-        int current = value.index;
+        int current = value.index ?? 0;
         List<Widget> list = List.generate(length, (index) {
           return index == 0
               ? Icon(
