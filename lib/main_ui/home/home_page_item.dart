@@ -58,6 +58,8 @@ class _HomePageItemState extends State<HomePageItem>
   }
 
   Widget _buildLocation(Location location, int index) {
+    String city = index == 0 ? location.city : "${location.city}市";
+    String district = index == 0 ? location.district : "${location.district}区";
     DateTime dateTime = DateTime.now();
     Widget column = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,7 +73,7 @@ class _HomePageItemState extends State<HomePageItem>
             child: Icon(Icons.near_me_sharp, size: 14, color: textColor),
           ),
           SizedBox(width: 4),
-          Text("${location.city} ${location.district}",
+          Text("$city $district",
               style: TextStyle(fontSize: 32, color: textColor)),
         ]),
       ],

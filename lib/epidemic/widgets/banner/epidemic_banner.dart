@@ -25,6 +25,7 @@ class _EpidemicBannerState extends State<EpidemicBanner>
 
   InternalData _model;
   Area _area;
+  Locale _locale;
 
   @override
   void initState() {
@@ -40,6 +41,7 @@ class _EpidemicBannerState extends State<EpidemicBanner>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    _locale = Localizations.localeOf(context);
     _title = [
       "${AppLocalizations.of(context).national}",
       "-- ${AppLocalizations.of(context).epidemicData}",
@@ -59,9 +61,12 @@ class _EpidemicBannerState extends State<EpidemicBanner>
       _model.areaTree[0].children.forEach((element) {
         if (location.province.contains(element.name)) {
           _area = element;
+          String provinceTitle = _locale.languageCode == "en"
+              ? "${element.name} ${AppLocalizations.of(context).epidemicData}"
+              : "${element.name}${AppLocalizations.of(context).epidemicData}";
           _title = [
             "${AppLocalizations.of(context).national}",
-            "${element.name} ${AppLocalizations.of(context).epidemicData}",
+            provinceTitle,
           ];
           return;
         }

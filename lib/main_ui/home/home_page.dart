@@ -53,6 +53,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
         if (list == null) return Container();
         ModelStatus.instance().init(list.length, _current);
         if (_current > list.length - 1) _current = list.length - 1;
+
         Widget pageView = PageView.builder(
           physics: BouncingScrollPhysics(),
           controller: _pageController,
@@ -81,30 +82,29 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
               offstage: list.length == 1 ? true : false,
               child: _buildIndicator(list.length),
             ));
+        Widget background =
+            Consumer<BackgrounPath>(builder: (context, path, child) {
+          return AnimatedSwitcher(
+              duration: const Duration(milliseconds: 500),
+              child: SizedBox.expand(
+                key: ValueKey(path.bgPath),
+                child: path.bgPath == null || path.bgPath.isEmpty
+                    ? Container(color: Colors.white)
+                    : Image.asset("${path.bgPath}", fit: BoxFit.cover),
+              ));
+        });
+        Widget opacityLayer = AnimatedOpacity(
+          opacity: isDark(context) ? 0.6 : 0.4,
+          duration: const Duration(milliseconds: 500),
+          child: Container(
+            color: Colors.black,
+          ),
+        );
         return Stack(
           alignment: AlignmentDirectional.center,
           children: <Widget>[
-            Positioned.fill(
-              child: Consumer<BackgrounPath>(builder: (context, path, child) {
-                return AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 500),
-                    child: SizedBox.expand(
-                      key: ValueKey(path.bgPath),
-                      child: path.bgPath == null || path.bgPath.isEmpty
-                          ? Container(color: Colors.white)
-                          : Image.asset("${path.bgPath}", fit: BoxFit.cover),
-                    ));
-              }),
-            ),
-            Positioned.fill(
-              child: AnimatedOpacity(
-                opacity: isDark(context) ? 0.5 : 0.25,
-                duration: const Duration(milliseconds: 1000),
-                child: Container(
-                  color: Colors.black,
-                ),
-              ),
-            ),
+            background,
+            opacityLayer,
             pageView,
             settings,
             indicator,
