@@ -118,11 +118,15 @@ class _ListItemState extends State<ListItem> {
         .then((condition) {
       cityModel = CityModel();
       cityModel.temperature = condition.temp;
-      cityModel.name = "${widget.location.city} ${widget.location.district}";
-      if (widget.index == 0)
-        cityModel.top = AppLocalizations.of(context).currentLocation;
-      else
-        cityModel.top = "";
+      String city = widget.index == 0
+          ? "${widget.location.city}"
+          : "${widget.location.city}市";
+      String district = widget.index == 0
+          ? "${widget.location.district}"
+          : "${widget.location.district}区";
+      cityModel.name = "$city $district";
+      cityModel.top =
+          widget.index == 0 ? AppLocalizations.of(context).currentLocation : "";
       cityModel.icon = iconPath(condition.icon);
       setState(() {});
     });
