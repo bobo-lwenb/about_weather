@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 class EpidemicBanner extends StatefulWidget {
   final Location location;
 
-  EpidemicBanner({this.location});
+  EpidemicBanner({Key key, this.location}) : super(key: key);
 
   @override
   _EpidemicBannerState createState() => _EpidemicBannerState();

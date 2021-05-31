@@ -71,7 +71,7 @@ class _SignBannerState extends State<SignBanner> {
     String icon = _condition?.icon;
     String tips = _condition?.tips;
     Widget top = Container(
-      height: 200,
+      height: 160,
       child: Stack(
         alignment: AlignmentDirectional.bottomCenter,
         children: <Widget>[

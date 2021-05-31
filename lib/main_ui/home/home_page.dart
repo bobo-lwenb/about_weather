@@ -10,6 +10,7 @@ import 'package:about_weather/main_ui/home/home_page_item.dart';
 import 'package:about_weather/main_ui/home/model_status.dart';
 import 'package:about_weather/main_ui/home/refresh_page.dart';
 import 'package:about_weather/tool_box/fields.dart';
+import 'package:about_weather/tool_box/moji_chart.dart';
 import 'package:about_weather/tool_box/settings_preferences.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -151,7 +152,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
         cityList,
       ],
     );
-    return Container(
+    Widget container = Container(
       height: 80,
       child: ClipRect(
         child: BackdropFilter(
@@ -159,6 +160,10 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
           child: stack,
         ),
       ),
+    );
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [white24Divider, container],
     );
   }
 

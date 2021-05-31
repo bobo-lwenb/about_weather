@@ -28,33 +28,29 @@ class _HomePageItemState extends State<HomePageItem>
   Widget build(BuildContext context) {
     super.build(context);
     return Consumer<RefreshPage>(builder: (context, value, child) {
-      Widget stack = Stack(key: ValueKey(value.number), children: <Widget>[
-        _buildScrollView(widget.location),
-        Positioned(
-          top: 30,
-          child: _buildLocation(widget.location, widget.index),
-        ),
-      ]);
-      return stack;
+      Widget scrollView = CustomScrollView(
+        key: ValueKey(value.number),
+        physics: BouncingScrollPhysics(),
+        slivers: [
+          SliverToBoxAdapter(child: SizedBox(height: 30)),
+          SliverToBoxAdapter(
+            child: _buildLocation(widget.location, widget.index),
+          ),
+          SliverToBoxAdapter(
+            child: SignBanner(location: widget.location, index: widget.index),
+          ),
+          SliverToBoxAdapter(child: TFBanner(location: widget.location)),
+          SliverToBoxAdapter(child: FifteenBanner(location: widget.location)),
+          SliverToBoxAdapter(child: AQIBanner(location: widget.location)),
+          SliverToBoxAdapter(child: LiveIndexBanner(location: widget.location)),
+          SliverToBoxAdapter(child: AlertBanner(location: widget.location)),
+          SliverToBoxAdapter(child: LimitBanner(location: widget.location)),
+          SliverToBoxAdapter(child: EpidemicBanner(location: widget.location)),
+          SliverToBoxAdapter(child: SizedBox(height: 80)),
+        ],
+      );
+      return scrollView;
     });
-  }
-
-  Widget _buildScrollView(Location location) {
-    Widget listview = ListView(
-      physics: BouncingScrollPhysics(),
-      children: [
-        SizedBox(height: 80),
-        SignBanner(location: location, index: widget.index),
-        TFBanner(location: location),
-        FifteenBanner(location: location),
-        AQIBanner(location: location),
-        LiveIndexBanner(location: location),
-        AlertBanner(location: location),
-        LimitBanner(location: location),
-        EpidemicBanner(location: location),
-      ],
-    );
-    return listview;
   }
 
   Widget _buildLocation(Location location, int index) {
@@ -67,15 +63,17 @@ class _HomePageItemState extends State<HomePageItem>
         Text(
             "${dateTime.month}月${dateTime.day}日 ${getWeekDesc(dateTime.weekday)}",
             style: TextStyle(fontSize: 14, color: textColor)),
-        Row(children: <Widget>[
-          Offstage(
-            offstage: index == 0 ? false : true,
-            child: Icon(Icons.near_me_sharp, size: 14, color: textColor),
-          ),
-          SizedBox(width: 4),
-          Text("$city $district",
-              style: TextStyle(fontSize: 32, color: textColor)),
-        ]),
+        Row(
+          children: <Widget>[
+            Offstage(
+              offstage: index == 0 ? false : true,
+              child: Icon(Icons.near_me_sharp, size: 14, color: textColor),
+            ),
+            SizedBox(width: 4),
+            Text("$city $district",
+                style: TextStyle(fontSize: 30, color: textColor)),
+          ],
+        ),
       ],
     );
     return Container(
