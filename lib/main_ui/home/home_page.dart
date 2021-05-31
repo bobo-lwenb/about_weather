@@ -7,7 +7,6 @@ import 'package:about_weather/main_ui/home/current_indext.dart';
 import 'package:about_weather/main_ui/home/home_page_item.dart';
 import 'package:about_weather/main_ui/home/model_status.dart';
 import 'package:about_weather/main_ui/home/refresh_page.dart';
-import 'package:about_weather/setting/setting_page.dart';
 import 'package:about_weather/tool_box/fields.dart';
 import 'package:about_weather/tool_box/settings_preferences.dart';
 import 'package:flutter/cupertino.dart';
@@ -71,10 +70,10 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
             _updatePages(_current);
           },
         );
-        Widget settings = Positioned(
+        Widget cityList = Positioned(
           right: 0,
           top: 20,
-          child: _buildSettings(),
+          child: _buildListCity(),
         );
         Widget indicator = Positioned(
             bottom: 20,
@@ -106,7 +105,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
             background,
             opacityLayer,
             pageView,
-            settings,
+            cityList,
             indicator,
           ],
         );
@@ -182,21 +181,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     );
   }
 
-  Widget _buildSettings() {
-    Widget settings = IconButton(
-      icon: Icon(Icons.settings_outlined, color: textColor),
-      onPressed: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-          return SettingPage();
-        }));
-      },
-    );
-    Widget refreshIndicator = CircularProgressIndicator(
-      value: null,
-      backgroundColor: Colors.white54,
-      valueColor: AlwaysStoppedAnimation<Color>(Colors.black38),
-      strokeWidth: 2,
-    );
+  Widget _buildListCity() {
     Widget listCity = IconButton(
       icon: Icon(Icons.list_alt_rounded, color: textColor),
       onPressed: () {
@@ -211,19 +196,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     );
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: <Widget>[
-          Row(children: <Widget>[
-            Offstage(
-              offstage: true,
-              child: SizedBox(width: 16, height: 16, child: refreshIndicator),
-            ),
-            settings
-          ]),
-          listCity,
-        ],
-      ),
+      child: listCity,
     );
   }
 

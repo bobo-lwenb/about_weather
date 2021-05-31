@@ -5,6 +5,7 @@ import 'package:about_weather/intl/l10n/localizations_intl.dart';
 import 'package:about_weather/location/location_list.dart';
 import 'package:about_weather/location/model/location.dart';
 import 'package:about_weather/main_ui/home/model_status.dart';
+import 'package:about_weather/setting/setting_page.dart';
 import 'package:about_weather/tool_box/fields.dart';
 import 'package:about_weather/tool_box/moji_chart.dart';
 import 'package:about_weather/tool_box/settings_preferences.dart';
@@ -43,6 +44,16 @@ class _CityListPageState extends State<CityListPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context).cityList),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.settings_outlined),
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                return SettingPage();
+              }));
+            },
+          )
+        ],
       ),
       body: ListView.separated(
         physics: BouncingScrollPhysics(),
