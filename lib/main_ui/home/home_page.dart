@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:about_weather/city_list/city_list.dart';
 import 'package:about_weather/location/amap_location.dart';
 import 'package:about_weather/location/location_list.dart';
@@ -70,17 +72,6 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
             _updatePages(_current);
           },
         );
-        Widget cityList = Positioned(
-          right: 0,
-          top: 20,
-          child: _buildListCity(),
-        );
-        Widget indicator = Positioned(
-            bottom: 20,
-            child: Offstage(
-              offstage: list.length == 1 ? true : false,
-              child: _buildIndicator(list.length),
-            ));
         Widget background =
             Consumer<BackgrounPath>(builder: (context, path, child) {
           return AnimatedSwitcher(
@@ -99,14 +90,19 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
             color: Colors.black,
           ),
         );
+        Widget bottom = Positioned(
+          bottom: 0,
+          left: 0,
+          right: 0,
+          child: _buildBottom(list.length),
+        );
         return Stack(
           alignment: AlignmentDirectional.center,
           children: <Widget>[
             background,
             opacityLayer,
             pageView,
-            cityList,
-            indicator,
+            bottom,
           ],
         );
       },
@@ -140,6 +136,32 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     Provider.of<BackgrounPath>(context, listen: false).changePath(status.path);
   }
 
+  Widget _buildBottom(int length) {
+    Widget cityList = Positioned(
+      right: 0,
+      child: _buildListCity(),
+    );
+    Widget indicator = Positioned(
+      child: _buildIndicator(length),
+    );
+    Widget stack = Stack(
+      alignment: AlignmentDirectional.center,
+      children: [
+        indicator,
+        cityList,
+      ],
+    );
+    return Container(
+      height: 80,
+      child: ClipRect(
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+          child: stack,
+        ),
+      ),
+    );
+  }
+
   Widget _buildIndicator(int length) {
     Widget widget = Consumer<CurrentIndex>(
       builder: (context, value, child) {
@@ -165,6 +187,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                 );
         });
         return Row(
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: list,
         );
