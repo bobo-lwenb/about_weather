@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:about_weather/epidemic/widgets/banner/epidemic_banner.dart';
 import 'package:about_weather/location/model/location.dart';
 import 'package:about_weather/main_ui/alert_banner/alert_banner.dart';
@@ -59,6 +61,7 @@ class _HomePageItemState extends State<HomePageItem>
         style: TextStyle(fontSize: 45, color: textColor),
       ),
     );
+
     String district = index == 0 ? location.district : "${location.district}区";
     Widget districtTitle = Text(
       "$district",
@@ -71,11 +74,17 @@ class _HomePageItemState extends State<HomePageItem>
       backgroundColor: Colors.transparent,
       shadowColor: Colors.transparent,
       expandedHeight: 160,
-      flexibleSpace: FlexibleSpaceBar(
-        collapseMode: CollapseMode.pin,
-        background: flexibleBanner,
-        title: districtTitle,
-      ),
+      flexibleSpace: LayoutBuilder(builder: (context, constraints) {
+        double sigma = constraints.biggest.height == 100 ? 15 : 0;
+        return ClipRect(
+            child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: sigma, sigmaY: sigma),
+                child: FlexibleSpaceBar(
+                  collapseMode: CollapseMode.pin,
+                  background: flexibleBanner,
+                  title: districtTitle,
+                )));
+      }),
     );
     return sliverAppBar;
   }
