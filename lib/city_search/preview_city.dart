@@ -88,10 +88,13 @@ class _PreviewCityState extends State<PreviewCity> {
       children: [
         SingleChildScrollView(
           physics: BouncingScrollPhysics(),
-          child: SignBanner(
-            location: widget.location,
-            signMode: SignMode.preview,
-          ),
+          child: Column(children: [
+            SizedBox(height: 40),
+            SignBanner(
+              location: widget.location,
+              signMode: SignMode.preview,
+            ),
+          ]),
         ),
         row,
       ],

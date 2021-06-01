@@ -32,10 +32,7 @@ class _HomePageItemState extends State<HomePageItem>
         key: ValueKey(value.number),
         physics: BouncingScrollPhysics(),
         slivers: [
-          SliverToBoxAdapter(child: SizedBox(height: 30)),
-          SliverToBoxAdapter(
-            child: _buildLocation(widget.location, widget.index),
-          ),
+          _buildAppBar(widget.location, widget.index),
           SliverToBoxAdapter(
             child: SignBanner(location: widget.location, index: widget.index),
           ),
@@ -53,33 +50,34 @@ class _HomePageItemState extends State<HomePageItem>
     });
   }
 
-  Widget _buildLocation(Location location, int index) {
+  Widget _buildAppBar(Location location, int index) {
     String city = index == 0 ? location.city : "${location.city}市";
+    Widget flexibleBanner = Container(
+      alignment: Alignment.center,
+      child: Text(
+        "$city",
+        style: TextStyle(fontSize: 45, color: textColor),
+      ),
+    );
     String district = index == 0 ? location.district : "${location.district}区";
-    DateTime dateTime = DateTime.now();
-    Widget column = Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-            "${dateTime.month}月${dateTime.day}日 ${getWeekDesc(dateTime.weekday)}",
-            style: TextStyle(fontSize: 14, color: textColor)),
-        Row(
-          children: <Widget>[
-            Offstage(
-              offstage: index == 0 ? false : true,
-              child: Icon(Icons.near_me_sharp, size: 14, color: textColor),
-            ),
-            SizedBox(width: 4),
-            Text("$city $district",
-                style: TextStyle(fontSize: 30, color: textColor)),
-          ],
-        ),
-      ],
+    Widget districtTitle = Text(
+      "$district",
+      style: TextStyle(
+          fontSize: 30, color: textColor, fontWeight: FontWeight.normal),
     );
-    return Container(
-      padding: const EdgeInsets.all(16),
-      child: column,
+    Widget sliverAppBar = SliverAppBar(
+      pinned: true,
+      centerTitle: false,
+      backgroundColor: Colors.transparent,
+      shadowColor: Colors.transparent,
+      expandedHeight: 160,
+      flexibleSpace: FlexibleSpaceBar(
+        collapseMode: CollapseMode.pin,
+        background: flexibleBanner,
+        title: districtTitle,
+      ),
     );
+    return sliverAppBar;
   }
 
   @override

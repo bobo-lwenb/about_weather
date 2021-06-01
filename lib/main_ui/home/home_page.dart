@@ -138,6 +138,10 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   }
 
   Widget _buildBottom(int length) {
+    Widget time = Positioned(
+      left: 0,
+      child: _buildTime(),
+    );
     Widget cityList = Positioned(
       right: 0,
       child: _buildListCity(),
@@ -148,6 +152,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     Widget stack = Stack(
       alignment: AlignmentDirectional.center,
       children: [
+        time,
         indicator,
         cityList,
       ],
@@ -225,6 +230,18 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
       child: listCity,
+    );
+  }
+
+  Widget _buildTime() {
+    DateTime dateTime = DateTime.now();
+    Widget time = Text(
+      "${dateTime.month}月${dateTime.day}日 ${getWeekDesc(dateTime.weekday)}",
+      style: TextStyle(fontSize: 14, color: textColor),
+    );
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: time,
     );
   }
 
