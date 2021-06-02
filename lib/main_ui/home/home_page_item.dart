@@ -69,6 +69,7 @@ class _HomePageItemState extends State<HomePageItem>
           fontSize: 30, color: textColor, fontWeight: FontWeight.normal),
     );
     Widget sliverAppBar = SliverAppBar(
+      brightness: Brightness.dark,
       pinned: true,
       centerTitle: false,
       backgroundColor: Colors.transparent,
