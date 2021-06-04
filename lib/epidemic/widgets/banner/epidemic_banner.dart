@@ -92,9 +92,8 @@ class _EpidemicBannerState extends State<EpidemicBanner>
       padding: EdgeInsets.all(8),
       margin: EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white12,
-        borderRadius: BorderRadius.circular(10),
-      ),
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.white30)),
       child: column,
     );
   }

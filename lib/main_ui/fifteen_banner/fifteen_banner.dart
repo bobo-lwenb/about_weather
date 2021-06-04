@@ -153,16 +153,13 @@ class ListHeader extends StatelessWidget {
             ),
             alignment: Alignment.center,
             height: 48,
-            child: Text("时间"),
+            child: Text("时间", style: TextStyle(color: textColor)),
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             alignment: Alignment.center,
             height: 23,
-            child: Text(
-              "降雨",
-              style: TextStyle(color: Colors.lightBlue),
-            ),
+            child: Text("降雨", style: TextStyle(color: Colors.lightBlue)),
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -170,7 +167,7 @@ class ListHeader extends StatelessWidget {
                 border: Border(top: BorderSide(color: Colors.white70))),
             alignment: Alignment.center,
             height: 74,
-            child: Text("日间"),
+            child: Text("日间", style: TextStyle(color: textColor)),
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -180,7 +177,7 @@ class ListHeader extends StatelessWidget {
             ),
             alignment: Alignment.center,
             height: 74,
-            child: Text("夜间"),
+            child: Text("夜间", style: TextStyle(color: textColor)),
           ),
         ],
       ),

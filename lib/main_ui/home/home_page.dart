@@ -212,7 +212,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
 
   Widget _buildListCity() {
     Widget listCity = IconButton(
-      icon: Icon(Icons.list_alt_rounded, color: textColor),
+      icon: Icon(Icons.list_rounded, color: textColor),
       onPressed: () {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) {
           return CityListPage();

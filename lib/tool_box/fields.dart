@@ -80,3 +80,33 @@ void statusbarLightColor() {
 
 bool isDark(BuildContext context) =>
     Theme.of(context).brightness == Brightness.dark ? true : false;
+
+IconData getIcon(String name) {
+  IconData iconData;
+  if (name.contains("钓鱼")) {
+    iconData = Icons.waves_outlined;
+  } else if (name.contains("化妆")) {
+    iconData = Icons.beach_access_sharp;
+  } else if (name.contains("过敏")) {
+    iconData = Icons.sentiment_dissatisfied_outlined;
+  } else if (name.contains("运动")) {
+    iconData = Icons.directions_run_outlined;
+  } else if (name.contains("穿衣")) {
+    iconData = Icons.style_outlined;
+  } else if (name.contains("感冒")) {
+    iconData = Icons.ac_unit_outlined;
+  } else if (name.contains("紫外线")) {
+    iconData = Icons.grain_outlined;
+  } else if (name.contains("交通")) {
+    iconData = Icons.traffic_outlined;
+  } else if (name.contains("旅游")) {
+    iconData = Icons.terrain_outlined;
+  } else if (name.contains("洗车")) {
+    iconData = Icons.local_car_wash_outlined;
+  } else if (name.contains("扩散")) {
+    iconData = Icons.blur_on_outlined;
+  } else {
+    iconData = Icons.error_outline_sharp;
+  }
+  return iconData;
+}

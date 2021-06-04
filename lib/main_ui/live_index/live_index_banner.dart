@@ -36,14 +36,14 @@ class _LiveIndexBannerState extends State<LiveIndexBanner> {
 
   @override
   Widget build(BuildContext context) {
-    Widget listView = ListView.separated(
-      shrinkWrap: true,
+    Widget gridView = GridView.builder(
       physics: NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+      ),
       itemBuilder: (context, index) {
-        return LiveItem(index: _list[index]);
-      },
-      separatorBuilder: (BuildContext context, int index) {
-        return white24Divider;
+        return ItemLive(liveIndex: _list[index]);
       },
       itemCount: _list.length,
     );
@@ -51,10 +51,7 @@ class _LiveIndexBannerState extends State<LiveIndexBanner> {
       context: context,
       removeTop: true,
       removeBottom: true,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: listView,
-      ),
+      child: gridView,
     );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,33 +67,45 @@ class _LiveIndexBannerState extends State<LiveIndexBanner> {
   }
 }
 
-class LiveItem extends StatelessWidget {
-  final LiveIndex index;
+class ItemLive extends StatelessWidget {
+  final LiveIndex liveIndex;
 
-  LiveItem({this.index});
+  const ItemLive({
+    Key key,
+    this.liveIndex,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    String desc = index.desc;
-    String status = index.status;
-    String name = index.name;
-    Widget column = Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text("$name: $status", style: TextStyle(color: textColor)),
-        SizedBox(height: 3),
-        Text(
-          "$desc",
-          style: TextStyle(
-            color: subtextColor,
-            fontSize: 14,
-          ),
+    return GestureDetector(
+      onTap: () => showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              content: Container(
+                height: 150,
+                child: Center(
+                  child: Text(liveIndex.desc, textAlign: TextAlign.center),
+                ),
+              ),
+            );
+          }),
+      child: InkWell(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Text(liveIndex.name, style: TextStyle(color: subtextColor)),
+            SizedBox(height: 8),
+            Text(
+              liveIndex.status,
+              style: TextStyle(fontSize: 22, color: textColor),
+            ),
+            SizedBox(height: 8),
+            Icon(getIcon(liveIndex.name), color: textColor),
+          ],
         ),
-      ],
-    );
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 16),
-      child: column,
+      ),
     );
   }
 }
