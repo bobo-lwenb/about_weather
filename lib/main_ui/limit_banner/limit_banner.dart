@@ -54,7 +54,7 @@ class _LimitBannerState extends State<LimitBanner> {
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.only(left: 16, top: 16, bottom: 16),
-          child: Text("本地限行尾号",
+          child: Text("本地限行",
               style: TextStyle(
                 fontSize: 24,
                 color: textColor,

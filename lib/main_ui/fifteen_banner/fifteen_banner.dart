@@ -37,6 +37,7 @@ class _FifteenBannerState extends State<FifteenBanner> {
   @override
   Widget build(BuildContext context) {
     if (_list.isEmpty) return Container(height: 243);
+    print(Theme.of(context).textTheme.bodyText1.fontSize);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -48,17 +49,15 @@ class _FifteenBannerState extends State<FifteenBanner> {
                 color: textColor,
               )),
         ),
-        Container(
-          height: 259,
-          child: ListView.builder(
-            itemExtent: 80,
-            physics: BouncingScrollPhysics(),
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              return FifteenItem(forecast: _list[index], index: index);
-            },
-            itemCount: _list.length,
-          ),
+        Flex(
+          direction: Axis.horizontal,
+          children: [
+            ListHeader(),
+            Expanded(
+              flex: 1,
+              child: ListBody(list: _list),
+            ),
+          ],
         ),
         white24Divider,
       ],
@@ -90,41 +89,98 @@ class FifteenItem extends StatelessWidget {
           Text("$date", style: TextStyle(color: textColor)),
           SizedBox(height: 8),
           Text("$pop%", style: TextStyle(color: Colors.lightBlue)),
+          SizedBox(height: 8),
+          Image.asset(iconPath(forecast.conditionIdDay), width: 20),
+          SizedBox(height: 8),
+          Text("$condotionDay", style: TextStyle(color: textColor)),
+          SizedBox(height: 8),
+          Text("$tempDay°", style: TextStyle(color: textColor)),
           SizedBox(height: 4),
+          Text("$tempNight°", style: TextStyle(color: textColor)),
+          SizedBox(height: 8),
+          Image.asset(iconPath(forecast.conditionIdNight), width: 20),
+          SizedBox(height: 8),
+          Text("$conditionNight", style: TextStyle(color: textColor)),
+        ],
+      ),
+    );
+  }
+}
+
+class ListBody extends StatefulWidget {
+  final List<Forecast> list;
+
+  ListBody({
+    Key key,
+    this.list,
+  }) : super(key: key);
+
+  @override
+  _ListBodyState createState() => _ListBodyState();
+}
+
+class _ListBodyState extends State<ListBody> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 243,
+      child: ListView.builder(
+        physics: BouncingScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return FifteenItem(forecast: widget.list[index], index: index);
+        },
+        itemCount: widget.list.length,
+      ),
+    );
+  }
+}
+
+class ListHeader extends StatelessWidget {
+  const ListHeader({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 16, right: 8),
+      child: Column(
+        children: [
           Container(
-            alignment: Alignment.center,
-            padding: EdgeInsets.all(4),
+            padding: const EdgeInsets.symmetric(horizontal: 8),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4),
-              border: Border.all(color: Colors.white70),
+              border: Border.symmetric(
+                  horizontal: BorderSide(color: Colors.white70)),
             ),
-            child: Column(
-              children: [
-                Image.asset(iconPath(forecast.conditionIdDay), width: 20),
-                SizedBox(height: 8),
-                Text("$condotionDay", style: TextStyle(color: textColor)),
-                SizedBox(height: 8),
-                Text("$tempDay°", style: TextStyle(color: textColor)),
-              ],
+            alignment: Alignment.center,
+            height: 48,
+            child: Text("时间"),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            alignment: Alignment.center,
+            height: 23,
+            child: Text(
+              "降雨",
+              style: TextStyle(color: Colors.lightBlue),
             ),
           ),
-          SizedBox(height: 4),
           Container(
-            alignment: Alignment.center,
-            padding: EdgeInsets.all(4),
+            padding: const EdgeInsets.symmetric(horizontal: 8),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4),
-              border: Border.all(color: Colors.black87),
+                border: Border(top: BorderSide(color: Colors.white70))),
+            alignment: Alignment.center,
+            height: 74,
+            child: Text("日间"),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            decoration: BoxDecoration(
+              border: Border.symmetric(
+                  horizontal: BorderSide(color: Colors.white70)),
             ),
-            child: Column(
-              children: [
-                Text("$tempNight°", style: TextStyle(color: textColor)),
-                SizedBox(height: 8),
-                Image.asset(iconPath(forecast.conditionIdNight), width: 20),
-                SizedBox(height: 8),
-                Text("$conditionNight", style: TextStyle(color: textColor)),
-              ],
-            ),
+            alignment: Alignment.center,
+            height: 74,
+            child: Text("夜间"),
           ),
         ],
       ),
