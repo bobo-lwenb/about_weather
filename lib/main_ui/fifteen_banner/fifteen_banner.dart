@@ -49,8 +49,9 @@ class _FifteenBannerState extends State<FifteenBanner> {
               )),
         ),
         Container(
-          height: 243,
+          height: 259,
           child: ListView.builder(
+            itemExtent: 80,
             physics: BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
@@ -89,18 +90,42 @@ class FifteenItem extends StatelessWidget {
           Text("$date", style: TextStyle(color: textColor)),
           SizedBox(height: 8),
           Text("$pop%", style: TextStyle(color: Colors.lightBlue)),
-          SizedBox(height: 8),
-          Image.asset(iconPath(forecast.conditionIdDay), width: 20),
-          SizedBox(height: 8),
-          Text("$condotionDay", style: TextStyle(color: textColor)),
-          SizedBox(height: 8),
-          Text("$tempDay°", style: TextStyle(color: textColor)),
           SizedBox(height: 4),
-          Text("$tempNight°", style: TextStyle(color: textColor)),
-          SizedBox(height: 8),
-          Image.asset(iconPath(forecast.conditionIdNight), width: 20),
-          SizedBox(height: 8),
-          Text("$conditionNight", style: TextStyle(color: textColor)),
+          Container(
+            alignment: Alignment.center,
+            padding: EdgeInsets.all(4),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4),
+              border: Border.all(color: Colors.white70),
+            ),
+            child: Column(
+              children: [
+                Image.asset(iconPath(forecast.conditionIdDay), width: 20),
+                SizedBox(height: 8),
+                Text("$condotionDay", style: TextStyle(color: textColor)),
+                SizedBox(height: 8),
+                Text("$tempDay°", style: TextStyle(color: textColor)),
+              ],
+            ),
+          ),
+          SizedBox(height: 4),
+          Container(
+            alignment: Alignment.center,
+            padding: EdgeInsets.all(4),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4),
+              border: Border.all(color: Colors.black87),
+            ),
+            child: Column(
+              children: [
+                Text("$tempNight°", style: TextStyle(color: textColor)),
+                SizedBox(height: 8),
+                Image.asset(iconPath(forecast.conditionIdNight), width: 20),
+                SizedBox(height: 8),
+                Text("$conditionNight", style: TextStyle(color: textColor)),
+              ],
+            ),
+          ),
         ],
       ),
     );

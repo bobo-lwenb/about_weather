@@ -140,7 +140,7 @@ class _SignBannerState extends State<SignBanner> {
 
   Widget _buildAQI() {
     String value = _aqiIndex?.value;
-    String desc = apiDesc(value);
+    String desc = aqiDesc(value).desc;
     String pubTime = formatDateFromSection(_aqiIndex?.pubtime);
     Widget column = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -235,7 +235,7 @@ class _SignBannerState extends State<SignBanner> {
         )),
         Expanded(
             child: Item(
-          top: "风 米/秒",
+          top: "风向 米/秒",
           title: "$windDir $windSpeed",
           signmode: widget.signMode,
         )),
