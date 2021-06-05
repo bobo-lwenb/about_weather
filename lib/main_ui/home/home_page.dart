@@ -2,13 +2,13 @@ import 'dart:ui';
 
 import 'package:about_weather/city_list/city_list.dart';
 import 'package:about_weather/location/amap_location.dart';
-import 'package:about_weather/location/location_list.dart';
+import 'package:about_weather/location/provider/location_list.dart';
 import 'package:about_weather/location/model/location.dart';
-import 'package:about_weather/main_ui/home/background_path.dart';
-import 'package:about_weather/main_ui/home/current_indext.dart';
+import 'package:about_weather/main_ui/home/provider/background_path.dart';
+import 'package:about_weather/main_ui/home/provider/current_indext.dart';
 import 'package:about_weather/main_ui/home/home_page_item.dart';
-import 'package:about_weather/main_ui/home/model_status.dart';
-import 'package:about_weather/main_ui/home/refresh_page.dart';
+import 'package:about_weather/main_ui/home/provider/model_status.dart';
+import 'package:about_weather/main_ui/home/provider/refresh_page.dart';
 import 'package:about_weather/tool_box/fields.dart';
 import 'package:about_weather/tool_box/settings_preferences.dart';
 import 'package:flutter/cupertino.dart';

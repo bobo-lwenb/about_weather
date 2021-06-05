@@ -5,7 +5,7 @@ import 'package:about_weather/location/model/location.dart';
 import 'package:about_weather/main_ui/alert_banner/alert_banner.dart';
 import 'package:about_weather/main_ui/aqi_banner/aqi_banner.dart';
 import 'package:about_weather/main_ui/fifteen_banner/fifteen_banner.dart';
-import 'package:about_weather/main_ui/home/refresh_page.dart';
+import 'package:about_weather/main_ui/home/provider/refresh_page.dart';
 import 'package:about_weather/main_ui/limit_banner/limit_banner.dart';
 import 'package:about_weather/main_ui/live_index/live_index_banner.dart';
 import 'package:about_weather/main_ui/sign_banner/sign_banner.dart';

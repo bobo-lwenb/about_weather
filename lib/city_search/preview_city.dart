@@ -1,7 +1,7 @@
 import 'package:about_weather/intl/l10n/localizations_intl.dart';
-import 'package:about_weather/location/location_list.dart';
+import 'package:about_weather/location/provider/location_list.dart';
 import 'package:about_weather/location/model/location.dart';
-import 'package:about_weather/main_ui/home/model_status.dart';
+import 'package:about_weather/main_ui/home/provider/model_status.dart';
 import 'package:about_weather/main_ui/sign_banner/sign_banner.dart';
 import 'package:about_weather/main_ui/sign_banner/sign_mode.dart';
 import 'package:about_weather/tool_box/fields.dart';

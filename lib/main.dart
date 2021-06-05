@@ -1,8 +1,8 @@
 import 'package:about_weather/intl/l10n/localizations_intl.dart';
-import 'package:about_weather/location/location_list.dart';
-import 'package:about_weather/main_ui/home/background_path.dart';
-import 'package:about_weather/main_ui/home/current_indext.dart';
-import 'package:about_weather/main_ui/home/refresh_page.dart';
+import 'package:about_weather/location/provider/location_list.dart';
+import 'package:about_weather/main_ui/home/provider/background_path.dart';
+import 'package:about_weather/main_ui/home/provider/current_indext.dart';
+import 'package:about_weather/main_ui/home/provider/refresh_page.dart';
 import 'package:about_weather/setting/language/language_provider.dart';
 import 'package:about_weather/tool_box/fields.dart';
 import 'package:about_weather/tool_box/settings_preferences.dart';

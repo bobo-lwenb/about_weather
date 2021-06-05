@@ -1,7 +1,7 @@
 import 'package:about_weather/dio/biz_dio/moji_dio.dart';
 import 'package:about_weather/location/model/location.dart';
-import 'package:about_weather/main_ui/home/background_path.dart';
-import 'package:about_weather/main_ui/home/model_status.dart';
+import 'package:about_weather/main_ui/home/provider/background_path.dart';
+import 'package:about_weather/main_ui/home/provider/model_status.dart';
 import 'package:about_weather/main_ui/short_forecast/short_forecast.dart';
 import 'package:about_weather/main_ui/sign_banner/model/aqi_index/aqi_index.dart';
 import 'package:about_weather/main_ui/sign_banner/model/condition/condition.dart';
