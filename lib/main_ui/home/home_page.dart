@@ -181,7 +181,8 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                       current == 0 ? Colors.deepOrangeAccent : Colors.grey[400],
                 )
               : Container(
-                  margin: EdgeInsets.symmetric(vertical: 5, horizontal: 3),
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 5, horizontal: 3),
                   width: 5,
                   height: 5,
                   decoration: BoxDecoration(
@@ -201,7 +202,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     );
 
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 4),
       decoration: BoxDecoration(
         color: Colors.white30,
         borderRadius: BorderRadius.circular(8),

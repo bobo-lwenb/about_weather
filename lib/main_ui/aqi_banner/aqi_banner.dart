@@ -60,7 +60,7 @@ class _AQIBannerState extends State<AQIBanner> {
             itemCount: _list.length,
           ),
         ),
-        white24Divider,
+        white30Divider,
       ],
     );
   }

@@ -70,7 +70,7 @@ class _TFBannerState extends State<TFBanner> {
             itemCount: _hourly.length,
           ),
         ),
-        white24Divider,
+        white30Divider,
       ],
     );
   }

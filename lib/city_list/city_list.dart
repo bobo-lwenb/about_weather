@@ -147,7 +147,7 @@ class _ListItemState extends State<ListItem> {
   Widget build(BuildContext context) {
     if (cityModel == null) return Container();
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       child: Row(
         children: <Widget>[
           Expanded(

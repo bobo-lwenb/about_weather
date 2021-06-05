@@ -37,7 +37,6 @@ class _FifteenBannerState extends State<FifteenBanner> {
   @override
   Widget build(BuildContext context) {
     if (_list.isEmpty) return Container(height: 243);
-    print(Theme.of(context).textTheme.bodyText1.fontSize);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -59,7 +58,7 @@ class _FifteenBannerState extends State<FifteenBanner> {
             ),
           ],
         ),
-        white24Divider,
+        white30Divider,
       ],
     );
   }

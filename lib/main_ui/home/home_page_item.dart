@@ -10,6 +10,7 @@ import 'package:about_weather/main_ui/limit_banner/limit_banner.dart';
 import 'package:about_weather/main_ui/live_index/live_index_banner.dart';
 import 'package:about_weather/main_ui/sign_banner/sign_banner.dart';
 import 'package:about_weather/main_ui/tf_banner/tf_banner.dart';
+import 'package:about_weather/main_ui/weatherinfo_banner/weatherinfo_banner.dart';
 import 'package:about_weather/tool_box/fields.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -41,6 +42,8 @@ class _HomePageItemState extends State<HomePageItem>
           SliverToBoxAdapter(child: TFBanner(location: widget.location)),
           SliverToBoxAdapter(child: FifteenBanner(location: widget.location)),
           SliverToBoxAdapter(child: AQIBanner(location: widget.location)),
+          SliverToBoxAdapter(
+              child: WeatherInfoBanner(location: widget.location)),
           SliverToBoxAdapter(child: LiveIndexBanner(location: widget.location)),
           SliverToBoxAdapter(child: AlertBanner(location: widget.location)),
           SliverToBoxAdapter(child: LimitBanner(location: widget.location)),

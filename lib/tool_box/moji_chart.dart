@@ -59,4 +59,5 @@ String dayDesc(String weekday, int index) {
 
 String iconPath(String icon) => "lib/images/W$icon.png";
 
-Widget get white24Divider => Divider(height: 1, color: Colors.white30);
+Widget get white30Divider => Divider(height: 1, color: Colors.white30);
+Widget get black12Divider => Divider(height: 1, color: Colors.black12);

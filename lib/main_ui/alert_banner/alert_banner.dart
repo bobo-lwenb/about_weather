@@ -44,7 +44,7 @@ class _AlertBannerState extends State<AlertBanner> {
         return AlertItem(alert: _list[index]);
       },
       separatorBuilder: (context, index) {
-        return white24Divider;
+        return white30Divider;
       },
       itemCount: _list.length,
     );
@@ -62,7 +62,7 @@ class _AlertBannerState extends State<AlertBanner> {
           child: Text("天气预警", style: TextStyle(fontSize: 24, color: textColor)),
         ),
         widget,
-        white24Divider,
+        white30Divider,
       ],
     );
   }
@@ -109,7 +109,7 @@ class AlertItem extends StatelessWidget {
       ],
     );
     return Padding(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       child: column,
     );
   }

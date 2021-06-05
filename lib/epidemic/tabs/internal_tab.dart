@@ -52,7 +52,7 @@ class _InternalTabState extends State<InternalTab>
         ),
         SliverToBoxAdapter(
           child: Padding(
-            padding: EdgeInsets.only(left: 8, top: 8, right: 8),
+            padding: const EdgeInsets.only(left: 8, top: 8, right: 8),
             child: _buildHeader(),
           ),
         ),
@@ -61,7 +61,8 @@ class _InternalTabState extends State<InternalTab>
         ),
         SliverToBoxAdapter(
           child: Padding(
-            padding: EdgeInsets.only(left: 8, top: 8, right: 8, bottom: 26),
+            padding:
+                const EdgeInsets.only(left: 8, top: 8, right: 8, bottom: 26),
             child: Text(
               AppLocalizations.of(context).dataSource,
               style: TextStyle(color: Colors.grey[500]),
@@ -320,7 +321,7 @@ class _InternalTabState extends State<InternalTab>
             color: isDark(context) ? Colors.black : Colors.grey[200],
             borderRadius: BorderRadius.circular(8),
           ),
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: matter,
         ),
       ],

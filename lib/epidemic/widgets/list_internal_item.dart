@@ -42,7 +42,7 @@ class ListiternalItem extends StatelessWidget {
           children: <Widget>[
             Container(
               height: 30,
-              padding: EdgeInsets.only(left: 8, bottom: 3),
+              padding: const EdgeInsets.only(left: 8, bottom: 3),
               child: Align(
                 alignment: Alignment.bottomLeft,
                 child: Text(
@@ -89,7 +89,7 @@ class ListiternalItem extends StatelessWidget {
   Widget _buildTopText({int value = 0}) {
     return Container(
       height: 30,
-      padding: EdgeInsets.only(bottom: 3),
+      padding: const EdgeInsets.only(bottom: 3),
       child: Align(
         alignment: Alignment.bottomCenter,
         child: Text(

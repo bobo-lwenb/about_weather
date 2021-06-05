@@ -60,7 +60,7 @@ class StatisCell extends StatelessWidget {
     );
     return Container(
       color: backgroundColor,
-      padding: EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 10),
       child: column,
     );
   }

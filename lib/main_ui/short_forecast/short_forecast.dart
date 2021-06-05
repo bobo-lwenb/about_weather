@@ -42,7 +42,7 @@ class _ShortForecastBannerState extends State<ShortForecastBanner> {
   Widget build(BuildContext context) {
     String banner = getField(_sfc?.banner);
     return Padding(
-      padding: EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.only(bottom: 16),
       child: opacityWidget(
         object: _sfc,
         child: Text("$banner",

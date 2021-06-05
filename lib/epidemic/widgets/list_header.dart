@@ -36,7 +36,7 @@ class ListHeader extends StatelessWidget {
           children: <Widget>[
             HeaderCell(
               title: title1,
-              padding: EdgeInsets.only(left: 8),
+              padding: const EdgeInsets.only(left: 8),
               alignment: Alignment.centerLeft,
               color: Colors.black87,
               backgroundColor: Colors.blue[300],

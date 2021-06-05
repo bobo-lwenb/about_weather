@@ -61,7 +61,7 @@ class _LimitBannerState extends State<LimitBanner> {
               )),
         ),
         listView,
-        white24Divider,
+        white30Divider,
       ],
     );
   }
@@ -86,7 +86,7 @@ class Limititem extends StatelessWidget {
       ),
     );
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: column,
     );
   }

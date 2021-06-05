@@ -55,7 +55,7 @@ class SearchItem extends StatelessWidget {
       ],
     );
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       height: 55,
       child: column,
     );

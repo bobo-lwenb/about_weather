@@ -41,6 +41,7 @@ class _LiveIndexBannerState extends State<LiveIndexBanner> {
       shrinkWrap: true,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
+        childAspectRatio: 1.2,
       ),
       itemBuilder: (context, index) {
         return ItemLive(liveIndex: _list[index]);
@@ -56,12 +57,14 @@ class _LiveIndexBannerState extends State<LiveIndexBanner> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
+        white30Divider,
         Padding(
           padding: const EdgeInsets.only(left: 16, top: 16),
           child: Text("生活指数", style: TextStyle(fontSize: 24, color: textColor)),
         ),
         widget,
-        white24Divider,
+        SizedBox(height: 8),
+        white30Divider,
       ],
     );
   }
@@ -93,7 +96,7 @@ class ItemLive extends StatelessWidget {
       child: InkWell(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(liveIndex.name, style: TextStyle(color: subtextColor)),
             SizedBox(height: 8),

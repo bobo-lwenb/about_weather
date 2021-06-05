@@ -4,7 +4,9 @@ import 'package:about_weather/location/model/location.dart';
 import 'package:about_weather/main_ui/home/provider/model_status.dart';
 import 'package:about_weather/main_ui/sign_banner/sign_banner.dart';
 import 'package:about_weather/main_ui/sign_banner/sign_mode.dart';
+import 'package:about_weather/main_ui/weatherinfo_banner/weatherinfo_banner.dart';
 import 'package:about_weather/tool_box/fields.dart';
+import 'package:about_weather/tool_box/moji_chart.dart';
 import 'package:about_weather/tool_box/settings_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -91,6 +93,14 @@ class _PreviewCityState extends State<PreviewCity> {
           child: Column(children: [
             SizedBox(height: 40),
             SignBanner(
+              location: widget.location,
+              signMode: SignMode.preview,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: black12Divider,
+            ),
+            WeatherInfoBanner(
               location: widget.location,
               signMode: SignMode.preview,
             ),

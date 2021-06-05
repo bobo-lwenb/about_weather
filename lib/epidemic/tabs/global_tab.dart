@@ -53,7 +53,8 @@ class _GlobalTabState extends State<GlobalTab>
         ),
         SliverToBoxAdapter(
           child: Padding(
-            padding: EdgeInsets.only(left: 8, top: 8, right: 8, bottom: 26),
+            padding:
+                const EdgeInsets.only(left: 8, top: 8, right: 8, bottom: 26),
             child: Text(
               AppLocalizations.of(context).source,
               style: TextStyle(color: Colors.grey[500]),

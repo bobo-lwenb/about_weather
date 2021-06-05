@@ -89,8 +89,8 @@ class _EpidemicBannerState extends State<EpidemicBanner>
     );
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(8),
-      margin: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(8),
+      margin: const EdgeInsets.all(16),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: Colors.white30)),

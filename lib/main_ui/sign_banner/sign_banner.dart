@@ -111,15 +111,9 @@ class _SignBannerState extends State<SignBanner> {
       ),
     );
     Widget list = Container(
-      padding: EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          _buildAQI(),
-          white24Divider,
-          _buildGrid(),
-        ],
-      ),
+      alignment: Alignment.centerLeft,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: _buildAQI(),
     );
     return Column(
       children: [
@@ -128,9 +122,9 @@ class _SignBannerState extends State<SignBanner> {
           location: widget.location,
           signMode: widget.signMode,
         ),
-        white24Divider,
+        white30Divider,
         list,
-        white24Divider,
+        white30Divider,
       ],
     );
   }
@@ -143,15 +137,24 @@ class _SignBannerState extends State<SignBanner> {
     String desc = aqiDesc(value).desc;
     String pubTime = formatDateFromSection(_aqiIndex?.pubtime);
     Widget column = Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
-        Text(
-          "空气质量",
-          style: TextStyle(color: adaptColor(subtextColor)),
-        ),
+        Stack(children: [
+          Text(
+            "空气质量",
+            style: TextStyle(color: adaptColor(subtextColor)),
+          ),
+          Positioned(
+            right: 0,
+            child: Text(
+              "AQI（CN）",
+              style: TextStyle(color: adaptColor(subtextColor)),
+            ),
+          ),
+        ]),
         SizedBox(height: 3),
         Text(
-          "$value $desc",
+          "$value - $desc",
           style: TextStyle(fontSize: 32, color: adaptColor(textColor)),
         ),
         SizedBox(height: 3),
@@ -162,135 +165,8 @@ class _SignBannerState extends State<SignBanner> {
       ],
     );
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: opacityWidget(object: _aqiIndex, child: column),
-    );
-  }
-
-  Widget _buildGrid() {
-    String sunRise = formatHmm(getField(_condition?.sunRise));
-    String sunSet = formatHmm(getField(_condition?.sunSet));
-    String humidity = getField(_condition?.humidity);
-    String realFeel = getField(_condition?.realFeel);
-    String pressure = getField(_condition?.pressure);
-    String uvi = getField(_condition?.uvi);
-    String vis = getField(_condition?.vis);
-    String windDir = getField(_condition?.windDir);
-    String windSpeed = getField(_condition?.windSpeed);
-    Widget row1 = Row(
-      children: <Widget>[
-        Expanded(
-            child: Item(
-          top: "日出",
-          title: "$sunRise",
-          signmode: widget.signMode,
-        )),
-        Expanded(
-            child: Item(
-          top: "日落",
-          title: "$sunSet",
-          signmode: widget.signMode,
-        )),
-      ],
-    );
-    Widget row2 = Row(
-      children: <Widget>[
-        Expanded(
-            child: Item(
-          top: "湿度",
-          title: "$humidity%",
-          signmode: widget.signMode,
-        )),
-        Expanded(
-            child: Item(
-          top: "体感温度",
-          title: "$realFeel°",
-          signmode: widget.signMode,
-        )),
-      ],
-    );
-    Widget row3 = Row(
-      children: <Widget>[
-        Expanded(
-            child: Item(
-          top: "气压",
-          title: "$pressure百帕",
-          signmode: widget.signMode,
-        )),
-        Expanded(
-            child: Item(
-          top: "紫外线指数",
-          title: "$uvi",
-          signmode: widget.signMode,
-        )),
-      ],
-    );
-    Widget row4 = Row(
-      children: <Widget>[
-        Expanded(
-            child: Item(
-          top: "能见度",
-          title: "${_convertMeter(vis)}",
-          signmode: widget.signMode,
-        )),
-        Expanded(
-            child: Item(
-          top: "风向 米/秒",
-          title: "$windDir $windSpeed",
-          signmode: widget.signMode,
-        )),
-      ],
-    );
-    return Column(
-      children: <Widget>[
-        opacityWidget(object: _condition, child: row1),
-        white24Divider,
-        opacityWidget(object: _condition, child: row2),
-        white24Divider,
-        opacityWidget(object: _condition, child: row3),
-        white24Divider,
-        opacityWidget(object: _condition, child: row4),
-      ],
-    );
-  }
-
-  String _convertMeter(String meter) {
-    if (meter.isEmpty) return "";
-    int value = int.parse(meter);
-    if (0 < value && value < 500) return "$meter 米";
-    double result = value / 1000;
-    String data = result.toStringAsFixed(1);
-    List<String> list = data.split(".");
-    if (list[1] == "0") return "${list[0]} 公里";
-    return "$data 公里";
-  }
-}
-
-class Item extends StatelessWidget {
-  final String top;
-  final String title;
-  final SignMode signmode;
-
-  Item({this.top, this.title, this.signmode});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 4),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text("$top",
-              style: TextStyle(
-                  color: signmode == SignMode.normal ? subtextColor : null)),
-          Text(
-            "$title",
-            style: TextStyle(
-                fontSize: 32,
-                color: signmode == SignMode.normal ? textColor : null),
-          ),
-        ],
-      ),
     );
   }
 }

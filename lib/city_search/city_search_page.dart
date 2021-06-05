@@ -58,7 +58,7 @@ class _CitySearchPageState extends State<CitySearchPage> {
                 _focusNode.unfocus();
               },
               child: Padding(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 child: Icon(Icons.search_rounded),
               ),
             );
