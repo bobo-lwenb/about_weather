@@ -153,7 +153,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
       alignment: AlignmentDirectional.center,
       children: [
         time,
-        indicator,
+        length > 1 ? indicator : SizedBox(),
         cityList,
       ],
     );
