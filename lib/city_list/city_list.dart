@@ -19,13 +19,7 @@ class CityListPage extends StatefulWidget {
 
 class _CityListPageState extends State<CityListPage> {
   List<Location> _locations;
-  SettingsPreferences _preferences;
-
-  @override
-  void initState() {
-    super.initState();
-    _preferences = SettingsPreferences();
-  }
+  SettingsPreferences _preferences = SettingsPreferences();
 
   @override
   void dispose() {
@@ -47,13 +41,13 @@ class _CityListPageState extends State<CityListPage> {
         title: Text(AppLocalizations.of(context).cityList),
         actions: [
           IconButton(
-            icon: Icon(Icons.settings_outlined),
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return SettingPage();
-              }));
-            },
-          )
+              icon: Icon(Icons.settings_outlined),
+              onPressed: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) {
+                  return SettingPage();
+                }));
+              })
         ],
       ),
       body: ListView.separated(
