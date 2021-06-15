@@ -19,7 +19,9 @@ class CityListPage extends StatefulWidget {
 
 class _CityListPageState extends State<CityListPage> {
   List<Location> _locations;
-  SettingsPreferences _preferences = SettingsPreferences();
+  final SettingsPreferences _preferences = SettingsPreferences();
+  final ValueNotifier _notifier =
+      ValueNotifier<List<Location>>(List<Location>());
 
   @override
   void dispose() {
@@ -31,10 +33,55 @@ class _CityListPageState extends State<CityListPage> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     _locations = Provider.of<LocationList>(context).locationList;
+    _notifier.value = _locations;
   }
 
   @override
   Widget build(BuildContext context) {
+    Widget valueListenableBuilder = ValueListenableBuilder(
+      valueListenable: _notifier,
+      builder: (context, value, child) {
+        if (value.length == 0) return SizedBox();
+        return ListView.separated(
+          physics: BouncingScrollPhysics(),
+          itemBuilder: (context, index) {
+            Location location = _locations[index];
+            return InkWell(
+              child: Dismissible(
+                key: ObjectKey(location),
+                background: index == 0
+                    ? Container(color: Colors.white)
+                    : Container(color: Colors.redAccent),
+                confirmDismiss: (direction) async {
+                  if (index == 0) return false;
+                  return true;
+                },
+                onDismissed: (direction) {
+                  _locations.removeAt(index);
+                  _preferences.setLocationList(_locations);
+                  Provider.of<LocationList>(context, listen: false)
+                      .updateLocation(_locations);
+
+                  ModelStatus.instance().deleteByIndex(index);
+                },
+                child: ListItem(
+                  key: ValueKey(index),
+                  location: location,
+                  index: index,
+                ),
+              ),
+              onTap: () {
+                Navigator.of(context).pop(index);
+              },
+            );
+          },
+          separatorBuilder: (context, index) {
+            return Divider(height: 1);
+          },
+          itemCount: _locations.length,
+        );
+      },
+    );
     return Scaffold(
       appBar: AppBar(
         shadowColor: Colors.transparent,
@@ -50,44 +97,7 @@ class _CityListPageState extends State<CityListPage> {
               })
         ],
       ),
-      body: ListView.separated(
-        physics: BouncingScrollPhysics(),
-        itemBuilder: (context, index) {
-          Location location = _locations[index];
-          return InkWell(
-            child: Dismissible(
-              key: ObjectKey(location),
-              background: index == 0
-                  ? Container(color: Colors.white)
-                  : Container(color: Colors.redAccent),
-              confirmDismiss: (direction) async {
-                if (index == 0) return false;
-                return true;
-              },
-              onDismissed: (direction) {
-                _locations.removeAt(index);
-                _preferences.setLocationList(_locations);
-                Provider.of<LocationList>(context, listen: false)
-                    .updateLocation(_locations);
-
-                ModelStatus.instance().deleteByIndex(index);
-              },
-              child: ListItem(
-                key: ValueKey(index),
-                location: location,
-                index: index,
-              ),
-            ),
-            onTap: () {
-              Navigator.of(context).pop(index);
-            },
-          );
-        },
-        separatorBuilder: (context, index) {
-          return Divider(height: 1);
-        },
-        itemCount: _locations.length,
-      ),
+      body: valueListenableBuilder,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(builder: (context) {
@@ -111,7 +121,7 @@ class ListItem extends StatefulWidget {
 }
 
 class _ListItemState extends State<ListItem> {
-  CityModel cityModel;
+  final ValueNotifier _valueNotifier = ValueNotifier<CityModel>(CityModel());
 
   @override
   void initState() {
@@ -122,7 +132,7 @@ class _ListItemState extends State<ListItem> {
       widget.location.longitude.toString(),
     )
         .then((condition) {
-      cityModel = CityModel();
+      CityModel cityModel = CityModel();
       cityModel.temperature = condition.temp;
       String city = widget.index == 0
           ? "${widget.location.city}"
@@ -134,40 +144,43 @@ class _ListItemState extends State<ListItem> {
       cityModel.top =
           widget.index == 0 ? AppLocalizations.of(context).currentLocation : "";
       cityModel.icon = iconPath(condition.icon);
-      setState(() {});
+      _valueNotifier.value = cityModel;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    if (cityModel == null) return Container();
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  "${cityModel?.top}",
-                  style: TextStyle(fontSize: 12, color: Colors.grey),
-                ),
-                Text(
-                  "${cityModel?.name}",
-                  style: TextStyle(fontSize: 28),
-                ),
-              ],
+    Widget valueListenableBuilder = ValueListenableBuilder(
+      valueListenable: _valueNotifier,
+      builder: (context, value, child) {
+        if (value.icon == null) return SizedBox();
+        return Container(
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          child: Row(children: <Widget>[
+            Expanded(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      "${value.top}",
+                      style: TextStyle(fontSize: 12, color: Colors.grey),
+                    ),
+                    Text(
+                      "${value.name}",
+                      style: TextStyle(fontSize: 28),
+                    ),
+                  ]),
             ),
-          ),
-          Text(
-            "${cityModel?.temperature}°",
-            style: TextStyle(fontSize: 44),
-          ),
-          SizedBox(width: 8),
-          Image.asset(cityModel?.icon, width: 24),
-        ],
-      ),
+            Text(
+              "${value.temperature}°",
+              style: TextStyle(fontSize: 44),
+            ),
+            SizedBox(width: 8),
+            Image.asset(value.icon, width: 24),
+          ]),
+        );
+      },
     );
+    return valueListenableBuilder;
   }
 }

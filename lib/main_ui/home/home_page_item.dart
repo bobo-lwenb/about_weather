@@ -36,19 +36,19 @@ class _HomePageItemState extends State<HomePageItem>
         physics: BouncingScrollPhysics(),
         slivers: [
           _buildAppBar(widget.location, widget.index),
-          // SliverToBoxAdapter(
-          //   child: SignBanner(location: widget.location, index: widget.index),
-          // ),
-          // SliverToBoxAdapter(child: TFBanner(location: widget.location)),
-          // SliverToBoxAdapter(child: FifteenBanner(location: widget.location)),
-          // SliverToBoxAdapter(child: AQIBanner(location: widget.location)),
-          // SliverToBoxAdapter(
-          //     child: WeatherInfoBanner(location: widget.location)),
-          // SliverToBoxAdapter(child: LiveIndexBanner(location: widget.location)),
-          // SliverToBoxAdapter(child: AlertBanner(location: widget.location)),
-          // SliverToBoxAdapter(child: LimitBanner(location: widget.location)),
-          // SliverToBoxAdapter(child: EpidemicBanner(location: widget.location)),
-          // SliverToBoxAdapter(child: SizedBox(height: 80)),
+          SliverToBoxAdapter(
+            child: SignBanner(location: widget.location, index: widget.index),
+          ),
+          SliverToBoxAdapter(child: TFBanner(location: widget.location)),
+          SliverToBoxAdapter(child: FifteenBanner(location: widget.location)),
+          SliverToBoxAdapter(child: AQIBanner(location: widget.location)),
+          SliverToBoxAdapter(
+              child: WeatherInfoBanner(location: widget.location)),
+          SliverToBoxAdapter(child: LiveIndexBanner(location: widget.location)),
+          SliverToBoxAdapter(child: AlertBanner(location: widget.location)),
+          SliverToBoxAdapter(child: LimitBanner(location: widget.location)),
+          SliverToBoxAdapter(child: EpidemicBanner(location: widget.location)),
+          SliverToBoxAdapter(child: SizedBox(height: 80)),
         ],
       );
       return scrollView;
