@@ -30,6 +30,7 @@ class _LanguagePageState extends State<LanguagePage> {
     _languageTitle = languageTitle(context);
     return Scaffold(
       appBar: AppBar(
+        shadowColor: Colors.transparent,
         title: Text(AppLocalizations.of(context).language),
       ),
       body: Column(

@@ -103,6 +103,7 @@ class _SettingPageState extends State<SettingPage> {
     );
     return Scaffold(
       appBar: AppBar(
+        shadowColor: Colors.transparent,
         title: Text(AppLocalizations.of(context).settings),
       ),
       body: body,

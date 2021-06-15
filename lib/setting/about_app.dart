@@ -24,6 +24,7 @@ class _AboutAppState extends State<AboutApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        shadowColor: Colors.transparent,
         elevation: 0,
         backgroundColor: isDark(context) ? Colors.grey[850] : Colors.white10,
       ),

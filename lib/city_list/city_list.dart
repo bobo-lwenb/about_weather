@@ -43,6 +43,7 @@ class _CityListPageState extends State<CityListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        shadowColor: Colors.transparent,
         title: Text(AppLocalizations.of(context).cityList),
         actions: [
           IconButton(

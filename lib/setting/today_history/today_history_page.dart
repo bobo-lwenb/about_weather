@@ -28,6 +28,7 @@ class _TodayHistoryPageState extends State<TodayHistoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        shadowColor: Colors.transparent,
         centerTitle: true,
         title: Column(
           children: [
