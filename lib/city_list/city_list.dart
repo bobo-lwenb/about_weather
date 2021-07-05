@@ -41,11 +41,12 @@ class _CityListPageState extends State<CityListPage> {
     Widget valueListenableBuilder = ValueListenableBuilder(
       valueListenable: _notifier,
       builder: (context, value, child) {
-        if (value.length == 0) return SizedBox();
+        List<Location> list = value as List<Location>;
+        if (list.length == 0) return SizedBox();
         return ListView.separated(
           physics: BouncingScrollPhysics(),
           itemBuilder: (context, index) {
-            Location location = _locations[index];
+            Location location = list[index];
             return InkWell(
               child: Dismissible(
                 key: ObjectKey(location),
@@ -57,10 +58,10 @@ class _CityListPageState extends State<CityListPage> {
                   return true;
                 },
                 onDismissed: (direction) {
-                  _locations.removeAt(index);
-                  _preferences.setLocationList(_locations);
+                  list.removeAt(index);
+                  _preferences.setLocationList(list);
                   Provider.of<LocationList>(context, listen: false)
-                      .updateLocation(_locations);
+                      .updateLocation(list);
 
                   ModelStatus.instance().deleteByIndex(index);
                 },
@@ -78,7 +79,7 @@ class _CityListPageState extends State<CityListPage> {
           separatorBuilder: (context, index) {
             return Divider(height: 1);
           },
-          itemCount: _locations.length,
+          itemCount: list.length,
         );
       },
     );
@@ -153,7 +154,8 @@ class _ListItemState extends State<ListItem> {
     Widget valueListenableBuilder = ValueListenableBuilder(
       valueListenable: _valueNotifier,
       builder: (context, value, child) {
-        if (value.icon == null) return SizedBox();
+        CityModel cityModel = value as CityModel;
+        if (cityModel.icon == null) return SizedBox();
         return Container(
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
           child: Row(children: <Widget>[
@@ -162,21 +164,21 @@ class _ListItemState extends State<ListItem> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      "${value.top}",
+                      "${cityModel.top}",
                       style: TextStyle(fontSize: 12, color: Colors.grey),
                     ),
                     Text(
-                      "${value.name}",
+                      "${cityModel.name}",
                       style: TextStyle(fontSize: 28),
                     ),
                   ]),
             ),
             Text(
-              "${value.temperature}°",
+              "${cityModel.temperature}°",
               style: TextStyle(fontSize: 44),
             ),
             SizedBox(width: 8),
-            Image.asset(value.icon, width: 24),
+            Image.asset(cityModel.icon, width: 24),
           ]),
         );
       },
