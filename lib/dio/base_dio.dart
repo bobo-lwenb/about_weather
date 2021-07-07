@@ -19,7 +19,7 @@ class BaseDio {
     BaseOptions baseOptions = BaseOptions();
     baseOptions.baseUrl = baseUrl;
     baseOptions.connectTimeout = 15000;
-    baseOptions.receiveTimeout = 5000;
+    baseOptions.receiveTimeout = 15000;
     baseOptions.headers = {
       HttpHeaders.contentTypeHeader:
           "application/x-www-form-urlencoded; charset=UTF-8"

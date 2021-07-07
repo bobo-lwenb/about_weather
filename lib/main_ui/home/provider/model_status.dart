@@ -25,7 +25,7 @@ class ModelStatus {
       );
       pages.add(status);
     });
-    ModelStatus.instance().updatePageStatus(pages);
+    updatePageStatus(pages);
   }
 
   PageStatus getPageStatu(int index) => _list[index];
@@ -36,25 +36,30 @@ class ModelStatus {
   }
 
   PageStatus setPageStatuByIndex(int index) {
-    List<PageStatus> data = List.empty(growable: true);
-    ModelStatus.instance().list.asMap().forEach((key, value) {
-      PageStatus status = PageStatus(
-        index: key,
-        isShow: index == key,
-        path: value.path,
-      );
-      data.add(status);
+    _list.forEach((status) {
+      status.isShow = _list.indexOf(status) == index;
     });
-    ModelStatus.instance().updatePageStatus(data);
-    PageStatus status = ModelStatus.instance().getPageStatu(index);
+    return getPageStatu(index);
+  }
+
+  PageStatus deleteByIndex(int index) {
+    PageStatus status = getPageStatu(index);
+    _list.removeAt(index);
+    _list.forEach((status) {
+      status.index = _list.indexOf(status);
+    });
     return status;
   }
 
-  PageStatus deleteByIndex(int index) => _list.removeAt(index);
+  void deletePageStatu(PageStatus status) {
+    int index = _list.indexOf(status);
+    deleteByIndex(index);
+  }
 
-  void deletePageStatu(PageStatus status) => _list.remove(status);
-
-  void addPageStatu(PageStatus status) => _list.add(status);
+  void addPageStatu(PageStatus status) {
+    status.index = _list.length;
+    _list.add(status);
+  }
 
   void updatePageStatus(List<PageStatus> data) {
     _list.clear();

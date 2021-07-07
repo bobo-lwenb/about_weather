@@ -24,6 +24,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   AMapLocation _aMapLocation;
   PageController _pageController;
   int _current = 0;
+  bool _isJump = false;
   SettingsPreferences _preferences;
   DateTime _lastUpdateTime;
 
@@ -68,6 +69,10 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
             );
           },
           onPageChanged: (index) {
+            if (_isJump) {
+              _isJump = false;
+              return;
+            }
             _current = index;
             _updatePages(_current);
           },
@@ -220,7 +225,9 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
           return CityListPage();
         })).then((index) {
           if (index == null) return;
+          _isJump = true;
           _current = index;
+          _updatePages(index);
           _pageController.jumpToPage(_current);
         });
       },

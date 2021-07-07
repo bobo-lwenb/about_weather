@@ -75,7 +75,7 @@ class _PreviewCityState extends State<PreviewCity> {
                   .updateLocation(_list);
 
               PageStatus status = PageStatus(
-                index: _list.length,
+                index: 0,
                 isShow: false,
                 path: "",
               );
