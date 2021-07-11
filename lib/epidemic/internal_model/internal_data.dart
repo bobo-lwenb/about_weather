@@ -7,7 +7,7 @@ import 'tree/area.dart';
 
 part 'internal_data.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class InternalData {
   String lastUpdateTime;
   ChinaTotal chinaTotal;
@@ -17,12 +17,12 @@ class InternalData {
   List<Area> areaTree;
 
   InternalData({
-    this.lastUpdateTime,
-    this.chinaTotal,
-    this.chinaAdd,
-    this.isShowAdd,
-    this.showAddSwitch,
-    this.areaTree,
+    required this.lastUpdateTime,
+    required this.chinaTotal,
+    required this.chinaAdd,
+    required this.isShowAdd,
+    required this.showAddSwitch,
+    required this.areaTree,
   });
 
   factory InternalData.fromJson(Map<String, dynamic> json) =>

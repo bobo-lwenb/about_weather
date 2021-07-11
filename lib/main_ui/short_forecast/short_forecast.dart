@@ -11,8 +11,8 @@ class ShortForecastBanner extends StatefulWidget {
   final SignMode signMode;
 
   ShortForecastBanner({
-    Key key,
-    this.location,
+    Key? key,
+    required this.location,
     this.signMode = SignMode.normal,
   }) : super(key: key);
 
@@ -21,7 +21,7 @@ class ShortForecastBanner extends StatefulWidget {
 }
 
 class _ShortForecastBannerState extends State<ShortForecastBanner> {
-  SFC _sfc;
+  SFC? _sfc;
 
   @override
   void initState() {
@@ -40,7 +40,8 @@ class _ShortForecastBannerState extends State<ShortForecastBanner> {
 
   @override
   Widget build(BuildContext context) {
-    String banner = getField(_sfc?.banner);
+    if (_sfc == null) return SizedBox();
+    String banner = _sfc!.banner;
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: opacityWidget(
@@ -54,6 +55,6 @@ class _ShortForecastBannerState extends State<ShortForecastBanner> {
     );
   }
 
-  Color adaptColor(Color color) =>
+  Color? adaptColor(Color color) =>
       widget.signMode == SignMode.normal ? color : null;
 }

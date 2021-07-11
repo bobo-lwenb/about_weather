@@ -1,5 +1,5 @@
 class ModelStatus {
-  static ModelStatus _instance;
+  static ModelStatus? _instance;
 
   List<PageStatus> _list = List.empty(growable: true);
 
@@ -11,7 +11,7 @@ class ModelStatus {
     if (_instance == null) {
       _instance = ModelStatus._internal();
     }
-    return _instance;
+    return _instance!;
   }
 
   void init(int length, int current) {
@@ -31,8 +31,8 @@ class ModelStatus {
   PageStatus getPageStatu(int index) => _list[index];
 
   void setPageStatu(PageStatus page) {
-    _list.removeAt(page.index);
-    _list.insert(page.index, page);
+    _list.removeAt(page.index!);
+    _list.insert(page.index!, page);
   }
 
   PageStatus setPageStatuByIndex(int index) {
@@ -70,9 +70,9 @@ class ModelStatus {
 }
 
 class PageStatus {
-  int index;
+  int? index;
   bool isShow;
-  String path;
+  String? path;
 
   PageStatus({
     this.index,

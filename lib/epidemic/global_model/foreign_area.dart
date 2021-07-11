@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'foreign_area.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class ForeignArea {
   String name;
   String date;
@@ -16,16 +16,16 @@ class ForeignArea {
   int heal;
 
   ForeignArea({
-    this.name,
-    this.date,
-    this.nameMap,
-    this.isUpdated,
-    this.confirmAdd,
-    this.confirmAddCut,
-    this.confirm,
-    this.suspect,
-    this.dead,
-    this.heal,
+    required this.name,
+    required this.date,
+    required this.nameMap,
+    required this.isUpdated,
+    required this.confirmAdd,
+    required this.confirmAddCut,
+    required this.confirm,
+    required this.suspect,
+    required this.dead,
+    required this.heal,
   });
 
   factory ForeignArea.fromJson(Map<String, dynamic> json) =>

@@ -13,16 +13,16 @@ class ListiternalItem extends StatelessWidget {
   final int deadAdd;
 
   ListiternalItem({
-    this.cellRatio,
-    this.areaName,
-    this.nowConfirm,
-    this.nowConfirmAdd,
-    this.confirm,
-    this.confirmAdd,
-    this.local,
-    this.localAdd,
-    this.dead,
-    this.deadAdd,
+    required this.cellRatio,
+    required this.areaName,
+    required this.nowConfirm,
+    required this.nowConfirmAdd,
+    required this.confirm,
+    required this.confirmAdd,
+    required this.local,
+    required this.localAdd,
+    required this.dead,
+    required this.deadAdd,
   });
 
   @override
@@ -100,7 +100,7 @@ class ListiternalItem extends StatelessWidget {
     );
   }
 
-  Widget _buildBottomText({int value, bool build = true}) {
+  Widget _buildBottomText({int? value, bool build = true}) {
     if (value == null) return Container(height: 27);
     if (value == 0 && !build) return Container(height: 27);
     return Container(
@@ -116,7 +116,6 @@ class ListiternalItem extends StatelessWidget {
   }
 
   String _buildString(int change) {
-    if (change == null) return "";
     if (change >= 0) {
       return "+${change.abs()}";
     } else if (change < 0) {

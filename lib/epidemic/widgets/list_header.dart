@@ -10,13 +10,13 @@ class ListHeader extends StatelessWidget {
   final String title6;
 
   ListHeader({
-    this.cellRatio,
-    this.title1,
-    this.title2,
-    this.title3,
-    this.title4,
-    this.title5,
-    this.title6,
+    required this.cellRatio,
+    required this.title1,
+    required this.title2,
+    required this.title3,
+    required this.title4,
+    required this.title5,
+    required this.title6,
   });
 
   @override
@@ -39,32 +39,32 @@ class ListHeader extends StatelessWidget {
               padding: const EdgeInsets.only(left: 8),
               alignment: Alignment.centerLeft,
               color: Colors.black87,
-              backgroundColor: Colors.blue[300],
+              backgroundColor: Colors.blue[300]!,
             ),
             HeaderCell(
               title: title2,
               color: Colors.red,
-              backgroundColor: Colors.red[50],
+              backgroundColor: Colors.red[50]!,
             ),
             HeaderCell(
               title: title3,
               color: Colors.orange,
-              backgroundColor: Colors.orange[50],
+              backgroundColor: Colors.orange[50]!,
             ),
             HeaderCell(
               title: title4,
               color: Colors.purple,
-              backgroundColor: Colors.purple[50],
+              backgroundColor: Colors.purple[50]!,
             ),
             HeaderCell(
               title: title5,
               color: Colors.black87,
-              backgroundColor: Colors.grey[500],
+              backgroundColor: Colors.grey[500]!,
             ),
             HeaderCell(
               title: title6,
               color: Colors.green,
-              backgroundColor: Colors.green[50],
+              backgroundColor: Colors.green[50]!,
             ),
           ],
         ),
@@ -82,11 +82,11 @@ class HeaderCell extends StatelessWidget {
   final Color backgroundColor;
 
   HeaderCell({
-    this.title,
+    required this.title,
     this.padding = const EdgeInsets.all(0),
     this.alignment = Alignment.center,
-    this.color,
-    this.backgroundColor,
+    required this.color,
+    required this.backgroundColor,
   });
   @override
   Widget build(BuildContext context) {

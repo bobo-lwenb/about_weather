@@ -8,7 +8,7 @@ import '../model/location.dart';
 class LocationList with ChangeNotifier, DiagnosticableTreeMixin {
   List<Location> list;
 
-  LocationList({this.list});
+  LocationList({required this.list});
 
   List<Location> get locationList => list;
 

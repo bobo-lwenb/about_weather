@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:about_weather/intl/l10n/localizations_intl.dart';
 import 'package:about_weather/tool_box/fields.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info/package_info.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AboutApp extends StatefulWidget {
   @override
@@ -32,7 +32,7 @@ class _AboutAppState extends State<AboutApp> {
         child: Column(
           children: [
             SizedBox(height: 16),
-            Text(AppLocalizations.of(context).welcome,
+            Text(AppLocalizations.of(context)!.welcome,
                 style: TextStyle(fontSize: 22)),
             Container(
               height: 255,
@@ -48,7 +48,7 @@ class _AboutAppState extends State<AboutApp> {
                 Text(_appVersion),
               ],
             ),
-            Text(AppLocalizations.of(context).developer),
+            Text(AppLocalizations.of(context)!.developer),
           ],
         ),
       ),

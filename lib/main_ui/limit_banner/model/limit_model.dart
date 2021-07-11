@@ -4,10 +4,10 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'limit_model.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class LimitModel {
-  City city;
-  List<Limit> limit;
+  City? city;
+  List<Limit?>? limit;
 
   LimitModel({
     this.city,

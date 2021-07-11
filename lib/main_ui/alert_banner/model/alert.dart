@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'alert.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class Alert {
   String content;
   int infoid;
@@ -27,16 +27,16 @@ class Alert {
   String type;
 
   Alert({
-    this.content,
-    this.infoid,
-    this.level,
-    this.name,
-    this.pubTime,
-    this.title,
-    this.type,
-    this.updateTime,
-    this.landDefenseId,
-    this.portDefenseId,
+    required this.content,
+    required this.infoid,
+    required this.level,
+    required this.name,
+    required this.pubTime,
+    required this.title,
+    required this.type,
+    required this.updateTime,
+    required this.landDefenseId,
+    required this.portDefenseId,
   });
 
   factory Alert.fromJson(Map<String, dynamic> json) => _$AlertFromJson(json);

@@ -23,8 +23,8 @@ CityInfo _$CityInfoFromJson(Map<String, dynamic> json) {
     c15: json['c15'] as String,
     c16: json['c16'] as String,
     c17: json['c17'] as String,
-    longitude: (json['longitude'] as num)?.toDouble(),
-    latitude: (json['latitude'] as num)?.toDouble(),
+    longitude: (json['longitude'] as num).toDouble(),
+    latitude: (json['latitude'] as num).toDouble(),
   );
 }
 

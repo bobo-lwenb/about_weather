@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'china_add.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class ChinaAdd {
   int confirm;
   int heal;
@@ -17,17 +17,17 @@ class ChinaAdd {
   int localConfirmH5;
 
   ChinaAdd({
-    this.confirm,
-    this.heal,
-    this.dead,
-    this.nowConfirm,
-    this.suspect,
-    this.nowSevere,
-    this.importedCase,
-    this.noInfect,
-    this.localConfirm,
-    this.noInfectH5,
-    this.localConfirmH5,
+    required this.confirm,
+    required this.heal,
+    required this.dead,
+    required this.nowConfirm,
+    required this.suspect,
+    required this.nowSevere,
+    required this.importedCase,
+    required this.noInfect,
+    required this.localConfirm,
+    required this.noInfectH5,
+    required this.localConfirmH5,
   });
 
   factory ChinaAdd.fromJson(Map<String, dynamic> json) =>

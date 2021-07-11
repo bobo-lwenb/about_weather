@@ -10,7 +10,7 @@ import 'model/forecast_aqi.dart';
 class AQIBanner extends StatefulWidget {
   final Location location;
 
-  AQIBanner({this.location, Key key}) : super(key: key);
+  AQIBanner({Key? key, required this.location}) : super(key: key);
 
   @override
   _AQIBannerState createState() => _AQIBannerState();
@@ -70,7 +70,7 @@ class AQIItem extends StatelessWidget {
   final ForecastAQI forecastAQI;
   final int index;
 
-  AQIItem({this.forecastAQI, this.index});
+  AQIItem({required this.forecastAQI, required this.index});
 
   @override
   Widget build(BuildContext context) {

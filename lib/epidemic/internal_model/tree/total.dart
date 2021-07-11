@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'total.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class Total {
   int nowConfirm;
   int confirm;
@@ -16,16 +16,16 @@ class Total {
   int wzz;
 
   Total({
-    this.nowConfirm,
-    this.confirm,
-    this.suspect,
-    this.dead,
-    this.deadRate,
-    this.showRate,
-    this.heal,
-    this.healRate,
-    this.showHeal,
-    this.wzz,
+    required this.nowConfirm,
+    required this.confirm,
+    required this.suspect,
+    required this.dead,
+    required this.deadRate,
+    required this.showRate,
+    required this.heal,
+    required this.healRate,
+    required this.showHeal,
+    required this.wzz,
   });
 
   factory Total.fromJson(Map<String, dynamic> json) => _$TotalFromJson(json);

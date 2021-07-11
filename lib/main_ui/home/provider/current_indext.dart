@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class CurrentIndex with ChangeNotifier, DiagnosticableTreeMixin {
   int indexValue = 0;
 
-  CurrentIndex({this.indexValue});
+  CurrentIndex({required this.indexValue});
 
   int get index => indexValue;
 

@@ -1,8 +1,8 @@
-import 'package:about_weather/intl/l10n/localizations_intl.dart';
 import 'package:about_weather/setting/widgets/item_tile.dart';
 import 'package:about_weather/tool_box/fields.dart';
 import 'package:about_weather/setting/theme/theme_provider.dart';
 import 'package:about_weather/tool_box/settings_preferences.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,16 +12,10 @@ class ThemePage extends StatefulWidget {
 }
 
 class _ThemePageState extends State<ThemePage> {
-  ThemeMode _themeMode;
-  int _current;
-  List<String> _themeTitle;
-  SettingsPreferences _sp;
-
-  @override
-  void initState() {
-    _sp = SettingsPreferences();
-    super.initState();
-  }
+  late ThemeMode _themeMode;
+  late int _current;
+  late List<String> _themeTitle;
+  SettingsPreferences _sp = SettingsPreferences();
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +25,7 @@ class _ThemePageState extends State<ThemePage> {
     return Scaffold(
       appBar: AppBar(
         shadowColor: Colors.transparent,
-        title: Text(AppLocalizations.of(context).themeMode),
+        title: Text(AppLocalizations.of(context)!.themeMode),
       ),
       body: Column(
         children: [

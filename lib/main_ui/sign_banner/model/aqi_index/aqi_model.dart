@@ -4,14 +4,14 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'aqi_model.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class AQIModel {
   AQIIndex aqi;
   City city;
 
   AQIModel({
-    this.aqi,
-    this.city,
+    required this.aqi,
+    required this.city,
   });
 
   factory AQIModel.fromJson(Map<String, dynamic> json) =>

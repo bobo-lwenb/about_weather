@@ -5,14 +5,14 @@ import 'forecast_aqi.dart';
 
 part 'forecast_aqi_model.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class ForecastAQIModel {
   City city;
   List<ForecastAQI> aqiForecast;
 
   ForecastAQIModel({
-    this.city,
-    this.aqiForecast,
+    required this.city,
+    required this.aqiForecast,
   });
 
   factory ForecastAQIModel.fromJson(Map<String, dynamic> json) =>

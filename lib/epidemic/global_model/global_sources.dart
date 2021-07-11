@@ -4,14 +4,14 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'global_sources.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class GlobalSources {
   List<ForeignModel> foreignList;
   GlobalStatis globalStatis;
 
   GlobalSources({
-    this.foreignList,
-    this.globalStatis,
+    required this.foreignList,
+    required this.globalStatis,
   });
 
   factory GlobalSources.fromJson(Map<String, dynamic> json) =>

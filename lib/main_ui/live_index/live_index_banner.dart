@@ -9,7 +9,7 @@ import 'model/live_index.dart';
 class LiveIndexBanner extends StatefulWidget {
   final Location location;
 
-  LiveIndexBanner({this.location, Key key}) : super(key: key);
+  LiveIndexBanner({Key? key, required this.location}) : super(key: key);
 
   @override
   _LiveIndexBannerState createState() => _LiveIndexBannerState();
@@ -74,8 +74,8 @@ class ItemLive extends StatelessWidget {
   final LiveIndex liveIndex;
 
   const ItemLive({
-    Key key,
-    this.liveIndex,
+    Key? key,
+    required this.liveIndex,
   }) : super(key: key);
 
   @override

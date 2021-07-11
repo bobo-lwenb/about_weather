@@ -4,8 +4,8 @@ import 'package:about_weather/epidemic/global_model/global_statis.dart';
 import 'package:about_weather/epidemic/widgets/list_global_item.dart';
 import 'package:about_weather/epidemic/widgets/list_header.dart';
 import 'package:about_weather/epidemic/widgets/statis_cell.dart';
-import 'package:about_weather/intl/l10n/localizations_intl.dart';
 import 'package:about_weather/tool_box/fields.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class GlobalTab extends StatefulWidget {
@@ -16,8 +16,8 @@ class GlobalTab extends StatefulWidget {
 class _GlobalTabState extends State<GlobalTab>
     with AutomaticKeepAliveClientMixin {
   List<double> cellRatio = [0.15, 0.2, 0.2, 0.2, 0.15, 0.1];
-  GlobalStatis _globalStatis;
-  List<ForeignModel> _foreignList;
+  GlobalStatis? _globalStatis;
+  List<ForeignModel>? _foreignList;
 
   @override
   void initState() {
@@ -56,7 +56,7 @@ class _GlobalTabState extends State<GlobalTab>
             padding:
                 const EdgeInsets.only(left: 8, top: 8, right: 8, bottom: 26),
             child: Text(
-              AppLocalizations.of(context).source,
+              AppLocalizations.of(context)!.source,
               style: TextStyle(color: Colors.grey[500]),
             ),
           ),
@@ -82,7 +82,7 @@ class _GlobalTabState extends State<GlobalTab>
       border: TableBorder.symmetric(
         outside: BorderSide.none,
         inside: BorderSide(
-          color: isDark(context) ? Colors.grey[850] : Colors.white,
+          color: isDark(context) ? Colors.grey[850]! : Colors.white,
           width: 3.0,
           style: BorderStyle.solid,
         ),
@@ -91,37 +91,37 @@ class _GlobalTabState extends State<GlobalTab>
         TableRow(children: <Widget>[
           StatisCell(
             topColor: Colors.grey[850],
-            typeName: AppLocalizations.of(context).confirmed,
-            count: _globalStatis.confirm,
-            changeCount: _globalStatis.confirmAdd,
-            color: Colors.redAccent[700],
-            backgroundColor: Colors.red[100],
+            typeName: AppLocalizations.of(context)!.confirmed,
+            count: _globalStatis!.confirm,
+            changeCount: _globalStatis!.confirmAdd,
+            color: Colors.redAccent[700]!,
+            backgroundColor: Colors.red[100]!,
           ),
           StatisCell(
             topColor: Colors.grey[850],
-            typeName: AppLocalizations.of(context).existConfirmed,
-            count: _globalStatis.nowConfirm,
-            changeCount: _globalStatis.nowConfirmAdd,
+            typeName: AppLocalizations.of(context)!.existConfirmed,
+            count: _globalStatis!.nowConfirm,
+            changeCount: _globalStatis!.nowConfirmAdd,
             color: Colors.red,
-            backgroundColor: Colors.red[50],
+            backgroundColor: Colors.red[50]!,
           ),
         ]),
         TableRow(children: <Widget>[
           StatisCell(
             topColor: Colors.grey[850],
-            typeName: AppLocalizations.of(context).cure,
-            count: _globalStatis.heal,
-            changeCount: _globalStatis.healAdd,
+            typeName: AppLocalizations.of(context)!.cure,
+            count: _globalStatis!.heal,
+            changeCount: _globalStatis!.healAdd,
             color: Colors.green,
-            backgroundColor: Colors.green[50],
+            backgroundColor: Colors.green[50]!,
           ),
           StatisCell(
             topColor: Colors.grey[850],
-            typeName: AppLocalizations.of(context).death,
-            count: _globalStatis.dead,
-            changeCount: _globalStatis.deadAdd,
+            typeName: AppLocalizations.of(context)!.death,
+            count: _globalStatis!.dead,
+            changeCount: _globalStatis!.deadAdd,
             color: Colors.black87,
-            backgroundColor: Colors.grey[200],
+            backgroundColor: Colors.grey[200]!,
           ),
         ]),
       ],
@@ -132,8 +132,9 @@ class _GlobalTabState extends State<GlobalTab>
         SizedBox(height: 10),
         Text.rich(TextSpan(
           children: <TextSpan>[
-            TextSpan(text: "${AppLocalizations.of(context).statisticsCutoff} "),
-            TextSpan(text: "${_globalStatis.lastUpdateTime}"),
+            TextSpan(
+                text: "${AppLocalizations.of(context)!.statisticsCutoff} "),
+            TextSpan(text: "${_globalStatis!.lastUpdateTime}"),
           ],
         )),
         SizedBox(height: 18),
@@ -149,18 +150,18 @@ class _GlobalTabState extends State<GlobalTab>
       children: <Widget>[
         SizedBox(height: 16),
         Text(
-          AppLocalizations.of(context).overseasEpidemic,
+          AppLocalizations.of(context)!.overseasEpidemic,
           style: TextStyle(fontSize: 26),
         ),
         SizedBox(height: 8),
         ListHeader(
           cellRatio: cellRatio,
-          title1: AppLocalizations.of(context).area,
-          title2: AppLocalizations.of(context).nowCases,
-          title3: AppLocalizations.of(context).confirmed,
-          title4: AppLocalizations.of(context).cure,
-          title5: AppLocalizations.of(context).deathless,
-          title6: AppLocalizations.of(context).detail,
+          title1: AppLocalizations.of(context)!.area,
+          title2: AppLocalizations.of(context)!.nowCases,
+          title3: AppLocalizations.of(context)!.confirmed,
+          title4: AppLocalizations.of(context)!.cure,
+          title5: AppLocalizations.of(context)!.deathless,
+          title6: AppLocalizations.of(context)!.detail,
         ),
       ],
     );
@@ -175,11 +176,11 @@ class _GlobalTabState extends State<GlobalTab>
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
-        ForeignModel model = _foreignList[index];
+        ForeignModel model = _foreignList![index];
         return InkWell(
           child: ListGlobalItem(
             cellRatio: cellRatio,
-            value0: model.name,
+            value0: model.name!,
             value1: "${model.nowConfirm}",
             value2: "${model.confirm}",
             value3: "${model.heal}",
@@ -193,8 +194,8 @@ class _GlobalTabState extends State<GlobalTab>
                     content: Container(
                       height: 100,
                       child: Center(
-                          child:
-                              Text(AppLocalizations.of(context).detailsExpect)),
+                          child: Text(
+                              AppLocalizations.of(context)!.detailsExpect)),
                     ),
                   );
                 });
@@ -202,7 +203,7 @@ class _GlobalTabState extends State<GlobalTab>
         );
       },
       separatorBuilder: (context, index) => Divider(height: 1),
-      itemCount: _foreignList.length,
+      itemCount: _foreignList!.length,
     );
     return MediaQuery.removePadding(
       removeTop: true,

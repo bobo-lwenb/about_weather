@@ -10,14 +10,14 @@ import 'model/limit.dart';
 class LimitBanner extends StatefulWidget {
   final Location location;
 
-  LimitBanner({this.location, Key key}) : super(key: key);
+  LimitBanner({Key? key, required this.location}) : super(key: key);
 
   @override
   _LimitBannerState createState() => _LimitBannerState();
 }
 
 class _LimitBannerState extends State<LimitBanner> {
-  final List<Limit> _list = List.empty(growable: true);
+  final List<Limit?> _list = List.empty(growable: true);
 
   @override
   void initState() {
@@ -31,6 +31,7 @@ class _LimitBannerState extends State<LimitBanner> {
       if (list == null) return;
       _list.clear();
       _list.addAll(list);
+      if (!mounted) return;
       setState(() {});
     });
   }
@@ -44,7 +45,7 @@ class _LimitBannerState extends State<LimitBanner> {
         physics: BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return Limititem(limit: _list[index]);
+          return Limititem(limit: _list[index]!);
         },
         itemCount: _list.length,
       ),
@@ -70,7 +71,7 @@ class _LimitBannerState extends State<LimitBanner> {
 class Limititem extends StatelessWidget {
   final Limit limit;
 
-  Limititem({this.limit});
+  Limititem({required this.limit});
 
   @override
   Widget build(BuildContext context) {

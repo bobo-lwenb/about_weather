@@ -2,16 +2,18 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 
 import 'interceptor/error_interceptor.dart';
 
 class BaseDio {
-  Dio _dio;
+  late Dio _dio;
   String baseUrl;
   String appCode;
 
-  BaseDio({@required this.baseUrl, @required this.appCode}) {
+  BaseDio({
+    required this.baseUrl,
+    required this.appCode,
+  }) {
     _init();
   }
 
@@ -24,7 +26,7 @@ class BaseDio {
       HttpHeaders.contentTypeHeader:
           "application/x-www-form-urlencoded; charset=UTF-8"
     };
-    if (appCode != null) {
+    if (appCode.isNotEmpty) {
       baseOptions.headers[HttpHeaders.authorizationHeader] = "APPCODE $appCode";
     }
     baseOptions.responseType = ResponseType.json;
@@ -37,11 +39,11 @@ class BaseDio {
   void dioSetting(Dio dio) {}
 
   Future<Map<String, dynamic>> get({
-    @required String path,
-    Map<String, dynamic> queryParams,
-    Options options,
-    CancelToken cancelToken,
-    ProgressCallback onReceiveProgress,
+    required String path,
+    Map<String, dynamic>? queryParams,
+    Options? options,
+    CancelToken? cancelToken,
+    ProgressCallback? onReceiveProgress,
   }) async {
     Response response = await _dio.get(
       path,
@@ -56,13 +58,13 @@ class BaseDio {
   }
 
   Future<Map<String, dynamic>> post({
-    @required String path,
+    required String path,
     data,
-    Map<String, dynamic> queryParameters,
-    Options options,
-    CancelToken cancelToken,
-    ProgressCallback onSendProgress,
-    ProgressCallback onReceiveProgress,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    CancelToken? cancelToken,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
   }) async {
     Response response = await _dio.post(
       path,

@@ -8,12 +8,8 @@ part of 'condition_model.dart';
 
 ConditionModel _$ConditionModelFromJson(Map<String, dynamic> json) {
   return ConditionModel(
-    city: json['city'] == null
-        ? null
-        : City.fromJson(json['city'] as Map<String, dynamic>),
-    condition: json['condition'] == null
-        ? null
-        : Condition.fromJson(json['condition'] as Map<String, dynamic>),
+    city: City.fromJson(json['city'] as Map<String, dynamic>),
+    condition: Condition.fromJson(json['condition'] as Map<String, dynamic>),
   );
 }
 

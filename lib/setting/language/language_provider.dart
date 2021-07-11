@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-const LANGUAGE = [
-  null,
+const LANGUAGE = <Locale>[
+  const Locale.fromSubtags(),
   const Locale('zh', 'CN'),
   const Locale('en', 'US'),
 ];
@@ -10,8 +10,7 @@ const LANGUAGE = [
 class Language with ChangeNotifier, DiagnosticableTreeMixin {
   Locale localeData = LANGUAGE[0];
 
-  Language({this.localeData});
-
+  Language({required this.localeData});
   Locale get locale => localeData;
 
   void changeLanguage(Locale value) {

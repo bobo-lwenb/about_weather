@@ -1,7 +1,6 @@
 import 'package:about_weather/city_list/model/city_model.dart';
 import 'package:about_weather/city_search/city_search_page.dart';
 import 'package:about_weather/dio/biz_dio/moji_dio.dart';
-import 'package:about_weather/intl/l10n/localizations_intl.dart';
 import 'package:about_weather/location/provider/location_list.dart';
 import 'package:about_weather/location/model/location.dart';
 import 'package:about_weather/main_ui/home/provider/model_status.dart';
@@ -9,6 +8,7 @@ import 'package:about_weather/setting/setting_page.dart';
 import 'package:about_weather/tool_box/fields.dart';
 import 'package:about_weather/tool_box/moji_chart.dart';
 import 'package:about_weather/tool_box/settings_preferences.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,10 +18,10 @@ class CityListPage extends StatefulWidget {
 }
 
 class _CityListPageState extends State<CityListPage> {
-  List<Location> _locations;
+  late List<Location> _locations;
   final SettingsPreferences _preferences = SettingsPreferences();
   final ValueNotifier _notifier =
-      ValueNotifier<List<Location>>(List<Location>());
+      ValueNotifier<List<Location>>(List<Location>.empty(growable: true));
 
   @override
   void dispose() {
@@ -86,7 +86,7 @@ class _CityListPageState extends State<CityListPage> {
     return Scaffold(
       appBar: AppBar(
         shadowColor: Colors.transparent,
-        title: Text(AppLocalizations.of(context).cityList),
+        title: Text(AppLocalizations.of(context)!.cityList),
         actions: [
           IconButton(
               icon: Icon(Icons.settings_outlined),
@@ -115,14 +115,19 @@ class ListItem extends StatefulWidget {
   final Location location;
   final int index;
 
-  ListItem({Key key, this.location, this.index}) : super(key: key);
+  ListItem({
+    Key? key,
+    required this.location,
+    required this.index,
+  }) : super(key: key);
 
   @override
   _ListItemState createState() => _ListItemState();
 }
 
 class _ListItemState extends State<ListItem> {
-  final ValueNotifier _valueNotifier = ValueNotifier<CityModel>(CityModel());
+  final ValueNotifier _valueNotifier =
+      ValueNotifier<CityModel>(CityModel.empty());
 
   @override
   void initState() {
@@ -133,7 +138,7 @@ class _ListItemState extends State<ListItem> {
       widget.location.longitude.toString(),
     )
         .then((condition) {
-      CityModel cityModel = CityModel();
+      CityModel cityModel = CityModel.empty();
       cityModel.temperature = condition.temp;
       String city = widget.index == 0
           ? "${widget.location.city}"
@@ -142,8 +147,9 @@ class _ListItemState extends State<ListItem> {
           ? "${widget.location.district}"
           : "${widget.location.district}区";
       cityModel.name = "$city $district";
-      cityModel.top =
-          widget.index == 0 ? AppLocalizations.of(context).currentLocation : "";
+      cityModel.top = widget.index == 0
+          ? AppLocalizations.of(context)!.currentLocation
+          : "";
       cityModel.icon = iconPath(condition.icon);
       _valueNotifier.value = cityModel;
     });
@@ -155,7 +161,7 @@ class _ListItemState extends State<ListItem> {
       valueListenable: _valueNotifier,
       builder: (context, value, child) {
         CityModel cityModel = value as CityModel;
-        if (cityModel.icon == null) return SizedBox();
+        if (cityModel.icon.isEmpty) return SizedBox();
         return Container(
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
           child: Row(children: <Widget>[

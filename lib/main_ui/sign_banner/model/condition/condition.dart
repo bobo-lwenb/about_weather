@@ -2,25 +2,25 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'condition.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class Condition {
-  String condition;
-  String conditionId;
-  String humidity;
-  String icon;
-  String pressure;
-  String realFeel;
-  String sunRise;
-  String sunSet;
-  String temp;
-  String tips;
-  String updatetime;
-  String uvi;
-  String vis;
-  String windDegrees;
-  String windDir;
-  String windLevel;
-  String windSpeed;
+  String? condition;
+  String? conditionId;
+  String? humidity;
+  String? icon;
+  String? pressure;
+  String? realFeel;
+  String? sunRise;
+  String? sunSet;
+  String? temp;
+  String? tips;
+  String? updatetime;
+  String? uvi;
+  String? vis;
+  String? windDegrees;
+  String? windDir;
+  String? windLevel;
+  String? windSpeed;
 
   Condition({
     this.condition,

@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'percent.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class Percent {
   int dbz;
   String desc;
@@ -10,10 +10,10 @@ class Percent {
   double percent;
 
   Percent({
-    this.dbz,
-    this.desc,
-    this.icon,
-    this.percent,
+    required this.dbz,
+    required this.desc,
+    required this.icon,
+    required this.percent,
   });
 
   factory Percent.fromJson(Map<String, dynamic> json) =>

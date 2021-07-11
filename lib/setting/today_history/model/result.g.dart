@@ -8,11 +8,11 @@ part of 'result.dart';
 
 Result _$ResultFromJson(Map<String, dynamic> json) {
   return Result(
-    title: json['title'] as String,
-    year: json['year'] as String,
-    month: json['month'] as String,
-    day: json['day'] as String,
-    content: json['content'] as String,
+    title: json['title'] as String?,
+    year: json['year'] as String?,
+    month: json['month'] as String?,
+    day: json['day'] as String?,
+    content: json['content'] as String?,
   );
 }
 

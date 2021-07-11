@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'show_add_switch.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class ShowAddSwitch {
   bool all;
   bool confirm;
@@ -17,17 +17,17 @@ class ShowAddSwitch {
   bool localinfeciton;
 
   ShowAddSwitch({
-    this.all,
-    this.confirm,
-    this.suspect,
-    this.dead,
-    this.heal,
-    this.nowConfirm,
-    this.nowSevere,
-    this.importedCase,
-    this.noInfect,
-    this.localConfirm,
-    this.localinfeciton,
+    required this.all,
+    required this.confirm,
+    required this.suspect,
+    required this.dead,
+    required this.heal,
+    required this.nowConfirm,
+    required this.nowSevere,
+    required this.importedCase,
+    required this.noInfect,
+    required this.localConfirm,
+    required this.localinfeciton,
   });
 
   factory ShowAddSwitch.fromJson(Map<String, dynamic> json) =>

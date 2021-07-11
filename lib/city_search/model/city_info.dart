@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'city_info.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class CityInfo {
   String c1;
   String c2;
@@ -23,23 +23,23 @@ class CityInfo {
   double latitude;
 
   CityInfo({
-    this.c1,
-    this.c2,
-    this.c3,
-    this.c4,
-    this.c5,
-    this.c6,
-    this.c7,
-    this.c8,
-    this.c9,
-    this.c10,
-    this.c11,
-    this.c12,
-    this.c15,
-    this.c16,
-    this.c17,
-    this.longitude,
-    this.latitude,
+    required this.c1,
+    required this.c2,
+    required this.c3,
+    required this.c4,
+    required this.c5,
+    required this.c6,
+    required this.c7,
+    required this.c8,
+    required this.c9,
+    required this.c10,
+    required this.c11,
+    required this.c12,
+    required this.c15,
+    required this.c16,
+    required this.c17,
+    required this.longitude,
+    required this.latitude,
   });
 
   factory CityInfo.fromJson(Map<String, dynamic> json) =>

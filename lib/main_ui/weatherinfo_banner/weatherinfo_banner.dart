@@ -12,8 +12,8 @@ class WeatherInfoBanner extends StatefulWidget {
   final SignMode signMode;
 
   const WeatherInfoBanner({
-    Key key,
-    this.location,
+    Key? key,
+    required this.location,
     this.signMode = SignMode.normal,
   }) : super(key: key);
 
@@ -22,7 +22,7 @@ class WeatherInfoBanner extends StatefulWidget {
 }
 
 class _WeatherInfoBannerState extends State<WeatherInfoBanner> {
-  Condition _condition;
+  Condition? _condition;
 
   @override
   void initState() {
@@ -42,6 +42,7 @@ class _WeatherInfoBannerState extends State<WeatherInfoBanner> {
 
   @override
   Widget build(BuildContext context) {
+    if (_condition == null) return SizedBox();
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -62,15 +63,15 @@ class _WeatherInfoBannerState extends State<WeatherInfoBanner> {
   }
 
   Widget _buildGrid() {
-    String sunRise = formatHmm(getField(_condition?.sunRise));
-    String sunSet = formatHmm(getField(_condition?.sunSet));
-    String humidity = getField(_condition?.humidity);
-    String realFeel = getField(_condition?.realFeel);
-    String pressure = getField(_condition?.pressure);
-    String uvi = getField(_condition?.uvi);
-    String vis = getField(_condition?.vis);
-    String windDir = getField(_condition?.windDir);
-    String windSpeed = getField(_condition?.windSpeed);
+    String sunRise = formatHmm(_condition!.sunRise!);
+    String sunSet = formatHmm(_condition!.sunSet!);
+    String humidity = _condition!.humidity!;
+    String realFeel = _condition!.realFeel!;
+    String pressure = _condition!.pressure!;
+    String uvi = _condition!.uvi!;
+    String vis = _condition!.vis!;
+    String windDir = _condition!.windDir!;
+    String windSpeed = _condition!.windSpeed!;
     Widget row1 = Row(
       children: <Widget>[
         Expanded(
@@ -165,7 +166,11 @@ class Item extends StatelessWidget {
   final String title;
   final SignMode signmode;
 
-  Item({this.top, this.title, this.signmode});
+  Item({
+    required this.top,
+    required this.title,
+    required this.signmode,
+  });
 
   @override
   Widget build(BuildContext context) {

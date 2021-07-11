@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 class ItemTile extends StatelessWidget {
-  final Widget leading;
+  final Widget? leading;
   final Widget leadingTitle;
   final Widget trailing;
-  final Widget trailingTitle;
-  final String subTitle;
-  final Function() onTap;
+  final Widget? trailingTitle;
+  final String? subTitle;
+  final Function()? onTap;
 
   ItemTile({
     this.leading,
-    @required this.leadingTitle,
+    required this.leadingTitle,
     this.trailing = const Icon(Icons.keyboard_arrow_right_rounded),
     this.trailingTitle,
     this.subTitle,
@@ -26,12 +26,10 @@ class ItemTile extends StatelessWidget {
             child: leading,
           );
     Widget _leadingTitle = Expanded(
-      child: leadingTitle == null
-          ? const SizedBox()
-          : Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: leadingTitle,
-            ),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 10),
+        child: leadingTitle,
+      ),
     );
     Widget _trailingTitle = trailingTitle == null
         ? const SizedBox()
@@ -39,13 +37,11 @@ class ItemTile extends StatelessWidget {
             padding: const EdgeInsets.only(left: 10, right: 5),
             child: trailingTitle,
           );
-    Widget _trailing = trailing == null
-        ? const SizedBox()
-        : Padding(
-            padding: const EdgeInsets.only(right: 10),
-            child: trailing,
-          );
-    double _subTitleLeftPadding = IconTheme.of(context).size + 10 + 10;
+    Widget _trailing = Padding(
+      padding: const EdgeInsets.only(right: 10),
+      child: trailing,
+    );
+    double _subTitleLeftPadding = IconTheme.of(context).size! + 10 + 10;
     Widget _subTitle = subTitle == null
         ? const SizedBox()
         : Align(
@@ -54,7 +50,7 @@ class ItemTile extends StatelessWidget {
               padding: EdgeInsets.only(
                   left: _subTitleLeftPadding, top: 5, right: 10, bottom: 5),
               child: Text(
-                subTitle,
+                subTitle!,
                 style: TextStyle(fontSize: 11, color: Colors.grey[600]),
               ),
             ),

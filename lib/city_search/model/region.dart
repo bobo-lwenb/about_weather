@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'region.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class Region {
   @JsonKey(name: "ret_code")
   int retCode;
@@ -14,9 +14,9 @@ class Region {
   List<PlaceName> list;
 
   Region({
-    this.retCode,
-    this.feeCode,
-    this.list,
+    required this.retCode,
+    required this.feeCode,
+    required this.list,
   });
 
   factory Region.fromJson(Map<String, dynamic> json) => _$RegionFromJson(json);

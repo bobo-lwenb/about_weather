@@ -2,9 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class BackgrounPath with ChangeNotifier, DiagnosticableTreeMixin {
-  String path = "";
+  String path;
 
-  BackgrounPath({this.path});
+  BackgrounPath({required this.path});
 
   String get bgPath => path;
 

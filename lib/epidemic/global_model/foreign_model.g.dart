@@ -8,26 +8,26 @@ part of 'foreign_model.dart';
 
 ForeignModel _$ForeignModelFromJson(Map<String, dynamic> json) {
   return ForeignModel(
-    name: json['name'] as String,
-    continent: json['continent'] as String,
-    y: json['y'] as String,
-    date: json['date'] as String,
-    isUpdated: json['isUpdated'] as bool,
-    confirmAdd: json['confirmAdd'] as int,
-    confirmAddCut: json['confirmAddCut'] as int,
-    confirm: json['confirm'] as int,
-    suspect: json['suspect'] as int,
-    dead: json['dead'] as int,
-    heal: json['heal'] as int,
-    nowConfirm: json['nowConfirm'] as int,
-    confirmCompare: json['confirmCompare'] as int,
-    nowConfirmCompare: json['nowConfirmCompare'] as int,
-    healCompare: json['healCompare'] as int,
-    deadCompare: json['deadCompare'] as int,
-    children: (json['children'] as List)
+    name: json['name'] as String?,
+    continent: json['continent'] as String?,
+    y: json['y'] as String?,
+    date: json['date'] as String?,
+    isUpdated: json['isUpdated'] as bool?,
+    confirmAdd: json['confirmAdd'] as int?,
+    confirmAddCut: json['confirmAddCut'] as int?,
+    confirm: json['confirm'] as int?,
+    suspect: json['suspect'] as int?,
+    dead: json['dead'] as int?,
+    heal: json['heal'] as int?,
+    nowConfirm: json['nowConfirm'] as int?,
+    confirmCompare: json['confirmCompare'] as int?,
+    nowConfirmCompare: json['nowConfirmCompare'] as int?,
+    healCompare: json['healCompare'] as int?,
+    deadCompare: json['deadCompare'] as int?,
+    children: (json['children'] as List<dynamic>?)
         ?.map((e) =>
             e == null ? null : ForeignArea.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+        .toList(),
   );
 }
 

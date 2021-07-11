@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'hourly.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class Hourly {
   String condition;
   String conditionId;
@@ -25,25 +25,25 @@ class Hourly {
   String windlevel;
 
   Hourly({
-    this.condition,
-    this.conditionId,
-    this.date,
-    this.hour,
-    this.humidity,
-    this.iconDay,
-    this.iconNight,
-    this.pop,
-    this.pressure,
-    this.qpf,
-    this.realFeel,
-    this.snow,
-    this.temp,
-    this.updatetime,
-    this.uvi,
-    this.windDegrees,
-    this.windDir,
-    this.windSpeed,
-    this.windlevel,
+    required this.condition,
+    required this.conditionId,
+    required this.date,
+    required this.hour,
+    required this.humidity,
+    required this.iconDay,
+    required this.iconNight,
+    required this.pop,
+    required this.pressure,
+    required this.qpf,
+    required this.realFeel,
+    required this.snow,
+    required this.temp,
+    required this.updatetime,
+    required this.uvi,
+    required this.windDegrees,
+    required this.windDir,
+    required this.windSpeed,
+    required this.windlevel,
   });
 
   factory Hourly.fromJson(Map<String, dynamic> json) => _$HourlyFromJson(json);

@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 class FifteenBanner extends StatefulWidget {
   final Location location;
 
-  FifteenBanner({this.location, Key key}) : super(key: key);
+  FifteenBanner({Key? key, required this.location}) : super(key: key);
 
   @override
   _FifteenBannerState createState() => _FifteenBannerState();
@@ -68,7 +68,7 @@ class FifteenItem extends StatelessWidget {
   final Forecast forecast;
   final int index;
 
-  FifteenItem({this.forecast, this.index});
+  FifteenItem({required this.forecast, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -110,8 +110,8 @@ class ListBody extends StatefulWidget {
   final List<Forecast> list;
 
   ListBody({
-    Key key,
-    this.list,
+    Key? key,
+    required this.list,
   }) : super(key: key);
 
   @override
@@ -136,7 +136,7 @@ class _ListBodyState extends State<ListBody> {
 }
 
 class ListHeader extends StatelessWidget {
-  const ListHeader({Key key}) : super(key: key);
+  const ListHeader({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

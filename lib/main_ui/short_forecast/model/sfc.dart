@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'sfc.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class SFC {
   String banner;
   ConfirmInfo confirmInfo;
@@ -18,16 +18,16 @@ class SFC {
   int timestamp;
 
   SFC({
-    this.banner,
-    this.confirmInfo,
-    this.isCorrect,
-    this.isFeedback,
-    this.notice,
-    this.percent,
-    this.rain,
-    this.rainLastTime,
-    this.sfCondition,
-    this.timestamp,
+    required this.banner,
+    required this.confirmInfo,
+    required this.isCorrect,
+    required this.isFeedback,
+    required this.notice,
+    required this.percent,
+    required this.rain,
+    required this.rainLastTime,
+    required this.sfCondition,
+    required this.timestamp,
   });
 
   factory SFC.fromJson(Map<String, dynamic> json) => _$SFCFromJson(json);

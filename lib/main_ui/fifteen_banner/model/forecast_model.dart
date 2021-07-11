@@ -4,14 +4,14 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'forecast_model.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class ForecastModel {
   City city;
   List<Forecast> forecast;
 
   ForecastModel({
-    this.city,
-    this.forecast,
+    required this.city,
+    required this.forecast,
   });
 
   factory ForecastModel.fromJson(Map<String, dynamic> json) =>

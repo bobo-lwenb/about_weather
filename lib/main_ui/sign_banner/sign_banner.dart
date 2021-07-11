@@ -16,11 +16,11 @@ import 'package:provider/provider.dart';
 class SignBanner extends StatefulWidget {
   final Location location;
   final SignMode signMode;
-  final int index;
+  final int? index;
 
   SignBanner({
-    Key key,
-    this.location,
+    Key? key,
+    required this.location,
     this.signMode = SignMode.normal,
     this.index,
   }) : super(key: key);
@@ -30,14 +30,13 @@ class SignBanner extends StatefulWidget {
 }
 
 class _SignBannerState extends State<SignBanner> {
-  Condition _condition;
-  AQIIndex _aqiIndex;
+  Condition? _condition;
+  AQIIndex? _aqiIndex;
 
   @override
   void initState() {
     super.initState();
     Location _location = widget.location;
-    if (_location == null) return;
     List<Future> list = [
       MojiDio.instance().condition(
         _location.latitude.toString(),
@@ -50,9 +49,10 @@ class _SignBannerState extends State<SignBanner> {
     ];
     Future.wait(list).then((listValues) {
       _condition = listValues[0];
-      if (widget.signMode == SignMode.normal && context != null) {
-        PageStatus status = ModelStatus.instance().getPageStatu(widget.index);
-        String path = adaptConditionId(_condition.conditionId, _condition.icon);
+      if (widget.signMode == SignMode.normal) {
+        PageStatus status = ModelStatus.instance().getPageStatu(widget.index!);
+        String path =
+            adaptConditionId(_condition!.conditionId!, _condition!.icon!);
         status.path = path;
         ModelStatus.instance().setPageStatu(status);
         if (status.isShow)
@@ -66,10 +66,11 @@ class _SignBannerState extends State<SignBanner> {
 
   @override
   Widget build(BuildContext context) {
-    String temp = getField(_condition?.temp);
-    String condition = _condition?.condition;
-    String icon = _condition?.icon;
-    String tips = _condition?.tips;
+    if (_condition == null || _aqiIndex == null) return SizedBox();
+    String temp = _condition!.temp!;
+    String condition = _condition!.condition!;
+    String icon = _condition!.icon!;
+    String tips = _condition!.tips!;
     Widget top = Container(
       height: 150,
       child: Stack(
@@ -95,9 +96,7 @@ class _SignBannerState extends State<SignBanner> {
                     color: adaptColor(textColor),
                   )),
               SizedBox(width: 8),
-              icon != null
-                  ? Image.asset(iconPath(icon), width: 20)
-                  : Container(),
+              Image.asset(iconPath(icon), width: 20)
             ]),
           ),
           Positioned(
@@ -129,13 +128,13 @@ class _SignBannerState extends State<SignBanner> {
     );
   }
 
-  Color adaptColor(Color color) =>
+  Color? adaptColor(Color color) =>
       widget.signMode == SignMode.normal ? color : null;
 
   Widget _buildAQI() {
-    String value = _aqiIndex?.value;
+    String value = _aqiIndex!.value!;
     String desc = aqiDesc(value).desc;
-    String pubTime = formatDateFromSection(_aqiIndex?.pubtime);
+    String pubTime = formatDateFromSection(_aqiIndex!.pubtime!);
     Widget column = Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[

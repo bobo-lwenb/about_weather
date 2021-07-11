@@ -1,5 +1,5 @@
 import 'package:about_weather/dio/biz_dio/history_dio.dart';
-import 'package:about_weather/intl/l10n/localizations_intl.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 
@@ -32,7 +32,7 @@ class _TodayHistoryPageState extends State<TodayHistoryPage> {
         centerTitle: true,
         title: Column(
           children: [
-            Text(AppLocalizations.of(context).todayInHistory),
+            Text(AppLocalizations.of(context)!.todayInHistory),
             Padding(
               padding: const EdgeInsets.only(top: 4),
               child: Text("${_dateTime.month}-${_dateTime.day}",
@@ -51,7 +51,7 @@ class _TodayHistoryPageState extends State<TodayHistoryPage> {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.all(8),
-                    child: Text(result.title, style: TextStyle(fontSize: 22)),
+                    child: Text(result.title!, style: TextStyle(fontSize: 22)),
                   ),
                   Text("${result.year}-${result.month}-${result.day}"),
                   Divider(),

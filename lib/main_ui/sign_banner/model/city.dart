@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'city.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class City {
   int cityId;
   String counname;
@@ -13,13 +13,13 @@ class City {
   String timezone;
 
   City({
-    this.cityId,
-    this.counname,
-    this.ianatimezone,
-    this.name,
-    this.pname,
-    this.secondaryname,
-    this.timezone,
+    required this.cityId,
+    required this.counname,
+    required this.ianatimezone,
+    required this.name,
+    required this.pname,
+    required this.secondaryname,
+    required this.timezone,
   });
 
   factory City.fromJson(Map<String, dynamic> json) => _$CityFromJson(json);

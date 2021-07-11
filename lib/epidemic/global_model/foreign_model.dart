@@ -3,25 +3,25 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'foreign_model.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class ForeignModel {
-  String name;
-  String continent;
-  String y;
-  String date;
-  bool isUpdated;
-  int confirmAdd;
-  int confirmAddCut;
-  int confirm;
-  int suspect;
-  int dead;
-  int heal;
-  int nowConfirm;
-  int confirmCompare;
-  int nowConfirmCompare;
-  int healCompare;
-  int deadCompare;
-  List<ForeignArea> children;
+  String? name;
+  String? continent;
+  String? y;
+  String? date;
+  bool? isUpdated;
+  int? confirmAdd;
+  int? confirmAddCut;
+  int? confirm;
+  int? suspect;
+  int? dead;
+  int? heal;
+  int? nowConfirm;
+  int? confirmCompare;
+  int? nowConfirmCompare;
+  int? healCompare;
+  int? deadCompare;
+  List<ForeignArea?>? children;
 
   ForeignModel({
     this.name,

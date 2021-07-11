@@ -9,14 +9,14 @@ import 'model/alert.dart';
 class AlertBanner extends StatefulWidget {
   final Location location;
 
-  AlertBanner({this.location, Key key}) : super(key: key);
+  AlertBanner({Key? key, required this.location}) : super(key: key);
 
   @override
   _AlertBannerState createState() => _AlertBannerState();
 }
 
 class _AlertBannerState extends State<AlertBanner> {
-  List<Alert> _list = List.empty(growable: true);
+  List<Alert?> _list = List.empty(growable: true);
   @override
   void initState() {
     super.initState();
@@ -41,7 +41,7 @@ class _AlertBannerState extends State<AlertBanner> {
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
-        return AlertItem(alert: _list[index]);
+        return AlertItem(alert: _list[index]!);
       },
       separatorBuilder: (context, index) {
         return white30Divider;
@@ -71,7 +71,7 @@ class _AlertBannerState extends State<AlertBanner> {
 class AlertItem extends StatelessWidget {
   final Alert alert;
 
-  AlertItem({this.alert});
+  AlertItem({required this.alert});
 
   @override
   Widget build(BuildContext context) {

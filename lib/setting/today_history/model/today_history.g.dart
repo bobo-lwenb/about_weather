@@ -8,12 +8,11 @@ part of 'today_history.dart';
 
 TodayHistory _$TodayHistoryFromJson(Map<String, dynamic> json) {
   return TodayHistory(
-    status: json['status'] as int,
-    msg: json['msg'] as String,
-    result: (json['result'] as List)
-        ?.map((e) =>
-            e == null ? null : Result.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    status: json['status'] as int?,
+    msg: json['msg'] as String?,
+    result: (json['result'] as List<dynamic>?)
+        ?.map((e) => Result.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 

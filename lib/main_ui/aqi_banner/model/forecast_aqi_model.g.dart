@@ -8,13 +8,10 @@ part of 'forecast_aqi_model.dart';
 
 ForecastAQIModel _$ForecastAQIModelFromJson(Map<String, dynamic> json) {
   return ForecastAQIModel(
-    city: json['city'] == null
-        ? null
-        : City.fromJson(json['city'] as Map<String, dynamic>),
-    aqiForecast: (json['aqiForecast'] as List)
-        ?.map((e) =>
-            e == null ? null : ForecastAQI.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    city: City.fromJson(json['city'] as Map<String, dynamic>),
+    aqiForecast: (json['aqiForecast'] as List<dynamic>)
+        .map((e) => ForecastAQI.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 

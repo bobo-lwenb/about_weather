@@ -4,14 +4,14 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'hourly_model.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class HourlyModel {
   City city;
   List<Hourly> hourly;
 
   HourlyModel({
-    this.city,
-    this.hourly,
+    required this.city,
+    required this.hourly,
   });
 
   factory HourlyModel.fromJson(Map<String, dynamic> json) =>

@@ -3,8 +3,8 @@ import 'package:about_weather/city_search/model/place_name.dart';
 import 'package:about_weather/city_search/preview_city.dart';
 import 'package:about_weather/city_search/search_item.dart';
 import 'package:about_weather/dio/biz_dio/yiyuan_dio.dart';
-import 'package:about_weather/intl/l10n/localizations_intl.dart';
 import 'package:about_weather/location/model/location.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class CitySearchPage extends StatefulWidget {
@@ -14,14 +14,8 @@ class CitySearchPage extends StatefulWidget {
 
 class _CitySearchPageState extends State<CitySearchPage> {
   List<PlaceName> _list = List.empty(growable: true);
-  TextEditingController _controller;
+  TextEditingController _controller = TextEditingController();
   FocusNode _focusNode = FocusNode();
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = TextEditingController();
-  }
 
   @override
   void dispose() {
@@ -41,7 +35,7 @@ class _CitySearchPageState extends State<CitySearchPage> {
             controller: _controller,
             maxLines: 1,
             decoration: InputDecoration(
-              hintText: AppLocalizations.of(context).citySearch,
+              hintText: AppLocalizations.of(context)!.citySearch,
               border: OutlineInputBorder(borderSide: BorderSide.none),
             ),
             onSubmitted: (text) {
@@ -80,7 +74,7 @@ class _CitySearchPageState extends State<CitySearchPage> {
                   return PreviewCity(location: location);
                 },
               ).then((value) {
-                if (value) Navigator.of(context).pop();
+                if (value!) Navigator.of(context).pop();
               });
             },
           );
@@ -103,13 +97,13 @@ class _CitySearchPageState extends State<CitySearchPage> {
 
   void _searchArea(BuildContext context, String name) {
     if (name.isEmpty) {
-      Scaffold.of(context).showSnackBar(
-          SnackBar(content: Text(AppLocalizations.of(context).citySearch)));
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(AppLocalizations.of(context)!.citySearch)));
     } else {
       YiyuanDio.instance().areaToId(name).then((list) {
         if (list == null || (list as List).isEmpty) {
-          Scaffold.of(context).showSnackBar(SnackBar(
-              content: Text(AppLocalizations.of(context).cityNoMatch)));
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text(AppLocalizations.of(context)!.cityNoMatch)));
         }
         _list = list;
         setState(() {});

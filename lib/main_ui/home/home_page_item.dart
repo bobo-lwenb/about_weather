@@ -19,7 +19,8 @@ class HomePageItem extends StatefulWidget {
   final Location location;
   final int index;
 
-  HomePageItem({Key key, this.location, this.index}) : super(key: key);
+  HomePageItem({Key? key, required this.location, required this.index})
+      : super(key: key);
 
   @override
   _HomePageItemState createState() => _HomePageItemState();
@@ -36,19 +37,19 @@ class _HomePageItemState extends State<HomePageItem>
         physics: BouncingScrollPhysics(),
         slivers: [
           _buildAppBar(widget.location, widget.index),
-          SliverToBoxAdapter(
-            child: SignBanner(location: widget.location, index: widget.index),
-          ),
-          SliverToBoxAdapter(child: TFBanner(location: widget.location)),
-          SliverToBoxAdapter(child: FifteenBanner(location: widget.location)),
-          SliverToBoxAdapter(child: AQIBanner(location: widget.location)),
-          SliverToBoxAdapter(
-              child: WeatherInfoBanner(location: widget.location)),
-          SliverToBoxAdapter(child: LiveIndexBanner(location: widget.location)),
-          SliverToBoxAdapter(child: AlertBanner(location: widget.location)),
-          SliverToBoxAdapter(child: LimitBanner(location: widget.location)),
-          SliverToBoxAdapter(child: EpidemicBanner(location: widget.location)),
-          SliverToBoxAdapter(child: SizedBox(height: 80)),
+          // SliverToBoxAdapter(
+          //   child: SignBanner(location: widget.location, index: widget.index),
+          // ),
+          // SliverToBoxAdapter(child: TFBanner(location: widget.location)),
+          // SliverToBoxAdapter(child: FifteenBanner(location: widget.location)),
+          // SliverToBoxAdapter(child: AQIBanner(location: widget.location)),
+          // SliverToBoxAdapter(
+          //     child: WeatherInfoBanner(location: widget.location)),
+          // SliverToBoxAdapter(child: LiveIndexBanner(location: widget.location)),
+          // SliverToBoxAdapter(child: AlertBanner(location: widget.location)),
+          // SliverToBoxAdapter(child: LimitBanner(location: widget.location)),
+          // SliverToBoxAdapter(child: EpidemicBanner(location: widget.location)),
+          // SliverToBoxAdapter(child: SizedBox(height: 80)),
         ],
       );
       return scrollView;
@@ -56,7 +57,7 @@ class _HomePageItemState extends State<HomePageItem>
   }
 
   Widget _buildAppBar(Location location, int index) {
-    String city = index == 0 ? location.city : "${location.city}市";
+    String city = index == 0 ? location.city! : "${location.city}市";
     Widget flexibleBanner = Container(
       alignment: Alignment.center,
       child: Text(
@@ -65,7 +66,7 @@ class _HomePageItemState extends State<HomePageItem>
       ),
     );
 
-    String district = index == 0 ? location.district : "${location.district}区";
+    String district = index == 0 ? location.district! : "${location.district}区";
     Widget districtTitle = Text(
       "$district",
       style: TextStyle(

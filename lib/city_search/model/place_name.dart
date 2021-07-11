@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'place_name.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class PlaceName {
   String prov;
   bool flag;
@@ -14,13 +14,13 @@ class PlaceName {
   String areaid;
 
   PlaceName({
-    this.prov,
-    this.flag,
-    this.area,
-    this.cityInfo,
-    this.areaCode,
-    this.distric,
-    this.areaid,
+    required this.prov,
+    required this.flag,
+    required this.area,
+    required this.cityInfo,
+    required this.areaCode,
+    required this.distric,
+    required this.areaid,
   });
 
   factory PlaceName.fromJson(Map<String, dynamic> json) =>

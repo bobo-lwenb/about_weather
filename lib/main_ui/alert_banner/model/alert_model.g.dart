@@ -11,10 +11,10 @@ AlertModel _$AlertModelFromJson(Map<String, dynamic> json) {
     city: json['city'] == null
         ? null
         : City.fromJson(json['city'] as Map<String, dynamic>),
-    alert: (json['alert'] as List)
+    alert: (json['alert'] as List<dynamic>?)
         ?.map(
             (e) => e == null ? null : Alert.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+        .toList(),
   );
 }
 

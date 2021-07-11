@@ -2,16 +2,16 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'confirm_information.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class ConfirmInfo {
   int comfirmIcon;
   String comfirmIconDesc;
   int isConfirm;
 
   ConfirmInfo({
-    this.comfirmIcon,
-    this.comfirmIconDesc,
-    this.isConfirm,
+    required this.comfirmIcon,
+    required this.comfirmIconDesc,
+    required this.isConfirm,
   });
 
   factory ConfirmInfo.fromJson(Map<String, dynamic> json) =>

@@ -8,12 +8,8 @@ part of 'aqi_model.dart';
 
 AQIModel _$AQIModelFromJson(Map<String, dynamic> json) {
   return AQIModel(
-    aqi: json['aqi'] == null
-        ? null
-        : AQIIndex.fromJson(json['aqi'] as Map<String, dynamic>),
-    city: json['city'] == null
-        ? null
-        : City.fromJson(json['city'] as Map<String, dynamic>),
+    aqi: AQIIndex.fromJson(json['aqi'] as Map<String, dynamic>),
+    city: City.fromJson(json['city'] as Map<String, dynamic>),
   );
 }
 

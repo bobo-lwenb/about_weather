@@ -2,27 +2,29 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'location.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class Location {
-  String callbackTime;
-  String locationTime;
-  int locationType;
+  String? callbackTime;
+  String? locationTime;
+  int? locationType;
   var latitude;
   var longitude;
-  double accuracy;
-  double altitude;
-  double bearing;
-  double speed;
-  String country;
-  String province;
-  String city;
-  String district;
-  String street;
-  String streetNumber;
-  String cityCode;
-  String adCode;
-  String address;
-  String description;
+  double? accuracy;
+  double? altitude;
+  double? bearing;
+  double? speed;
+  String? country;
+  String? province;
+  String? city;
+  String? district;
+  String? street;
+  String? streetNumber;
+  String? cityCode;
+  String? adCode;
+  String? address;
+  String? description;
+  int? errorCode;
+  String? errorInfo;
 
   Location({
     this.callbackTime,
@@ -44,10 +46,17 @@ class Location {
     this.adCode,
     this.address,
     this.description,
+    this.errorCode,
+    this.errorInfo,
   });
 
   factory Location.fromJson(Map<String, dynamic> json) =>
       _$LocationFromJson(json);
 
   Map<String, dynamic> toJson() => _$LocationToJson(this);
+
+  @override
+  String toString() {
+    return super.toString();
+  }
 }

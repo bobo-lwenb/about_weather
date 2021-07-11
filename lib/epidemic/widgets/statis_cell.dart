@@ -1,16 +1,16 @@
-import 'package:about_weather/intl/l10n/localizations_intl.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class StatisCell extends StatelessWidget {
   final bool isShowChange;
-  final int changeCount;
-  final int count;
-  final Color topColor;
+  final int? changeCount;
+  final int? count;
+  final Color? topColor;
   final Color subColor;
-  final String typeName;
-  final double countSize;
-  final Color color;
-  final Color backgroundColor;
+  final String? typeName;
+  final double? countSize;
+  final Color? color;
+  final Color? backgroundColor;
 
   StatisCell({
     this.typeName,
@@ -44,7 +44,7 @@ class StatisCell extends StatelessWidget {
         isShowChange
             ? Text.rich(TextSpan(children: <TextSpan>[
                 TextSpan(
-                  text: AppLocalizations.of(context).fromYesterday,
+                  text: AppLocalizations.of(context)!.fromYesterday,
                   style: TextStyle(color: subColor, fontSize: 14),
                 ),
                 TextSpan(
@@ -65,7 +65,7 @@ class StatisCell extends StatelessWidget {
     );
   }
 
-  String _buildString(int change) {
+  String _buildString(int? change) {
     if (change == null) return "";
     if (change >= 0) {
       return "+${change.abs()}";

@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'forecast.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class Forecast {
   String conditionDay;
   String conditionIdDay;
@@ -31,31 +31,31 @@ class Forecast {
   String windSpeedNight;
 
   Forecast({
-    this.conditionDay,
-    this.conditionIdDay,
-    this.conditionNight,
-    this.conditionIdNight,
-    this.humidity,
-    this.moonphase,
-    this.moonrise,
-    this.moonset,
-    this.pop,
-    this.predictDate,
-    this.qpf,
-    this.sunrise,
-    this.sunset,
-    this.tempDay,
-    this.tempNight,
-    this.updatetime,
-    this.uvi,
-    this.windDegreesDay,
-    this.windDegreesNight,
-    this.windDirDay,
-    this.windDirNight,
-    this.windLevelDay,
-    this.windLevelNight,
-    this.windSpeedDay,
-    this.windSpeedNight,
+    required this.conditionDay,
+    required this.conditionIdDay,
+    required this.conditionNight,
+    required this.conditionIdNight,
+    required this.humidity,
+    required this.moonphase,
+    required this.moonrise,
+    required this.moonset,
+    required this.pop,
+    required this.predictDate,
+    required this.qpf,
+    required this.sunrise,
+    required this.sunset,
+    required this.tempDay,
+    required this.tempNight,
+    required this.updatetime,
+    required this.uvi,
+    required this.windDegreesDay,
+    required this.windDegreesNight,
+    required this.windDirDay,
+    required this.windDirNight,
+    required this.windLevelDay,
+    required this.windLevelNight,
+    required this.windSpeedDay,
+    required this.windSpeedNight,
   });
 
   factory Forecast.fromJson(Map<String, dynamic> json) =>

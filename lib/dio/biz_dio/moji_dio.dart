@@ -45,9 +45,9 @@ const String ALERT = "/whapi/json/aliweather/alert";
 const String LIMIT = "/whapi/json/aliweather/limit";
 
 class MojiDio extends BaseDio {
-  static MojiDio _instance;
+  static MojiDio? _instance;
 
-  MojiDio._internal({String baseUrl, String appCode})
+  MojiDio._internal({required String baseUrl, required String appCode})
       : super(baseUrl: baseUrl, appCode: appCode);
 
   factory MojiDio.instance() => _getInstance();
@@ -56,7 +56,7 @@ class MojiDio extends BaseDio {
     if (_instance == null) {
       _instance = MojiDio._internal(baseUrl: MOJI_HOST, appCode: MOJI_APPCODE);
     }
-    return _instance;
+    return _instance!;
   }
 
   @override

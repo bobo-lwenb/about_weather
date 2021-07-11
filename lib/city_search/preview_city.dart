@@ -1,13 +1,12 @@
-import 'package:about_weather/intl/l10n/localizations_intl.dart';
 import 'package:about_weather/location/provider/location_list.dart';
 import 'package:about_weather/location/model/location.dart';
 import 'package:about_weather/main_ui/home/provider/model_status.dart';
 import 'package:about_weather/main_ui/sign_banner/sign_banner.dart';
 import 'package:about_weather/main_ui/sign_banner/sign_mode.dart';
 import 'package:about_weather/main_ui/weatherinfo_banner/weatherinfo_banner.dart';
-import 'package:about_weather/tool_box/fields.dart';
 import 'package:about_weather/tool_box/moji_chart.dart';
 import 'package:about_weather/tool_box/settings_preferences.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,15 +14,15 @@ import 'package:provider/provider.dart';
 class PreviewCity extends StatefulWidget {
   final Location location;
 
-  PreviewCity({this.location});
+  PreviewCity({required this.location});
 
   @override
   _PreviewCityState createState() => _PreviewCityState();
 }
 
 class _PreviewCityState extends State<PreviewCity> {
-  List<Location> _list;
-  SettingsPreferences _preferences;
+  late List<Location> _list;
+  late SettingsPreferences _preferences;
   bool isadd = true;
 
   @override
@@ -48,12 +47,12 @@ class _PreviewCityState extends State<PreviewCity> {
   @override
   Widget build(BuildContext context) {
     Location location = widget.location;
-    String city = location.city;
-    String district = getField(location.district);
+    String city = location.city!;
+    String district = location.district!;
     Widget row = Row(
       children: <Widget>[
         TextButton(
-          child: Text(AppLocalizations.of(context).cancel),
+          child: Text(AppLocalizations.of(context)!.cancel),
           onPressed: () {
             Navigator.of(context).pop(false);
           },
@@ -66,7 +65,7 @@ class _PreviewCityState extends State<PreviewCity> {
           ),
         ),
         TextButton(
-          child: Text(AppLocalizations.of(context).add),
+          child: Text(AppLocalizations.of(context)!.add),
           onPressed: () {
             if (isadd) {
               _list.add(widget.location);

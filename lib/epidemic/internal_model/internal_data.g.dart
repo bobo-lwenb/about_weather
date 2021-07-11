@@ -9,20 +9,14 @@ part of 'internal_data.dart';
 InternalData _$InternalDataFromJson(Map<String, dynamic> json) {
   return InternalData(
     lastUpdateTime: json['lastUpdateTime'] as String,
-    chinaTotal: json['chinaTotal'] == null
-        ? null
-        : ChinaTotal.fromJson(json['chinaTotal'] as Map<String, dynamic>),
-    chinaAdd: json['chinaAdd'] == null
-        ? null
-        : ChinaAdd.fromJson(json['chinaAdd'] as Map<String, dynamic>),
+    chinaTotal: ChinaTotal.fromJson(json['chinaTotal'] as Map<String, dynamic>),
+    chinaAdd: ChinaAdd.fromJson(json['chinaAdd'] as Map<String, dynamic>),
     isShowAdd: json['isShowAdd'] as bool,
-    showAddSwitch: json['showAddSwitch'] == null
-        ? null
-        : ShowAddSwitch.fromJson(json['showAddSwitch'] as Map<String, dynamic>),
-    areaTree: (json['areaTree'] as List)
-        ?.map(
-            (e) => e == null ? null : Area.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    showAddSwitch:
+        ShowAddSwitch.fromJson(json['showAddSwitch'] as Map<String, dynamic>),
+    areaTree: (json['areaTree'] as List<dynamic>)
+        .map((e) => Area.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 

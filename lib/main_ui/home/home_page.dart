@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:about_weather/city_list/city_list.dart';
-import 'package:about_weather/location/amap_location.dart';
+import 'package:about_weather/location/location_amap.dart';
 import 'package:about_weather/location/provider/location_list.dart';
 import 'package:about_weather/location/model/location.dart';
 import 'package:about_weather/main_ui/home/provider/background_path.dart';
@@ -21,19 +21,29 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
-  AMapLocation _aMapLocation;
-  PageController _pageController;
+  late PageController _pageController;
   int _current = 0;
   bool _isJump = false;
-  SettingsPreferences _preferences;
-  DateTime _lastUpdateTime;
+  SettingsPreferences _preferences = SettingsPreferences();
+  DateTime _lastUpdateTime = DateTime.now();
+
+  late LocationAmap _locationAmap;
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this);
-    _preferences = SettingsPreferences();
-    _setAMapLocation();
+    WidgetsBinding.instance!.addObserver(this);
+
+    _locationAmap = LocationAmap.init((location) {
+      if (location.province == null || location.province!.isEmpty) return;
+      _preferences.getLocationList().then((list) {
+        if (list.isNotEmpty) list.removeAt(0);
+        list.insert(0, location);
+        Provider.of<LocationList>(context, listen: false).updateLocation(list);
+      });
+    });
+    _locationAmap.startLocation();
+
     _pageController = PageController(
       initialPage: _current,
       viewportFraction: 1.0,
@@ -41,18 +51,13 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-    _aMapLocation.dispose();
-    _pageController.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    Locale locale = Localizations.localeOf(context);
+    print(locale);
     Widget consumer = Consumer<LocationList>(
       builder: (context, data, child) {
         List<Location> list = data.list;
-        if (list == null) return Container();
+        if (list.isEmpty) return Container();
         ModelStatus.instance().init(list.length, _current);
         if (_current > list.length - 1) _current = list.length - 1;
 
@@ -83,7 +88,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
               duration: const Duration(milliseconds: 500),
               child: SizedBox.expand(
                 key: ValueKey(path.bgPath),
-                child: path.bgPath == null || path.bgPath.isEmpty
+                child: path.bgPath.isEmpty
                     ? Container(color: Colors.white)
                     : Image.asset("${path.bgPath}", fit: BoxFit.cover),
               ));
@@ -118,13 +123,19 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _locationAmap.dispose();
+    _pageController.dispose();
+  }
+
+  @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
     switch (state) {
       case AppLifecycleState.resumed:
-        if (_lastUpdateTime != null &&
-            DateTime.now().difference(_lastUpdateTime) >
-                Duration(minutes: 15)) {
+        if (DateTime.now().difference(_lastUpdateTime) >
+            Duration(minutes: 15)) {
           Provider.of<RefreshPage>(context, listen: false).refresh();
         }
         break;
@@ -138,8 +149,8 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   void _updatePages(int index) {
     Provider.of<CurrentIndex>(context, listen: false).updateIndex(index);
     PageStatus status = ModelStatus.instance().setPageStatuByIndex(index);
-    if (status.path.isEmpty) return;
-    Provider.of<BackgrounPath>(context, listen: false).changePath(status.path);
+    if (status.path!.isEmpty) return;
+    Provider.of<BackgrounPath>(context, listen: false).changePath(status.path!);
   }
 
   Widget _buildBottom(int length) {
@@ -177,7 +188,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   Widget _buildIndicator(int length) {
     Widget widget = Consumer<CurrentIndex>(
       builder: (context, value, child) {
-        int current = value.index ?? 0;
+        int current = value.index;
         List<Widget> list = List.generate(length, (index) {
           return index == 0
               ? Icon(
@@ -248,21 +259,5 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: time,
     );
-  }
-
-  void _setAMapLocation() {
-    _aMapLocation = AMapLocation(
-      locationChange: (location) {
-        if (location.province == null || location.province.isEmpty) return;
-        _preferences.getLocationList().then((list) {
-          if (list.isNotEmpty) list.removeAt(0);
-          list.insert(0, location);
-          Provider.of<LocationList>(context, listen: false)
-              .updateLocation(list);
-        });
-      },
-      permissionDenied: () {},
-    );
-    _aMapLocation.requestPermission();
   }
 }

@@ -5,8 +5,8 @@ import 'package:about_weather/epidemic/internal_model/tree/area.dart';
 import 'package:about_weather/epidemic/widgets/list_header.dart';
 import 'package:about_weather/epidemic/widgets/list_internal_item.dart';
 import 'package:about_weather/epidemic/widgets/statis_cell.dart';
-import 'package:about_weather/intl/l10n/localizations_intl.dart';
 import 'package:about_weather/tool_box/fields.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class InternalTab extends StatefulWidget {
@@ -16,10 +16,10 @@ class InternalTab extends StatefulWidget {
 
 class _InternalTabState extends State<InternalTab>
     with AutomaticKeepAliveClientMixin {
-  String _lastUpdateTime;
-  ChinaTotal _chinaTotal;
-  ChinaAdd _chinaAdd;
-  List<Area> _listArea;
+  late String _lastUpdateTime;
+  ChinaTotal? _chinaTotal;
+  ChinaAdd? _chinaAdd;
+  List<Area>? _listArea;
   List<double> cellRatio = [0.2, 0.15, 0.2, 0.2, 0.15, 0.1];
 
   @override
@@ -64,7 +64,7 @@ class _InternalTabState extends State<InternalTab>
             padding:
                 const EdgeInsets.only(left: 8, top: 8, right: 8, bottom: 26),
             child: Text(
-              AppLocalizations.of(context).dataSource,
+              AppLocalizations.of(context)!.dataSource,
               style: TextStyle(color: Colors.grey[500]),
             ),
           ),
@@ -96,7 +96,7 @@ class _InternalTabState extends State<InternalTab>
       border: TableBorder.symmetric(
         outside: BorderSide.none,
         inside: BorderSide(
-          color: isDark(context) ? Colors.grey[850] : Colors.white,
+          color: isDark(context) ? Colors.grey[850]! : Colors.white,
           width: 3.0,
           style: BorderStyle.solid,
         ),
@@ -105,79 +105,79 @@ class _InternalTabState extends State<InternalTab>
         TableRow(children: <Widget>[
           StatisCell(
             topColor: Colors.grey[850],
-            typeName: AppLocalizations.of(context).localExistConfirmed,
-            count: _chinaTotal.localConfirm,
-            changeCount: _chinaAdd.localConfirm,
+            typeName: AppLocalizations.of(context)!.localExistConfirmed,
+            count: _chinaTotal!.localConfirm,
+            changeCount: _chinaAdd!.localConfirm,
             color: Colors.deepOrange,
-            backgroundColor: Colors.orange[50],
+            backgroundColor: Colors.orange[50]!,
           ),
           StatisCell(
             topColor: Colors.grey[850],
-            typeName: AppLocalizations.of(context).existConfirmed,
-            count: _chinaTotal.nowConfirm,
-            changeCount: _chinaAdd.nowConfirm,
+            typeName: AppLocalizations.of(context)!.existConfirmed,
+            count: _chinaTotal!.nowConfirm,
+            changeCount: _chinaAdd!.nowConfirm,
             color: Colors.red,
-            backgroundColor: Colors.red[50],
+            backgroundColor: Colors.red[50]!,
           ),
           StatisCell(
             topColor: Colors.grey[850],
-            typeName: AppLocalizations.of(context).confirmed,
-            count: _chinaTotal.confirm,
-            changeCount: _chinaAdd.confirm,
-            color: Colors.redAccent[700],
-            backgroundColor: Colors.red[100],
+            typeName: AppLocalizations.of(context)!.confirmed,
+            count: _chinaTotal!.confirm,
+            changeCount: _chinaAdd!.confirm,
+            color: Colors.redAccent[700]!,
+            backgroundColor: Colors.red[100]!,
           ),
         ]),
         TableRow(children: <Widget>[
           StatisCell(
             topColor: Colors.grey[850],
-            typeName: AppLocalizations.of(context).symptomless,
-            count: _chinaTotal.noInfect,
-            changeCount: _chinaAdd.noInfect,
+            typeName: AppLocalizations.of(context)!.symptomless,
+            count: _chinaTotal!.noInfect,
+            changeCount: _chinaAdd!.noInfect,
             color: Colors.deepPurple,
-            backgroundColor: Colors.deepPurple[50],
+            backgroundColor: Colors.deepPurple[50]!,
           ),
           StatisCell(
             topColor: Colors.grey[850],
-            typeName: AppLocalizations.of(context).importAbroad,
-            count: _chinaTotal.importedCase,
-            changeCount: _chinaAdd.importedCase,
+            typeName: AppLocalizations.of(context)!.importAbroad,
+            count: _chinaTotal!.importedCase,
+            changeCount: _chinaAdd!.importedCase,
             color: Colors.blue,
-            backgroundColor: Colors.blue[50],
+            backgroundColor: Colors.blue[50]!,
           ),
           StatisCell(
             topColor: Colors.grey[850],
-            typeName: AppLocalizations.of(context).death,
-            count: _chinaTotal.dead,
-            changeCount: _chinaAdd.dead,
+            typeName: AppLocalizations.of(context)!.death,
+            count: _chinaTotal!.dead,
+            changeCount: _chinaAdd!.dead,
             color: Colors.black87,
-            backgroundColor: Colors.grey[300],
+            backgroundColor: Colors.grey[300]!,
           ),
         ]),
         TableRow(children: <Widget>[
           StatisCell(
             topColor: Colors.grey[850],
-            typeName: AppLocalizations.of(context).cure,
-            count: _chinaTotal.heal,
-            changeCount: _chinaAdd.heal,
+            typeName: AppLocalizations.of(context)!.cure,
+            count: _chinaTotal!.heal,
+            changeCount: _chinaAdd!.heal,
             color: Colors.green,
-            backgroundColor: Colors.green[50],
+            backgroundColor: Colors.green[50]!,
           ),
           StatisCell(
             topColor: Colors.grey[850],
-            typeName: AppLocalizations.of(context).existSuspect,
-            count: _chinaTotal.suspect,
-            changeCount: _chinaAdd.suspect,
+            typeName: AppLocalizations.of(context)!.existSuspect,
+            count: _chinaTotal!.suspect,
+            changeCount: _chinaAdd!.suspect,
             color: Colors.orange,
-            backgroundColor: Colors.yellow[50],
+            backgroundColor: Colors.yellow[50]!,
           ),
           StatisCell(
             topColor: Colors.grey[850],
-            typeName: AppLocalizations.of(context).existSevere,
-            count: _chinaTotal.nowSevere,
-            changeCount: _chinaAdd.nowSevere,
+            typeName: AppLocalizations.of(context)!.existSevere,
+            count: _chinaTotal!.nowSevere,
+            changeCount: _chinaAdd!.nowSevere,
             color: Colors.orange,
-            backgroundColor: Colors.deepOrange[50],
+            backgroundColor: Colors.deepOrange[50]!,
           ),
         ]),
       ],
@@ -188,7 +188,8 @@ class _InternalTabState extends State<InternalTab>
         SizedBox(height: 10),
         Text.rich(TextSpan(
           children: <TextSpan>[
-            TextSpan(text: "${AppLocalizations.of(context).statisticsCutoff} "),
+            TextSpan(
+                text: "${AppLocalizations.of(context)!.statisticsCutoff} "),
             TextSpan(text: "$_lastUpdateTime"),
           ],
         )),
@@ -204,23 +205,23 @@ class _InternalTabState extends State<InternalTab>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          AppLocalizations.of(context).chinaEpidemic,
+          AppLocalizations.of(context)!.chinaEpidemic,
           style: TextStyle(fontSize: 26),
         ),
         SizedBox(height: 5),
         Text(
-          AppLocalizations.of(context).epidemicTip,
+          AppLocalizations.of(context)!.epidemicTip,
           style: TextStyle(color: Colors.grey[700]),
         ),
         SizedBox(height: 15),
         ListHeader(
           cellRatio: cellRatio,
-          title1: AppLocalizations.of(context).area,
-          title2: AppLocalizations.of(context).ec,
-          title3: AppLocalizations.of(context).confirmed,
-          title4: AppLocalizations.of(context).localSymptomless,
-          title5: AppLocalizations.of(context).deathless,
-          title6: AppLocalizations.of(context).detail,
+          title1: AppLocalizations.of(context)!.area,
+          title2: AppLocalizations.of(context)!.ec,
+          title3: AppLocalizations.of(context)!.confirmed,
+          title4: AppLocalizations.of(context)!.localSymptomless,
+          title5: AppLocalizations.of(context)!.deathless,
+          title6: AppLocalizations.of(context)!.detail,
         ),
       ],
     );
@@ -232,17 +233,19 @@ class _InternalTabState extends State<InternalTab>
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
-        Area area = _listArea[index];
+        Area area = _listArea![index];
         return InkWell(
           child: ListiternalItem(
             cellRatio: cellRatio,
-            areaName: area.name,
-            nowConfirm: area.total.nowConfirm,
-            confirm: area.total.confirm,
-            confirmAdd: area.today.confirm,
-            local: area.total.wzz,
-            localAdd: area.today.wzzAdd,
-            dead: area.total.dead,
+            areaName: area.name!,
+            nowConfirm: area.total!.nowConfirm,
+            nowConfirmAdd: 0,
+            confirm: area.total!.confirm,
+            confirmAdd: area.today!.confirm!,
+            local: area.total!.wzz,
+            localAdd: area.today!.wzzAdd!,
+            dead: area.total!.dead,
+            deadAdd: 0,
           ),
           onTap: () {
             showDialog(
@@ -252,8 +255,8 @@ class _InternalTabState extends State<InternalTab>
                     content: Container(
                       height: 100,
                       child: Center(
-                          child:
-                              Text(AppLocalizations.of(context).detailsExpect)),
+                          child: Text(
+                              AppLocalizations.of(context)!.detailsExpect)),
                     ),
                   );
                 });
@@ -261,7 +264,7 @@ class _InternalTabState extends State<InternalTab>
         );
       },
       separatorBuilder: (context, index) => Divider(height: 1),
-      itemCount: _listArea.length,
+      itemCount: _listArea!.length,
     );
     return MediaQuery.removePadding(
       context: context,
@@ -275,39 +278,39 @@ class _InternalTabState extends State<InternalTab>
 
   Widget _buildMatter() {
     Widget title = Text(
-      AppLocalizations.of(context).preventionAdvice,
+      AppLocalizations.of(context)!.preventionAdvice,
       style: TextStyle(fontSize: 26),
     );
     Widget matter = Column(
       children: <Widget>[
         _buildMatterTile(
           icon: Icon(Icons.info_outline_rounded, color: Colors.blue),
-          text: Text(AppLocalizations.of(context).hygiene,
+          text: Text(AppLocalizations.of(context)!.hygiene,
               style: TextStyle(fontSize: 22)),
         ),
-        _buildMatterTile(text: Text(AppLocalizations.of(context).hygiene1)),
-        _buildMatterTile(text: Text(AppLocalizations.of(context).hygiene2)),
-        _buildMatterTile(text: Text(AppLocalizations.of(context).hygiene3)),
-        _buildMatterTile(text: Text(AppLocalizations.of(context).hygiene4)),
-        _buildMatterTile(text: Text(AppLocalizations.of(context).hygiene5)),
+        _buildMatterTile(text: Text(AppLocalizations.of(context)!.hygiene1)),
+        _buildMatterTile(text: Text(AppLocalizations.of(context)!.hygiene2)),
+        _buildMatterTile(text: Text(AppLocalizations.of(context)!.hygiene3)),
+        _buildMatterTile(text: Text(AppLocalizations.of(context)!.hygiene4)),
+        _buildMatterTile(text: Text(AppLocalizations.of(context)!.hygiene5)),
         SizedBox(height: 16),
         _buildMatterTile(
           icon: Icon(Icons.remove_circle_outline_rounded, color: Colors.red),
-          text: Text(AppLocalizations.of(context).avoid,
+          text: Text(AppLocalizations.of(context)!.avoid,
               style: TextStyle(fontSize: 22)),
         ),
-        _buildMatterTile(text: Text(AppLocalizations.of(context).avoid1)),
-        _buildMatterTile(text: Text(AppLocalizations.of(context).avoid2)),
-        _buildMatterTile(text: Text(AppLocalizations.of(context).avoid3)),
+        _buildMatterTile(text: Text(AppLocalizations.of(context)!.avoid1)),
+        _buildMatterTile(text: Text(AppLocalizations.of(context)!.avoid2)),
+        _buildMatterTile(text: Text(AppLocalizations.of(context)!.avoid3)),
         SizedBox(height: 16),
         _buildMatterTile(
           icon: Icon(Icons.add_circle_outline_rounded, color: Colors.green),
-          text: Text(AppLocalizations.of(context).sd,
+          text: Text(AppLocalizations.of(context)!.sd,
               style: TextStyle(fontSize: 22)),
         ),
-        _buildMatterTile(text: Text(AppLocalizations.of(context).sd1)),
-        _buildMatterTile(text: Text(AppLocalizations.of(context).sd2)),
-        _buildMatterTile(text: Text(AppLocalizations.of(context).sd3)),
+        _buildMatterTile(text: Text(AppLocalizations.of(context)!.sd1)),
+        _buildMatterTile(text: Text(AppLocalizations.of(context)!.sd2)),
+        _buildMatterTile(text: Text(AppLocalizations.of(context)!.sd3)),
         SizedBox(height: 16),
       ],
     );

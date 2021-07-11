@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'live_index.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class LiveIndex {
   int code;
   String day;
@@ -13,13 +13,13 @@ class LiveIndex {
   String updatetime;
 
   LiveIndex({
-    this.code,
-    this.day,
-    this.desc,
-    this.level,
-    this.name,
-    this.status,
-    this.updatetime,
+    required this.code,
+    required this.day,
+    required this.desc,
+    required this.level,
+    required this.name,
+    required this.status,
+    required this.updatetime,
   });
 
   factory LiveIndex.fromJson(Map<String, dynamic> json) =>

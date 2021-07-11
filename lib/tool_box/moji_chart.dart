@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 AQIDescModel aqiDesc(String number) {
   AQIDescModel model;
-  if (number == null || number.isEmpty) {
+  if (number.isEmpty) {
     model = AQIDescModel();
     return model;
   }

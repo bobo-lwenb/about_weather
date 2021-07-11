@@ -8,9 +8,9 @@ const String YIYUAN_HOST = "https://ali-weather.showapi.com";
 const String AREA_TO_ID = "/area-to-id";
 
 class YiyuanDio extends BaseDio {
-  static YiyuanDio _instance;
+  static YiyuanDio? _instance;
 
-  YiyuanDio._internal({String baseUrl, String appCode})
+  YiyuanDio._internal({required String baseUrl, required String appCode})
       : super(baseUrl: baseUrl, appCode: appCode);
 
   factory YiyuanDio.instance() => _getInstance();
@@ -20,7 +20,7 @@ class YiyuanDio extends BaseDio {
       _instance =
           YiyuanDio._internal(baseUrl: YIYUAN_HOST, appCode: YIYUAN_APPCODE);
     }
-    return _instance;
+    return _instance!;
   }
 
   Future areaToId(String areaName) async {

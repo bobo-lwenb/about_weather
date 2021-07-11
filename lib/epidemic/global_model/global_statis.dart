@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'global_statis.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class GlobalStatis {
   int nowConfirm;
   int confirm;
@@ -15,15 +15,15 @@ class GlobalStatis {
   String lastUpdateTime;
 
   GlobalStatis({
-    this.nowConfirm,
-    this.confirm,
-    this.heal,
-    this.dead,
-    this.nowConfirmAdd,
-    this.confirmAdd,
-    this.healAdd,
-    this.deadAdd,
-    this.lastUpdateTime,
+    required this.nowConfirm,
+    required this.confirm,
+    required this.heal,
+    required this.dead,
+    required this.nowConfirmAdd,
+    required this.confirmAdd,
+    required this.healAdd,
+    required this.deadAdd,
+    required this.lastUpdateTime,
   });
 
   factory GlobalStatis.fromJson(Map<String, dynamic> json) =>

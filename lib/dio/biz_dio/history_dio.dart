@@ -6,9 +6,9 @@ const String TODAY_HISTORY_HOST = "https://jisulssdjt.market.alicloudapi.com";
 const String TODAY_HISTORY_PATH = "/todayhistory/query";
 
 class HistoryDio extends BaseDio {
-  static HistoryDio _instance;
+  static HistoryDio? _instance;
 
-  HistoryDio._internal({String baseUrl, String appCode})
+  HistoryDio._internal({required String baseUrl, required String appCode})
       : super(baseUrl: baseUrl, appCode: appCode);
 
   factory HistoryDio.instance() => _getInstance();
@@ -18,7 +18,7 @@ class HistoryDio extends BaseDio {
       _instance = HistoryDio._internal(
           baseUrl: TODAY_HISTORY_HOST, appCode: TODAY_HISTORY_APPCODE);
     }
-    return _instance;
+    return _instance!;
   }
 
   Future getDayHistory(DateTime dateTime) async {

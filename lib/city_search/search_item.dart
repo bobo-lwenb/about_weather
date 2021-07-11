@@ -5,7 +5,7 @@ import 'model/city_info.dart';
 class SearchItem extends StatelessWidget {
   final CityInfo info;
 
-  SearchItem({this.info});
+  SearchItem({required this.info});
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +62,7 @@ class SearchItem extends StatelessWidget {
   }
 
   String _translate(String value) {
-    if (value == null || value.isEmpty) {
+    if (value.isEmpty) {
       return "--";
     }
     return value;

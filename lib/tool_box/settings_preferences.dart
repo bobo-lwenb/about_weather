@@ -10,7 +10,7 @@ const LOCALE_KEY = "locale_mode";
 const LOCATION_LIST = "location_list";
 
 class SettingsPreferences {
-  BuildContext context;
+  BuildContext? context;
 
   SettingsPreferences({this.context});
 
@@ -45,7 +45,7 @@ class SettingsPreferences {
   Future<List<Location>> getLocationList() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     List<Location> locations = List.empty(growable: true);
-    String list = sp.getString(LOCATION_LIST);
+    String? list = sp.getString(LOCATION_LIST);
     if (list != null) {
       List<dynamic> data = json.decode(list);
       data.forEach((element) {

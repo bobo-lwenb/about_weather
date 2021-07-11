@@ -2,13 +2,13 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'result.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class Result {
-  String title;
-  String year;
-  String month;
-  String day;
-  String content;
+  String? title;
+  String? year;
+  String? month;
+  String? day;
+  String? content;
 
   Result({this.title, this.year, this.month, this.day, this.content});
 

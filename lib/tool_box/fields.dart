@@ -1,19 +1,19 @@
-import 'package:about_weather/intl/l10n/localizations_intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 List<String> themeTitle(BuildContext context) => [
-      AppLocalizations.of(context).followSystem,
-      AppLocalizations.of(context).lightMode,
-      AppLocalizations.of(context).darkMode,
+      AppLocalizations.of(context)!.followSystem,
+      AppLocalizations.of(context)!.lightMode,
+      AppLocalizations.of(context)!.darkMode,
     ];
 
 List<String> languageTitle(BuildContext context) => [
-      AppLocalizations.of(context).systemLanguage,
+      AppLocalizations.of(context)!.systemLanguage,
       "简体中文",
       "Eglish",
-      // AppLocalizations.of(context).simplifiedChinese,
-      // AppLocalizations.of(context).english,
+      // AppLocalizations.of(context)!.simplifiedChinese,
+      // AppLocalizations.of(context)!.english,
     ];
 
 Color get textColor => Color(0xDFFFFFFF);
@@ -49,11 +49,7 @@ String getWeekDesc(int weekday) {
   return desc;
 }
 
-String getField(String field) {
-  return field == null ? "" : field;
-}
-
-Widget opacityWidget({@required dynamic object, @required Widget child}) {
+Widget opacityWidget({required dynamic object, required Widget child}) {
   Widget widget = IgnorePointer(
     ignoring: true,
     child: Opacity(

@@ -2,14 +2,14 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'today.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class Today {
-  int confirm;
-  int confirmCuts;
-  bool isUpdated;
-  String tip;
+  int? confirm;
+  int? confirmCuts;
+  bool? isUpdated;
+  String? tip;
   @JsonKey(name: "wzz_add")
-  int wzzAdd;
+  int? wzzAdd;
 
   Today({
     this.confirm,

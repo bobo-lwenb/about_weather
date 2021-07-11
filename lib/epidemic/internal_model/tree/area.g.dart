@@ -8,17 +8,16 @@ part of 'area.dart';
 
 Area _$AreaFromJson(Map<String, dynamic> json) {
   return Area(
-    name: json['name'] as String,
+    name: json['name'] as String?,
     today: json['today'] == null
         ? null
         : Today.fromJson(json['today'] as Map<String, dynamic>),
     total: json['total'] == null
         ? null
         : Total.fromJson(json['total'] as Map<String, dynamic>),
-    children: (json['children'] as List)
-        ?.map(
-            (e) => e == null ? null : Area.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    children: (json['children'] as List<dynamic>?)
+        ?.map((e) => Area.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 

@@ -5,10 +5,10 @@ import 'alert.dart';
 
 part 'alert_model.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class AlertModel {
-  City city;
-  List<Alert> alert;
+  City? city;
+  List<Alert?>? alert;
 
   AlertModel({
     this.city,

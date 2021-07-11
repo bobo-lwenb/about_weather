@@ -1,6 +1,6 @@
 import 'package:about_weather/epidemic/tabs/global_tab.dart';
 import 'package:about_weather/epidemic/tabs/internal_tab.dart';
-import 'package:about_weather/intl/l10n/localizations_intl.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class EpidemicPage extends StatefulWidget {
@@ -10,7 +10,7 @@ class EpidemicPage extends StatefulWidget {
 
 class _EpidemicPageState extends State<EpidemicPage>
     with SingleTickerProviderStateMixin {
-  TabController _tabController;
+  late TabController _tabController;
   List<String> _tabs = ['', ''];
 
   @override
@@ -23,8 +23,8 @@ class _EpidemicPageState extends State<EpidemicPage>
   void didChangeDependencies() {
     super.didChangeDependencies();
     _tabs = [
-      AppLocalizations.of(context).domesticEpidemic,
-      AppLocalizations.of(context).overseasEpidemic,
+      AppLocalizations.of(context)!.domesticEpidemic,
+      AppLocalizations.of(context)!.overseasEpidemic,
     ];
   }
 
@@ -64,7 +64,7 @@ class _EpidemicPageState extends State<EpidemicPage>
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Text(
-            AppLocalizations.of(context).covid_19,
+            AppLocalizations.of(context)!.covid_19,
             style: TextStyle(fontSize: 32),
           ),
           SizedBox(height: 100),
@@ -80,7 +80,7 @@ class _EpidemicPageState extends State<EpidemicPage>
       ),
       child: SliverAppBar(
         pinned: true,
-        title: Text(AppLocalizations.of(context).epidemicData),
+        title: Text(AppLocalizations.of(context)!.epidemicData),
         centerTitle: true,
         expandedHeight: 250.0,
         forceElevated: innerBoxIsScrolled,

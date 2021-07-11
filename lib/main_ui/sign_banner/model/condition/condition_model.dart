@@ -5,14 +5,14 @@ import '../city.dart';
 
 part 'condition_model.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class ConditionModel {
   City city;
   Condition condition;
 
   ConditionModel({
-    this.city,
-    this.condition,
+    required this.city,
+    required this.condition,
   });
 
   factory ConditionModel.fromJson(Map<String, dynamic> json) =>

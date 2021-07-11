@@ -9,12 +9,12 @@ class ListGlobalItem extends StatelessWidget {
   final String value4;
 
   ListGlobalItem({
-    this.cellRatio,
-    this.value0,
-    this.value1,
-    this.value2,
-    this.value3,
-    this.value4,
+    required this.cellRatio,
+    required this.value0,
+    required this.value1,
+    required this.value2,
+    required this.value3,
+    required this.value4,
   });
 
   @override
@@ -52,8 +52,8 @@ class ListGlobalItem extends StatelessWidget {
   }
 
   Widget _buildText({
-    String text,
-    Color color,
+    String? text,
+    Color? color,
     AlignmentGeometry alignment = Alignment.center,
   }) {
     Widget container = Container(

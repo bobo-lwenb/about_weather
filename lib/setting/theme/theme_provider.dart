@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class ThemeValues with ChangeNotifier, DiagnosticableTreeMixin {
   ThemeMode mode = ThemeMode.system;
 
-  ThemeValues({this.mode});
+  ThemeValues({required this.mode});
 
   ThemeMode get themeMode => mode;
 

@@ -2,24 +2,24 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'aqi_index.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class AQIIndex {
-  String cityName;
-  String co;
-  String coC;
-  String no2;
-  String no2C;
-  String o3;
-  String o3C;
-  String pm10;
-  String pm10C;
-  String pm25;
-  String pm25C;
-  String pubtime;
-  String rank;
-  String o2;
-  String so2C;
-  String value;
+  String? cityName;
+  String? co;
+  String? coC;
+  String? no2;
+  String? no2C;
+  String? o3;
+  String? o3C;
+  String? pm10;
+  String? pm10C;
+  String? pm25;
+  String? pm25C;
+  String? pubtime;
+  String? rank;
+  String? o2;
+  String? so2C;
+  String? value;
 
   AQIIndex({
     this.cityName,

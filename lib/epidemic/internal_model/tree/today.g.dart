@@ -8,11 +8,11 @@ part of 'today.dart';
 
 Today _$TodayFromJson(Map<String, dynamic> json) {
   return Today(
-    confirm: json['confirm'] as int,
-    confirmCuts: json['confirmCuts'] as int,
-    isUpdated: json['isUpdated'] as bool,
-    tip: json['tip'] as String,
-    wzzAdd: json['wzz_add'] as int,
+    confirm: json['confirm'] as int?,
+    confirmCuts: json['confirmCuts'] as int?,
+    isUpdated: json['isUpdated'] as bool?,
+    tip: json['tip'] as String?,
+    wzzAdd: json['wzz_add'] as int?,
   );
 }
 

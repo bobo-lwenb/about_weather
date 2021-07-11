@@ -8,13 +8,10 @@ part of 'hourly_model.dart';
 
 HourlyModel _$HourlyModelFromJson(Map<String, dynamic> json) {
   return HourlyModel(
-    city: json['city'] == null
-        ? null
-        : City.fromJson(json['city'] as Map<String, dynamic>),
-    hourly: (json['hourly'] as List)
-        ?.map((e) =>
-            e == null ? null : Hourly.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    city: City.fromJson(json['city'] as Map<String, dynamic>),
+    hourly: (json['hourly'] as List<dynamic>)
+        .map((e) => Hourly.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 

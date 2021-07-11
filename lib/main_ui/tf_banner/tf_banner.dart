@@ -11,7 +11,7 @@ import 'model/hourly.dart';
 class TFBanner extends StatefulWidget {
   final Location location;
 
-  TFBanner({this.location, Key key}) : super(key: key);
+  TFBanner({Key? key, required this.location}) : super(key: key);
 
   @override
   _TFBannerState createState() => _TFBannerState();
@@ -34,8 +34,8 @@ class _TFBannerState extends State<TFBanner> {
       widget.location.longitude.toString(),
     );
     Future.wait([contidion, forecast]).then((list) {
-      riseSun = (list[0] as Condition).sunRise;
-      setSun = (list[0] as Condition).sunSet;
+      riseSun = (list[0] as Condition).sunRise!;
+      setSun = (list[0] as Condition).sunSet!;
       _hourly.clear();
       _hourly.addAll(list[1]);
       if (!mounted) return;
@@ -100,7 +100,7 @@ class TFItem extends StatelessWidget {
   final Hourly hourly;
   final bool isDay;
 
-  TFItem({this.hourly, this.isDay = true});
+  TFItem({required this.hourly, this.isDay = true});
 
   @override
   Widget build(BuildContext context) {

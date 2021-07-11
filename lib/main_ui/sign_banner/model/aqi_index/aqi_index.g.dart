@@ -8,22 +8,22 @@ part of 'aqi_index.dart';
 
 AQIIndex _$AQIIndexFromJson(Map<String, dynamic> json) {
   return AQIIndex(
-    cityName: json['cityName'] as String,
-    co: json['co'] as String,
-    coC: json['coC'] as String,
-    no2: json['no2'] as String,
-    no2C: json['no2C'] as String,
-    o3: json['o3'] as String,
-    o3C: json['o3C'] as String,
-    pm10: json['pm10'] as String,
-    pm10C: json['pm10C'] as String,
-    pm25: json['pm25'] as String,
-    pm25C: json['pm25C'] as String,
-    pubtime: json['pubtime'] as String,
-    rank: json['rank'] as String,
-    o2: json['o2'] as String,
-    so2C: json['so2C'] as String,
-    value: json['value'] as String,
+    cityName: json['cityName'] as String?,
+    co: json['co'] as String?,
+    coC: json['coC'] as String?,
+    no2: json['no2'] as String?,
+    no2C: json['no2C'] as String?,
+    o3: json['o3'] as String?,
+    o3C: json['o3C'] as String?,
+    pm10: json['pm10'] as String?,
+    pm10C: json['pm10C'] as String?,
+    pm25: json['pm25'] as String?,
+    pm25C: json['pm25C'] as String?,
+    pubtime: json['pubtime'] as String?,
+    rank: json['rank'] as String?,
+    o2: json['o2'] as String?,
+    so2C: json['so2C'] as String?,
+    value: json['value'] as String?,
   );
 }
 

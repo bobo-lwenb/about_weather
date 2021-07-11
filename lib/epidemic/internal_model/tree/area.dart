@@ -5,12 +5,12 @@ import 'total.dart';
 
 part 'area.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class Area {
-  String name;
-  Today today;
-  Total total;
-  List<Area> children;
+  String? name;
+  Today? today;
+  Total? total;
+  List<Area>? children;
 
   Area({
     this.name,

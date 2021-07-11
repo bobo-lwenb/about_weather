@@ -2,16 +2,16 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'forecast_aqi.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class ForecastAQI {
   String date;
   String publishTime;
   int value;
 
   ForecastAQI({
-    this.date,
-    this.publishTime,
-    this.value,
+    required this.date,
+    required this.publishTime,
+    required this.value,
   });
 
   factory ForecastAQI.fromJson(Map<String, dynamic> json) =>

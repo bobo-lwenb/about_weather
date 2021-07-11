@@ -11,9 +11,7 @@ PlaceName _$PlaceNameFromJson(Map<String, dynamic> json) {
     prov: json['prov'] as String,
     flag: json['flag'] as bool,
     area: json['area'] as String,
-    cityInfo: json['cityInfo'] == null
-        ? null
-        : CityInfo.fromJson(json['cityInfo'] as Map<String, dynamic>),
+    cityInfo: CityInfo.fromJson(json['cityInfo'] as Map<String, dynamic>),
     areaCode: json['areaCode'] as String,
     distric: json['distric'] as String,
     areaid: json['areaid'] as String,

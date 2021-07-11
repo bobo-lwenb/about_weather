@@ -11,10 +11,10 @@ LimitModel _$LimitModelFromJson(Map<String, dynamic> json) {
     city: json['city'] == null
         ? null
         : City.fromJson(json['city'] as Map<String, dynamic>),
-    limit: (json['limit'] as List)
+    limit: (json['limit'] as List<dynamic>?)
         ?.map(
             (e) => e == null ? null : Limit.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+        .toList(),
   );
 }
 

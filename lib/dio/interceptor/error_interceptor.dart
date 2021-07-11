@@ -4,10 +4,10 @@ import 'package:flutter/cupertino.dart';
 
 class ErrorInterceptor extends Interceptor {
   @override
-  Future onError(DioError err) {
+  void onError(DioError err, ErrorInterceptorHandler handler) {
     AppException appException = AppException.create(err);
     debugPrint("DioError===: ${appException.toString()}");
     err.error = appException;
-    return super.onError(err);
+    super.onError(err, handler);
   }
 }

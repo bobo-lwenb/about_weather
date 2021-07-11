@@ -2,14 +2,14 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'limit.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class Limit {
   String date;
   String prompt;
 
   Limit({
-    this.date,
-    this.prompt,
+    required this.date,
+    required this.prompt,
   });
 
   factory Limit.fromJson(Map<String, dynamic> json) => _$LimitFromJson(json);

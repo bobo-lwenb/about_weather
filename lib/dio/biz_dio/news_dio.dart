@@ -9,18 +9,18 @@ const String INTERNAL_PATH = "/g2/getOnsInfo?name=disease_h5";
 const String GLOBAL_PATH = "/g2/getOnsInfo?name=disease_foreign";
 
 class NewsDio extends BaseDio {
-  static NewsDio _instance;
+  static NewsDio? _instance;
 
-  NewsDio._internal({String baseUrl, String appCode})
+  NewsDio._internal({required String baseUrl, required String appCode})
       : super(baseUrl: baseUrl, appCode: appCode);
 
   factory NewsDio.instance() => _getInstance();
 
   static NewsDio _getInstance() {
     if (_instance == null) {
-      _instance = NewsDio._internal(baseUrl: NEWS_HOST);
+      _instance = NewsDio._internal(baseUrl: NEWS_HOST, appCode: '');
     }
-    return _instance;
+    return _instance!;
   }
 
   Future<InternalData> getInternalData() async {
