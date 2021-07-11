@@ -73,6 +73,7 @@ class _EpidemicPageState extends State<EpidemicPage>
     );
     return Theme(
       data: ThemeData(
+        brightness: Brightness.dark,
         iconTheme: IconThemeData(color: Colors.white),
         textTheme: TextTheme(
           bodyText2: TextStyle(color: Colors.white),
@@ -90,6 +91,11 @@ class _EpidemicPageState extends State<EpidemicPage>
           background: flexibleBanner,
         ),
         bottom: TabBar(
+          labelColor: Colors.deepOrangeAccent,
+          unselectedLabelColor: Colors.white,
+          indicatorColor: Colors.deepOrangeAccent,
+          indicatorWeight: 2,
+          indicatorSize: TabBarIndicatorSize.tab,
           tabs: _tabs.map((String name) => Tab(text: name)).toList(),
           controller: _tabController,
         ),

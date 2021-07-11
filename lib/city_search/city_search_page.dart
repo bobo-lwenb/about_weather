@@ -18,6 +18,14 @@ class _CitySearchPageState extends State<CitySearchPage> {
   FocusNode _focusNode = FocusNode();
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      _focusNode.requestFocus();
+    });
+  }
+
+  @override
   void dispose() {
     super.dispose();
     _controller.dispose();
@@ -30,7 +38,6 @@ class _CitySearchPageState extends State<CitySearchPage> {
       appBar: AppBar(
         title: Builder(builder: (context) {
           return TextField(
-            autofocus: true,
             focusNode: _focusNode,
             controller: _controller,
             maxLines: 1,

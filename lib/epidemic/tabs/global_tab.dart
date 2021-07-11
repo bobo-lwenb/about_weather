@@ -22,10 +22,12 @@ class _GlobalTabState extends State<GlobalTab>
   @override
   void initState() {
     super.initState();
-    NewsDio.instance().getGlobalData().then((sources) {
-      _globalStatis = sources.globalStatis;
-      _foreignList = sources.foreignList;
-      setState(() {});
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      NewsDio.instance().getGlobalData().then((sources) {
+        _globalStatis = sources.globalStatis;
+        _foreignList = sources.foreignList;
+        setState(() {});
+      });
     });
   }
 

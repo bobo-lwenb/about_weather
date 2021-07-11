@@ -25,12 +25,14 @@ class _InternalTabState extends State<InternalTab>
   @override
   void initState() {
     super.initState();
-    NewsDio.instance().getInternalData().then((total) {
-      _lastUpdateTime = total.lastUpdateTime;
-      _chinaTotal = total.chinaTotal;
-      _chinaAdd = total.chinaAdd;
-      _listArea = total.areaTree[0].children;
-      setState(() {});
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      NewsDio.instance().getInternalData().then((total) {
+        _lastUpdateTime = total.lastUpdateTime;
+        _chinaTotal = total.chinaTotal;
+        _chinaAdd = total.chinaAdd;
+        _listArea = total.areaTree[0].children;
+        setState(() {});
+      });
     });
   }
 
