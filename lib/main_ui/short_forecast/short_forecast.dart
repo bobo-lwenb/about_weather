@@ -40,7 +40,7 @@ class _ShortForecastBannerState extends State<ShortForecastBanner> {
 
   @override
   Widget build(BuildContext context) {
-    if (_sfc == null) return SizedBox();
+    if (_sfc == null) return SizedBox(height: 40);
     String banner = _sfc!.banner;
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),

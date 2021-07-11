@@ -37,7 +37,7 @@ class _AQIBannerState extends State<AQIBanner> {
 
   @override
   Widget build(BuildContext context) {
-    if (_list.isEmpty) return Container();
+    if (_list.isEmpty) return Container(height: 171);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[

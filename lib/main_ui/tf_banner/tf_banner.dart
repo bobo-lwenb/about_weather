@@ -45,7 +45,7 @@ class _TFBannerState extends State<TFBanner> {
 
   @override
   Widget build(BuildContext context) {
-    if (_hourly.isEmpty) return Container(height: 148);
+    if (_hourly.isEmpty) return Container(height: 193);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[

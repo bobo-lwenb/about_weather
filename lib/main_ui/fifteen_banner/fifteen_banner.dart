@@ -36,7 +36,7 @@ class _FifteenBannerState extends State<FifteenBanner> {
 
   @override
   Widget build(BuildContext context) {
-    if (_list.isEmpty) return Container(height: 243);
+    if (_list.isEmpty) return Container(height: 288);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[

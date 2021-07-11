@@ -66,7 +66,7 @@ class _SignBannerState extends State<SignBanner> {
 
   @override
   Widget build(BuildContext context) {
-    if (_condition == null || _aqiIndex == null) return SizedBox();
+    if (_condition == null || _aqiIndex == null) return SizedBox(height: 286);
     String temp = _condition!.temp!;
     String condition = _condition!.condition!;
     String icon = _condition!.icon!;
