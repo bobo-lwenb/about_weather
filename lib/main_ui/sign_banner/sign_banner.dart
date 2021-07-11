@@ -49,7 +49,7 @@ class _SignBannerState extends State<SignBanner> {
     ];
     Future.wait(list).then((listValues) {
       _condition = listValues[0];
-      if (widget.signMode == SignMode.normal) {
+      if (widget.signMode == SignMode.normal && mounted) {
         PageStatus status = ModelStatus.instance().getPageStatu(widget.index!);
         String path =
             adaptConditionId(_condition!.conditionId!, _condition!.icon!);

@@ -52,8 +52,6 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    Locale locale = Localizations.localeOf(context);
-    print(locale);
     Widget consumer = Consumer<LocationList>(
       builder: (context, data, child) {
         List<Location> list = data.list;

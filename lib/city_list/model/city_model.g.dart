@@ -8,7 +8,7 @@ part of 'city_model.dart';
 
 CityModel _$CityModelFromJson(Map<String, dynamic> json) {
   return CityModel(
-    top: json['top'] as String,
+    showTop: json['showTop'] as bool,
     name: json['name'] as String,
     temperature: json['temperature'] as String,
     icon: json['icon'] as String,
@@ -16,7 +16,7 @@ CityModel _$CityModelFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$CityModelToJson(CityModel instance) => <String, dynamic>{
-      'top': instance.top,
+      'showTop': instance.showTop,
       'name': instance.name,
       'temperature': instance.temperature,
       'icon': instance.icon,

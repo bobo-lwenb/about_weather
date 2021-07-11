@@ -147,9 +147,7 @@ class _ListItemState extends State<ListItem> {
           ? "${widget.location.district}"
           : "${widget.location.district}区";
       cityModel.name = "$city $district";
-      cityModel.top = widget.index == 0
-          ? AppLocalizations.of(context)!.currentLocation
-          : "";
+      cityModel.showTop = widget.index == 0;
       cityModel.icon = iconPath(condition.icon);
       _valueNotifier.value = cityModel;
     });
@@ -170,7 +168,9 @@ class _ListItemState extends State<ListItem> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      "${cityModel.top}",
+                      cityModel.showTop
+                          ? AppLocalizations.of(context)!.currentLocation
+                          : '',
                       style: TextStyle(fontSize: 12, color: Colors.grey),
                     ),
                     Text(

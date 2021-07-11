@@ -59,7 +59,9 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeBundle.dark,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      locale: Provider.of<Language>(context).locale,
+      locale: Provider.of<Language>(context).locale.languageCode == 'und'
+          ? null
+          : Provider.of<Language>(context).locale,
       home: HomePage(),
     );
   }

@@ -4,20 +4,20 @@ part 'city_model.g.dart';
 
 @JsonSerializable()
 class CityModel {
-  String top;
+  bool showTop;
   String name;
   String temperature;
   String icon;
 
   CityModel({
-    required this.top,
+    required this.showTop,
     required this.name,
     required this.temperature,
     required this.icon,
   });
 
   CityModel.empty()
-      : top = '',
+      : showTop = false,
         name = '',
         temperature = '',
         icon = '';
