@@ -14,36 +14,28 @@ class _AboutAppState extends State<AboutApp>
   String _appName = "";
   String _appVersion = "";
 
-  ValueNotifier _valueNotifier = ValueNotifier<double>(0);
-  late AnimationController _controller;
-
   @override
   void initState() {
     super.initState();
     _info();
-    _controller = AnimationController(
-        duration: const Duration(milliseconds: 800), vsync: this);
-    _controller.addListener(() {
-      _valueNotifier.value = (1 - _controller.value) * _valueNotifier.value;
-      if (_controller.isCompleted) _controller.reset();
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    Column column = Column(
+    Flex flex = Flex(
+      direction: Axis.vertical,
       children: [
-        SizedBox(height: 32),
+        Expanded(flex: 1, child: SizedBox()),
         Text(
           AppLocalizations.of(context)!.welcome,
-          style: TextStyle(fontSize: 22),
+          style: TextStyle(fontSize: 26),
         ),
-        SizedBox(height: 150),
+        Expanded(flex: 2, child: SizedBox()),
         Text(
           _appName,
           style: TextStyle(fontSize: 42),
         ),
-        SizedBox(height: 150),
+        Expanded(flex: 2, child: SizedBox()),
         Column(
           children: [
             Row(
@@ -59,31 +51,6 @@ class _AboutAppState extends State<AboutApp>
         ),
       ],
     );
-    ValueListenableBuilder builder = ValueListenableBuilder(
-      valueListenable: _valueNotifier,
-      builder: (context, value, child) {
-        return Positioned(
-          top: value as double,
-          child: child!,
-        );
-      },
-      child: column,
-    );
-    GestureDetector detector = GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onVerticalDragUpdate: (details) {
-        _valueNotifier.value += details.delta.dy / 2;
-      },
-      onVerticalDragEnd: (details) {
-        _controller.forward();
-      },
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          builder,
-        ],
-      ),
-    );
     return Theme(
       data: ThemeData.dark(),
       child: Scaffold(
@@ -94,15 +61,9 @@ class _AboutAppState extends State<AboutApp>
           title: Text(AppLocalizations.of(context)!.aboutApp),
         ),
         backgroundColor: Colors.deepOrange[400],
-        body: detector,
+        body: SafeArea(child: flex),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _controller.dispose();
   }
 
   void _info() async {
