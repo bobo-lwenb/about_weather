@@ -25,7 +25,7 @@ class AppException implements Exception {
         try {
           int errCode = error.response!.statusCode!;
           String errMsg = error.response!.statusMessage!;
-          print("==============$errMsg");
+          print("$errCode==============$errMsg");
           // return ErrorEntity(code: errCode, message: errMsg);
           switch (errCode) {
             case 400:

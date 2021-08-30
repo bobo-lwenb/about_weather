@@ -6,16 +6,16 @@ part 'region.g.dart';
 @JsonSerializable()
 class Region {
   @JsonKey(name: "ret_code")
-  int retCode;
+  final int retCode;
 
   @JsonKey(name: "showapi_fee_code")
-  int feeCode;
+  final int? feeCode;
 
-  List<PlaceName> list;
+  final List<PlaceName> list;
 
   Region({
     required this.retCode,
-    required this.feeCode,
+    this.feeCode,
     required this.list,
   });
 
