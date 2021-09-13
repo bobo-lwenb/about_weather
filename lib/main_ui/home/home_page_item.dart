@@ -50,7 +50,7 @@ class _HomePageItemState extends State<HomePageItem>
           SliverToBoxAdapter(child: AlertBanner(location: widget.location)),
           SliverToBoxAdapter(child: LimitBanner(location: widget.location)),
           SliverToBoxAdapter(child: EpidemicBanner(location: widget.location)),
-          SliverToBoxAdapter(child: SizedBox(height: 80)),
+          SliverToBoxAdapter(child: SizedBox(height: 100)),
         ],
       );
       return scrollView;

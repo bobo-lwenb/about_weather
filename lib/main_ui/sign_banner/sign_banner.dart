@@ -2,6 +2,7 @@ import 'package:about_weather/dio/biz_dio/moji_dio.dart';
 import 'package:about_weather/location/model/location.dart';
 import 'package:about_weather/main_ui/home/provider/background_path.dart';
 import 'package:about_weather/main_ui/home/provider/model_status.dart';
+import 'package:about_weather/main_ui/home/round_rectangle_border.dart';
 import 'package:about_weather/main_ui/short_forecast/short_forecast.dart';
 import 'package:about_weather/main_ui/sign_banner/model/aqi_index/aqi_index.dart';
 import 'package:about_weather/main_ui/sign_banner/model/condition/condition.dart';
@@ -101,18 +102,25 @@ class _SignBannerState extends State<SignBanner> {
           ),
           Positioned(
             bottom: 20,
-            child: Text("$tips",
-                style: TextStyle(
-                  color: adaptColor(textColor),
-                )),
+            child: Visibility(
+              visible: false,
+              child: Text("$tips",
+                  style: TextStyle(
+                    color: adaptColor(textColor),
+                  )),
+            ),
           ),
         ],
       ),
     );
-    Widget list = Container(
+    Widget aqi = Container(
       alignment: Alignment.centerLeft,
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: _buildAQI(),
+      child: RRectangleBorder(
+        isPadding: true,
+        isMargin: false,
+        child: _buildAQI(),
+      ),
     );
     return Column(
       children: [
@@ -121,9 +129,7 @@ class _SignBannerState extends State<SignBanner> {
           location: widget.location,
           signMode: widget.signMode,
         ),
-        white30Divider,
-        list,
-        white30Divider,
+        aqi,
       ],
     );
   }
@@ -163,9 +169,6 @@ class _SignBannerState extends State<SignBanner> {
         ),
       ],
     );
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      child: opacityWidget(object: _aqiIndex, child: column),
-    );
+    return opacityWidget(object: _aqiIndex, child: column);
   }
 }

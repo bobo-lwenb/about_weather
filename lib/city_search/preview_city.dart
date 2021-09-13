@@ -103,6 +103,7 @@ class _PreviewCityState extends State<PreviewCity> {
               location: widget.location,
               signMode: SignMode.preview,
             ),
+            SizedBox(height: 40),
           ]),
         ),
         row,

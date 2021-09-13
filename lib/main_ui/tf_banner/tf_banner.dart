@@ -1,5 +1,6 @@
 import 'package:about_weather/dio/biz_dio/moji_dio.dart';
 import 'package:about_weather/location/model/location.dart';
+import 'package:about_weather/main_ui/home/round_rectangle_border.dart';
 import 'package:about_weather/main_ui/sign_banner/model/condition/condition.dart';
 import 'package:about_weather/tool_box/fields.dart';
 import 'package:about_weather/tool_box/moji_chart.dart';
@@ -46,7 +47,7 @@ class _TFBannerState extends State<TFBanner> {
   @override
   Widget build(BuildContext context) {
     if (_hourly.isEmpty) return Container(height: 193);
-    return Column(
+    Column column = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
@@ -70,9 +71,9 @@ class _TFBannerState extends State<TFBanner> {
             itemCount: _hourly.length,
           ),
         ),
-        white30Divider,
       ],
     );
+    return RRectangleBorder(child: column);
   }
 
   bool isDay(String hour, String riseSun, String setSun) {

@@ -4,6 +4,7 @@ import 'package:about_weather/epidemic/internal_model/tree/area.dart';
 import 'package:about_weather/epidemic/widgets/banner/china_banner.dart';
 import 'package:about_weather/epidemic/widgets/banner/local_banner.dart';
 import 'package:about_weather/location/model/location.dart';
+import 'package:about_weather/main_ui/home/round_rectangle_border.dart';
 import 'package:about_weather/tool_box/fields.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -86,15 +87,7 @@ class _EpidemicBannerState extends State<EpidemicBanner>
         ),
       ],
     );
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(8),
-      margin: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Colors.white30)),
-      child: column,
-    );
+    return RRectangleBorder(child: column);
   }
 
   Widget _buildTabs(List<String> title) {

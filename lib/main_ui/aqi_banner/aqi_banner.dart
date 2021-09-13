@@ -1,5 +1,6 @@
 import 'package:about_weather/dio/biz_dio/moji_dio.dart';
 import 'package:about_weather/location/model/location.dart';
+import 'package:about_weather/main_ui/home/round_rectangle_border.dart';
 import 'package:about_weather/tool_box/fields.dart';
 import 'package:about_weather/tool_box/format_date.dart';
 import 'package:about_weather/tool_box/moji_chart.dart';
@@ -38,7 +39,7 @@ class _AQIBannerState extends State<AQIBanner> {
   @override
   Widget build(BuildContext context) {
     if (_list.isEmpty) return Container(height: 171);
-    return Column(
+    Column column = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
@@ -60,9 +61,9 @@ class _AQIBannerState extends State<AQIBanner> {
             itemCount: _list.length,
           ),
         ),
-        white30Divider,
       ],
     );
+    return RRectangleBorder(child: column);
   }
 }
 

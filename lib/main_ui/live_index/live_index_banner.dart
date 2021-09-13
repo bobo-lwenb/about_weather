@@ -1,7 +1,7 @@
 import 'package:about_weather/dio/biz_dio/moji_dio.dart';
 import 'package:about_weather/location/model/location.dart';
+import 'package:about_weather/main_ui/home/round_rectangle_border.dart';
 import 'package:about_weather/tool_box/fields.dart';
-import 'package:about_weather/tool_box/moji_chart.dart';
 import 'package:flutter/material.dart';
 
 import 'model/live_index.dart';
@@ -54,19 +54,17 @@ class _LiveIndexBannerState extends State<LiveIndexBanner> {
       removeBottom: true,
       child: gridView,
     );
-    return Column(
+    Column column = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        white30Divider,
         Padding(
           padding: const EdgeInsets.only(left: 16, top: 16),
           child: Text("生活指数", style: TextStyle(fontSize: 24, color: textColor)),
         ),
         widget,
-        SizedBox(height: 8),
-        white30Divider,
       ],
     );
+    return RRectangleBorder(child: column);
   }
 }
 

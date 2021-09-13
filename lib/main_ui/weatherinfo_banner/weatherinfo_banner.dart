@@ -1,5 +1,6 @@
 import 'package:about_weather/dio/biz_dio/moji_dio.dart';
 import 'package:about_weather/location/model/location.dart';
+import 'package:about_weather/main_ui/home/round_rectangle_border.dart';
 import 'package:about_weather/main_ui/sign_banner/model/condition/condition.dart';
 import 'package:about_weather/main_ui/sign_banner/sign_mode.dart';
 import 'package:about_weather/tool_box/fields.dart';
@@ -43,22 +44,23 @@ class _WeatherInfoBannerState extends State<WeatherInfoBanner> {
   @override
   Widget build(BuildContext context) {
     if (_condition == null) return SizedBox(height: 315);
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 16),
-            child: Text("天气信息",
-                style: TextStyle(
-                  fontSize: 24,
-                  color: widget.signMode == SignMode.normal ? textColor : null,
-                )),
-          ),
-          _buildGrid(),
-        ],
-      ),
+    Column column = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(bottom: 16),
+          child: Text("天气信息",
+              style: TextStyle(
+                fontSize: 24,
+                color: widget.signMode == SignMode.normal ? textColor : null,
+              )),
+        ),
+        _buildGrid(),
+      ],
+    );
+    return RRectangleBorder(
+      isPadding: true,
+      child: column,
     );
   }
 
