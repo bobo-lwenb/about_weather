@@ -13,6 +13,7 @@ import 'package:about_weather/main_ui/tf_banner/tf_banner.dart';
 import 'package:about_weather/main_ui/weatherinfo_banner/weatherinfo_banner.dart';
 import 'package:about_weather/tool_box/fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class HomePageItem extends StatefulWidget {
@@ -73,12 +74,12 @@ class _HomePageItemState extends State<HomePageItem>
           fontSize: 30, color: textColor, fontWeight: FontWeight.normal),
     );
     Widget sliverAppBar = SliverAppBar(
-      brightness: Brightness.dark,
       pinned: true,
       centerTitle: false,
       backgroundColor: Colors.transparent,
       shadowColor: Colors.transparent,
       expandedHeight: 160,
+      systemOverlayStyle: SystemUiOverlayStyle.light,
       flexibleSpace: LayoutBuilder(builder: (context, constraints) {
         double sigma = constraints.biggest.height == 100 ? 15 : 0;
         return ClipRect(

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:about_weather/tool_box/fields.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info/package_info.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -60,7 +61,8 @@ class _AboutAppState extends State<AboutApp>
           backgroundColor: Colors.transparent,
           title: Text(AppLocalizations.of(context)!.aboutApp),
         ),
-        backgroundColor: Colors.deepOrange[400],
+        backgroundColor:
+            isDark(context) ? Colors.grey[900] : Colors.deepOrange[400],
         body: SafeArea(child: flex),
       ),
     );

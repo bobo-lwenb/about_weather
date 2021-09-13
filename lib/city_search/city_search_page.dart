@@ -41,8 +41,10 @@ class _CitySearchPageState extends State<CitySearchPage> {
             focusNode: _focusNode,
             controller: _controller,
             maxLines: 1,
+            style: TextStyle(color: Colors.white),
             decoration: InputDecoration(
               hintText: AppLocalizations.of(context)!.citySearch,
+              hintStyle: TextStyle(color: Colors.white),
               border: OutlineInputBorder(borderSide: BorderSide.none),
             ),
             onSubmitted: (text) {
