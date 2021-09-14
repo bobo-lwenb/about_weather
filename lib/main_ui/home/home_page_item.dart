@@ -81,7 +81,7 @@ class _HomePageItemState extends State<HomePageItem>
       expandedHeight: 160,
       systemOverlayStyle: SystemUiOverlayStyle.light,
       flexibleSpace: LayoutBuilder(builder: (context, constraints) {
-        double sigma = constraints.biggest.height == 100 ? 15 : 0;
+        double sigma = constraints.biggest.height == 100 ? 25 : 0;
         return ClipRect(
             child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: sigma, sigmaY: sigma),
