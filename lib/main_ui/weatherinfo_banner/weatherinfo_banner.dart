@@ -59,6 +59,7 @@ class _WeatherInfoBannerState extends State<WeatherInfoBanner> {
       ],
     );
     return RRectangleBorder(
+      mode: widget.signMode,
       isPadding: true,
       child: column,
     );

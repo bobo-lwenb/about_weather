@@ -1,5 +1,6 @@
 import 'package:about_weather/dio/biz_dio/moji_dio.dart';
 import 'package:about_weather/location/model/location.dart';
+import 'package:about_weather/main_ui/home/round_rectangle_border.dart';
 import 'package:about_weather/main_ui/sign_banner/sign_mode.dart';
 import 'package:about_weather/tool_box/fields.dart';
 import 'package:flutter/material.dart';
@@ -44,13 +45,24 @@ class _ShortForecastBannerState extends State<ShortForecastBanner> {
     String banner = _sfc!.banner;
     return opacityWidget(
       object: _sfc,
-      child: Container(
-        alignment: Alignment.centerLeft,
-        child: Text("$banner",
-            style: TextStyle(
-              fontSize: 18,
+      child: RRectangleBorder(
+        mode: widget.signMode,
+        isPadding: true,
+        child: Row(
+          children: [
+            Icon(
+              Icons.turned_in_not_outlined,
+              size: 18,
               color: adaptColor(textColor),
-            )),
+            ),
+            SizedBox(width: 8),
+            Text("$banner",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: adaptColor(textColor),
+                )),
+          ],
+        ),
       ),
     );
   }

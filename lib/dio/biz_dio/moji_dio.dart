@@ -77,7 +77,7 @@ class MojiDio extends BaseDio {
       "lon": lon,
       "token": "ff826c205f8f4a59701e64e9e64e01c4",
     };
-    Map<String, dynamic> result = await post(path: LIMIT, data: params);
+    Map<String, dynamic> result = await post(path: CONDITION, data: params);
     Map<String, dynamic> data = result["data"];
     ConditionModel model = ConditionModel.fromJson(data);
     return model.condition;
@@ -90,7 +90,7 @@ class MojiDio extends BaseDio {
       "lon": lon,
       "token": "6e9a127c311094245fc1b2aa6d0a54fd",
     };
-    Map<String, dynamic> result = await post(path: LIMIT, data: params);
+    Map<String, dynamic> result = await post(path: AQI_INDEX, data: params);
     Map<String, dynamic> data = result["data"];
     AQIModel model = AQIModel.fromJson(data);
     return model.aqi;

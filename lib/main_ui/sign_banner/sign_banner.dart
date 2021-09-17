@@ -7,6 +7,7 @@ import 'package:about_weather/main_ui/short_forecast/short_forecast.dart';
 import 'package:about_weather/main_ui/sign_banner/model/aqi_index/aqi_index.dart';
 import 'package:about_weather/main_ui/sign_banner/model/condition/condition.dart';
 import 'package:about_weather/main_ui/sign_banner/sign_mode.dart';
+import 'package:about_weather/main_ui/tf_banner/model/hourly.dart';
 import 'package:about_weather/tool_box/fields.dart';
 import 'package:about_weather/tool_box/fields_bg.dart';
 import 'package:about_weather/tool_box/format_date.dart';
@@ -33,6 +34,7 @@ class SignBanner extends StatefulWidget {
 class _SignBannerState extends State<SignBanner> {
   Condition? _condition;
   AQIIndex? _aqiIndex;
+  ValueBean? bean;
 
   @override
   void initState() {
@@ -44,6 +46,10 @@ class _SignBannerState extends State<SignBanner> {
         _location.longitude.toString(),
       ),
       MojiDio.instance().aqiIndex(
+        _location.latitude.toString(),
+        _location.longitude.toString(),
+      ),
+      MojiDio.instance().forecast24(
         _location.latitude.toString(),
         _location.longitude.toString(),
       ),
@@ -60,6 +66,10 @@ class _SignBannerState extends State<SignBanner> {
           Provider.of<BackgrounPath>(context, listen: false).changePath(path);
       }
       _aqiIndex = listValues[1];
+      List<int> temps = (listValues[2] as List<Hourly>)
+          .map((e) => int.parse(e.temp))
+          .toList();
+      bean = minAndMax(temps);
       if (!mounted) return;
       setState(() {});
     });
@@ -71,49 +81,77 @@ class _SignBannerState extends State<SignBanner> {
     String temp = _condition!.temp!;
     String condition = _condition!.condition!;
     String icon = _condition!.icon!;
-    String tips = _condition!.tips!;
-    Widget top = Container(
-      height: 150,
-      child: Stack(
-        alignment: AlignmentDirectional.bottomCenter,
-        children: <Widget>[
-          Positioned(
-            bottom: 55,
-            child: Text(
-              "$temp°",
-              style: TextStyle(
-                fontSize: 100,
-                fontWeight: FontWeight.w200,
-                color: adaptColor(textColor),
+
+    Widget column = Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        RRectangleBorder(
+          mode: widget.signMode,
+          isPadding: true,
+          halfLeftMargin: true,
+          child: Row(
+            children: [
+              Image.asset(iconPath(icon), width: 16),
+              SizedBox(width: 8),
+              Text(
+                "$condition",
+                style: TextStyle(color: adaptColor(textColor)),
               ),
+            ],
+          ),
+        ),
+        RRectangleBorder(
+          mode: widget.signMode,
+          isPadding: true,
+          halfLeftMargin: true,
+          child: Text("最高${bean!.max}°  最低${bean!.min}°",
+              style: TextStyle(
+                color: adaptColor(textColor),
+              )),
+        ),
+      ],
+    );
+    Widget row = Row(
+      children: [
+        Expanded(
+          flex: 1,
+          child: RRectangleBorder(
+            mode: widget.signMode,
+            isPadding: true,
+            halfRightMargin: true,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("$temp",
+                    style: TextStyle(
+                      fontSize: 85,
+                      fontWeight: FontWeight.w200,
+                      color: adaptColor(textColor),
+                    )),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Text("°",
+                      style: TextStyle(
+                        fontSize: 50,
+                        fontWeight: FontWeight.w200,
+                        color: adaptColor(textColor),
+                      )),
+                ),
+              ],
             ),
           ),
-          Positioned(
-            bottom: 40,
-            child: Row(children: [
-              Text("$condition",
-                  style: TextStyle(
-                    fontSize: 22,
-                    color: adaptColor(textColor),
-                  )),
-              SizedBox(width: 8),
-              Image.asset(iconPath(icon), width: 20)
-            ]),
-          ),
-          Positioned(
-            bottom: 20,
-            child: Text("$tips",
-                style: TextStyle(
-                  color: adaptColor(textColor),
-                )),
-          ),
-        ],
-      ),
+        ),
+        Expanded(
+          flex: 1,
+          child: column,
+        ),
+      ],
     );
     Widget aqi = Container(
       alignment: Alignment.centerLeft,
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: RRectangleBorder(
+        mode: widget.signMode,
         isPadding: true,
         isMargin: false,
         child: _buildAQI(),
@@ -121,22 +159,16 @@ class _SignBannerState extends State<SignBanner> {
     );
     return Column(
       children: [
-        opacityWidget(object: _condition, child: top),
-        RRectangleBorder(
-          isPadding: true,
-          child: ShortForecastBanner(
-            location: widget.location,
-            signMode: widget.signMode,
-          ),
+        opacityWidget(object: _condition, child: row),
+        ShortForecastBanner(
+          location: widget.location,
+          signMode: widget.signMode,
         ),
         SizedBox(height: 16),
         aqi,
       ],
     );
   }
-
-  Color? adaptColor(Color color) =>
-      widget.signMode == SignMode.normal ? color : null;
 
   Widget _buildAQI() {
     String value = _aqiIndex!.value!;
@@ -172,4 +204,28 @@ class _SignBannerState extends State<SignBanner> {
     );
     return opacityWidget(object: _aqiIndex, child: column);
   }
+
+  Color? adaptColor(Color color) =>
+      widget.signMode == SignMode.normal ? color : null;
+
+  ValueBean minAndMax(List<int> hourly) {
+    int max = hourly[0];
+    int min = hourly[0];
+    for (int temp in hourly) {
+      if (temp > max) {
+        max = temp;
+      }
+      if (temp < min) {
+        min = temp;
+      }
+    }
+    return ValueBean(max: max, min: min);
+  }
+}
+
+class ValueBean {
+  final int max;
+  final int min;
+
+  ValueBean({required this.max, required this.min});
 }

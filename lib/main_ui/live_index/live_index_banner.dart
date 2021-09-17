@@ -62,6 +62,7 @@ class _LiveIndexBannerState extends State<LiveIndexBanner> {
           child: Text("生活指数", style: TextStyle(fontSize: 24, color: textColor)),
         ),
         widget,
+        SizedBox(height: 8),
       ],
     );
     return RRectangleBorder(child: column);
