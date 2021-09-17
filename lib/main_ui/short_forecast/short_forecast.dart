@@ -42,13 +42,13 @@ class _ShortForecastBannerState extends State<ShortForecastBanner> {
   Widget build(BuildContext context) {
     if (_sfc == null) return SizedBox(height: 40);
     String banner = _sfc!.banner;
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 16),
-      child: opacityWidget(
-        object: _sfc,
+    return opacityWidget(
+      object: _sfc,
+      child: Container(
+        alignment: Alignment.centerLeft,
         child: Text("$banner",
             style: TextStyle(
-              fontSize: 22,
+              fontSize: 18,
               color: adaptColor(textColor),
             )),
       ),

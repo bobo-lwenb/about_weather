@@ -102,13 +102,10 @@ class _SignBannerState extends State<SignBanner> {
           ),
           Positioned(
             bottom: 20,
-            child: Visibility(
-              visible: false,
-              child: Text("$tips",
-                  style: TextStyle(
-                    color: adaptColor(textColor),
-                  )),
-            ),
+            child: Text("$tips",
+                style: TextStyle(
+                  color: adaptColor(textColor),
+                )),
           ),
         ],
       ),
@@ -125,10 +122,14 @@ class _SignBannerState extends State<SignBanner> {
     return Column(
       children: [
         opacityWidget(object: _condition, child: top),
-        ShortForecastBanner(
-          location: widget.location,
-          signMode: widget.signMode,
+        RRectangleBorder(
+          isPadding: true,
+          child: ShortForecastBanner(
+            location: widget.location,
+            signMode: widget.signMode,
+          ),
         ),
+        SizedBox(height: 16),
         aqi,
       ],
     );
