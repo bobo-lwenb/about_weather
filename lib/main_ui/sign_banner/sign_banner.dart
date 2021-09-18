@@ -1,8 +1,7 @@
-import 'package:about_weather/dio/biz_dio/moji_dio.dart';
-import 'package:about_weather/location/model/location.dart';
 import 'package:about_weather/main_ui/home/provider/background_path.dart';
 import 'package:about_weather/main_ui/home/provider/model_status.dart';
-import 'package:about_weather/main_ui/home/round_rectangle_border.dart';
+import 'package:about_weather/main_ui/home/widgets/round_rectangle_border.dart';
+import 'package:about_weather/main_ui/short_forecast/model/sfc.dart';
 import 'package:about_weather/main_ui/short_forecast/short_forecast.dart';
 import 'package:about_weather/main_ui/sign_banner/model/aqi_index/aqi_index.dart';
 import 'package:about_weather/main_ui/sign_banner/model/condition/condition.dart';
@@ -16,13 +15,19 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class SignBanner extends StatefulWidget {
-  final Location location;
+  final Condition condition;
+  final SFC sfc;
+  final AQIIndex aqiIndex;
+  final List<Hourly> hourly;
   final SignMode signMode;
   final int? index;
 
   SignBanner({
     Key? key,
-    required this.location,
+    required this.condition,
+    required this.sfc,
+    required this.aqiIndex,
+    required this.hourly,
     this.signMode = SignMode.normal,
     this.index,
   }) : super(key: key);
@@ -32,55 +37,31 @@ class SignBanner extends StatefulWidget {
 }
 
 class _SignBannerState extends State<SignBanner> {
-  Condition? _condition;
-  AQIIndex? _aqiIndex;
   ValueBean? bean;
 
   @override
   void initState() {
     super.initState();
-    Location _location = widget.location;
-    List<Future> list = [
-      MojiDio.instance().condition(
-        _location.latitude.toString(),
-        _location.longitude.toString(),
-      ),
-      MojiDio.instance().aqiIndex(
-        _location.latitude.toString(),
-        _location.longitude.toString(),
-      ),
-      MojiDio.instance().forecast24(
-        _location.latitude.toString(),
-        _location.longitude.toString(),
-      ),
-    ];
-    Future.wait(list).then((listValues) {
-      _condition = listValues[0];
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
       if (widget.signMode == SignMode.normal && mounted) {
         PageStatus status = ModelStatus.instance().getPageStatu(widget.index!);
-        String path =
-            adaptConditionId(_condition!.conditionId!, _condition!.icon!);
+        String path = adaptConditionId(
+            widget.condition.conditionId!, widget.condition.icon!);
         status.path = path;
         ModelStatus.instance().setPageStatu(status);
         if (status.isShow)
           Provider.of<BackgrounPath>(context, listen: false).changePath(path);
       }
-      _aqiIndex = listValues[1];
-      List<int> temps = (listValues[2] as List<Hourly>)
-          .map((e) => int.parse(e.temp))
-          .toList();
-      bean = minAndMax(temps);
-      if (!mounted) return;
-      setState(() {});
     });
+    List<int> temps = widget.hourly.map((e) => int.parse(e.temp)).toList();
+    bean = minAndMax(temps);
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_condition == null || _aqiIndex == null) return SizedBox(height: 286);
-    String temp = _condition!.temp!;
-    String condition = _condition!.condition!;
-    String icon = _condition!.icon!;
+    String temp = widget.condition.temp!;
+    String condition = widget.condition.condition!;
+    String icon = widget.condition.icon!;
 
     Widget column = Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -159,9 +140,9 @@ class _SignBannerState extends State<SignBanner> {
     );
     return Column(
       children: [
-        opacityWidget(object: _condition, child: row),
+        opacityWidget(object: widget.condition, child: row),
         ShortForecastBanner(
-          location: widget.location,
+          sfc: widget.sfc,
           signMode: widget.signMode,
         ),
         SizedBox(height: 16),
@@ -171,9 +152,9 @@ class _SignBannerState extends State<SignBanner> {
   }
 
   Widget _buildAQI() {
-    String value = _aqiIndex!.value!;
+    String value = widget.aqiIndex.value!;
     String desc = aqiDesc(value).desc;
-    String pubTime = formatDateFromSection(_aqiIndex!.pubtime!);
+    String pubTime = formatDateFromSection(widget.aqiIndex.pubtime!);
     Widget column = Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
@@ -202,7 +183,7 @@ class _SignBannerState extends State<SignBanner> {
         ),
       ],
     );
-    return opacityWidget(object: _aqiIndex, child: column);
+    return opacityWidget(object: widget.aqiIndex, child: column);
   }
 
   Color? adaptColor(Color color) =>

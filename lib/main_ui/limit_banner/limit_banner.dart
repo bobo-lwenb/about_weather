@@ -1,6 +1,4 @@
-import 'package:about_weather/dio/biz_dio/moji_dio.dart';
-import 'package:about_weather/location/model/location.dart';
-import 'package:about_weather/main_ui/home/round_rectangle_border.dart';
+import 'package:about_weather/main_ui/home/widgets/round_rectangle_border.dart';
 import 'package:about_weather/tool_box/fields.dart';
 import 'package:about_weather/tool_box/format_date.dart';
 import 'package:flutter/material.dart';
@@ -8,46 +6,27 @@ import 'package:flutter/material.dart';
 import 'model/limit.dart';
 
 class LimitBanner extends StatefulWidget {
-  final Location location;
+  final List<Limit?>? limits;
 
-  LimitBanner({Key? key, required this.location}) : super(key: key);
+  LimitBanner({Key? key, required this.limits}) : super(key: key);
 
   @override
   _LimitBannerState createState() => _LimitBannerState();
 }
 
 class _LimitBannerState extends State<LimitBanner> {
-  final List<Limit?> _list = List.empty(growable: true);
-
-  @override
-  void initState() {
-    super.initState();
-    MojiDio.instance()
-        .limit(
-      widget.location.latitude.toString(),
-      widget.location.longitude.toString(),
-    )
-        .then((list) {
-      if (list == null) return;
-      _list.clear();
-      _list.addAll(list);
-      if (!mounted) return;
-      setState(() {});
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    if (_list.isEmpty) return Container();
+    if (widget.limits == null || widget.limits!.isEmpty) return Container();
     Widget listView = Container(
       height: 60,
       child: ListView.builder(
         physics: BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return Limititem(limit: _list[index]!);
+          return Limititem(limit: widget.limits![index]!);
         },
-        itemCount: _list.length,
+        itemCount: widget.limits!.length,
       ),
     );
     Column column = Column(

@@ -1,18 +1,22 @@
-import 'package:about_weather/dio/biz_dio/news_dio.dart';
 import 'package:about_weather/epidemic/internal_model/internal_data.dart';
 import 'package:about_weather/epidemic/internal_model/tree/area.dart';
 import 'package:about_weather/epidemic/widgets/banner/china_banner.dart';
 import 'package:about_weather/epidemic/widgets/banner/local_banner.dart';
 import 'package:about_weather/location/model/location.dart';
-import 'package:about_weather/main_ui/home/round_rectangle_border.dart';
+import 'package:about_weather/main_ui/home/widgets/round_rectangle_border.dart';
 import 'package:about_weather/tool_box/fields.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class EpidemicBanner extends StatefulWidget {
   final Location location;
+  final InternalData internalData;
 
-  EpidemicBanner({Key? key, required this.location}) : super(key: key);
+  EpidemicBanner({
+    Key? key,
+    required this.location,
+    required this.internalData,
+  }) : super(key: key);
 
   @override
   _EpidemicBannerState createState() => _EpidemicBannerState();
@@ -24,7 +28,6 @@ class _EpidemicBannerState extends State<EpidemicBanner>
   late TabController _tabController;
   int _currentindex = 0;
 
-  InternalData? _model;
   late Area _area;
   late Locale _locale;
 
@@ -32,11 +35,6 @@ class _EpidemicBannerState extends State<EpidemicBanner>
   void initState() {
     super.initState();
     _tabController = TabController(length: _title.length, vsync: this);
-    NewsDio.instance().getInternalData().then((model) {
-      _model = model;
-      if (!mounted) return;
-      setState(() {});
-    });
   }
 
   @override
@@ -57,9 +55,9 @@ class _EpidemicBannerState extends State<EpidemicBanner>
 
   @override
   Widget build(BuildContext context) {
-    if (_model == null) return SizedBox();
+    // if (_model == null) return SizedBox();
     Location location = widget.location;
-    _model!.areaTree[0].children!.forEach((element) {
+    widget.internalData.areaTree![0].children!.forEach((element) {
       if (location.province!.contains(element.name!)) {
         _area = element;
         String provinceTitle = _locale.languageCode == "en"
@@ -77,11 +75,11 @@ class _EpidemicBannerState extends State<EpidemicBanner>
       children: <Widget>[
         _buildTabs(_title),
         SizedBox(height: 8),
-        _buildIndexedStack(_model!, _area),
+        _buildIndexedStack(widget.internalData, _area),
         Padding(
           padding: const EdgeInsets.only(left: 16, top: 8.0, bottom: 8),
           child: Text(
-            "${AppLocalizations.of(context)!.statisticsCutoff} ${_model!.lastUpdateTime}",
+            "${AppLocalizations.of(context)!.statisticsCutoff} ${widget.internalData.lastUpdateTime}",
             style: TextStyle(color: subtextColor),
           ),
         ),

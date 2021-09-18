@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'model/city_info.dart';
+import '../model/city_info.dart';
 
 class SearchItem extends StatelessWidget {
   final CityInfo info;

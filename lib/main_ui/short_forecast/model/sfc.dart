@@ -6,28 +6,28 @@ part 'sfc.g.dart';
 
 @JsonSerializable()
 class SFC {
-  String banner;
-  ConfirmInfo confirmInfo;
-  int isCorrect;
-  int isFeedback;
-  String notice;
-  List<Percent> percent;
-  int rain;
-  int rainLastTime;
-  int sfCondition;
-  int timestamp;
+  String? banner;
+  ConfirmInfo? confirmInfo;
+  int? isCorrect;
+  int? isFeedback;
+  String? notice;
+  List<Percent>? percent;
+  int? rain;
+  int? rainLastTime;
+  int? sfCondition;
+  int? timestamp;
 
   SFC({
-    required this.banner,
-    required this.confirmInfo,
-    required this.isCorrect,
-    required this.isFeedback,
-    required this.notice,
-    required this.percent,
-    required this.rain,
-    required this.rainLastTime,
-    required this.sfCondition,
-    required this.timestamp,
+    this.banner,
+    this.confirmInfo,
+    this.isCorrect,
+    this.isFeedback,
+    this.notice,
+    this.percent,
+    this.rain,
+    this.rainLastTime,
+    this.sfCondition,
+    this.timestamp,
   });
 
   factory SFC.fromJson(Map<String, dynamic> json) => _$SFCFromJson(json);

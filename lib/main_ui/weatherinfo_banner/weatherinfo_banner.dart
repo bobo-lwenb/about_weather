@@ -1,6 +1,4 @@
-import 'package:about_weather/dio/biz_dio/moji_dio.dart';
-import 'package:about_weather/location/model/location.dart';
-import 'package:about_weather/main_ui/home/round_rectangle_border.dart';
+import 'package:about_weather/main_ui/home/widgets/round_rectangle_border.dart';
 import 'package:about_weather/main_ui/sign_banner/model/condition/condition.dart';
 import 'package:about_weather/main_ui/sign_banner/sign_mode.dart';
 import 'package:about_weather/tool_box/fields.dart';
@@ -9,12 +7,12 @@ import 'package:about_weather/tool_box/moji_chart.dart';
 import 'package:flutter/material.dart';
 
 class WeatherInfoBanner extends StatefulWidget {
-  final Location location;
+  final Condition condition;
   final SignMode signMode;
 
   const WeatherInfoBanner({
     Key? key,
-    required this.location,
+    required this.condition,
     this.signMode = SignMode.normal,
   }) : super(key: key);
 
@@ -23,27 +21,8 @@ class WeatherInfoBanner extends StatefulWidget {
 }
 
 class _WeatherInfoBannerState extends State<WeatherInfoBanner> {
-  Condition? _condition;
-
-  @override
-  void initState() {
-    super.initState();
-    Location _location = widget.location;
-    MojiDio.instance()
-        .condition(
-      _location.latitude.toString(),
-      _location.longitude.toString(),
-    )
-        .then((value) {
-      _condition = value;
-      if (!mounted) return;
-      setState(() {});
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    if (_condition == null) return SizedBox(height: 315);
     Column column = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -66,15 +45,15 @@ class _WeatherInfoBannerState extends State<WeatherInfoBanner> {
   }
 
   Widget _buildGrid() {
-    String sunRise = formatHmm(_condition!.sunRise!);
-    String sunSet = formatHmm(_condition!.sunSet!);
-    String humidity = _condition!.humidity!;
-    String realFeel = _condition!.realFeel!;
-    String pressure = _condition!.pressure!;
-    String uvi = _condition!.uvi!;
-    String vis = _condition!.vis!;
-    String windDir = _condition!.windDir!;
-    String windSpeed = _condition!.windSpeed!;
+    String sunRise = formatHmm(widget.condition.sunRise!);
+    String sunSet = formatHmm(widget.condition.sunSet!);
+    String humidity = widget.condition.humidity!;
+    String realFeel = widget.condition.realFeel!;
+    String pressure = widget.condition.pressure!;
+    String uvi = widget.condition.uvi!;
+    String vis = widget.condition.vis!;
+    String windDir = widget.condition.windDir!;
+    String windSpeed = widget.condition.windSpeed!;
     Widget row1 = Row(
       children: <Widget>[
         Expanded(
@@ -141,13 +120,13 @@ class _WeatherInfoBannerState extends State<WeatherInfoBanner> {
     );
     return Column(
       children: <Widget>[
-        opacityWidget(object: _condition, child: row1),
+        opacityWidget(object: widget.condition, child: row1),
         white30Divider,
-        opacityWidget(object: _condition, child: row2),
+        opacityWidget(object: widget.condition, child: row2),
         white30Divider,
-        opacityWidget(object: _condition, child: row3),
+        opacityWidget(object: widget.condition, child: row3),
         white30Divider,
-        opacityWidget(object: _condition, child: row4),
+        opacityWidget(object: widget.condition, child: row4),
       ],
     );
   }

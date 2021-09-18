@@ -134,8 +134,8 @@ class _ListItemState extends State<ListItem> {
     super.initState();
     MojiDio.instance()
         .condition(
-      widget.location.latitude.toString(),
-      widget.location.longitude.toString(),
+      widget.location.latitude!,
+      widget.location.longitude!,
     )
         .then((condition) {
       CityModel cityModel = CityModel.empty();

@@ -13,8 +13,8 @@ class ChinaBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ChinaTotal total = model.chinaTotal;
-    ChinaAdd add = model.chinaAdd;
+    ChinaTotal total = model.chinaTotal!;
+    ChinaAdd add = model.chinaAdd!;
     Widget flex1 = Flex(
       direction: Axis.horizontal,
       children: <Widget>[

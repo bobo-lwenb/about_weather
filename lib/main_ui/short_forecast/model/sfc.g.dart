@@ -8,19 +8,20 @@ part of 'sfc.dart';
 
 SFC _$SFCFromJson(Map<String, dynamic> json) {
   return SFC(
-    banner: json['banner'] as String,
-    confirmInfo:
-        ConfirmInfo.fromJson(json['confirmInfo'] as Map<String, dynamic>),
-    isCorrect: json['isCorrect'] as int,
-    isFeedback: json['isFeedback'] as int,
-    notice: json['notice'] as String,
-    percent: (json['percent'] as List<dynamic>)
-        .map((e) => Percent.fromJson(e as Map<String, dynamic>))
+    banner: json['banner'] as String?,
+    confirmInfo: json['confirmInfo'] == null
+        ? null
+        : ConfirmInfo.fromJson(json['confirmInfo'] as Map<String, dynamic>),
+    isCorrect: json['isCorrect'] as int?,
+    isFeedback: json['isFeedback'] as int?,
+    notice: json['notice'] as String?,
+    percent: (json['percent'] as List<dynamic>?)
+        ?.map((e) => Percent.fromJson(e as Map<String, dynamic>))
         .toList(),
-    rain: json['rain'] as int,
-    rainLastTime: json['rainLastTime'] as int,
-    sfCondition: json['sfCondition'] as int,
-    timestamp: json['timestamp'] as int,
+    rain: json['rain'] as int?,
+    rainLastTime: json['rainLastTime'] as int?,
+    sfCondition: json['sfCondition'] as int?,
+    timestamp: json['timestamp'] as int?,
   );
 }
 

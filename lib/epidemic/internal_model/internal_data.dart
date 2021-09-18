@@ -9,20 +9,20 @@ part 'internal_data.g.dart';
 
 @JsonSerializable()
 class InternalData {
-  String lastUpdateTime;
-  ChinaTotal chinaTotal;
-  ChinaAdd chinaAdd;
-  bool isShowAdd;
-  ShowAddSwitch showAddSwitch;
-  List<Area> areaTree;
+  String? lastUpdateTime;
+  ChinaTotal? chinaTotal;
+  ChinaAdd? chinaAdd;
+  bool? isShowAdd;
+  ShowAddSwitch? showAddSwitch;
+  List<Area>? areaTree;
 
   InternalData({
-    required this.lastUpdateTime,
-    required this.chinaTotal,
-    required this.chinaAdd,
-    required this.isShowAdd,
-    required this.showAddSwitch,
-    required this.areaTree,
+    this.lastUpdateTime,
+    this.chinaTotal,
+    this.chinaAdd,
+    this.isShowAdd,
+    this.showAddSwitch,
+    this.areaTree,
   });
 
   factory InternalData.fromJson(Map<String, dynamic> json) =>

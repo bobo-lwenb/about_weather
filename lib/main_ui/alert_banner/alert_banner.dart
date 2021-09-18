@@ -1,6 +1,4 @@
-import 'package:about_weather/dio/biz_dio/moji_dio.dart';
-import 'package:about_weather/location/model/location.dart';
-import 'package:about_weather/main_ui/home/round_rectangle_border.dart';
+import 'package:about_weather/main_ui/home/widgets/round_rectangle_border.dart';
 import 'package:about_weather/tool_box/fields.dart';
 import 'package:about_weather/tool_box/moji_chart.dart';
 import 'package:flutter/material.dart';
@@ -8,48 +6,30 @@ import 'package:flutter/material.dart';
 import 'model/alert.dart';
 
 class AlertBanner extends StatefulWidget {
-  final Location location;
+  final List<Alert?>? alerts;
 
-  AlertBanner({Key? key, required this.location}) : super(key: key);
+  AlertBanner({Key? key, required this.alerts}) : super(key: key);
 
   @override
   _AlertBannerState createState() => _AlertBannerState();
 }
 
 class _AlertBannerState extends State<AlertBanner> {
-  List<Alert?> _list = List.empty(growable: true);
-  @override
-  void initState() {
-    super.initState();
-    MojiDio.instance()
-        .alert(
-      widget.location.latitude.toString(),
-      widget.location.longitude.toString(),
-    )
-        .then((list) {
-      if (list == null) return;
-      _list.clear();
-      _list.addAll(list);
-      if (!mounted) return;
-      setState(() {});
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    if (_list.isEmpty) return Container();
+    if (widget.alerts == null || widget.alerts!.isEmpty) return Container();
     Widget listView = ListView.separated(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
-        return AlertItem(alert: _list[index]!);
+        return AlertItem(alert: widget.alerts![index]!);
       },
       separatorBuilder: (context, index) {
         return white30Divider;
       },
-      itemCount: _list.length,
+      itemCount: widget.alerts!.length,
     );
-    Widget widget = MediaQuery.removePadding(
+    Widget listWrapper = MediaQuery.removePadding(
       context: context,
       removeTop: true,
       removeBottom: true,
@@ -62,7 +42,7 @@ class _AlertBannerState extends State<AlertBanner> {
           padding: const EdgeInsets.only(left: 16, top: 16),
           child: Text("天气预警", style: TextStyle(fontSize: 24, color: textColor)),
         ),
-        widget,
+        listWrapper,
       ],
     );
     return RRectangleBorder(child: column);

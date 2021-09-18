@@ -1,7 +1,7 @@
 import 'package:about_weather/city_search/model/city_info.dart';
 import 'package:about_weather/city_search/model/place_name.dart';
 import 'package:about_weather/city_search/preview_city.dart';
-import 'package:about_weather/city_search/search_item.dart';
+import 'package:about_weather/city_search/widgets/search_item.dart';
 import 'package:about_weather/dio/biz_dio/yiyuan_dio.dart';
 import 'package:about_weather/location/model/location.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -83,7 +83,8 @@ class _CitySearchPageState extends State<CitySearchPage> {
                   return PreviewCity(location: location);
                 },
               ).then((value) {
-                if (value!) Navigator.of(context).pop();
+                if (value == null || !value) return;
+                if (value) Navigator.of(context).pop();
               });
             },
           );
@@ -96,8 +97,8 @@ class _CitySearchPageState extends State<CitySearchPage> {
 
   Location _cityinfo2Location(CityInfo info) {
     Location location = Location();
-    location.latitude = info.latitude;
-    location.longitude = info.longitude;
+    location.latitude = info.latitude.toString();
+    location.longitude = info.longitude.toString();
     location.province = info.c7;
     location.city = info.c5;
     location.district = info.c3;

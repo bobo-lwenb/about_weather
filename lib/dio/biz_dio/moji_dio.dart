@@ -83,6 +83,20 @@ class MojiDio extends BaseDio {
     return model.condition;
   }
 
+  /// 短时预报
+  Future shortForecast(String lat, String lon) async {
+    Map<String, dynamic> params = {
+      "lat": lat,
+      "lon": lon,
+      "token": "bbc0fdc738a3877f3f72f69b1a4d30fe",
+    };
+    Map<String, dynamic> result =
+        await post(path: SHORT_FORECAST, data: params);
+    Map<String, dynamic> data = result["data"]["sfc"];
+    SFC model = SFC.fromJson(data);
+    return model;
+  }
+
   /// 空气质量指数
   Future aqiIndex(String lat, String lon) async {
     Map<String, dynamic> params = {
@@ -154,20 +168,6 @@ class MojiDio extends BaseDio {
       list.add(index);
     });
     return list;
-  }
-
-  /// 短时预报
-  Future shortForecast(String lat, String lon) async {
-    Map<String, dynamic> params = {
-      "lat": lat,
-      "lon": lon,
-      "token": "bbc0fdc738a3877f3f72f69b1a4d30fe",
-    };
-    Map<String, dynamic> result =
-        await post(path: SHORT_FORECAST, data: params);
-    Map<String, dynamic> data = result["data"]["sfc"];
-    SFC model = SFC.fromJson(data);
-    return model;
   }
 
   /// 天气预警

@@ -1,6 +1,4 @@
-import 'package:about_weather/dio/biz_dio/moji_dio.dart';
-import 'package:about_weather/location/model/location.dart';
-import 'package:about_weather/main_ui/home/round_rectangle_border.dart';
+import 'package:about_weather/main_ui/home/widgets/round_rectangle_border.dart';
 import 'package:about_weather/main_ui/sign_banner/model/condition/condition.dart';
 import 'package:about_weather/tool_box/fields.dart';
 import 'package:about_weather/tool_box/moji_chart.dart';
@@ -10,43 +8,33 @@ import 'package:intl/intl.dart';
 import 'model/hourly.dart';
 
 class TFBanner extends StatefulWidget {
-  final Location location;
+  final Condition condition;
+  final List<Hourly> hourly;
 
-  TFBanner({Key? key, required this.location}) : super(key: key);
+  TFBanner({
+    Key? key,
+    required this.condition,
+    required this.hourly,
+  }) : super(key: key);
 
   @override
   _TFBannerState createState() => _TFBannerState();
 }
 
 class _TFBannerState extends State<TFBanner> {
-  List<Hourly> _hourly = List.empty(growable: true);
   String riseSun = "";
   String setSun = "";
 
   @override
   void initState() {
     super.initState();
-    Future contidion = MojiDio.instance().condition(
-      widget.location.latitude.toString(),
-      widget.location.longitude.toString(),
-    );
-    Future forecast = MojiDio.instance().forecast24(
-      widget.location.latitude.toString(),
-      widget.location.longitude.toString(),
-    );
-    Future.wait([contidion, forecast]).then((list) {
-      riseSun = (list[0] as Condition).sunRise!;
-      setSun = (list[0] as Condition).sunSet!;
-      _hourly.clear();
-      _hourly.addAll(list[1]);
-      if (!mounted) return;
-      setState(() {});
-    });
+    riseSun = widget.condition.sunRise!;
+    setSun = widget.condition.sunSet!;
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_hourly.isEmpty) return Container(height: 193);
+    if (widget.hourly.isEmpty) return Container(height: 193);
     Column column = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -64,11 +52,11 @@ class _TFBannerState extends State<TFBanner> {
             physics: BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
-              Hourly hourly = _hourly[index];
+              Hourly hourly = widget.hourly[index];
               bool isday = isDay(hourly.hour, riseSun, setSun);
               return TFItem(hourly: hourly, isDay: isday);
             },
-            itemCount: _hourly.length,
+            itemCount: widget.hourly.length,
           ),
         ),
       ],

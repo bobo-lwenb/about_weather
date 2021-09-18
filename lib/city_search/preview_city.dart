@@ -1,3 +1,4 @@
+import 'package:about_weather/city_search/preview_view_model.dart';
 import 'package:about_weather/location/provider/location_list.dart';
 import 'package:about_weather/location/model/location.dart';
 import 'package:about_weather/main_ui/home/provider/model_status.dart';
@@ -9,7 +10,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-// lat = 15.917, lon = 114.483
 class PreviewCity extends StatefulWidget {
   final Location location;
 
@@ -20,6 +20,7 @@ class PreviewCity extends StatefulWidget {
 }
 
 class _PreviewCityState extends State<PreviewCity> {
+  late PreViewModel _preViewModel;
   late List<Location> _list;
   late SettingsPreferences _preferences;
   bool isadd = true;
@@ -28,6 +29,11 @@ class _PreviewCityState extends State<PreviewCity> {
   void initState() {
     super.initState();
     _preferences = SettingsPreferences();
+    _preViewModel = PreViewModel(
+      lat: widget.location.latitude!,
+      lon: widget.location.longitude!,
+    );
+    _preViewModel.initData();
   }
 
   @override
@@ -84,25 +90,36 @@ class _PreviewCityState extends State<PreviewCity> {
         ),
       ],
     );
-    return Stack(
-      children: [
-        SingleChildScrollView(
+    ValueListenableBuilder builder = ValueListenableBuilder(
+      valueListenable: _preViewModel.valueNotifier,
+      builder: (context, preModel, child) {
+        if (!preModel.isInit) return SizedBox(height: double.infinity);
+        Widget scrollView = SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Column(children: [
             SizedBox(height: 40),
             SignBanner(
-              location: widget.location,
+              condition: preModel.condition,
+              sfc: preModel.sfc,
+              aqiIndex: preModel.aqi,
+              hourly: preModel.hourly,
               signMode: SignMode.preview,
             ),
             WeatherInfoBanner(
-              location: widget.location,
+              condition: preModel.condition,
               signMode: SignMode.preview,
             ),
             SizedBox(height: 40),
           ]),
-        ),
-        row,
-      ],
+        );
+        return Stack(
+          children: [
+            scrollView,
+            row,
+          ],
+        );
+      },
     );
+    return builder;
   }
 }

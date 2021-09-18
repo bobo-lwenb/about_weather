@@ -27,10 +27,10 @@ class _InternalTabState extends State<InternalTab>
     super.initState();
     WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
       NewsDio.instance().getInternalData().then((total) {
-        _lastUpdateTime = total.lastUpdateTime;
+        _lastUpdateTime = total.lastUpdateTime!;
         _chinaTotal = total.chinaTotal;
         _chinaAdd = total.chinaAdd;
-        _listArea = total.areaTree[0].children;
+        _listArea = total.areaTree![0].children;
         setState(() {});
       });
     });

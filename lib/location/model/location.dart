@@ -7,8 +7,8 @@ class Location {
   String? callbackTime;
   String? locationTime;
   int? locationType;
-  var latitude;
-  var longitude;
+  String? latitude;
+  String? longitude;
   double? accuracy;
   double? altitude;
   double? bearing;

@@ -5,6 +5,7 @@ import 'package:about_weather/location/model/location.dart';
 import 'package:about_weather/main_ui/alert_banner/alert_banner.dart';
 import 'package:about_weather/main_ui/aqi_banner/aqi_banner.dart';
 import 'package:about_weather/main_ui/fifteen_banner/fifteen_banner.dart';
+import 'package:about_weather/main_ui/home/home_view_model.dart';
 import 'package:about_weather/main_ui/home/provider/refresh_page.dart';
 import 'package:about_weather/main_ui/limit_banner/limit_banner.dart';
 import 'package:about_weather/main_ui/live_index/live_index_banner.dart';
@@ -29,31 +30,68 @@ class HomePageItem extends StatefulWidget {
 
 class _HomePageItemState extends State<HomePageItem>
     with AutomaticKeepAliveClientMixin {
+  late HomeViewModel _homeViewModel;
+
+  @override
+  void initState() {
+    super.initState();
+    _homeViewModel = HomeViewModel(
+      lat: widget.location.latitude!,
+      lon: widget.location.longitude!,
+    );
+    _homeViewModel.initData();
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return Consumer<RefreshPage>(builder: (context, value, child) {
-      Widget scrollView = CustomScrollView(
-        key: ValueKey(value.number),
-        physics: BouncingScrollPhysics(),
-        slivers: [
-          _buildAppBar(widget.location, widget.index),
-          SliverToBoxAdapter(
-            child: SignBanner(location: widget.location, index: widget.index),
-          ),
-          SliverToBoxAdapter(child: TFBanner(location: widget.location)),
-          SliverToBoxAdapter(child: FifteenBanner(location: widget.location)),
-          SliverToBoxAdapter(child: AQIBanner(location: widget.location)),
-          SliverToBoxAdapter(
-              child: WeatherInfoBanner(location: widget.location)),
-          SliverToBoxAdapter(child: LiveIndexBanner(location: widget.location)),
-          SliverToBoxAdapter(child: AlertBanner(location: widget.location)),
-          SliverToBoxAdapter(child: LimitBanner(location: widget.location)),
-          SliverToBoxAdapter(child: EpidemicBanner(location: widget.location)),
-          SliverToBoxAdapter(child: SizedBox(height: 100)),
-        ],
+      ValueListenableBuilder builder = ValueListenableBuilder(
+        valueListenable: _homeViewModel.valueNotifier,
+        builder: (context, homeModel, child) {
+          if (!homeModel.isInit) return SizedBox();
+          Widget scrollView = CustomScrollView(
+            key: ValueKey(value.number),
+            physics: BouncingScrollPhysics(),
+            slivers: [
+              _buildAppBar(widget.location, widget.index),
+              SliverToBoxAdapter(
+                child: SignBanner(
+                  condition: homeModel.condition,
+                  sfc: homeModel.sfc,
+                  aqiIndex: homeModel.aqi,
+                  hourly: homeModel.hourly,
+                  index: widget.index,
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: TFBanner(
+                  condition: homeModel.condition,
+                  hourly: homeModel.hourly,
+                ),
+              ),
+              SliverToBoxAdapter(
+                  child: FifteenBanner(list: homeModel.forecast)),
+              SliverToBoxAdapter(child: AQIBanner(list: homeModel.aqiForecast)),
+              SliverToBoxAdapter(
+                  child: WeatherInfoBanner(condition: homeModel.condition)),
+              SliverToBoxAdapter(
+                  child: LiveIndexBanner(list: homeModel.liveList)),
+              SliverToBoxAdapter(child: AlertBanner(alerts: homeModel.alert)),
+              SliverToBoxAdapter(child: LimitBanner(limits: homeModel.limit)),
+              SliverToBoxAdapter(
+                child: EpidemicBanner(
+                  location: widget.location,
+                  internalData: homeModel.internalData,
+                ),
+              ),
+              SliverToBoxAdapter(child: SizedBox(height: 100)),
+            ],
+          );
+          return scrollView;
+        },
       );
-      return scrollView;
+      return builder;
     });
   }
 
@@ -95,7 +133,6 @@ class _HomePageItemState extends State<HomePageItem>
     return sliverAppBar;
   }
 
-  //---
   @override
   bool get wantKeepAlive => true;
 }

@@ -1,43 +1,26 @@
-import 'package:about_weather/dio/biz_dio/moji_dio.dart';
-import 'package:about_weather/location/model/location.dart';
 import 'package:about_weather/main_ui/fifteen_banner/model/forecast.dart';
-import 'package:about_weather/main_ui/home/round_rectangle_border.dart';
+import 'package:about_weather/main_ui/home/widgets/round_rectangle_border.dart';
 import 'package:about_weather/tool_box/fields.dart';
 import 'package:about_weather/tool_box/format_date.dart';
 import 'package:about_weather/tool_box/moji_chart.dart';
 import 'package:flutter/material.dart';
 
 class FifteenBanner extends StatefulWidget {
-  final Location location;
+  final List<Forecast> list;
 
-  FifteenBanner({Key? key, required this.location}) : super(key: key);
+  FifteenBanner({
+    Key? key,
+    required this.list,
+  }) : super(key: key);
 
   @override
   _FifteenBannerState createState() => _FifteenBannerState();
 }
 
 class _FifteenBannerState extends State<FifteenBanner> {
-  List<Forecast> _list = List.empty(growable: true);
-
-  @override
-  void initState() {
-    super.initState();
-    MojiDio.instance()
-        .forecast15(
-      widget.location.latitude.toString(),
-      widget.location.longitude.toString(),
-    )
-        .then((list) {
-      _list.clear();
-      _list.addAll(list);
-      if (!mounted) return;
-      setState(() {});
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    if (_list.isEmpty) return Container(height: 288);
+    if (widget.list.isEmpty) return Container(height: 288);
     Column column = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -55,7 +38,7 @@ class _FifteenBannerState extends State<FifteenBanner> {
             ListHeader(),
             Expanded(
               flex: 1,
-              child: ListBody(list: _list),
+              child: ListBody(list: widget.list),
             ),
           ],
         ),
