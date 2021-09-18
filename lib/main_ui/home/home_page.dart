@@ -174,12 +174,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     Widget container = Container(
       height: 80,
       color: Colors.black54,
-      child: ClipRect(
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-          child: stack,
-        ),
-      ),
+      child: stack,
     );
     return container;
   }

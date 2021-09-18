@@ -67,7 +67,6 @@ class _SignBannerState extends State<SignBanner> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         RRectangleBorder(
-          mode: widget.signMode,
           isPadding: true,
           halfLeftMargin: true,
           child: Row(
@@ -76,18 +75,17 @@ class _SignBannerState extends State<SignBanner> {
               SizedBox(width: 8),
               Text(
                 "$condition",
-                style: TextStyle(color: adaptColor(textColor)),
+                style: TextStyle(color: textColor),
               ),
             ],
           ),
         ),
         RRectangleBorder(
-          mode: widget.signMode,
           isPadding: true,
           halfLeftMargin: true,
           child: Text("最高${bean!.max}°  最低${bean!.min}°",
               style: TextStyle(
-                color: adaptColor(textColor),
+                color: textColor,
               )),
         ),
       ],
@@ -97,7 +95,6 @@ class _SignBannerState extends State<SignBanner> {
         Expanded(
           flex: 1,
           child: RRectangleBorder(
-            mode: widget.signMode,
             isPadding: true,
             halfRightMargin: true,
             child: Row(
@@ -107,7 +104,7 @@ class _SignBannerState extends State<SignBanner> {
                     style: TextStyle(
                       fontSize: 85,
                       fontWeight: FontWeight.w200,
-                      color: adaptColor(textColor),
+                      color: textColor,
                     )),
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0),
@@ -115,7 +112,7 @@ class _SignBannerState extends State<SignBanner> {
                       style: TextStyle(
                         fontSize: 50,
                         fontWeight: FontWeight.w200,
-                        color: adaptColor(textColor),
+                        color: textColor,
                       )),
                 ),
               ],
@@ -132,7 +129,6 @@ class _SignBannerState extends State<SignBanner> {
       alignment: Alignment.centerLeft,
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: RRectangleBorder(
-        mode: widget.signMode,
         isPadding: true,
         isMargin: false,
         child: _buildAQI(),
@@ -141,10 +137,7 @@ class _SignBannerState extends State<SignBanner> {
     return Column(
       children: [
         opacityWidget(object: widget.condition, child: row),
-        ShortForecastBanner(
-          sfc: widget.sfc,
-          signMode: widget.signMode,
-        ),
+        ShortForecastBanner(sfc: widget.sfc),
         SizedBox(height: 16),
         aqi,
       ],
@@ -161,33 +154,30 @@ class _SignBannerState extends State<SignBanner> {
         Stack(children: [
           Text(
             "空气质量",
-            style: TextStyle(color: adaptColor(subtextColor)),
+            style: TextStyle(color: subtextColor),
           ),
           Positioned(
             right: 0,
             child: Text(
               "AQI（CN）",
-              style: TextStyle(color: adaptColor(subtextColor)),
+              style: TextStyle(color: subtextColor),
             ),
           ),
         ]),
         SizedBox(height: 3),
         Text(
           "$value - $desc",
-          style: TextStyle(fontSize: 32, color: adaptColor(textColor)),
+          style: TextStyle(fontSize: 32, color: textColor),
         ),
         SizedBox(height: 3),
         Text(
           "上次更新：$pubTime",
-          style: TextStyle(color: adaptColor(subtextColor)),
+          style: TextStyle(color: subtextColor),
         ),
       ],
     );
     return opacityWidget(object: widget.aqiIndex, child: column);
   }
-
-  Color? adaptColor(Color color) =>
-      widget.signMode == SignMode.normal ? color : null;
 
   ValueBean minAndMax(List<int> hourly) {
     int max = hourly[0];

@@ -1,6 +1,5 @@
 import 'package:about_weather/main_ui/home/widgets/round_rectangle_border.dart';
 import 'package:about_weather/main_ui/sign_banner/model/condition/condition.dart';
-import 'package:about_weather/main_ui/sign_banner/sign_mode.dart';
 import 'package:about_weather/tool_box/fields.dart';
 import 'package:about_weather/tool_box/format_date.dart';
 import 'package:about_weather/tool_box/moji_chart.dart';
@@ -8,13 +7,9 @@ import 'package:flutter/material.dart';
 
 class WeatherInfoBanner extends StatefulWidget {
   final Condition condition;
-  final SignMode signMode;
 
-  const WeatherInfoBanner({
-    Key? key,
-    required this.condition,
-    this.signMode = SignMode.normal,
-  }) : super(key: key);
+  const WeatherInfoBanner({Key? key, required this.condition})
+      : super(key: key);
 
   @override
   _WeatherInfoBannerState createState() => _WeatherInfoBannerState();
@@ -31,14 +26,13 @@ class _WeatherInfoBannerState extends State<WeatherInfoBanner> {
           child: Text("天气信息",
               style: TextStyle(
                 fontSize: 24,
-                color: widget.signMode == SignMode.normal ? textColor : null,
+                color: textColor,
               )),
         ),
         _buildGrid(),
       ],
     );
     return RRectangleBorder(
-      mode: widget.signMode,
       isPadding: true,
       child: column,
     );
@@ -60,13 +54,11 @@ class _WeatherInfoBannerState extends State<WeatherInfoBanner> {
             child: Item(
           top: "日出",
           title: "$sunRise",
-          signmode: widget.signMode,
         )),
         Expanded(
             child: Item(
           top: "日落",
           title: "$sunSet",
-          signmode: widget.signMode,
         )),
       ],
     );
@@ -76,13 +68,11 @@ class _WeatherInfoBannerState extends State<WeatherInfoBanner> {
             child: Item(
           top: "湿度",
           title: "$humidity%",
-          signmode: widget.signMode,
         )),
         Expanded(
             child: Item(
           top: "体感温度",
           title: "$realFeel°",
-          signmode: widget.signMode,
         )),
       ],
     );
@@ -92,13 +82,11 @@ class _WeatherInfoBannerState extends State<WeatherInfoBanner> {
             child: Item(
           top: "气压",
           title: "$pressure百帕",
-          signmode: widget.signMode,
         )),
         Expanded(
             child: Item(
           top: "紫外线指数",
           title: "$uvi",
-          signmode: widget.signMode,
         )),
       ],
     );
@@ -108,13 +96,11 @@ class _WeatherInfoBannerState extends State<WeatherInfoBanner> {
             child: Item(
           top: "能见度",
           title: "${_convertMeter(vis)}",
-          signmode: widget.signMode,
         )),
         Expanded(
             child: Item(
           top: "风向 米/秒",
           title: "$windDir $windSpeed",
-          signmode: widget.signMode,
         )),
       ],
     );
@@ -146,12 +132,10 @@ class _WeatherInfoBannerState extends State<WeatherInfoBanner> {
 class Item extends StatelessWidget {
   final String top;
   final String title;
-  final SignMode signmode;
 
   Item({
     required this.top,
     required this.title,
-    required this.signmode,
   });
 
   @override
@@ -161,14 +145,10 @@ class Item extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text("$top",
-              style: TextStyle(
-                  color: signmode == SignMode.normal ? subtextColor : null)),
+          Text("$top", style: TextStyle(color: subtextColor)),
           Text(
             "$title",
-            style: TextStyle(
-                fontSize: 32,
-                color: signmode == SignMode.normal ? textColor : null),
+            style: TextStyle(fontSize: 32, color: textColor),
           ),
         ],
       ),

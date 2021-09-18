@@ -5,9 +5,12 @@ import 'package:about_weather/main_ui/home/provider/model_status.dart';
 import 'package:about_weather/main_ui/sign_banner/sign_banner.dart';
 import 'package:about_weather/main_ui/sign_banner/sign_mode.dart';
 import 'package:about_weather/main_ui/weatherinfo_banner/weatherinfo_banner.dart';
+import 'package:about_weather/tool_box/fields.dart';
+import 'package:about_weather/tool_box/fields_bg.dart';
 import 'package:about_weather/tool_box/settings_preferences.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:provider/provider.dart';
 
 class PreviewCity extends StatefulWidget {
@@ -66,7 +69,7 @@ class _PreviewCityState extends State<PreviewCity> {
           child: Text(
             "$city $district",
             textAlign: TextAlign.center,
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(fontWeight: FontWeight.bold, color: textColor),
           ),
         ),
         TextButton(
@@ -105,15 +108,26 @@ class _PreviewCityState extends State<PreviewCity> {
               hourly: preModel.hourly,
               signMode: SignMode.preview,
             ),
-            WeatherInfoBanner(
-              condition: preModel.condition,
-              signMode: SignMode.preview,
-            ),
+            WeatherInfoBanner(condition: preModel.condition),
             SizedBox(height: 40),
           ]),
         );
+        String path = adaptConditionId(
+            preModel.condition.conditionId, preModel.condition.icon);
+        Widget background = SizedBox.expand(
+          child: Image.asset("$path", fit: BoxFit.fitWidth),
+        );
+        Widget opacityLayer = AnimatedOpacity(
+          opacity: isDark(context) ? 0.6 : 0.4,
+          duration: const Duration(milliseconds: 500),
+          child: Container(
+            color: Colors.black,
+          ),
+        );
         return Stack(
           children: [
+            background,
+            opacityLayer,
             scrollView,
             row,
           ],

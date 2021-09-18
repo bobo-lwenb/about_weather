@@ -1,23 +1,21 @@
-import 'package:about_weather/main_ui/sign_banner/sign_mode.dart';
 import 'package:about_weather/tool_box/fields.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/shims/dart_ui_real.dart';
 
 class RRectangleBorder extends StatelessWidget {
-  final Widget child;
   final bool isPadding;
   final bool isMargin;
   final bool halfRightMargin;
   final bool halfLeftMargin;
-  final SignMode mode;
+  final bool followTheme;
+  final Widget child;
 
   const RRectangleBorder({
     Key? key,
-    this.mode = SignMode.normal,
     this.isPadding = false,
     this.isMargin = true,
     this.halfRightMargin = false,
     this.halfLeftMargin = false,
+    this.followTheme = false,
     required this.child,
   }) : super(key: key);
 
@@ -26,9 +24,10 @@ class RRectangleBorder extends StatelessWidget {
     Container container = Container(
       padding: isPadding ? const EdgeInsets.all(16) : const EdgeInsets.all(0),
       decoration: BoxDecoration(
+        color: Colors.black12,
         borderRadius: BorderRadius.circular(10),
         border: Border.all(
-            color: mode == SignMode.normal
+            color: !followTheme
                 ? Colors.white24
                 : isDark(context)
                     ? Colors.white24
@@ -38,10 +37,7 @@ class RRectangleBorder extends StatelessWidget {
     );
     Widget temp = ClipRRect(
       borderRadius: BorderRadius.circular(10),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
-        child: container,
-      ),
+      child: container,
     );
     Widget border = isMargin
         ? Padding(
